@@ -4,39 +4,146 @@
        "-//Apache Software Foundation//DTD Tiles Configuration 1.1//EN"
        "http://jakarta.apache.org/struts/dtds/tiles-config_1_1.dtd">
 
-
-<!--
-     This is a blank Tiles definition file with a commented example.
--->
-
+  
 <tiles-definitions>
-
-    <!-- sample tiles definitions
-    <definition name=".mainLayout" path="/common/layouts/classicLayout.jsp">
-        <put name="title"  value="Sample Page Title" />
-        <put name="header" value="/common/header.jsp" />
-        <put name="menu"   value=".mainMenu" />
-        <put name="footer" value="/common/footer.jsp" />
-        <put name="body"   value=".portal.body" />
+    
+    <definition name="home" path="/interfaz/genericos/plantilla_general/plantilla.jsp">
+        <put name="titulo" value="Dirección de Seguridad Integral"></put>
+        <put name="noticias" value="/interfaz/genericos/plantilla_general/noticias.jsp"></put>
+        <put name="navBarGeneral" value="/interfaz/genericos/barras_navegacion/navBarGeneral.jsp"></put>
+        <put name="sidebar" value="/interfaz/genericos/plantilla_general/sidebar-second.jsp"></put>
+        <put name="footer" value="/interfaz/genericos/plantilla_general/footer.jsp"></put> 
     </definition>
 
-    <definition name=".mainMenu" path="/common/layouts/vboxLayout.jsp" >
-        <putList name="list" >
-            <add value=".menu.links" />
-            <add value=".menu.taglib.references" />
-            <add value=".menu.printer.friendly" />
-            <add value=".menu.old.documents" />
-      </putList>
+    <definition name="lista" extends="home">
+        <put name="noticias" value="/interfaz/admin/lista_usuarios/content-lista-usuarios.jsp"></put>
+        <put name="navBarGeneral" value="/interfaz/genericos/barras_navegacion/navBarpedido.jsp"></put>
+    </definition>
+    
+    <definition name="usuario" extends="home">
+        <put name="navBarGeneral" value=""></put>
+        <put name="sidebar" value=""></put>
+    </definition>
+    
+    <definition name="mortal-usuario-habilitado" extends="interfaz-administrador">
+        <put name="navBarGeneral" value="/interfaz/usuario/barras_navegacion/navBarUsuarioHabilitado.jsp"></put>
+    </definition>
+    
+    <definition name="mortal-usuario-no-habilitado" extends="interfaz-administrador">
+        <put name="navBarGeneral" value="/interfaz/usuario/barras_navegacion/navBarUsuarioNoHabilitado.jsp"></put>
     </definition>
 
-    <definition name="aPage" extends=".mainLayout">
-        <put name="title"  value="Another Title" />
-        <put name="body"   value=".aPage.body" />
+    <definition name="usuario-no-eliminado" extends="usuario">
+        <put name="noticias" value="/interfaz/admin/lista_usuarios/eliminar/usuario-no-elim.jsp"></put>
+    </definition>
+    
+    <definition name="usuario-no-registrado" extends="usuario">
+        <put name="noticias" value="/interfaz/genericos/registro/usuario-no-regis.jsp"></put>
     </definition>
 
-    end samples -->
-
-    <definition name="${YOUR_DEFINITION_HERE}">
+    <definition name="mal" extends="home">
+        <put name="noticias" value="/interfaz/genericos/plantilla_general/mal.jsp"></put>
+        <put name="navBarGeneral" value="/interfaz/genericos/barras_navegacion/navbar-registro.jsp"></put> 
+    </definition>
+    
+    <definition name="confirmar" extends="home">
+        <put name="noticias" value="/interfaz/genericos/pedido/conf-solicitud.jsp"></put>
+        <put name="navBarGeneral" value=""></put>
+        <put name="sidebar" value=""></put>
+    </definition>
+    
+    <definition name="confirmar-eliminar" extends="home">
+        <put name="noticias" value="/interfaz/admin/lista_usuarios/eliminar/conf-eliminar.jsp"></put>
+        <put name="navBarGeneral" value="/interfaz/admin/barras_navegacion/navBarListar.jsp"></put>
+    </definition>
+    
+    <definition name="interfaz-administrador" extends="home">
+        <put name="noticias" value="/interfaz/genericos/plantilla_general/noticias.jsp"></put>
+        <put name="navBarGeneral" value="/interfaz/usuario/barras_navegacion/navBarusuario.jsp"></put>
     </definition>
 
+    <definition name="interfaz-sesion-no-iniciada" extends="home">
+        <put name="noticias" value="/interfaz/genericos/plantilla_general/content-sesion-no-iniciada.jsp"></put>
+        <put name="navBarGeneral" value=""></put>
+        <put name="sidebar" value=""></put>
+    </definition>
+    
+    <definition name="registro" path="/interfaz/genericos/registro/plantilla-registro.jsp">
+        <put name="script" value="/interfaz/genericos/registro/registro-script.jsp"></put>
+        <put name="registro-content" value="/interfaz/genericos/registro/registro-content.jsp"></put>
+        <put name="navbar-registro" value="/interfaz/genericos/barras_navegacion/navbar-registro.jsp"></put> 
+        <put name="sidebar" value="/interfaz/genericos/plantilla_general/sidebar-second.jsp"></put>
+        <put name="footer" value="/interfaz/genericos/plantilla_general/footer.jsp"></put> 
+    </definition>
+    
+    <definition name="formulario-pedido" path="/interfaz/genericos/pedido/plantilla-pedido.jsp">
+        <put name="script" value="/interfaz/genericos/pedido/script-pedido.jsp"></put>
+        <put name="formulario" value="/interfaz/genericos/pedido/formulario-pedido.jsp"></put>
+        <put name="navBar" value="/interfaz/genericos/barras_navegacion/navBarpedido.jsp"></put>
+        <put name="sidebar-second" value="/interfaz/genericos/plantilla_general/sidebar-second.jsp"></put>
+        <put name="footer" value="/interfaz/genericos/plantilla_general/footer.jsp"></put> 
+    </definition> 
+    
+    <definition name="formulario-editar-usuario" path="/interfaz/genericos/editar_datos/plantilla-formulario-editar.jsp">
+        <put name="script" value="/interfaz/genericos/editar_datos/script-form-edit.jsp"></put>
+        <put name="content" value="/interfaz/admin/lista_usuarios/editar/form-edit-content.jsp"></put>
+        <put name="navBar" value="/interfaz/admin/barras_navegacion/navBarListar.jsp"></put>
+        <put name="sidebar-second" value="/interfaz/genericos/plantilla_general/sidebar-second.jsp"></put>
+        <put name="footer" value="/interfaz/genericos/plantilla_general/footer.jsp"></put> 
+    </definition> 
+    
+    <definition name="formulario-editar-admin" extends="formulario-editar-usuario">
+        <put name="content" value="/interfaz/genericos/editar_datos/form-edit-admin-content.jsp"></put>
+        <put name="navBar" value="/interfaz/genericos/barras_navegacion/navBarpedido.jsp"></put>
+    </definition> 
+    
+    <definition name="formulario-agregar-noticia" path="/interfaz/admin/noticias/plantilla-form-agregar-noticia.jsp">
+        <put name="formulario" value="/interfaz/admin/noticias/form-agregar-noticia-content.jsp"></put>
+        <put name="navBar" value="/interfaz/genericos/barras_navegacion/navBarpedido.jsp"></put>
+        <put name="sidebar-second" value="/interfaz/genericos/plantilla_general/sidebar-second.jsp"></put>
+        <put name="footer" value="/interfaz/genericos/plantilla_general/footer.jsp"></put> 
+    </definition> 
+
+    <definition name="noticia-no-agregada" extends="usuario">
+        <put name="noticias" value="/interfaz/admin/noticia/noticia-agregada.jsp"></put>
+    </definition>
+    
+    <definition name="ver-pedido" extends="home">
+        <put name="noticias" value="/interfaz/genericos/pedido/ver-pedido.jsp"></put>
+        <put name="navBarGeneral" value="/interfaz/genericos/barras_navegacion/navBarpedido.jsp"></put>
+    </definition> 
+    
+    <definition name="confirmar-eliminar-solicitud" extends="home">
+        <put name="noticias" value="/interfaz/genericos/pedido/conf-eliminar-pedido.jsp"></put>
+        <put name="navBarGeneral" value="/interfaz/genericos/barras_navegacion/navBarpedido.jsp"></put>
+    </definition>
+    
+    <definition name="lista-noticias" extends="home">
+        <put name="noticias" value="/interfaz/admin/noticias/listar_noticias/content-lista-noticias.jsp"></put>
+        <put name="navBarGeneral" value="/interfaz/genericos/barras_navegacion/navBarpedido.jsp"></put>
+    </definition>
+    
+    <definition name="formulario-editar-noticia" extends="formulario-agregar-noticia">
+        <put name="formulario" value="/interfaz/admin/noticias/listar_noticias/form-edit-noticia-content.jsp"></put>
+        <put name="navBar" value="/interfaz/admin/barras_navegacion/navBarListaNoticias.jsp"></put>
+    </definition>
+    
+    <definition name="confirmar-eliminar-noticia" extends="home">
+        <put name="noticias" value="/interfaz/admin/noticias/listar_noticias/confirmar-eliminar-noticia.jsp"></put>
+        <put name="navBarGeneral" value="/interfaz/admin/barras_navegacion/navBarListaNoticias.jsp"></put>
+    </definition>
+    
+    <definition name="listados-generales" extends="home">
+        <put name="noticias" value="/interfaz/admin/reportes/listados-generales.jsp"></put>
+        <put name="navBarGeneral" value="/interfaz/genericos/barras_navegacion/navBarpedido.jsp"></put>
+    </definition>
+    
+    
+    
+    
+    
+    <!--    <definition name="" extends="home">
+        <put name="" value=""></put>
+    </definition> -->
+   
 </tiles-definitions>
