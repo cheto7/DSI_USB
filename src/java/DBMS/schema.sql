@@ -164,4 +164,13 @@ OIDS = FALSE
 );
 
 
-CREATE TABLE "PREPAS".supervisa
+CREATE TABLE "PREPAS".supervisa (
+    supervisor VARCHAR NOT NULL,
+    individuo VARCHAR NOT NULL,
+
+    CONSTRAINT PK_supervisa PRIMARY KEY (supervisor,individuo),
+    CONSTRAINT FK_supervisa_supervisor FOREIGN KEY (supervisor) REFERENCES "PREPAS".supervisor (usuario),
+    CONSTRAINT FK_supervisa_individuo FOREIGN KEY (individuo) REFERENCES "PREPAS".individuo (usuario)
+) WITH (
+OIDS = FALSE
+);
