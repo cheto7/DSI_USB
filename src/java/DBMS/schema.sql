@@ -162,3 +162,6 @@ CREATE TABLE "PREPAS".facturado (
 ) WITH (
 OIDS = FALSE
 );
+
+
+CREATE TABLE "PREPAS".supervisa
