@@ -73,7 +73,7 @@ CREATE TABLE "PREPAS".equipo (
   evaluacion NUMERIC,
   funcionalidad VARCHAR,
 
-  CONSTRAINT PK_equipo PRIMARY KEY (equipo)
+  CONSTRAINT PK_equipo PRIMARY KEY (serial)
 ) WITH (
 OIDS = FALSE
 );
@@ -96,7 +96,9 @@ CREATE TABLE "PREPAS".factura (
     RIF VARCHAR,
     fecha DATE NOT NULL,
 
-    CONSTRAINT PK_factura PRIMARY KEY (numero_factura)
+    CONSTRAINT PK_factura PRIMARY KEY (numero_factura),
+    CONSTRAINT FK_factura_proveedor FOREIGN KEY (RIF) REFERENCES "PREPAS".proveedor (RIF)
+
 ) WITH (
 OIDS = FALSE
 );
@@ -129,7 +131,21 @@ CREATE TABLE "PREPAS".contiene (
     frecuencia INT,
 
     CONSTRAINT PK_contiene PRIMARY KEY (id,serial),
+    CONSTRAINT FK_contiene_solicitud FOREIGN KEY (id) REFERENCES "PREPAS".solicitud (id),
+    CONSTRAINT FK_contiene_equipo FOREIGN KEY (serial) REFERENCES "PREPAS".equipo (serial)
+
 ) WITH (
 OIDS = FALSE
 );
 
+CREATE TABLE "PREPAS".vende (
+    RIF VARCHAR NOT NULL,
+    serial INT NOT NULL,
+    costo NUMERIC,
+
+    CONSTRAINT PK_vende PRIMARY KEY (RIF,serial),
+    CONSTRAINT FK_vende_proveedor FOREIGN KEY (RIF) REFERENCES "PREPAS".proveedor (RIF),
+    CONSTRAINT FK_vende_equipo FOREIGN KEY (serial) REFERENCES "PREPAS".equipo (serial)
+) WITH (
+OIDS = FALSE
+);
