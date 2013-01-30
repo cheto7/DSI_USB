@@ -149,3 +149,16 @@ CREATE TABLE "PREPAS".vende (
 ) WITH (
 OIDS = FALSE
 );
+
+CREATE TABLE "PREPAS".facturado (
+    numero_factura INT NOT NULL,
+    serial INT NOT NULL,
+    cantidad INT NOT NULL,
+    costo_unidad NUMERIC NOT NULL,
+
+    CONSTRAINT PK_facturado PRIMARY KEY (numero_factura,serial),
+    CONSTRAINT FK_facturado_factura FOREIGN KEY (numero_factura) REFERENCES "PREPAS".factura (numero_factura),
+    CONSTRAINT FK_facturado_equipo FOREIGN KEY (serial) REFERENCES "PREPAS".equipo (serial)
+) WITH (
+OIDS = FALSE
+);
