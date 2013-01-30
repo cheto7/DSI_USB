@@ -28,13 +28,75 @@ CREATE TABLE "PREPAS".usuario (
 OIDS = FALSE
 );
 
+CREATE TABLE "PREPAS".director (
+    usuario VARCHAR NOT NULL,
+    
+    CONSTRAINT PK_director PRIMARY KEY (usuario),
+  CONSTRAINT FK_director_usuario FOREIGN KEY (usuario) REFERENCES "PREPAS".usuario (usuario)
+) WITH (
+OIDS = FALSE
+);
+
+CREATE TABLE "PREPAS".inspector (
+    usuario VARCHAR NOT NULL,
+    
+    CONSTRAINT PK_inspector PRIMARY KEY (usuario),
+  CONSTRAINT FK_inspector_usuario FOREIGN KEY (usuario) REFERENCES "PREPAS".usuario (usuario)
+) WITH (
+OIDS = FALSE
+);
+
+CREATE TABLE "PREPAS".supervisor (
+    usuario VARCHAR NOT NULL,
+    
+    CONSTRAINT PK_supervisor PRIMARY KEY (usuario),
+  CONSTRAINT FK_supervisor_usuario FOREIGN KEY (usuario) REFERENCES "PREPAS".usuario (usuario)
+) WITH (
+OIDS = FALSE
+);
+
+CREATE TABLE "PREPAS".individuo (
+    usuario VARCHAR NOT NULL,
+    
+    CONSTRAINT PK_individuo PRIMARY KEY (usuario),
+  CONSTRAINT FK_individuo_usuario FOREIGN KEY (usuario) REFERENCES "PREPAS".usuario (usuario)
+) WITH (
+OIDS = FALSE
+);
+
 CREATE TABLE "PREPAS".equipo (
-  equipo VARCHAR NOT NULL,
+  serial SERIAL,
   imagen VARCHAR NOT NULL,
   tipo VARCHAR,
   nombre_vista VARCHAR,
+  cantidad NUMERIC,
+  evaluacion NUMERIC,
+  funcionalidad VARCHAR,
 
   CONSTRAINT PK_equipo PRIMARY KEY (equipo)
+) WITH (
+OIDS = FALSE
+);
+
+CREATE TABLE "PREPAS".proveedor (
+    RIF VARCHAR NOT NULL,
+    nombre VARCHAR,
+    telefono VARCHAR,
+    email VARCHAR,
+    contacto VARCHAR,
+    direccion VARCHAR,
+
+    CONSTRAINT PK_proveedor PRIMARY KEY (RIF)
+) WITH (
+OIDS = FALSE
+);
+
+CREATE TABLE "PREPAS".factura (
+    numero_factura SERIAL,
+    RIF VARCHAR,
+    fecha DATE NOT NULL,
+
+    CONSTRAINT PK_factura PRIMARY KEY (numero_factura)
 ) WITH (
 OIDS = FALSE
 );
@@ -49,16 +111,25 @@ OIDS = FALSE
 );
 
 CREATE TABLE "PREPAS".solicitud (
+    id SERIAL,
   usuario VARCHAR NOT NULL,
-  equipo VARCHAR NOT NULL,
-  fecha_solicitud VARCHAR NOT NULL,
-  nombre_vista VARCHAR NOT NULL,
-  cantidad NUMERIC DEFAULT 1,
-  frecuencia VARCHAR,
+  fecha_solicitud DATE NOT NULL,
 
-  CONSTRAINT PK_solicitud PRIMARY KEY (usuario,equipo),
-  CONSTRAINT FK_solicitud_usuario FOREIGN KEY (usuario) REFERENCES "PREPAS".usuario (usuario),
-  CONSTRAINT FK_solicitud_equipo FOREIGN KEY (equipo) REFERENCES "PREPAS".equipo (equipo)
+  CONSTRAINT PK_solicitud PRIMARY KEY (id),
+  CONSTRAINT FK_solicitud_usuario FOREIGN KEY (usuario) REFERENCES "PREPAS".usuario (usuario)
 ) WITH (
 OIDS = FALSE
 );
+
+CREATE TABLE "PREPAS".contiene (
+    id INT NOT NULL,
+    serial INT NOT NULL,
+    cantidad INT,
+    talla VARCHAR, 
+    frecuencia INT,
+
+    CONSTRAINT PK_contiene PRIMARY KEY (id,serial),
+) WITH (
+OIDS = FALSE
+);
+
