@@ -89,6 +89,24 @@ public class DBMS {
         return false;
     }
 
+    public Boolean agregarEquipo(Equipo e) {
+        try {
+            String sqlquery;
+            sqlquery = "INSERT INTO \"PREPAS\".equipo (tipo, imagen, nombre_vista, funcionalidad)  VALUES "
+                    + "('" + e.getTipo() + "' , '" + e.getImagen()
+                    + "' , '" + e.getNombre_vista() + "' , '" + e.getFuncionalidad() +"';";
+
+            Statement stmt = conexion.createStatement();
+            System.out.println(sqlquery);
+            Integer i = stmt.executeUpdate(sqlquery);
+            return i > 0;
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return false;
+    }
+    
+    
     public Boolean agregarNoticia(Noticia n) {
         try {
             String sqlquery;

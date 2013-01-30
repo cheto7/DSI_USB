@@ -69,8 +69,8 @@ CREATE TABLE "PREPAS".equipo (
   imagen VARCHAR NOT NULL,
   tipo VARCHAR,
   nombre_vista VARCHAR,
-  cantidad NUMERIC,
-  evaluacion NUMERIC,
+  cantidad INT default 0,
+  evaluacion NUMERIC default 0,
   funcionalidad VARCHAR,
 
   CONSTRAINT PK_equipo PRIMARY KEY (serial)
