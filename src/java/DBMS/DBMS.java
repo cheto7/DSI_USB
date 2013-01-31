@@ -94,7 +94,7 @@ public class DBMS {
             String sqlquery;
             sqlquery = "INSERT INTO \"PREPAS\".equipo (tipo, imagen, nombre_vista, funcionalidad)  VALUES "
                     + "('" + e.getTipo() + "' , '" + e.getImagen()
-                    + "' , '" + e.getNombre_vista() + "' , '" + e.getFuncionalidad() +"';";
+                    + "' , '" + e.getNombre_vista() + "' , '" + e.getFuncionalidad() +"');";
 
             Statement stmt = conexion.createStatement();
             System.out.println(sqlquery);

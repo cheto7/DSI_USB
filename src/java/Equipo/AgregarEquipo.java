@@ -42,6 +42,9 @@ public class AgregarEquipo extends org.apache.struts.action.Action {
         if (agregada) {
             return mapping.findForward(SUCCESS);
         } else {
+            Usuario u = new Usuario();
+            u.setMensaje("No se pudo cargar a la Base de Datos. ");
+            request.setAttribute("equipoNulo",u);
             return mapping.findForward(FAILURE);
         }
     }
