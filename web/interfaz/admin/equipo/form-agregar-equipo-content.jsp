@@ -13,7 +13,6 @@
 <link type="text/css" rel="stylesheet" href="assets/css/jquery-te-Style.css" charset="utf-8" />
 
 <legend>Agregar un Equipo</legend>
-
 <logic:present name="equipoNulo">
     <logic:notEmpty name="equipoNulo">
         <center>
@@ -21,7 +20,6 @@
         </center>
     </logic:notEmpty>
 </logic:present>
-
 <html:form action = "/AgregarEquipo" acceptCharset="iso-8859-1" onsubmit = "return (this)">
 
     <label>Nombre</label>
@@ -29,7 +27,7 @@
     <label>Tipo</label>
     <html:text name="Equipo" property="tipo" styleClass="span5" ></html:text><br>
     <label>Imagen</label>
-    <html:file name="UploadFile" property="file" styleClass="span5" ></html:file><br>
+    <html:file name="Equipo" property="file" styleClass="span5" ></html:file><br>
     <label>Funcionalidad</label>
     <html:textarea name="Equipo" property="funcionalidad" rows="3" styleClass="span5" ></html:textarea><br>
 

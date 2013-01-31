@@ -104,7 +104,7 @@
         <put name="footer" value="/interfaz/genericos/plantilla_general/footer.jsp"></put> 
     </definition> 
     
-    <definition name="formulario-agregar-equipo" path="/interfaz/admin/equipo/plantilla-form-agregar-equipo.jsp">
+    <definition name="formulario-agregar-equipos" path="/interfaz/admin/equipo/plantilla-form-agregar-equipo.jsp">
         <put name="formulario" value="/interfaz/admin/equipo/form-agregar-equipo-content.jsp"></put>
         <put name="navBar" value="/interfaz/genericos/barras_navegacion/navBarpedido.jsp"></put>
         <put name="sidebar-second" value="/interfaz/genericos/plantilla_general/sidebar-second.jsp"></put>

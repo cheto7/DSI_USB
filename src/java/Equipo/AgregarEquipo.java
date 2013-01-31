@@ -29,23 +29,17 @@ public class AgregarEquipo extends org.apache.struts.action.Action {
             HttpServletRequest request, HttpServletResponse response)
             throws Exception {
         Equipo e = (Equipo) form;
-        UploadFile uf = (UploadFile) form;
-        
-        e.setImagen(uf.getFile().getAbsolutePath());
-        
+        e.setImagen(e.getFile().getAbsolutePath());
         if(e.getFuncionalidad().equals("") || e.getImagen().equals("")
                  || e.getNombre_vista().equals("") || e.getTipo().equals("")) {
             Usuario u = new Usuario();
             u.setMensaje("No puede dejar los campos vacios. ");
-            request.setAttribute("noticiaNula",u);
+            request.setAttribute("equipoNulo",u);
             return mapping.findForward(FAILURE);
         }
         
         Boolean agregada = DBMS.getInstance().agregarEquipo(e);
         if (agregada) {
-            ArrayList<Noticia> noticias = DBMS.getInstance().obtenerNoticias();
-            request.setAttribute("informacion", noticias);
-            
             return mapping.findForward(SUCCESS);
         } else {
             return mapping.findForward(FAILURE);

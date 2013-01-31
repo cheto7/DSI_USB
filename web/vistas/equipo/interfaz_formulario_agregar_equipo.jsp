@@ -13,7 +13,7 @@
 <%
     } else {
 %>
-<tiles:insert definition="formulario-agregar-equipo"/>
+<tiles:insert definition="formulario-agregar-equipos"/>
 <%
     }
 %>

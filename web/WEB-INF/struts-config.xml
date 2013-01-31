@@ -166,12 +166,12 @@
         <action path="/IrAgregarEquipo" type="Equipo.FormularioAgregarEquipo" scope="request"
                 name="Equipo">
             <forward name="success" path="/vistas/equipo/interfaz_formulario_agregar_equipo.jsp"></forward>
-            </action>
+        </action>
         
         <action path="/AgregarEquipo" type="Equipo.AgregarEquipo" scope="request"
                 name="Equipo">
             <forward name="success" path="/vistas/genericos/interfaz_administrador.jsp"></forward>
-            <forward name="failure" path="/vistas/noticias/interfaz_formulario_agregar_noticia.jsp"></forward>  
+            <forward name="failure" path="/vistas/equipo/interfaz_formulario_agregar_equipo.jsp"></forward>  
         </action>
         
         <action path="/ListarNoticia" type="Noticias.Listar" scope="request"

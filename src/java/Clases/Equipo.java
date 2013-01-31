@@ -1,5 +1,6 @@
 package Clases;
 
+import java.io.File;
 import org.apache.struts.action.ActionForm;
 
 /**
@@ -15,6 +16,15 @@ public class Equipo extends ActionForm {
     private int cantidad;
     private Double evaluacion;
     private String funcionalidad;
+    private File file;
+
+    public File getFile() {
+        return file;
+    }
+
+    public void setFile(File file) {
+        this.file = file;
+    }
 
     /**
      * @return the serial

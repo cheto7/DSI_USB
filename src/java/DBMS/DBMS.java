@@ -41,9 +41,9 @@ public class DBMS {
         try {
             Class.forName("org.postgresql.Driver");
             conexion = DriverManager.getConnection(
-                    "jdbc:postgresql://localhost:5432/postgres",
+                    "jdbc:postgresql://localhost:5432/DSI_USB",
                     "postgres",
-                    "0639563");
+                    "postgres");
             return true;
         } catch (Exception e) {
             System.out.println(e.getMessage());
