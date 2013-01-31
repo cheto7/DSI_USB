@@ -8,7 +8,7 @@
 CREATE TABLE "PREPAS".usuario (
   usuario VARCHAR NOT NULL,
   password VARCHAR NOT NULL,
-  email VARCHAR NOT NULL,
+  email VARCHAR NOT NULL UNIQUE,
   nombre VARCHAR NOT NULL,
   apellido VARCHAR NOT NULL,
   fecha VARCHAR NOT NULL,
@@ -68,7 +68,7 @@ CREATE TABLE "PREPAS".equipo (
   serial SERIAL,
   imagen VARCHAR NOT NULL,
   tipo VARCHAR,
-  nombre_vista VARCHAR,
+  nombre_vista VARCHAR UNIQUE,
   cantidad INT default 0,
   evaluacion NUMERIC default 0,
   funcionalidad VARCHAR,
