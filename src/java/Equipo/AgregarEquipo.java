@@ -5,7 +5,11 @@
 package Equipo;
 
 import Clases.Equipo;
+import Clases.Noticia;
 import Clases.UploadFile;
+import Clases.Usuario;
+import DBMS.DBMS;
+import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.apache.struts.action.ActionForm;
@@ -25,10 +29,26 @@ public class AgregarEquipo extends org.apache.struts.action.Action {
             HttpServletRequest request, HttpServletResponse response)
             throws Exception {
         Equipo e = (Equipo) form;
-        UploadFile u = (UploadFile) form;
+        UploadFile uf = (UploadFile) form;
         
-        e.setImagen(u.getFile().getAbsolutePath());
+        e.setImagen(uf.getFile().getAbsolutePath());
         
+        if(e.getFuncionalidad().equals("") || e.getImagen().equals("")
+                 || e.getNombre_vista().equals("") || e.getTipo().equals("")) {
+            Usuario u = new Usuario();
+            u.setMensaje("No puede dejar los campos vacios. ");
+            request.setAttribute("noticiaNula",u);
+            return mapping.findForward(FAILURE);
+        }
         
+        Boolean agregada = DBMS.getInstance().agregarEquipo(e);
+        if (agregada) {
+            ArrayList<Noticia> noticias = DBMS.getInstance().obtenerNoticias();
+            request.setAttribute("informacion", noticias);
+            
+            return mapping.findForward(SUCCESS);
+        } else {
+            return mapping.findForward(FAILURE);
+        }
     }
 }
