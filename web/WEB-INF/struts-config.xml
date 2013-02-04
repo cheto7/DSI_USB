@@ -189,6 +189,11 @@
             <forward name="success" path="/vistas/noticias/lista_noticias/formulario_editar_noticia.jsp"></forward>  
         </action>
         
+        <action path="/FormularioEditarEquipo" type="Equipo.FormularioEditarEquipo" scope="request"
+                name="Equipo">
+            <forward name="success" path="/vistas/equipo/lista_equipos/formulario_editar_equipo.jsp"></forward>  
+        </action>
+        
         <action path="/EditarNoticia" type="Noticias.Editar" scope="request"
                 name="Noticia">
             <forward name="success" path="/ListarNoticia.do"></forward>  
@@ -199,9 +204,19 @@
             <forward name="success" path="/vistas/noticias/lista_noticias/confirmar_eliminar_noticia.jsp"></forward>  
         </action>
         
+        <action path="/ConfirmarEliminarEquipo" type="Equipo.ConfirmarEliminar" scope="request"
+                name="Equipo">
+            <forward name="success" path="/vistas/equipo/lista_equipos/confirmar_eliminar_equipo.jsp"></forward>  
+        </action>
+        
         <action path="/EliminarNoticia" type="Noticias.Eliminar" scope="request"
                 name="Noticia">
             <forward name="success" path="/ListarNoticia.do"></forward>  
+        </action>
+        
+        <action path="/EliminarEquipo" type="Equipo.Eliminar" scope="request"
+                name="Equipo">
+            <forward name="success" path="/ListarEquipo.do"></forward>  
         </action>
         
         <action path="/Welcome" type="Noticias.MostrarNoticias" scope="request"

@@ -131,7 +131,7 @@
     </definition>
     
     <definition name="lista-equipos" extends="home">
-        <put name="equipo" value="/interfaz/admin/equipo/listar_equipos/content-lista-equipos.jsp"></put>
+        <put name="noticias" value="/interfaz/admin/equipo/listar_equipos/content-lista-equipos.jsp"></put>
         <put name="navBarGeneral" value="/interfaz/genericos/barras_navegacion/navBarpedido.jsp"></put>
     </definition>
     
@@ -142,6 +142,11 @@
     
     <definition name="confirmar-eliminar-noticia" extends="home">
         <put name="noticias" value="/interfaz/admin/noticias/listar_noticias/confirmar-eliminar-noticia.jsp"></put>
+        <put name="navBarGeneral" value="/interfaz/admin/barras_navegacion/navBarListaNoticias.jsp"></put>
+    </definition>
+    
+    <definition name="confirmar-eliminar-equipo" extends="home">
+        <put name="noticias" value="/interfaz/admin/equipo/listar_equipos/confirmar-eliminar-equipo.jsp"></put>
         <put name="navBarGeneral" value="/interfaz/admin/barras_navegacion/navBarListaNoticias.jsp"></put>
     </definition>
     

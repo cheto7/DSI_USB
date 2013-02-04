@@ -209,6 +209,22 @@ public class DBMS {
             ex.printStackTrace();
         }
     }
+    
+    public void eliminarEquipo(Equipo e) {
+        try {
+            String sqlquery = "DELETE FROM \"PREPAS\".equipo WHERE "
+                    + "serial = '" + e.getSerial() + "' ;";
+
+            Statement stmt = conexion.createStatement();
+            System.out.println(sqlquery);
+            ResultSet rs = stmt.executeQuery(sqlquery);
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+    }
+    
+    
     /* Retorna todos los atributos del usuario a consultar. */
 
     public Usuario atributosUsuario(Usuario us) {
