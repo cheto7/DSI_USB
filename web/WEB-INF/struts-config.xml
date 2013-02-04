@@ -174,6 +174,11 @@
             <forward name="failure" path="/vistas/equipo/interfaz_formulario_agregar_equipo.jsp"></forward>  
         </action>
         
+        <action path="/ListarEquipo" type="Equipo.Listar" scope="request"
+                name="Equipo">
+            <forward name="success" path="/vistas/equipo/lista_equipos/lista_equipos.jsp"></forward>  
+        </action>
+        
         <action path="/ListarNoticia" type="Noticias.Listar" scope="request"
                 name="Noticia">
             <forward name="success" path="/vistas/noticias/lista_noticias/lista_noticias.jsp"></forward>  

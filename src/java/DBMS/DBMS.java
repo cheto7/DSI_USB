@@ -149,6 +149,35 @@ public class DBMS {
         }
         return noticias;
     }
+    
+    public ArrayList<Equipo> obtenerEquipos() {
+        ArrayList<Equipo> equipos = new ArrayList<Equipo>(0);
+        try {
+            String sqlquery;
+            sqlquery = "SELECT * FROM \"PREPAS\".equipo";
+
+            Statement stmt = conexion.createStatement();
+            System.out.println(sqlquery);
+            ResultSet rs = stmt.executeQuery(sqlquery);
+
+            while (rs.next()) {
+                Equipo e = new Equipo();
+                e.setNombre_vista(rs.getString("nombre_vista"));
+                e.setImagen(rs.getString("imagen"));
+                e.setTipo(rs.getString("tipo"));
+                e.setCantidad(Integer.parseInt(rs.getString("cantidad")));
+                e.setEvaluacion(Double.parseDouble(rs.getString("evaluacion")));
+                e.setFuncionalidad(rs.getString("funcionalidad"));
+                e.setSerial(Integer.parseInt(rs.getString("serial")));
+                equipos.add(e);
+            }
+            return equipos;
+        } catch (SQLException ex) {
+            System.out.println("EXCEPCION");
+            ex.printStackTrace();
+        }
+        return equipos;
+    }
 
     public void editarNoticia(Noticia n) {
         try {
