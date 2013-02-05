@@ -140,7 +140,7 @@
         <put name="navBar" value="/interfaz/admin/barras_navegacion/navBarListaNoticias.jsp"></put>
     </definition>
     
-    <definition name="formulario-editar-equipo" extends="formulario-agregar-equipo">
+    <definition name="formulario-editar-equipo" extends="formulario-agregar-equipos">
         <put name="formulario" value="/interfaz/admin/equipo/listar_equipos/form-edit-equipo-content.jsp"></put>
         <put name="navBar" value="/interfaz/admin/barras_navegacion/navBarListaNoticias.jsp"></put>
     </definition>
