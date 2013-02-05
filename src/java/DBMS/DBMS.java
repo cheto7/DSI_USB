@@ -194,6 +194,25 @@ public class DBMS {
             ex.printStackTrace();
         }
     }
+    
+    public void editarEquipo(Equipo e) {
+        try {
+            String sqlquery = "UPDATE \"PREPAS\".equipo SET "
+                    + "nombre_vista = '" + e.getNombre_vista() + "' , "
+                    + "tipo = '" + e.getTipo() + "' , "
+                    + "imagen = '" + e.getImagen() + "' , "
+                    + "cantidad = '" + e.getCantidad() + "' , "
+                    + "evaluacion = '" + e.getEvaluacion() + "' , "
+                    + "funcionalidad = '" + e.getFuncionalidad() + "'"
+                    + " WHERE serial = '" + e.getSerial() + "'";
+
+            Statement stmt = conexion.createStatement();
+            System.out.println(sqlquery);
+            Integer i = stmt.executeUpdate(sqlquery);
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+    }
 
     public void eliminarNoticia(Noticia n) {
         try {

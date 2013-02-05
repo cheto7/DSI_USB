@@ -199,6 +199,11 @@
             <forward name="success" path="/ListarNoticia.do"></forward>  
         </action>
         
+        <action path="/EditarEquipo" type="Equipo.Editar" scope="request"
+                name="Equipo">
+            <forward name="success" path="/ListarEquipo.do"></forward>  
+        </action>
+        
         <action path="/ConfirmarEliminarNoticia" type="Noticias.ConfirmarEliminar" scope="request"
                 name="Noticia">
             <forward name="success" path="/vistas/noticias/lista_noticias/confirmar_eliminar_noticia.jsp"></forward>  
