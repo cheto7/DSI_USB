@@ -99,6 +99,16 @@
             <option>44.5</option>
             <option>45</option>
     </html:select>
+    <legend style="color:red">Área laboral:</legend>
+    <html:select name="autenticado" property="area_laboral" styleClass="span1">
+        <option>
+            <bean:write name="autenticado" property="area_laboral"></bean:write>
+        </option>
+        <option>Administrativa</option>
+        <option>Académica</option>
+        <option>Bombero</option>
+        <option>Obrero</option> 
+    </html:select>
     <br>
     <html:submit> Modificar </html:submit>
 </html:form>

@@ -22,6 +22,7 @@ CREATE TABLE "PREPAS".usuario (
   talla_zapato VARCHAR NOT NULL,
   habilitado VARCHAR NOT NULL,
   administrador VARCHAR DEFAULT 'usuario',
+  area_laboral   VARCHAR,
   
   CONSTRAINT PK_usuario PRIMARY KEY (usuario)
 ) WITH (
@@ -85,6 +86,7 @@ CREATE TABLE "PREPAS".proveedor (
     email VARCHAR,
     contacto VARCHAR,
     direccion VARCHAR,
+    habilitado VARCHAR,
 
     CONSTRAINT PK_proveedor PRIMARY KEY (RIF)
 ) WITH (

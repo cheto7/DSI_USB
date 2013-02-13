@@ -1,5 +1,5 @@
 --INSERT INTO "PREPAS".usuario VALUES ('smaf@usb.ve','12345','','Steph','Alib','','','','f','S','S','28','S','36','true','administrador');
-INSERT INTO "PREPAS".usuario VALUES ('mgomez@usb.ve','dsiusb','','Marcos','Gómez','','','','f','S','S','28','S','36','true','administrador');
+INSERT INTO "PREPAS".usuario VALUES ('mgomez@usb.ve','dsiusb','','Marcos','Gómez','','','','f','S','S','28','S','36','true','administrador','Adminitrativa');
 --INSERT INTO "PREPAS".usuario VALUES ('sofia@usb.ve','12345','','sofia','Soto','','','','f','S','S','28','S','36','true','usuario');
 --INSERT INTO "PREPAS".usuario VALUES ('astrid@usb.ve','12345','','astrid','Soto','','','','f','S','S','28','S','36','true','usuario');
 INSERT INTO "PREPAS".noticia VALUES ('mgomez@usb.ve','Entrega 30%','Ya se encuentra habilitado el sistema para la DSI con el 30% de los casos de uso implementados. ','2012-11-29');
