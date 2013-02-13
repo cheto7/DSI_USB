@@ -62,7 +62,7 @@
                 Femenino
             </html:radio>
         </label>
-        <br />
+        <br/>
 
 
         <legend style="color:red">Talla de equipos:</legend>
@@ -124,6 +124,14 @@
             <option>44</option>
             <option>44.5</option>
             <option>45</option>
+        </html:select>
+            
+        <legend style="color:red">Área laboral:</legend>
+        <html:select name="Usuario" property="area_laboral" styleClass="span1" style="width: 5">
+            <option value="administrativo">Administrativa</option>
+            <option value="academico">Académica</option>
+            <option value="bombero">Bombero</option>
+            <option value="obrero">Obrero</option> 
         </html:select>
 
         <br />

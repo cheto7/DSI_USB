@@ -70,7 +70,7 @@ public class DBMS {
         return false;
     }
 
-    /*Consulta si al momento de registrarse el nombre de usuario ya se 
+    /* Consulta si al momento de registrarse el nombre de usuario ya se 
      * encuentra en uso. */
     public Boolean existeUsuario(Usuario u) {
 
@@ -271,6 +271,7 @@ public class DBMS {
             u.setTalla_zapato(rs.getString("talla_zapato"));
             u.setHabilitado(rs.getString("habilitado"));
             u.setAdministrador(rs.getString("administrador"));
+            u.setArea_laboral(rs.getString("area_laboral"));
 
             return u;
 
@@ -293,8 +294,10 @@ public class DBMS {
                     + "' , '" + u.getSexo() + "' , '" + u.getTalla_mascara()
                     + "' , '" + u.getTalla_camisa() + "' , '" + u.getTalla_pantalon()
                     + "' , '" + u.getTalla_guantes()
-                    + "' , '" + u.getTalla_zapato() + "' , "
-                    + "'false')";
+                    + "' , '" + u.getTalla_zapato()
+                    + "' , '" + "false"
+                    + "' , '" + "false"
+                    + "' , '" + u.getArea_laboral()+"')";
 
             Statement stmt = conexion.createStatement();
             System.out.println(sqlquery);
@@ -306,7 +309,7 @@ public class DBMS {
         return false;
     }
 
-    /*Elimina un usuario de la base de datos*/
+    /* Elimina un usuario de la base de datos */
     public Boolean eliminarUsuario(Usuario u) {
         try {
             String sqlquery = "DELETE FROM \"PREPAS\".solicitud WHERE "
@@ -423,15 +426,16 @@ public class DBMS {
         try {
             String sqlquery = "UPDATE \"PREPAS\".usuario SET "
                     + "password = '" + u.getPassword() + "' , "
-                    + "telefono = " + "'" + u.getTelefono() + "' , "
-                    + "email = " + "'" + u.getEmail() + "' , "
-                    + "direccion = " + "'" + u.getDireccion() + "' , "
-                    + "talla_mascara = " + "'" + u.getTalla_mascara() + "' , "
-                    + "talla_camisa = " + "'" + u.getTalla_camisa() + "' , "
-                    + "talla_pantalon = " + "'" + u.getTalla_pantalon() + "' , "
-                    + "talla_guantes = " + "'" + u.getTalla_guantes() + "' , "
-                    + "talla_zapato = " + "'" + u.getTalla_zapato() + "'"
-                    + " WHERE usuario = '" + u.getUsuario() + "'";
+                    + "telefono = '" + u.getTelefono() + "' , "
+                    + "email = '" + u.getEmail() + "' , "
+                    + "direccion = '" + u.getDireccion() + "' , "
+                    + "talla_mascara = '" + u.getTalla_mascara() + "' , "
+                    + "talla_camisa = '" + u.getTalla_camisa() + "' , "
+                    + "talla_pantalon = '" + u.getTalla_pantalon() + "' , "
+                    + "talla_guantes = '" + u.getTalla_guantes() + "' , "
+                    + "talla_zapato = '" + u.getTalla_zapato() + "' , "
+                    + "area_laboral = '" + u.getArea_laboral() + "'"
+                    + "WHERE usuario = '" + u.getUsuario() + "'";
 
             Statement stmt = conexion.createStatement();
             System.out.println(sqlquery);
@@ -2501,5 +2505,22 @@ public class DBMS {
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
+    }
+
+    public Boolean existeProveedor(Proveedor p) {
+
+        String sqlquery = "SELECT * FROM \"PREPAS\".proveedor"
+                + " WHERE rif ='" + p.getRif() + "' ";
+
+        System.out.println(sqlquery);
+        try {
+            Statement stmt = conexion.createStatement();
+            ResultSet rs = stmt.executeQuery(sqlquery);
+            Boolean b = rs.next();
+            return b;
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return false;
     }
 }

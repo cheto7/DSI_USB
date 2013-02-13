@@ -1,9 +1,11 @@
-
-package Usuarios;
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package Solicitudes;
 
 import Clases.Usuario;
-import DBMS.*;
-import java.util.ArrayList;
+import DBMS.DBMS;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -13,13 +15,9 @@ import org.apache.struts.action.ActionMapping;
 
 /**
  *
- * @author sibs
+ * @author ivan
  */
-
-/*Accion que llama a la clase DBMS.java para consultar todos los usuarios
- que estan en la base de datos para luego mandarlos a la vista 
- correspondiente. */
-public class Listar extends org.apache.struts.action.Action {
+public class ListarEquiposSolicitud extends org.apache.struts.action.Action {
 
     /* forward name="success" path="" */
     private static final String SUCCESS = "success";
@@ -38,22 +36,18 @@ public class Listar extends org.apache.struts.action.Action {
     public ActionForward execute(ActionMapping mapping, ActionForm form,
             HttpServletRequest request, HttpServletResponse response)
             throws Exception {
-
-        /*NUEVO!*/
-        HttpSession session = request.getSession();
-        String loggueado = (String) session.getAttribute("usuarioAutenticado");
-        Usuario autenticado = new Usuario();
-        autenticado.setUsuario(loggueado);
         
-        ArrayList<Usuario> usuariosHab = DBMS.getInstance().consultarUsuariosHabilitados(autenticado);
-        request.setAttribute("usuariosHab", usuariosHab);
-
-        ArrayList<Usuario> usuariosNoHab = DBMS.getInstance().consultarUsuariosNoHabilitados(autenticado);
-        request.setAttribute("usuariosNoHab", usuariosNoHab);
-
-        /*u = DBMS.getInstance().atributosUsuario(u);
-        request.setAttribute("autenticado", u);*/
-
+        HttpSession session = request.getSession();
+        String autenticado = (String) session.getAttribute("usuarioAutenticado");
+        Usuario u = new Usuario();
+        u.setUsuario(autenticado);
+        u = DBMS.getInstance().atributosUsuario(u);
+        
+        /* Aqui se debe preguntar por el TIPO DE USUARIO para saber que
+         * equipos se van a listar
+         */
+        
+        
         return mapping.findForward(SUCCESS);
     }
 }

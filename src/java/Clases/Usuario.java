@@ -22,6 +22,17 @@ public class Usuario extends Root {
     private String talla_zapato;
     private String habilitado;
     private String administrador;
+    private String area_laboral;
+
+    public String getArea_laboral() {
+        return area_laboral;
+    }
+
+    public void setArea_laboral(String area_laboral) {
+        this.area_laboral = area_laboral;
+    }
+
+
 
     public String getAdministrador() {
         return administrador;

@@ -9,20 +9,17 @@
 <%@ taglib uri="http://struts.apache.org/tags-tiles" prefix="tiles" %>
 
 
-
-
 <legend>Editar información usuario</legend>
-<label>Usuario</label> 
-<bean:write name="Usuario" property="usuario"/><br>
-<label>Datos Personales</label> 
 
-<html:form action = "/Editar" onsubmit = "return (this)">
+<legend>Datos Personales:</legend> 
+<label>Usuario:</label> <bean:write name="Usuario" property="usuario"/><br>
+<html:form action = "/Editar" styleId="Form" onsubmit = "return (this)">
     <html:hidden name="Usuario" property="usuario"/>
     <html:hidden name="autenticado" property="usuario"/>
-    <label>Password</label><html:password name="Usuario" property="password"></html:password><br>
+    <label><br>Password: </label><html:password name="Usuario" property="password" styleId="password"></html:password><br>
     <label>Correo electrónico alternativo:</label><html:text name="Usuario" property="email"></html:text><br>      
-    <label>Teléfono</label><html:text name="Usuario" property="telefono"></html:text><br>  
-    <label>Dirección</label><html:textarea name="Usuario" property="direccion" rows="5" ></html:textarea><br>    
+    <label>Teléfono: </label><html:text name="Usuario" property="telefono"></html:text><br>  
+    <label>Dirección: </label><html:textarea name="Usuario" property="direccion" rows="5" ></html:textarea><br>    
         <br/>
 
         <legend>Talla de equipos:</legend>
@@ -99,6 +96,17 @@
             <option>44.5</option>
             <option>45</option>
     </html:select>
+    <legend style="color:red">Área laboral:</legend>
+    <html:select name="Usuario" property="area_laboral" styleClass="span1">
+        <option>
+            <bean:write name="Usuario" property="area_laboral"></bean:write>
+        </option>
+        <option>Administrativa</option>
+        <option>Académica</option>
+        <option>Bombero</option>
+        <option>Obrero</option> 
+    </html:select>                
+       
     <br>
     <html:submit> Modificar </html:submit>
 </html:form>

@@ -9,11 +9,11 @@
 <%@ taglib uri="http://struts.apache.org/tags-tiles" prefix="tiles" %>
 
 <legend>Editar información usuario</legend>
-<label>Autenticado</label> 
-<bean:write name="autenticado" property="usuario"/><br>
-<label>Datos Personales</label> 
-<bean:write name="autenticado" property="nombre"/>
-<bean:write name="autenticado" property="apellido"/> <br><br>
+<legend>Datos Personales</legend> 
+
+<h1 style="display: inline">Usuario: </h1><bean:write name="autenticado" property="usuario"/><br><br>
+<h1 style="display: inline">Nombre: </h1><bean:write name="autenticado" property="nombre"/><br><br>
+<h1 style="display: inline">Apellido: </h1><bean:write name="autenticado" property="apellido"/><br><br>
 
 <html:form action = "/EditarAdmin" onsubmit = "return (this)">
     <html:hidden name="autenticado" property="usuario"/>
@@ -98,7 +98,8 @@
             <option>44</option>
             <option>44.5</option>
             <option>45</option>
-    </html:select>
+    </html:select>        
+
     <br>
     <html:submit> Modificar </html:submit>
 </html:form>

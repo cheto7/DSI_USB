@@ -48,6 +48,11 @@ public class AgregarProveedor extends org.apache.struts.action.Action {
             request.setAttribute("mensajeProveedorNombre", "error");
             return mapping.findForward(FAILURE);
         }
+        Boolean existe = DBMS.getInstance().existeProveedor(p);
+        if (existe){
+            request.setAttribute("mensajeProveedorExistente", "error");
+            return mapping.findForward(FAILURE);
+        }
         p.setHabilitado("true");
         Boolean agregada = DBMS.getInstance().agregarProveedor(p);
         if (agregada){

@@ -33,6 +33,12 @@
         </center>
 </logic:present>
 
+<logic:present name="mensajeProveedorExistente">
+        <center>
+            <label style="color:red">Error: El RIF ya se encuentra registrado en la base de datos</label>
+        </center>
+</logic:present>
+
 <html:form action = "/AgregarProveedor" acceptCharset="iso-8859-1" onsubmit = "return (this)">
 
     <label>RIF:</label>
