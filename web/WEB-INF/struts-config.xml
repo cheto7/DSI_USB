@@ -138,7 +138,7 @@
                 name="Usuario">
             <forward name="success" path="/vistas/pedido/interfaz_pedido.jsp"></forward>
             <forward name="failure" path="/vistas/error/welcomeStruts.jsp"></forward>
-        </action>
+        </action> 
         
         <action path="/Ir_pag_usuario" type="Volver.Volver" scope="request"
                 name="Usuario">
@@ -171,7 +171,7 @@
         
         <action path="/AgregarEquipo" type="Equipo.AgregarEquipo" scope="request"
                 name="Equipo">
-            <forward name="success" path="/vistas/genericos/interfaz_administrador.jsp"></forward>
+            <forward name="success" path="/ListarEquipo.do"></forward>
             <forward name="failure" path="/vistas/equipo/interfaz_formulario_agregar_equipo.jsp"></forward>  
         </action>
         
