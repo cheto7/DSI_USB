@@ -99,6 +99,12 @@
             <html:submit style="padding:0px 10px 30px 0px">Lista noticias</html:submit>
         </html:form>
     </li>
+    <li>
+        <html:form action="/ListarProveedores" onsubmit="return (this)">
+            <html:hidden name="autenticado" property="usuario"/>
+            <html:submit style="padding:0px 10px 30px 0px">Proveedores</html:submit>
+        </html:form>
+    </li>
         </div>
 
 </ul>

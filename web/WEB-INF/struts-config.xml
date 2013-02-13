@@ -11,6 +11,7 @@
      <form-bean name="Solicitud" type="Clases.Solicitud"/>
      <form-bean name="Pedido"  type="Clases.Pedido"/>
      <form-bean name="Noticia" type="Clases.Noticia"/>
+     <form-bean name="Proveedor" type="Clases.Proveedor"/>
      <form-bean name="Equipo" type="Clases.Equipo"/>
      <form-bean name="UploadFile" type="Clases.UploadFile"/>
     </form-beans>
@@ -155,7 +156,7 @@
         <action path="/IrAgregarNoticia" type="Noticias.FormularioAgregarNoticia" scope="request"
                 name="Noticia">
             <forward name="success" path="/vistas/noticias/interfaz_formulario_agregar_noticia.jsp"></forward>
-            </action>
+        </action>
         
         <action path="/AgregarNoticia" type="Noticias.AgregarNoticia" scope="request"
                 name="Noticia">
@@ -242,7 +243,45 @@
          name="Noticia">
             <forward name="success" path="/vistas/listados_generales.jsp"></forward>
         </action>
+        
+         <action path="/AgregarProveedor" type="Proveedores.AgregarProveedor" scope="request"
+              name="Proveedor">
+              <forward name="failure" path="/vistas/proveedores/agregarProveedor.jsp"></forward>
+              <forward name="success" path="/vistas/proveedores/lista_proveedores.jsp"></forward>
+         </action>
+         
+         <action path="/ListarProveedores" type="Proveedores.Listar" scope="request"
+                name="Proveedor">
+            <forward name="success" path="/vistas/proveedores/lista_proveedores.jsp"></forward>  
+         </action>
+         
+         <action path="/EliminarProveedor" type="Proveedores.Eliminar" scope="request"
+                name="Proveedor">
+            <forward name="success" path="/vistas/proveedores/lista_proveedores.jsp"></forward>  
+         </action>
 
+         <action path="/VerProveedor" type="Proveedores.Ver" scope="request" name="Proveedor">
+             <forward name="success" path="/vistas/proveedores/verProveedor.jsp"></forward>  
+         </action>
+         
+        <action path="/ConfirmarEliminarProveedor" type="Proveedores.ConfirmarEliminar" scope="request"
+                name="Proveedor">
+            <forward name="success" path="/vistas/proveedores/confirmar_eliminar_proveedor.jsp"></forward>  
+        </action>
+        <action path="/FormularioAgregarProveedor" type="Proveedores.FormularioAgregarProveedor" scope="request"
+                name="Proveedor">
+            <forward name="success" path="/vistas/proveedores/agregarProveedor.jsp"></forward>  
+        </action>
+        <action path="/FormularioEditarProveedor" type="Proveedores.FormularioEditarProveedor" scope="request"
+                        name="Proveedor">
+            <forward name="success" path="/vistas/proveedores/formulario_editar_proveedor.jsp"></forward>  
+        </action>
+        <action path="/EditarProveedor" type="Proveedores.Editar" scope="request"
+                name="Proveedor">
+            <forward name="success" path="/ListarProveedores.do"></forward>
+            <forward name="failure" path="/vistas/proveedores/formulario_editar_proveedor.jsp"></forward>  
+        </action>
+        
     </action-mappings>
     
     <controller processorClass="org.apache.struts.tiles.TilesRequestProcessor"/>

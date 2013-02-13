@@ -76,7 +76,7 @@ public class Verificar extends DispatchAction {
         
         /*Verificaciones de sexo. */
         if (u.getSexo() == null) {
-            u.setMensaje("Porfavor seleccione sexo. ");
+            u.setMensaje("Por favor seleccione sexo. ");
             return mapping.findForward(FAILURE);
         }
         

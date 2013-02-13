@@ -41,7 +41,7 @@ public class DBMS {
         try {
             Class.forName("org.postgresql.Driver");
             conexion = DriverManager.getConnection(
-                    "jdbc:postgresql://localhost:5432/DSI_USB",
+                    "jdbc:postgresql://localhost/DSI_USB",
                     "postgres",
                     "postgres");
             return true;
@@ -94,7 +94,7 @@ public class DBMS {
             String sqlquery;
             sqlquery = "INSERT INTO \"PREPAS\".equipo (tipo, imagen, nombre_vista, funcionalidad)  VALUES "
                     + "('" + e.getTipo() + "' , '" + e.getImagen()
-                    + "' , '" + e.getNombre_vista() + "' , '" + e.getFuncionalidad() +"');";
+                    + "' , '" + e.getNombre_vista() + "' , '" + e.getFuncionalidad() + "');";
 
             Statement stmt = conexion.createStatement();
             System.out.println(sqlquery);
@@ -105,8 +105,7 @@ public class DBMS {
         }
         return false;
     }
-    
-    
+
     public Boolean agregarNoticia(Noticia n) {
         try {
             String sqlquery;
@@ -149,7 +148,7 @@ public class DBMS {
         }
         return noticias;
     }
-    
+
     public ArrayList<Equipo> obtenerEquipos() {
         ArrayList<Equipo> equipos = new ArrayList<Equipo>(0);
         try {
@@ -194,7 +193,7 @@ public class DBMS {
             ex.printStackTrace();
         }
     }
-    
+
     public void editarEquipo(Equipo e) {
         try {
             String sqlquery = "UPDATE \"PREPAS\".equipo SET "
@@ -228,7 +227,7 @@ public class DBMS {
             ex.printStackTrace();
         }
     }
-    
+
     public void eliminarEquipo(Equipo e) {
         try {
             String sqlquery = "DELETE FROM \"PREPAS\".equipo WHERE "
@@ -242,10 +241,8 @@ public class DBMS {
             ex.printStackTrace();
         }
     }
-    
-    
-    /* Retorna todos los atributos del usuario a consultar. */
 
+    /* Retorna todos los atributos del usuario a consultar. */
     public Usuario atributosUsuario(Usuario us) {
 
         Usuario u = new Usuario();
@@ -2421,5 +2418,88 @@ public class DBMS {
         }
         return equipos;
 
+    }
+
+    public Boolean agregarProveedor(Proveedor p) {
+        try {
+            String sqlquery;
+            sqlquery = "INSERT INTO \"PREPAS\".proveedor VALUES "
+                    + "('" + p.getRif() + "' , '" + p.getNombre()
+                    + "' , '" + p.getTelefono() + "' , '" + p.getEmail()
+                    + "' , '" + p.getContacto() + "' , '" + p.getDireccion()
+                    + "',  '" + p.getHabilitado() + "')";
+
+            Statement stmt = conexion.createStatement();
+            System.out.println(sqlquery);
+            Integer i = stmt.executeUpdate(sqlquery);
+            return i > 0;
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return false;
+    }
+
+    public ArrayList<Proveedor> obtenerProveedores() {
+        ArrayList<Proveedor> proveedores = new ArrayList<Proveedor>(0);
+        try {
+            String sqlquery;
+            sqlquery = "SELECT * FROM \"PREPAS\".proveedor WHERE habilitado = 'true'";
+
+            Statement stmt = conexion.createStatement();
+            System.out.println(sqlquery);
+            ResultSet rs = stmt.executeQuery(sqlquery);
+
+            while (rs.next()) {
+                Proveedor p = new Proveedor();
+                p.setRif(rs.getString("rif"));
+                p.setNombre(rs.getString("nombre"));
+                p.setTelefono(rs.getString("telefono"));
+                p.setEmail(rs.getString("email"));
+                p.setDireccion(rs.getString("direccion"));
+                p.setContacto(rs.getString("contacto"));
+                proveedores.add(p);
+            }
+            return proveedores;
+        } catch (SQLException ex) {
+            System.out.println("EXCEPCION");
+            ex.printStackTrace();
+        }
+        return proveedores;
+    }
+
+    /*Deshabilita un proveedor. */
+    public Boolean eliminarProveedor(Proveedor p) {
+        try {
+            String sqlquery = "UPDATE \"PREPAS\".proveedor SET "
+                    + "habilitado = 'false' "
+                    + " WHERE rif = '" + p.getRif() + "'";
+
+            Statement stmt = conexion.createStatement();
+            System.out.println(sqlquery);
+            Integer i = stmt.executeUpdate(sqlquery);
+            return i > 0;
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return false;
+    }
+
+    public void editarProveedor(Proveedor p) {
+        try {
+            String sqlquery = "UPDATE \"PREPAS\".proveedor SET "
+                    + "rif = '" + p.getRif() + "' , "
+                    + "nombre = '" + p.getNombre() + "' , "
+                    + "telefono = '" + p.getTelefono() + "' , "
+                    + "email = '" + p.getEmail() + "' , "
+                    + "contacto = '" + p.getContacto() + "' , "
+                    + "direccion = '" + p.getDireccion() + "'"
+                    + " WHERE rif = '" + p.getRifAnterior() + "'";
+
+            Statement stmt = conexion.createStatement();
+            System.out.println(sqlquery);
+            Integer i = stmt.executeUpdate(sqlquery);
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
     }
 }
