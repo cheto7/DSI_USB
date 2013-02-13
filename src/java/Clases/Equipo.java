@@ -1,13 +1,13 @@
 package Clases;
 
 import java.io.File;
-import org.apache.struts.action.ActionForm;
+import org.apache.struts.validator.ValidatorForm;
 
 /**
  *
  * @author cheo
  */
-public class Equipo extends ActionForm {
+public class Equipo extends ValidatorForm {
 
     private int serial;
     private String imagen;
