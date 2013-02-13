@@ -281,6 +281,7 @@
             <forward name="success" path="/ListarProveedores.do"></forward>
             <forward name="failure" path="/vistas/proveedores/formulario_editar_proveedor.jsp"></forward>  
         </action>
+        <action path="/ListarEquiposSolicitud" type="Solicitudes.ListarEquiposSolicitud"/>
         
     </action-mappings>
     
