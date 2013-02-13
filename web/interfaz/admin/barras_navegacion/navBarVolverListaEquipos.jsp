@@ -1,8 +1,9 @@
 <%-- 
-    Document   : navBarpedido
-    Created on : Nov 4, 2012, 2:44:49 AM
-    Author     : sibs
+    Document   : navBarVolverListaEquipos
+    Created on : 13/02/2013, 02:34:43 PM
+    Author     : ivan
 --%>
+
 <%@ taglib uri="http://struts.apache.org/tags-bean" prefix="bean" %>
 <%@ taglib uri="http://struts.apache.org/tags-html" prefix="html" %>
 <%@ taglib uri="http://struts.apache.org/tags-logic" prefix="logic" %>
@@ -21,7 +22,7 @@
     </p> 
     
     <li>
-        <html:form action = "/Ir_pag_usuario" onsubmit="return (this)">
+        <html:form action = "/ListarEquipo" onsubmit="return (this)">
             <html:hidden name="autenticado" property="usuario"/>
             <html:submit style="padding:10px 20px 40px 20px"> Volver </html:submit>
         </html:form> 
@@ -32,3 +33,4 @@
         </html:form> 
     </li>
 </ul>
+

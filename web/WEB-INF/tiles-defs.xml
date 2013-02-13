@@ -99,14 +99,14 @@
     
     <definition name="formulario-agregar-noticia" path="/interfaz/admin/noticias/plantilla-form-agregar-noticia.jsp">
         <put name="formulario" value="/interfaz/admin/noticias/form-agregar-noticia-content.jsp"></put>
-        <put name="navBar" value="/interfaz/genericos/barras_navegacion/navBarpedido.jsp"></put>
+        <put name="navBar" value="/interfaz/admin/barras_navegacion/navBarListaNoticias.jsp"></put>
         <put name="sidebar-second" value="/interfaz/genericos/plantilla_general/sidebar-second.jsp"></put>
         <put name="footer" value="/interfaz/genericos/plantilla_general/footer.jsp"></put> 
-    </definition> 
+    </definition>
     
     <definition name="formulario-agregar-equipos" path="/interfaz/admin/equipo/plantilla-form-agregar-equipo.jsp">
         <put name="formulario" value="/interfaz/admin/equipo/form-agregar-equipo-content.jsp"></put>
-        <put name="navBar" value="/interfaz/genericos/barras_navegacion/navBarpedido.jsp"></put>
+        <put name="navBar" value="/interfaz/admin/barras_navegacion/navBarVolverListaEquipos.jsp"></put>
         <put name="sidebar-second" value="/interfaz/genericos/plantilla_general/sidebar-second.jsp"></put>
         <put name="footer" value="/interfaz/genericos/plantilla_general/footer.jsp"></put> 
     </definition>
@@ -127,12 +127,12 @@
     
     <definition name="lista-noticias" extends="home">
         <put name="noticias" value="/interfaz/admin/noticias/listar_noticias/content-lista-noticias.jsp"></put>
-        <put name="navBarGeneral" value="/interfaz/genericos/barras_navegacion/navBarpedido.jsp"></put>
+        <put name="navBarGeneral" value="/interfaz/admin/barras_navegacion/navBarNoticias.jsp"></put>
     </definition>
     
     <definition name="lista-equipos" extends="home">
         <put name="noticias" value="/interfaz/admin/equipo/listar_equipos/content-lista-equipos.jsp"></put>
-        <put name="navBarGeneral" value="/interfaz/genericos/barras_navegacion/navBarpedido.jsp"></put>
+        <put name="navBarGeneral" value="/interfaz/admin/barras_navegacion/navBarListaEquipos.jsp"></put>
     </definition>
     
     <definition name="formulario-editar-noticia" extends="formulario-agregar-noticia">
@@ -142,7 +142,7 @@
     
     <definition name="formulario-editar-equipo" extends="formulario-agregar-equipos">
         <put name="formulario" value="/interfaz/admin/equipo/listar_equipos/form-edit-equipo-content.jsp"></put>
-        <put name="navBar" value="/interfaz/admin/barras_navegacion/navBarListaNoticias.jsp"></put>
+        <put name="navBar" value="/interfaz/admin/barras_navegacion/navBarVolverListaEquipos.jsp"></put>
     </definition>
     
     <definition name="confirmar-eliminar-noticia" extends="home">
@@ -152,7 +152,7 @@
     
     <definition name="confirmar-eliminar-equipo" extends="home">
         <put name="noticias" value="/interfaz/admin/equipo/listar_equipos/confirmar-eliminar-equipo.jsp"></put>
-        <put name="navBarGeneral" value="/interfaz/admin/barras_navegacion/navBarListaNoticias.jsp"></put>
+        <put name="navBarGeneral" value="/interfaz/admin/barras_navegacion/navBarVolverListaEquipos.jsp"></put>
     </definition>
     
     <definition name="listados-generales" extends="home">

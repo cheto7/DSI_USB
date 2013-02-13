@@ -1,1 +1,1 @@
-SELECT * FROM "PREPAS".usuario;
+SELECT * FROM "PREPAS".equipo;

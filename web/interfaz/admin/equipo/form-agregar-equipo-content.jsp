@@ -20,7 +20,28 @@
         </center>
     </logic:notEmpty>
 </logic:present>
-<html:form enctype="multipart/form-data" action = "/AgregarEquipo" acceptCharset="iso-8859-1" onsubmit = "return (this)">
+<logic:present name="errorNombreEquipo">
+    <logic:notEmpty name="errorNombreEquipo">
+        <center>
+            <label style="color:red">Error: Debe introducir el nombre del equipo</label>
+        </center>
+    </logic:notEmpty>
+</logic:present>
+<logic:present name="errorTipoEquipo">
+    <logic:notEmpty name="errorTipoEquipo">
+        <center>
+            <label style="color:red">Error: Debe introducir el tipo del equipo</label>
+        </center>
+    </logic:notEmpty>
+</logic:present>
+<logic:present name="errorFuncionalidadEquipo">
+    <logic:notEmpty name="errorFuncionalidadEquipo">
+        <center>
+            <label style="color:red">Error: Debe introducir la funcionalidad del equipo</label>
+        </center>
+    </logic:notEmpty>
+</logic:present>
+<html:form action = "/AgregarEquipo" acceptCharset="iso-8859-1" onsubmit = "return (this)">
 
     <label>Nombre</label>
     <html:text name="Equipo" property="nombre_vista" styleClass="span5"></html:text><br>  

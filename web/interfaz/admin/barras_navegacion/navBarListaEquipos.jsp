@@ -1,8 +1,9 @@
 <%-- 
-    Document   : navBarpedido
-    Created on : Nov 4, 2012, 2:44:49 AM
-    Author     : sibs
+    Document   : navBarListaEquipos
+    Created on : 13/02/2013, 02:20:07 PM
+    Author     : ivan
 --%>
+
 <%@ taglib uri="http://struts.apache.org/tags-bean" prefix="bean" %>
 <%@ taglib uri="http://struts.apache.org/tags-html" prefix="html" %>
 <%@ taglib uri="http://struts.apache.org/tags-logic" prefix="logic" %>
@@ -18,7 +19,13 @@
     <p>
         <bean:write name="autenticado" property="nombre"></bean:write> 
         <bean:write name="autenticado" property="apellido"></bean:write>
-    </p> 
+    </p>
+    <li>
+        <html:form action="/IrAgregarEquipo" onsubmit="return (this)">
+            <html:hidden name="autenticado" property="usuario"/>
+            <html:submit style="padding:10px 20px 40px 20px">Agregar Equipo</html:submit>
+        </html:form>
+    </li>
     
     <li>
         <html:form action = "/Ir_pag_usuario" onsubmit="return (this)">

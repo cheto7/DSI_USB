@@ -35,7 +35,24 @@ public class AgregarEquipo extends org.apache.struts.action.Action {
             HttpServletRequest request, HttpServletResponse response)
             throws Exception {
         Equipo e = (Equipo) form;
-        if(e.getFuncionalidad().equals("")
+        if (e.getNombre_vista()==""){
+            request.setAttribute("errorNombreEquipo","error");
+            return mapping.findForward(FAILURE);
+        }
+        if (e.getTipo()==""){
+            request.setAttribute("errorTipoEquipo","error");
+            return mapping.findForward(FAILURE);
+        }
+        if (e.getFuncionalidad()==""){
+            request.setAttribute("errorFuncionalidadEquipo","error");
+            return mapping.findForward(FAILURE);
+        }
+        /*if (e.getFile() == ""){
+            e.setImagen(e.getFile().getAbsolutePath());
+        }*/
+        //e.setImagen(e.getFile().getAbsolutePath());
+        e.setImagen("imagen");
+        if(e.getFuncionalidad().equals("") || e.getImagen().equals("")
                  || e.getNombre_vista().equals("") || e.getTipo().equals("")) {
             Usuario u = new Usuario();
             u.setMensaje("No puede dejar los campos vacios. ");
