@@ -1,26 +1,27 @@
 <%-- 
-    Document   : navBarpedido
-    Created on : Nov 4, 2012, 2:44:49 AM
-    Author     : sibs
+    Document   : navBarNoticias
+    Created on : 13/02/2013, 02:59:56 PM
+    Author     : ivan
 --%>
+
 <%@ taglib uri="http://struts.apache.org/tags-bean" prefix="bean" %>
 <%@ taglib uri="http://struts.apache.org/tags-html" prefix="html" %>
 <%@ taglib uri="http://struts.apache.org/tags-logic" prefix="logic" %>
 <%@ taglib uri="http://struts.apache.org/tags-tiles" prefix="tiles" %>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-
-<div id="datos_persona" style="margin-bottom:20px; display:none">
-    <a href="#" style="margin-left:10px; color:#F30; text-decoration:none; display:block"> Salir </a>
-</div>
-
 <ul id="navbar">              
     <p>
         <bean:write name="autenticado" property="nombre"></bean:write> 
         <bean:write name="autenticado" property="apellido"></bean:write>
-    </p> 
-    
+        </p> 
     <li>
+        <html:form action="/IrAgregarNoticia" onsubmit="return (this)">
+            <html:hidden name="autenticado" property="usuario"/>
+            <html:submit style="padding:10px 20px 40px 20px">Agregar noticia</html:submit>
+        </html:form>
+    </li>
+        <li>
         <html:form action = "/Ir_pag_usuario" onsubmit="return (this)">
             <html:hidden name="autenticado" property="usuario"/>
             <html:submit style="padding:10px 20px 40px 20px"> Volver </html:submit>

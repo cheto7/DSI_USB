@@ -171,7 +171,7 @@
         
         <action path="/AgregarEquipo" type="Equipo.AgregarEquipo" scope="request"
                 name="Equipo">
-            <forward name="success" path="/vistas/genericos/interfaz_administrador.jsp"></forward>
+            <forward name="success" path="/ListarEquipo.do"></forward>
             <forward name="failure" path="/vistas/equipo/interfaz_formulario_agregar_equipo.jsp"></forward>  
         </action>
         

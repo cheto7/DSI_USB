@@ -105,7 +105,7 @@
         <option>Académica</option>
         <option>Bombero</option>
         <option>Obrero</option> 
-    </html:select>                
+    </html:select> 
        
     <br>
     <html:submit> Modificar </html:submit>
