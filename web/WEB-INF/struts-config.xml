@@ -285,7 +285,7 @@
     <plug-in className="org.apache.struts.validator.ValidatorPlugIn">
         <set-property
             property="pathnames"
-            value="/WEB-INF/validator-rules.xml,/WEB-INF/validation.xml"/>
+            value="/WEB-INF/validator-rules.xml,/WEB-INF/validation.xml"/> <!--,/WEB-INF/validator-equipo.xml"/> -->
     </plug-in>
   
 </struts-config>

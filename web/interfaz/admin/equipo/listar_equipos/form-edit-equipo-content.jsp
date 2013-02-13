@@ -22,6 +22,10 @@
     </logic:notEmpty>
 </logic:present>
 
+<font color="red">
+<html:errors/>
+</font>
+
 <html:form action = "/EditarEquipo" acceptCharset="ISO-8859-1" onsubmit = "return (this)">
 
     <label>Nombre</label>
