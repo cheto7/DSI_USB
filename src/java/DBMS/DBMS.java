@@ -433,7 +433,8 @@ public class DBMS {
                     + "talla_camisa = '" + u.getTalla_camisa() + "' , "
                     + "talla_pantalon = '" + u.getTalla_pantalon() + "' , "
                     + "talla_guantes = '" + u.getTalla_guantes() + "' , "
-                    + "talla_zapato = '" + u.getTalla_zapato() + "'"
+                    + "talla_zapato = '" + u.getTalla_zapato() + "' , "
+                    + "area_laboral = '" + u.getArea_laboral() + "'"
                     + "WHERE usuario = '" + u.getUsuario() + "'";
 
             Statement stmt = conexion.createStatement();

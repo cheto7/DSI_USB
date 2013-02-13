@@ -13,7 +13,6 @@
 
 <legend>Datos Personales:</legend> 
 <label>Usuario:</label> <bean:write name="Usuario" property="usuario"/><br>
-<label>Área laboral:</label> <bean:write name="Usuario" property="area_laboral"/>
 <html:form action = "/Editar" styleId="Form" onsubmit = "return (this)">
     <html:hidden name="Usuario" property="usuario"/>
     <html:hidden name="autenticado" property="usuario"/>
@@ -97,6 +96,17 @@
             <option>44.5</option>
             <option>45</option>
     </html:select>
+    <legend style="color:red">Área laboral:</legend>
+    <html:select name="Usuario" property="area_laboral" styleClass="span1">
+        <option>
+            <bean:write name="Usuario" property="area_laboral"></bean:write>
+        </option>
+        <option>Administrativa</option>
+        <option>Académica</option>
+        <option>Bombero</option>
+        <option>Obrero</option> 
+    </html:select>                
+       
     <br>
     <html:submit> Modificar </html:submit>
 </html:form>
