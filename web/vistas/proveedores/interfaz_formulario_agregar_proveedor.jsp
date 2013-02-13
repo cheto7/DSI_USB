@@ -1,7 +1,7 @@
 <%-- 
-    Document   : interfaz_formulario_agregar_noticia
-    Created on : Nov 10, 2012, 6:20:53 PM
-    Author     : smaf
+    Document   : interfaz_formulario_agregar_proveedor
+    Created on : 30/01/2013, 03:32:20 PM
+    Author     : ivan
 --%>
 <%@ taglib uri="http://struts.apache.org/tags-tiles" prefix="tiles" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -13,7 +13,7 @@
 <%
     } else {
 %>
-<tiles:insert definition="formulario-agregar-noticia"/>
+<tiles:insert definition="formulario-agregar-proveedor"/>
 <%
     }
 %>

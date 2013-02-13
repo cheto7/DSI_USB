@@ -48,6 +48,19 @@ CREATE TABLE "PREPAS".noticia (
 OIDS = FALSE
 );
 
+CREATE TABLE "PREPAS".proveedor (
+  rif           VARCHAR NOT NULL,
+  nombre        VARCHAR,
+  telefono      VARCHAR,
+  email         VARCHAR,
+  contacto      VARCHAR,
+  direccion     VARCHAR,
+  habilitado    VARCHAR,
+  CONSTRAINT PK_proveedor PRIMARY KEY (rif)
+) WITH (
+OIDS = FALSE
+);
+
 CREATE TABLE "PREPAS".solicitud (
   usuario VARCHAR NOT NULL,
   equipo VARCHAR NOT NULL,

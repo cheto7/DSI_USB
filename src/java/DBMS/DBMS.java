@@ -41,9 +41,9 @@ public class DBMS {
         try {
             Class.forName("org.postgresql.Driver");
             conexion = DriverManager.getConnection(
-                    "jdbc:postgresql://localhost:5432/postgres",
+                    "jdbc:postgresql://localhost/DSI_USB",
                     "postgres",
-                    "0639563");
+                    "postgres");
             return true;
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -2340,4 +2340,88 @@ public class DBMS {
         return equipos;
 
     }
+    
+    public Boolean agregarProveedor(Proveedor p) {
+        try {
+            String sqlquery;
+            sqlquery = "INSERT INTO \"PREPAS\".proveedor VALUES "
+                    + "('" + p.getRif() + "' , '" + p.getNombre()
+                    + "' , '" + p.getTelefono() + "' , '" + p.getEmail()
+                    + "' , '" + p.getContacto() + "' , '" + p.getDireccion()
+                    + "',  '" + p.getHabilitado() + "')";
+
+            Statement stmt = conexion.createStatement();
+            System.out.println(sqlquery);
+            Integer i = stmt.executeUpdate(sqlquery);
+            return i > 0;
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return false;
+    }
+
+    public ArrayList<Proveedor> obtenerProveedores() {
+        ArrayList<Proveedor> proveedores = new ArrayList<Proveedor>(0);
+        try {
+            String sqlquery;
+            sqlquery = "SELECT * FROM \"PREPAS\".proveedor WHERE habilitado = 'true'";
+
+            Statement stmt = conexion.createStatement();
+            System.out.println(sqlquery);
+            ResultSet rs = stmt.executeQuery(sqlquery);
+
+            while (rs.next()) {
+                Proveedor p = new Proveedor();
+                p.setRif(rs.getString("rif"));
+                p.setNombre(rs.getString("nombre"));
+                p.setTelefono(rs.getString("telefono"));
+                p.setEmail(rs.getString("email"));
+                p.setDireccion(rs.getString("direccion"));
+                p.setContacto(rs.getString("contacto"));
+                proveedores.add(p);
+            }
+            return proveedores;
+        } catch (SQLException ex) {
+            System.out.println("EXCEPCION");
+            ex.printStackTrace();
+        }
+        return proveedores;
+    }
+    
+        /*Deshabilita un proveedor. */
+    public Boolean eliminarProveedor(Proveedor p) {
+        try {
+            String sqlquery = "UPDATE \"PREPAS\".proveedor SET "
+                    + "habilitado = 'false' "
+                    + " WHERE rif = '" + p.getRif() + "'";
+
+            Statement stmt = conexion.createStatement();
+            System.out.println(sqlquery);
+            Integer i = stmt.executeUpdate(sqlquery);
+            return i > 0;
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return false;
+    }
+    
+        public void editarProveedor(Proveedor p) {
+        try {
+            String sqlquery = "UPDATE \"PREPAS\".proveedor SET "
+                    + "rif = '" + p.getRif() + "' , "
+                    + "nombre = '" + p.getNombre() + "' , "
+                    + "telefono = '" + p.getTelefono() + "' , "
+                    + "email = '" + p.getEmail() + "' , "
+                    + "contacto = '" + p.getContacto() + "' , "
+                    + "direccion = '" + p.getDireccion() + "'"
+                    + " WHERE rif = '" + p.getRifAnterior() + "'";
+
+            Statement stmt = conexion.createStatement();
+            System.out.println(sqlquery);
+            Integer i = stmt.executeUpdate(sqlquery);
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+    }
+    
 }
