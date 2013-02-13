@@ -26,16 +26,16 @@
         <div id="tabs-1">
 
             <div class="selector">
-                <h1>1) Cascos:</h1>
+                <logic:iterate name="equipos" id="eq">
                 <div class="casilla">
                     <label class="checkbox inline">
-                        <html:checkbox value="true" name="Pedido" property="cascoSeguridad"/>
-                        Seguridad
+                        <%--<html:checkbox value="true" name="Pedido" property="cascoSeguridad"/>--%>
+                        <bean:write name="eq" property="imagen"/><%--<bean:write name="eq" property="nombre_vista"/>--%>
                     </label>
 
                     <center>
                         <div class="casillaimg">
-                            <img src="assets/materiales/c1.png" />
+                            <img src="<bean:write name="eq" property="imagen"/>" />
                         </div>
                     </center>
 
@@ -52,12 +52,13 @@
 
                         <p style="float:left">Cantidad:</p>
 
-                        <html:text name="Pedido" property="c1" styleClass="span1" styleId="spinner" value="1">                
+                        <html:text name="Pedido" property="c1" styleClass="span1" styleId="spinner" value="0">                
                         </html:text>
 
                     </div>
                     <!--- HASTA AQUI --->
                 </div>
+                </logic:iterate>
             </div>
         </div>
 

@@ -5,11 +5,17 @@
 package Equipo;
 
 import Clases.Equipo;
-import Clases.Noticia;
-import Clases.UploadFile;
 import Clases.Usuario;
 import DBMS.DBMS;
-import java.util.ArrayList;
+import java.io.File;
+import java.io.InputStream;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.io.FileOutputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.FileNotFoundException;
+import java.io.File;
+import org.apache.struts.upload.FormFile;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.apache.struts.action.ActionForm;
@@ -29,14 +35,55 @@ public class AgregarEquipo extends org.apache.struts.action.Action {
             HttpServletRequest request, HttpServletResponse response)
             throws Exception {
         Equipo e = (Equipo) form;
-        e.setImagen(e.getFile().getAbsolutePath());
-        if(e.getFuncionalidad().equals("") || e.getImagen().equals("")
+        if(e.getFuncionalidad().equals("")
                  || e.getNombre_vista().equals("") || e.getTipo().equals("")) {
             Usuario u = new Usuario();
             u.setMensaje("No puede dejar los campos vacios. ");
             request.setAttribute("equipoNulo",u);
             return mapping.findForward(FAILURE);
         }
+        String path = "/home/cheto/" + e.getFile().getFileName();
+
+//Controlamos las condiciones para subirlo
+
+try {
+
+// se comprueba que la ruta exista
+
+File f = new File(path);
+
+if(!f.exists()) f.createNewFile();
+
+if (makeSureDirectoryExists(parent(f))) {
+System.out.println(path);
+// Se graba en la ruta la foto;
+
+FileOutputStream out = new FileOutputStream(f);
+
+out.write(e.getFile().getFileData());
+
+out.flush();
+
+out.close();
+
+//indicamos que la intalación tiene ya foto asociada
+e.setImagen(path);
+} //if
+
+
+} //try
+
+catch (Exception ex) {
+
+System.out.println ( "Lanzada excepcion en agregarEquipo subiendo imagen:" +ex);
+
+return null ;
+
+}
+
+//Destruimos el archivo temporal
+
+e.getFile().destroy();
         
         Boolean agregada = DBMS.getInstance().agregarEquipo(e);
         if (agregada) {
@@ -48,4 +95,47 @@ public class AgregarEquipo extends org.apache.struts.action.Action {
             return mapping.findForward(FAILURE);
         }
     }
+    
+    private File parent(File f) {
+
+String dirname = f.getParent();
+
+if (dirname == null ) {
+
+return new File(File.separator);
+
+}
+
+return new File(dirname);
+
+}
+
+/**
+
+* Crear un subdirectorio si este no existe
+
+* @param dir --> El path del archivo (dirección + nombre)
+
+* @return True -> Existe o se ha creado False --> No existe y no se ha podido crear
+
+*/
+
+private boolean makeSureDirectoryExists(File dir) {
+
+if (!dir.exists()) {
+
+if (makeSureDirectoryExists(parent(dir)))
+
+dir.mkdir();
+
+else{
+System.out.println("falso caiman");
+return false ;
+}
+}
+
+return true ;
+
+}
+
 }

@@ -1,11 +1,12 @@
 package Clases;
 
 import java.io.File;
+import org.apache.struts.upload.FormFile;
 import org.apache.struts.validator.ValidatorForm;
 
 /**
  *
- * @author cheo
+ * @author cheto
  */
 public class Equipo extends ValidatorForm {
 
@@ -16,13 +17,13 @@ public class Equipo extends ValidatorForm {
     private int cantidad;
     private Double evaluacion;
     private String funcionalidad;
-    private File file;
+    private FormFile file;
 
-    public File getFile() {
+    public FormFile getFile() {
         return file;
     }
 
-    public void setFile(File file) {
+    public void setFile(FormFile file) {
         this.file = file;
     }
 
