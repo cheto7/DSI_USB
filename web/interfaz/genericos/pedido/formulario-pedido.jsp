@@ -35,7 +35,7 @@
 
                     <center>
                         <div class="casillaimg">
-                            <img src="<bean:write name="eq" property="imagen"/>" />
+                            <img src="assets/materiales/<bean:write name="eq" property="nombre_vista"/>.png" />
                         </div>
                     </center>
 

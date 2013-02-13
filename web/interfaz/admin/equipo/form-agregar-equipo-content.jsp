@@ -41,7 +41,7 @@
         </center>
     </logic:notEmpty>
 </logic:present>
-<html:form action = "/AgregarEquipo" acceptCharset="iso-8859-1" onsubmit = "return (this)">
+<html:form enctype="multipart/form-data" action = "/AgregarEquipo" acceptCharset="iso-8859-1" onsubmit = "return (this)">
 
     <label>Nombre</label>
     <html:text name="Equipo" property="nombre_vista" styleClass="span5"></html:text><br>  

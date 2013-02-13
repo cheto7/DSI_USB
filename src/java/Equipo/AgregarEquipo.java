@@ -47,19 +47,7 @@ public class AgregarEquipo extends org.apache.struts.action.Action {
             request.setAttribute("errorFuncionalidadEquipo","error");
             return mapping.findForward(FAILURE);
         }
-        /*if (e.getFile() == ""){
-            e.setImagen(e.getFile().getAbsolutePath());
-        }*/
-        //e.setImagen(e.getFile().getAbsolutePath());
-        e.setImagen("imagen");
-        if(e.getFuncionalidad().equals("") || e.getImagen().equals("")
-                 || e.getNombre_vista().equals("") || e.getTipo().equals("")) {
-            Usuario u = new Usuario();
-            u.setMensaje("No puede dejar los campos vacios. ");
-            request.setAttribute("equipoNulo",u);
-            return mapping.findForward(FAILURE);
-        }
-        String path = "/home/cheto/" + e.getFile().getFileName();
+        String path = "/home/cheto/NetBeansProjects/DSI_USB/web/assets/materiales/" + e.getNombre_vista() + ".png";
 
 //Controlamos las condiciones para subirlo
 
@@ -84,7 +72,7 @@ out.flush();
 out.close();
 
 //indicamos que la intalación tiene ya foto asociada
-e.setImagen(path);
+e.setImagen(f.getAbsolutePath());
 } //if
 
 
@@ -146,7 +134,6 @@ if (makeSureDirectoryExists(parent(dir)))
 dir.mkdir();
 
 else{
-System.out.println("falso caiman");
 return false ;
 }
 }
