@@ -89,6 +89,23 @@ public class DBMS {
         return false;
     }
 
+    public Boolean agregarEquipo(Equipo e) {
+        try {
+            String sqlquery;
+            sqlquery = "INSERT INTO \"PREPAS\".equipo (tipo, imagen, nombre_vista, funcionalidad)  VALUES "
+                    + "('" + e.getTipo() + "' , '" + e.getImagen()
+                    + "' , '" + e.getNombre_vista() + "' , '" + e.getFuncionalidad() + "');";
+
+            Statement stmt = conexion.createStatement();
+            System.out.println(sqlquery);
+            Integer i = stmt.executeUpdate(sqlquery);
+            return i > 0;
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return false;
+    }
+
     public Boolean agregarNoticia(Noticia n) {
         try {
             String sqlquery;
@@ -132,6 +149,35 @@ public class DBMS {
         return noticias;
     }
 
+    public ArrayList<Equipo> obtenerEquipos() {
+        ArrayList<Equipo> equipos = new ArrayList<Equipo>(0);
+        try {
+            String sqlquery;
+            sqlquery = "SELECT * FROM \"PREPAS\".equipo";
+
+            Statement stmt = conexion.createStatement();
+            System.out.println(sqlquery);
+            ResultSet rs = stmt.executeQuery(sqlquery);
+
+            while (rs.next()) {
+                Equipo e = new Equipo();
+                e.setNombre_vista(rs.getString("nombre_vista"));
+                e.setImagen(rs.getString("imagen"));
+                e.setTipo(rs.getString("tipo"));
+                e.setCantidad(Integer.parseInt(rs.getString("cantidad")));
+                e.setEvaluacion(Double.parseDouble(rs.getString("evaluacion")));
+                e.setFuncionalidad(rs.getString("funcionalidad"));
+                e.setSerial(Integer.parseInt(rs.getString("serial")));
+                equipos.add(e);
+            }
+            return equipos;
+        } catch (SQLException ex) {
+            System.out.println("EXCEPCION");
+            ex.printStackTrace();
+        }
+        return equipos;
+    }
+
     public void editarNoticia(Noticia n) {
         try {
             String sqlquery = "UPDATE \"PREPAS\".noticia SET "
@@ -139,6 +185,25 @@ public class DBMS {
                     + "contenido = '" + n.getContenido() + "'"
                     + " WHERE usuario = '" + n.getUsuario() + "'"
                     + " AND titulo = '" + n.getTituloAnterior() + "'";
+
+            Statement stmt = conexion.createStatement();
+            System.out.println(sqlquery);
+            Integer i = stmt.executeUpdate(sqlquery);
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    public void editarEquipo(Equipo e) {
+        try {
+            String sqlquery = "UPDATE \"PREPAS\".equipo SET "
+                    + "nombre_vista = '" + e.getNombre_vista() + "' , "
+                    + "tipo = '" + e.getTipo() + "' , "
+                    + "imagen = '" + e.getImagen() + "' , "
+                    + "cantidad = '" + e.getCantidad() + "' , "
+                    + "evaluacion = '" + e.getEvaluacion() + "' , "
+                    + "funcionalidad = '" + e.getFuncionalidad() + "'"
+                    + " WHERE serial = '" + e.getSerial() + "'";
 
             Statement stmt = conexion.createStatement();
             System.out.println(sqlquery);
@@ -162,8 +227,22 @@ public class DBMS {
             ex.printStackTrace();
         }
     }
-    /* Retorna todos los atributos del usuario a consultar. */
 
+    public void eliminarEquipo(Equipo e) {
+        try {
+            String sqlquery = "DELETE FROM \"PREPAS\".equipo WHERE "
+                    + "serial = '" + e.getSerial() + "' ;";
+
+            Statement stmt = conexion.createStatement();
+            System.out.println(sqlquery);
+            ResultSet rs = stmt.executeQuery(sqlquery);
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    /* Retorna todos los atributos del usuario a consultar. */
     public Usuario atributosUsuario(Usuario us) {
 
         Usuario u = new Usuario();
@@ -2340,7 +2419,7 @@ public class DBMS {
         return equipos;
 
     }
-    
+
     public Boolean agregarProveedor(Proveedor p) {
         try {
             String sqlquery;
@@ -2387,8 +2466,8 @@ public class DBMS {
         }
         return proveedores;
     }
-    
-        /*Deshabilita un proveedor. */
+
+    /*Deshabilita un proveedor. */
     public Boolean eliminarProveedor(Proveedor p) {
         try {
             String sqlquery = "UPDATE \"PREPAS\".proveedor SET "
@@ -2404,8 +2483,8 @@ public class DBMS {
         }
         return false;
     }
-    
-        public void editarProveedor(Proveedor p) {
+
+    public void editarProveedor(Proveedor p) {
         try {
             String sqlquery = "UPDATE \"PREPAS\".proveedor SET "
                     + "rif = '" + p.getRif() + "' , "
@@ -2423,5 +2502,4 @@ public class DBMS {
             ex.printStackTrace();
         }
     }
-    
 }
