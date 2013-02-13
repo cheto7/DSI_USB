@@ -138,7 +138,7 @@
                 name="Usuario">
             <forward name="success" path="/vistas/pedido/interfaz_pedido.jsp"></forward>
             <forward name="failure" path="/vistas/error/welcomeStruts.jsp"></forward>
-        </action>
+        </action> 
         
         <action path="/Ir_pag_usuario" type="Volver.Volver" scope="request"
                 name="Usuario">

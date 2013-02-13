@@ -2,6 +2,7 @@
 package Pedido;
 
 import Clases.*;
+import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.apache.struts.action.ActionForm;
@@ -10,14 +11,13 @@ import org.apache.struts.action.ActionMapping;
 
 /**
  *
- * @author cheo
+ * @author cheto
  */
 
 /*Accion que lleva a la pagina de realizar solicitud. */
 public class Solicitud extends org.apache.struts.action.Action {
 
     private static final String SUCCESS = "success";
-    private static final String FAILURE = "failure";
     /**
      * This is the action called from the Struts framework.
      *
@@ -33,13 +33,8 @@ public class Solicitud extends org.apache.struts.action.Action {
             HttpServletRequest request, HttpServletResponse response)
             throws Exception {
         
-        Usuario u = (Usuario) form;
-        if (DBMS.DBMS.getInstance().consultarUsuario(u)) {
-            u = DBMS.DBMS.getInstance().atributosUsuario(u);
-            request.setAttribute("autenticado",u);
-            return mapping.findForward(SUCCESS);
-        }else {
-            return mapping.findForward(FAILURE);
-        }
+        ArrayList<Equipo> equipos = DBMS.DBMS.getInstance().obtenerEquipos();
+        request.setAttribute("equipos", equipos);
+        return mapping.findForward(SUCCESS);
     }
 }
