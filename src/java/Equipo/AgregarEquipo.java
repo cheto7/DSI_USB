@@ -51,7 +51,7 @@ public class AgregarEquipo extends org.apache.struts.action.Action {
             e.setImagen(e.getFile().getAbsolutePath());
         }*/
         //e.setImagen(e.getFile().getAbsolutePath());
-        e.setImagen("imagen");
+        //e.setImagen("imagen");
         if(e.getFuncionalidad().equals("") || e.getImagen().equals("")
                  || e.getNombre_vista().equals("") || e.getTipo().equals("")) {
             Usuario u = new Usuario();
@@ -59,7 +59,7 @@ public class AgregarEquipo extends org.apache.struts.action.Action {
             request.setAttribute("equipoNulo",u);
             return mapping.findForward(FAILURE);
         }
-        String path = "/home/cheto/" + e.getFile().getFileName();
+        String path = "/home/ivan/" + e.getFile().getFileName();
 
 //Controlamos las condiciones para subirlo
 
