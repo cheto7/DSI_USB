@@ -73,7 +73,9 @@ CREATE TABLE "PREPAS".equipo (
   cantidad INT default 0,
   evaluacion NUMERIC default 0,
   funcionalidad VARCHAR,
-
+  tiempo_vida INT default 1,
+  empleados VARCHAR NOT NULL,    -- 11111 sirve para todos los empleados, 00000 para ningun empleado
+                                 -- 1er bit para obrero, 2do profesor, 3ero bombero, 4to administrativo, 5to genericos
   CONSTRAINT PK_equipo PRIMARY KEY (serial)
 ) WITH (
 OIDS = FALSE

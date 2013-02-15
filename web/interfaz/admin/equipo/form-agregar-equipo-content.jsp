@@ -51,6 +51,14 @@
     <html:file name="Equipo" property="file" styleClass="span5" ></html:file><br>
     <label>Funcionalidad</label>
     <html:textarea name="Equipo" property="funcionalidad" rows="3" styleClass="span5" ></html:textarea><br>
-
+    <label>Equipo disponible para:</label>
+    <html:checkbox name="Equipo" property="obrero">Obrero</html:checkbox><br>
+    <html:checkbox name="Equipo" property="profesor">Profesor</html:checkbox><br>
+    <html:checkbox name="Equipo" property="bombero">Bombero</html:checkbox><br>
+    <html:checkbox name="Equipo" property="administrativo">Administrativo</html:checkbox><br>
+    <html:checkbox name="Equipo" property="generico">Generico</html:checkbox><br>
+    <label>Tiempo de Vida (en dias):</label>
+    <html:text name="Equipo" property="tiempo_vida" styleClass="span5"></html:text><br>
+    
     <html:submit styleClass="btn btn-primary"> Agregar </html:submit>
 </html:form>

@@ -1,7 +1,7 @@
 <%-- 
     Document   : formulario-pedido
-    Created on : Nov 4, 2012, 2:33:41 AM
-    Author     : sibs
+    Created on : Feb 13, 2013, 2:33:41 AM
+    Author     : cheto
 --%>
 
 <%@ taglib uri="http://struts.apache.org/tags-bean" prefix="bean" %>

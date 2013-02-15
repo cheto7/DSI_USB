@@ -18,6 +18,12 @@ public class Equipo extends ValidatorForm {
     private Double evaluacion;
     private String funcionalidad;
     private FormFile file;
+    private int tiempo_vida;
+    private String obrero;
+    private String profesor;
+    private String bombero;
+    private String administrativo;
+    private String generico;
 
     public FormFile getFile() {
         return file;
@@ -123,6 +129,90 @@ public class Equipo extends ValidatorForm {
      */
     public void setFuncionalidad(String funcionalidad) {
         this.funcionalidad = funcionalidad;
+    }
+
+    /**
+     * @return the tiempo_vida
+     */
+    public int getTiempo_vida() {
+        return tiempo_vida;
+    }
+
+    /**
+     * @param tiempo_vida the tiempo_vida to set
+     */
+    public void setTiempo_vida(int tiempo_vida) {
+        this.tiempo_vida = tiempo_vida;
+    }
+
+    /**
+     * @return the obrero
+     */
+    public String getObrero() {
+        return obrero;
+    }
+
+    /**
+     * @param obrero the obrero to set
+     */
+    public void setObrero(String obrero) {
+        this.obrero = obrero;
+    }
+
+    /**
+     * @return the profesor
+     */
+    public String getProfesor() {
+        return profesor;
+    }
+
+    /**
+     * @param profesor the profesor to set
+     */
+    public void setProfesor(String profesor) {
+        this.profesor = profesor;
+    }
+
+    /**
+     * @return the bombero
+     */
+    public String getBombero() {
+        return bombero;
+    }
+
+    /**
+     * @param bombero the bombero to set
+     */
+    public void setBombero(String bombero) {
+        this.bombero = bombero;
+    }
+
+    /**
+     * @return the administrativo
+     */
+    public String getAdministrativo() {
+        return administrativo;
+    }
+
+    /**
+     * @param administrativo the administrativo to set
+     */
+    public void setAdministrativo(String administrativo) {
+        this.administrativo = administrativo;
+    }
+
+    /**
+     * @return the generico
+     */
+    public String getGenerico() {
+        return generico;
+    }
+
+    /**
+     * @param generico the generico to set
+     */
+    public void setGenerico(String generico) {
+        this.generico = generico;
     }
 
 }
