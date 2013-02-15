@@ -1,5 +1,5 @@
 --SELECT * FROM "PREPAS".solicitud;
---SELECT * FROM "PREPAS".equipo;
+SELECT * FROM "PREPAS".equipo;
 --SELECT * FROM "PREPAS".contiene;
 --SELECT * FROM "PREPAS".usuario;
 

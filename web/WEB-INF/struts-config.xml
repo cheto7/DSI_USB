@@ -103,8 +103,7 @@
         </action>
         
         <action path="/ListarPedido" type="Pedido.Listar" scope="request" name="Pedido">
-            <!--<forward name="success" path="/vistas/pedido/ver_pedido.jsp"></forward>-->
-            <forward name="success" path="/SiguientePaso.do"></forward>
+            <forward name="success" path="/vistas/pedido/ver_pedido.jsp"></forward>
         </action>
         
         <action path="/EliminarElemSolicitud" type="Pedido.EliminarElem" scope="request" name="Solicitud">
