@@ -118,9 +118,12 @@ public class DBMS {
         }
         try {
             String sqlquery;
-            sqlquery = "INSERT INTO \"PREPAS\".equipo (tipo, imagen, nombre_vista, funcionalidad)  VALUES "
+            sqlquery = "INSERT INTO \"PREPAS\".equipo (tipo, imagen, nombre_vista, funcionalidad,tiempo_vida,"
+                    + "sector,norma)  VALUES "
                     + "('" + e.getTipo() + "' , '" + e.getImagen()
-                    + "' , '" + e.getNombre_vista() + "' , '" + e.getFuncionalidad() + "');";
+                    + "' , '" + e.getNombre_vista() + "' , '" + e.getFuncionalidad()
+                    + "' , '" + e.getVida_util() + "' , '" + e.getSector()
+                    + "' , '" + e.getNorma() + "')";
 
             Statement stmt = conexion.createStatement();
             System.out.println(sqlquery);
@@ -179,7 +182,7 @@ public class DBMS {
         ArrayList<Equipo> equipos = new ArrayList<Equipo>(0);
         try {
             String sqlquery;
-            sqlquery = "SELECT * FROM \"PREPAS\".equipo";
+            sqlquery = "SELECT * FROM \"PREPAS\".equipo WHERE habilitado = 'true'";
 
             Statement stmt = conexion.createStatement();
             System.out.println(sqlquery);
@@ -194,6 +197,9 @@ public class DBMS {
                 e.setEvaluacion(Double.parseDouble(rs.getString("evaluacion")));
                 e.setFuncionalidad(rs.getString("funcionalidad"));
                 e.setSerial(Integer.parseInt(rs.getString("serial")));
+                e.setNorma(rs.getString("norma"));
+                e.setSector(rs.getString("sector"));
+                e.setVida_util(rs.getString("tiempo_vida"));
                 equipos.add(e);
             }
             return equipos;
@@ -227,7 +233,9 @@ public class DBMS {
                     + "tipo = '" + e.getTipo() + "' , "
                     + "imagen = '" + e.getImagen() + "' , "
                     + "cantidad = '" + e.getCantidad() + "' , "
-                    + "evaluacion = '" + e.getEvaluacion() + "' , "
+                    + "sector = '" + e.getSector() + "' , "
+                    + "tiempo_vida = '" + e.getVida_util() + "' , "
+                    + "norma = '" + e.getNorma() + "' , "
                     + "funcionalidad = '" + e.getFuncionalidad() + "'"
                     + " WHERE serial = '" + e.getSerial() + "'";
 
@@ -256,7 +264,8 @@ public class DBMS {
 
     public void eliminarEquipo(Equipo e) {
         try {
-            String sqlquery = "DELETE FROM \"PREPAS\".equipo WHERE "
+            String sqlquery = "UPDATE \"PREPAS\".equipo SET "
+                    + "habilitado = 'false' WHERE "
                     + "serial = '" + e.getSerial() + "' ;";
 
             Statement stmt = conexion.createStatement();
@@ -323,7 +332,7 @@ public class DBMS {
                     + "' , '" + u.getTalla_zapato()
                     + "' , '" + "false"
                     + "' , '" + "false"
-                    + "' , '" + u.getArea_laboral()+"')";
+                    + "' , '" + u.getArea_laboral() + "')";
 
             Statement stmt = conexion.createStatement();
             System.out.println(sqlquery);
@@ -2548,5 +2557,257 @@ public class DBMS {
             ex.printStackTrace();
         }
         return false;
+    }
+
+    public ArrayList<Equipo> obtenerEquiposSolicitudAcademico(Usuario u) {
+        ArrayList<Equipo> equipos = new ArrayList<Equipo>(0);
+        try {
+            String sqlquery = "SELECT serial,imagen,nombre_vista,funcionalidad FROM \"PREPAS\".equipo"
+                    + " WHERE habilitado='true' AND sector= 'academico'"
+                    + "EXCEPT "
+                    + "SELECT E.serial,E.imagen,E.nombre_vista,E.funcionalidad "
+                    + "FROM \"PREPAS\".solicitud S,\"PREPAS\".contiene C,\"PREPAS\".equipo E "
+                    + "WHERE S.usuario = '" + u.getUsuario() + "' AND C.id=S.id AND E.serial=C.serial "
+                    + "AND E.sector= 'academico'";
+
+
+            Statement stmt = conexion.createStatement();
+            System.out.println(sqlquery);
+            ResultSet rs = stmt.executeQuery(sqlquery);
+
+            while (rs.next()) {
+                Equipo e = new Equipo();
+                e.setSerial(rs.getInt("serial"));
+                e.setImagen(rs.getString("imagen"));
+                e.setNombre_vista(rs.getString("nombre_vista"));
+                e.setFuncionalidad(rs.getString("funcionalidad"));
+                equipos.add(e);
+            }
+            return equipos;
+        } catch (SQLException ex) {
+            System.out.println("EXCEPCION");
+            ex.printStackTrace();
+        }
+        return equipos;
+    }
+
+    public ArrayList<Equipo> obtenerEquiposSolicitudAdmin(Usuario u) {
+        ArrayList<Equipo> equipos = new ArrayList<Equipo>(0);
+        try {
+            String sqlquery = "SELECT serial,imagen,nombre_vista,funcionalidad FROM \"PREPAS\".equipo"
+                    + " WHERE habilitado='true' AND sector= 'administrativo'"
+                    + "EXCEPT "
+                    + "SELECT E.serial,E.imagen,E.nombre_vista,E.funcionalidad "
+                    + "FROM \"PREPAS\".solicitud S,\"PREPAS\".contiene C,\"PREPAS\".equipo E "
+                    + "WHERE S.usuario = '" + u.getUsuario() + "' AND C.id=S.id AND E.serial=C.serial "
+                    + "AND E.sector= 'administrativo'";
+
+
+            Statement stmt = conexion.createStatement();
+            System.out.println(sqlquery);
+            ResultSet rs = stmt.executeQuery(sqlquery);
+
+            while (rs.next()) {
+                Equipo e = new Equipo();
+                e.setSerial(rs.getInt("serial"));
+                e.setImagen(rs.getString("imagen"));
+                e.setNombre_vista(rs.getString("nombre_vista"));
+                e.setFuncionalidad(rs.getString("funcionalidad"));
+                equipos.add(e);
+            }
+            return equipos;
+        } catch (SQLException ex) {
+            System.out.println("EXCEPCION");
+            ex.printStackTrace();
+        }
+        return equipos;
+    }
+
+    public ArrayList<Equipo> obtenerEquiposSolicitudBombero(Usuario u) {
+        ArrayList<Equipo> equipos = new ArrayList<Equipo>(0);
+        try {
+            String sqlquery = "SELECT serial,imagen,nombre_vista,funcionalidad FROM \"PREPAS\".equipo"
+                    + " WHERE habilitado='true' AND sector= 'bombero'"
+                    + "EXCEPT "
+                    + "SELECT E.serial,E.imagen,E.nombre_vista,E.funcionalidad "
+                    + "FROM \"PREPAS\".solicitud S,\"PREPAS\".contiene C,\"PREPAS\".equipo E "
+                    + "WHERE S.usuario = '" + u.getUsuario() + "' AND C.id=S.id AND E.serial=C.serial "
+                    + "AND E.sector= 'bombero'";
+
+
+            Statement stmt = conexion.createStatement();
+            System.out.println(sqlquery);
+            ResultSet rs = stmt.executeQuery(sqlquery);
+
+            while (rs.next()) {
+                Equipo e = new Equipo();
+                e.setSerial(rs.getInt("serial"));
+                e.setImagen(rs.getString("imagen"));
+                e.setNombre_vista(rs.getString("nombre_vista"));
+                e.setFuncionalidad(rs.getString("funcionalidad"));
+                equipos.add(e);
+            }
+            return equipos;
+        } catch (SQLException ex) {
+            System.out.println("EXCEPCION");
+            ex.printStackTrace();
+        }
+        return equipos;
+    }
+
+    public ArrayList<Equipo> obtenerEquiposSolicitudObrero(Usuario u) {
+        ArrayList<Equipo> equipos = new ArrayList<Equipo>(0);
+        try {
+            String sqlquery = "SELECT serial,imagen,nombre_vista,funcionalidad FROM \"PREPAS\".equipo"
+                    + " WHERE habilitado='true' AND sector= 'obrero'"
+                    + "EXCEPT "
+                    + "SELECT E.serial,E.imagen,E.nombre_vista,E.funcionalidad "
+                    + "FROM \"PREPAS\".solicitud S,\"PREPAS\".contiene C,\"PREPAS\".equipo E "
+                    + "WHERE S.usuario = '" + u.getUsuario() + "' AND C.id=S.id AND E.serial=C.serial "
+                    + "AND E.sector= 'obrero'";
+
+
+            Statement stmt = conexion.createStatement();
+            System.out.println(sqlquery);
+            ResultSet rs = stmt.executeQuery(sqlquery);
+
+            while (rs.next()) {
+                Equipo e = new Equipo();
+                e.setSerial(rs.getInt("serial"));
+                e.setImagen(rs.getString("imagen"));
+                e.setNombre_vista(rs.getString("nombre_vista"));
+                e.setFuncionalidad(rs.getString("funcionalidad"));
+                equipos.add(e);
+            }
+            return equipos;
+        } catch (SQLException ex) {
+            System.out.println("EXCEPCION");
+            ex.printStackTrace();
+        }
+        return equipos;
+    }
+
+    public ArrayList<Equipo> obtenerEquiposSolicitudGenerico(Usuario u) {
+        ArrayList<Equipo> equipos = new ArrayList<Equipo>(0);
+        try {
+            String sqlquery = "SELECT serial,imagen,nombre_vista,funcionalidad FROM \"PREPAS\".equipo"
+                    + " WHERE habilitado='true' AND sector= 'generico'"
+                    + "EXCEPT "
+                    + "SELECT E.serial,E.imagen,E.nombre_vista,E.funcionalidad "
+                    + "FROM \"PREPAS\".solicitud S,\"PREPAS\".contiene C,\"PREPAS\".equipo E "
+                    + "WHERE S.usuario = '" + u.getUsuario() + "' AND C.id=S.id AND E.serial=C.serial "
+                    + "AND E.sector= 'generico'";
+
+
+            Statement stmt = conexion.createStatement();
+            System.out.println(sqlquery);
+            ResultSet rs = stmt.executeQuery(sqlquery);
+
+            while (rs.next()) {
+                Equipo e = new Equipo();
+                e.setSerial(rs.getInt("serial"));
+                e.setImagen(rs.getString("imagen"));
+                e.setNombre_vista(rs.getString("nombre_vista"));
+                e.setFuncionalidad(rs.getString("funcionalidad"));
+                equipos.add(e);
+            }
+            return equipos;
+        } catch (SQLException ex) {
+            System.out.println("EXCEPCION");
+            ex.printStackTrace();
+        }
+        return equipos;
+    }
+
+    public Solicitud agregarASolicitud(Usuario u) {
+        try {
+            String sqlquery;
+            sqlquery = "INSERT INTO \"PREPAS\".solicitud (usuario, fecha_solicitud)  VALUES "
+                    + "('" + u.getUsuario() + "' , (SELECT CURRENT_DATE))";
+
+            Statement stmt = conexion.createStatement();
+            System.out.println(sqlquery);
+            Integer i = stmt.executeUpdate(sqlquery);
+            sqlquery = "SELECT * FROM \"PREPAS\".solicitud WHERE usuario='"
+                    + u.getUsuario() + "'";
+            ResultSet rs = stmt.executeQuery(sqlquery);
+            rs.next();
+            Solicitud s = new Solicitud();
+            s.setNombre_usuario(rs.getString("usuario"));
+            s.setFecha_solicitud(rs.getString("fecha_solicitud"));
+            s.setId(rs.getInt("id"));
+            return s;
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return null;
+    }
+
+    public void agregarAContiene(Equipo e, Solicitud s, String frecuencia, String cantidad) {
+        try {
+            String sqlquery;
+            sqlquery = "INSERT INTO \"PREPAS\".contiene (id, serial,cantidad,frecuencia)  VALUES "
+                    + "('" + s.getId() + "' , '" + e.getSerial() + "' , '" + Integer.parseInt(cantidad) + "' , '"
+                    + transformaFrecuencia(frecuencia) + "')";
+
+            Statement stmt = conexion.createStatement();
+            System.out.println(sqlquery);
+            Integer i = stmt.executeUpdate(sqlquery);
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    private Integer transformaFrecuencia(String frecuencia) {
+        if ("Diaria".equals(frecuencia)) {
+            return 1;
+        }
+        if ("Semanal".equals(frecuencia)) {
+            return 7;
+        }
+        if ("Mensual".equals(frecuencia)) {
+            return 30;
+        }
+        if ("Trimestral".equals(frecuencia)) {
+            return 60;
+        }
+        if ("Anual".equals(frecuencia)) {
+            return 365;
+        } else {
+            return 0;
+        }
+    }
+
+    public ArrayList<Solicitud> obtenerSolicitudUsuario(Usuario u, Solicitud sol) {
+        ArrayList<Solicitud> solicitudes = new ArrayList<Solicitud>(0);
+        try {
+            String sqlquery;
+
+            sqlquery = "SELECT C.id, C.cantidad,C.frecuencia, E.nombre_vista, E.imagen "
+                    + "FROM \"PREPAS\".solicitud S,\"PREPAS\".contiene C,\"PREPAS\".equipo E "
+                    + "WHERE S.id= '" + sol.getId() + "' AND S.usuario = '" + u.getUsuario() + "' "
+                    + "AND C.id=S.id AND E.serial=C.serial";
+
+
+            Statement stmt = conexion.createStatement();
+            System.out.println(sqlquery);
+            ResultSet rs = stmt.executeQuery(sqlquery);
+
+            while (rs.next()) {
+                Solicitud s = new Solicitud();
+                s.setId(rs.getInt("id"));
+                s.setCantidad(rs.getString("cantidad"));
+                s.setFrecuencia(rs.getString("frecuencia"));
+                s.setNombre_vista(rs.getString("nombre_vista"));
+                s.setImagen(rs.getString("imagen"));
+                solicitudes.add(s);
+            }
+            return solicitudes;
+        } catch (SQLException ex) {
+            System.out.println("EXCEPCION");
+            ex.printStackTrace();
+        }
+        return solicitudes;
     }
 }

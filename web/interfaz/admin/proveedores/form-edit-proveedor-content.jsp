@@ -32,14 +32,14 @@
     <html:text name="Proveedor" property="rif" styleClass="span5">
         <bean:write name="proveedor" property="rif"/>
     </html:text><br>
-    <label>Nombre:</label>
+    <label>Nombre / Razón Social:</label>
     <html:text name="Proveedor" property="nombre" styleClass="span5">
         <bean:write name="proveedor" property="nombre"/>
     </html:text><br>
     <label>Dirección:</label>
-    <html:text name="Proveedor" property="direccion" styleClass="span5">
+    <html:textarea name="Proveedor" property="direccion" rows="4" styleClass="span5">
         <bean:write name="proveedor" property="direccion"/>
-    </html:text><br>
+    </html:textarea><br>
     <label>Email:</label>
     <html:text name="Proveedor" property="email" styleClass="span5">
         <bean:write name="proveedor" property="email"/>

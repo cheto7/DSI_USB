@@ -4,8 +4,11 @@
  */
 package Solicitudes;
 
+import Clases.Equipo;
+import Clases.Solicitud;
 import Clases.Usuario;
 import DBMS.DBMS;
+import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -36,18 +39,28 @@ public class ListarEquiposSolicitud extends org.apache.struts.action.Action {
     public ActionForward execute(ActionMapping mapping, ActionForm form,
             HttpServletRequest request, HttpServletResponse response)
             throws Exception {
-        
+
         HttpSession session = request.getSession();
         String autenticado = (String) session.getAttribute("usuarioAutenticado");
         Usuario u = new Usuario();
         u.setUsuario(autenticado);
         u = DBMS.getInstance().atributosUsuario(u);
-        
+
         /* Aqui se debe preguntar por el TIPO DE USUARIO para saber que
          * equipos se van a listar
          */
-        
-        
+        Solicitud solicitud = DBMS.getInstance().agregarASolicitud(u);
+        ArrayList<Equipo> equiposAcad = DBMS.getInstance().obtenerEquiposSolicitudAcademico(u);
+        ArrayList<Equipo> equiposAdmin = DBMS.getInstance().obtenerEquiposSolicitudAdmin(u);
+        ArrayList<Equipo> equiposBomb = DBMS.getInstance().obtenerEquiposSolicitudBombero(u);
+        ArrayList<Equipo> equiposObrero = DBMS.getInstance().obtenerEquiposSolicitudObrero(u);
+        ArrayList<Equipo> equiposGen = DBMS.getInstance().obtenerEquiposSolicitudGenerico(u);
+        request.setAttribute("equiposAcad", equiposAcad);
+        request.setAttribute("equiposAdmin", equiposAdmin);
+        request.setAttribute("equiposBomb", equiposBomb);
+        request.setAttribute("equiposObrero", equiposObrero);
+        request.setAttribute("equiposGen", equiposGen);
+        request.setAttribute("solicitud", solicitud);
         return mapping.findForward(SUCCESS);
     }
 }

@@ -23,7 +23,7 @@
 </logic:present>
 
 <fieldset>
-    <legend>Lista de Equipos</legend> 
+    <legend>Lista de Equipos de protección</legend> 
 
     <logic:notPresent name="equipos">
         <center>
@@ -44,11 +44,11 @@
             <table class="table table-hover">
                 <tbody>
                     <tr>
-                        <th><center>Nombre</center></th>
-                <th><center>Funcionalidad</center></th>
-                <th><center>Cantidad</center></th>
-                <th><center>Modificador</center></th>
-                <th><center>Eliminar</center></th>
+                <th><center>Nombre</center></th>
+                <th><center>Imagen</center></th>
+                <th><center>En existencia</center></th>
+                <th colspan="2"><center>Opciones</center></th>
+                <%--<th><center>Eliminar</center></th>--%>
                 </tr>
 
                 <logic:iterate name="equipos" id="equipo">
@@ -61,11 +61,13 @@
                         </td>
 
                         <td>
-                            <p> <bean:write name="equipo" property="funcionalidad"></bean:write> </p>
+                            <p> <img width="50" src="assets/materiales/<bean:write name="equipo" property="nombre_vista"/>.png" /></p>
                         </td>
                         
                         <td>
+                    <center>
                             <p> <bean:write name="equipo" property="cantidad"></bean:write> </p>
+                            </center>
                         </td>
 
                         <td>
@@ -78,6 +80,9 @@
                             <html:hidden name="equipo" property="cantidad"/>
                             <html:hidden name="equipo" property="evaluacion"/>
                             <html:hidden name="equipo" property="funcionalidad"/>
+                            <html:hidden name="equipo" property="sector"/>
+                            <html:hidden name="equipo" property="vida_util"/>
+                            <html:hidden name="equipo" property="norma"/>
                             <html:submit styleClass="btn btn-success"> Editar </html:submit>
                         </html:form> 
                     </center>

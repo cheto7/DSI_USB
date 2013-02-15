@@ -24,6 +24,12 @@
             <center> No hay noticias que mostrar.</center>
         </label>
     </logic:notPresent>
+    
+    <logic:present name="solicitudProcesada">
+        <center>
+            <label style="color:blue">Solicitud procesada satisfactoriamente</label>
+        </center>
+    </logic:present>
 
     <logic:present name="informacion">
 

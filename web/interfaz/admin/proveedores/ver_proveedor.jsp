@@ -46,7 +46,7 @@
                             <tbody>
                                     <tr>
                                         <td>
-                                            <h1 style="display: inline">Nombre:</h1>
+                                            <h1 style="display: inline">Nombre/Razón social:</h1>
                                              <bean:write name="proveedor" property="nombre"></bean:write>
                                         </td>
                                     </tr>

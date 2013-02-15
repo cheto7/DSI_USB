@@ -9,26 +9,29 @@
 <%@ taglib uri="http://struts.apache.org/tags-tiles" prefix="tiles" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
-<legend>Pagina confirmacion solicitud</legend>
+<legend>Confirmación de solicitud</legend>
 
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
-<h1>Pedido realizado por:</h1> 
-<h5><bean:write name="Pedido" property="usuario"/></h5>
+<h1>Pedido realizado por:</h1>
+<%--<h5><bean:write name="Pedido" property="usuario"/></h5>--%>
+<h5><bean:write name="usuario" property="usuario"/></h5>
 <label> Usted debe confirmar su pedido para continuar. </label>
-<label> En caso que haya olvidado algo, puede volver a modificar su pedido. </label>
+<%--<label> En caso que haya olvidado algo, puede volver a modificar su pedido. </label>--%>
 
 <table class="table table-hover">
+    
     <tbody>
         <tr>
-            <th>Material</th>
+            <th>Equipo</th>
             <th>Imagen</th>
-            <th>Frecuencia de uso</th>
-            <th>Cantidad</th>
+            <th>Frecuencia de uso (días)</th>
+            <th>Cantidad solicitada</th>
         </tr>
+        <%--
 
         <tr>
-            <logic:equal name="Pedido" property="cascoSeguridad" value="true">
+        <logic:equal name="Pedido" property="cascoSeguridad" value="true">
             <tr>
                 <td> Casco Seguridad </td> 
                 <td> <img src="assets/materiales/c1.png" /> </td>
@@ -850,9 +853,45 @@
             <html:hidden name="Pedido" property="f69"/>
             <html:hidden name="Pedido" property="c69"/>
 
-        </tbody>
+        --%>
+        
+    <%--<bean:write name="usuario" property="usuario"/>--%>
+    <logic:iterate name="solicitud" id="solicitud">
+        <tr>
+            <td> <bean:write name="solicitud" property="nombre_vista" /> </td>
+            <%--<td> <img src="assets/materiales/img.png" /> </td>--%>
+            <%--<td> <img src="<bean:write name="solicitud" property="imagen"/>" /> </td>--%>
+            <td><img width="70px" src="assets/materiales/<bean:write name="solicitud" property="nombre_vista"/>.png" /></td>
+            <td>
+                <center> 
+                    <bean:write name="solicitud" property="frecuencia" />
+                </center>
+            </td>
+            <td>
+                <center>
+                    <bean:write name="solicitud" property="cantidad" />
+                </center>
+            </td>
+        </tr>
+    </logic:iterate>
+    </tbody>
     </table>
-
+    
+    <table align="center">
+        <tr>
+            <td>
+    <html:form action="/Ir_pag_pedido" onsubmit="return (this)">
+        <html:submit styleClass="btn btn-primary"> Seguir Agregando </html:submit>
+    </html:form>        
+    </td>
+    <td>
+    <html:form action="/CulminarSolicitud" onsubmit="return (this)">
+        <html:submit styleClass="btn btn-primary"> Confirmar </html:submit>
+    </html:form>
+        </td>
+    </tr>
+</table>
+<%--
     <br>
     <center>
         <a class="btn btn-info" href="javascript: history.go(-1)">Modificar Pedido</a>
@@ -863,3 +902,4 @@
     <br>
     <br>
 </html:form>
+--%>
