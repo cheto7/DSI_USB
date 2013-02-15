@@ -90,32 +90,6 @@ public class DBMS {
     }
 
     public Boolean agregarEquipo(Equipo e) {
-        String empleados = "";
-        if(e.getObrero() == "on"){
-            empleados += "1";
-        }else{
-            empleados += "0";
-        }
-        if(e.getProfesor() == "on"){
-            empleados += "1";
-        }else{
-            empleados += "0";
-        }
-        if(e.getBombero() == "on"){
-            empleados += "1";
-        }else{
-            empleados += "0";
-        }
-        if(e.getAdministrativo() == "on"){
-            empleados += "1";
-        }else{
-            empleados += "0";
-        }
-        if(e.getGenerico() == "on"){
-            empleados += "1";
-        }else{
-            empleados += "0";
-        }
         try {
             String sqlquery;
             sqlquery = "INSERT INTO \"PREPAS\".equipo (tipo, imagen, nombre_vista, funcionalidad,tiempo_vida,"
