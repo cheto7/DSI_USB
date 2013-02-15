@@ -30,12 +30,12 @@
                 <div class="casilla">
                     <label class="checkbox inline">
                         <%--<html:checkbox value="true" name="Pedido" property="cascoSeguridad"/>--%>
-                        <bean:write name="eq" property="imagen"/><%--<bean:write name="eq" property="nombre_vista"/>--%>
+                        <bean:write name="eq" property="nombre_vista"/>
                     </label>
 
                     <center>
                         <div class="casillaimg">
-                            <img src="<bean:write name="eq" property="imagen"/>" />
+                            <img src="assets/materiales/<bean:write name="eq" property="nombre_vista"/>.png" />
                         </div>
                     </center>
 
