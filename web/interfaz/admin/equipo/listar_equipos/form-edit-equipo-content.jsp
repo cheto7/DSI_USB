@@ -28,30 +28,46 @@
 
 <html:form action = "/EditarEquipo" acceptCharset="ISO-8859-1" onsubmit = "return (this)">
 
-    <label>Nombre</label>
+    <label>Nombre:</label>
     <html:text name="Equipo" property="nombre_vista" styleClass="span5">
         <bean:write name="equipo" property="nombre_vista"/>
     </html:text>
     <br>
-    <label>Tipo</label>
+    <label>Tipo:</label>
     <html:text name="Equipo" property="tipo" styleClass="span5">
         <bean:write name="equipo" property="tipo"/>
     </html:text>
     <br>
-    <label>Cantidad</label>
+    <label>Cantidad en existencia:</label>
     <html:text name="Equipo" property="cantidad" styleClass="span5">
         <bean:write name="equipo" property="cantidad"/>
     </html:text>
     <br>
-    <label>Evaluacion</label>
-    <html:text name="Equipo" property="evaluacion" styleClass="span5">
-        <bean:write name="equipo" property="evaluacion"/>
+    <label>Norma técnica asociada:</label>
+    <html:text name="Equipo" property="norma" styleClass="span5" >
+        <bean:write name="equipo" property="norma"/>
+    </html:text>
+    <br>    
+    <label>Vida útil (Meses):</label>
+    <html:text name="Equipo" property="vida_util" styleClass="span5">
+        <bean:write name="equipo" property="vida_util"/>
     </html:text>
     <br>
-    <label>Funcionalidad</label>
+    <label>Funcionalidad:</label>
     <html:textarea  name="Equipo" property="funcionalidad" rows="3" styleClass="span5">
         <bean:write name="equipo" property="funcionalidad"/>
     </html:textarea>
+    <br>
+    <label>Sector universitario asociado:</label>  
+    <html:select name="Equipo" property="sector"> 
+        <option><bean:write name="equipo" property="sector"/></option>
+        <option value="academico">Académico</option>
+        <option value="administrarivo">Administrativo</option>
+        <option value="bombero">Bombero</option>
+        <option value="obrero">Obrero</option>
+        <option value="generico">Genérico</option>
+    </html:select><br>
+    
     <script>
         $('textarea').jqte();
     </script>

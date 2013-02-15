@@ -73,6 +73,10 @@ CREATE TABLE "PREPAS".equipo (
   cantidad INT default 0,
   evaluacion NUMERIC default 0,
   funcionalidad VARCHAR,
+  habilitado VARCHAR DEFAULT 'true',
+  tiempo_vida INT default 0,
+  sector    VARCHAR,
+  norma     VARCHAR,
 
   CONSTRAINT PK_equipo PRIMARY KEY (serial)
 ) WITH (
@@ -87,6 +91,7 @@ CREATE TABLE "PREPAS".proveedor (
     contacto VARCHAR,
     direccion VARCHAR,
     habilitado VARCHAR,
+    evaluacion VARCHAR,
 
     CONSTRAINT PK_proveedor PRIMARY KEY (RIF)
 ) WITH (
@@ -130,7 +135,7 @@ OIDS = FALSE
 CREATE TABLE "PREPAS".solicitud (
     id SERIAL,
   usuario VARCHAR NOT NULL,
-  fecha_solicitud DATE NOT NULL,
+  fecha_solicitud VARCHAR NOT NULL,
 
   CONSTRAINT PK_solicitud PRIMARY KEY (id),
   CONSTRAINT FK_solicitud_usuario FOREIGN KEY (usuario) REFERENCES "PREPAS".usuario (usuario)

@@ -76,7 +76,7 @@ INSERT INTO "PREPAS".equipo VALUES ('chaquetaVestir','assets/materiales/img.png'
 
 
 
-INSERT INTO "PREPAS".proveedor VALUES ('J-001','Proveedor1','0212-3624566','correo@correo.com','yo','caracas','true');
+/*INSERT INTO "PREPAS".proveedor VALUES ('J-001','Proveedor1','0212-3624566','correo@correo.com','yo','caracas','true');
 INSERT INTO "PREPAS".proveedor VALUES ('J-002','Proveedor2','0212-3624566','correo@correo.com','yo','caracas','true');
 INSERT INTO "PREPAS".proveedor VALUES ('J-003','Proveedor3','0212-3624566','correo@correo.com','yo','caracas','true');
-SELECT * FROM "PREPAS".proveedor;
+SELECT * FROM "PREPAS".proveedor;*/

@@ -27,6 +27,7 @@ import org.apache.struts.action.ActionMapping;
  * @author cheto
  */
 public class AgregarEquipo extends org.apache.struts.action.Action {
+
     private static final String SUCCESS = "success";
     private static final String FAILURE = "failure";
 
@@ -35,111 +36,109 @@ public class AgregarEquipo extends org.apache.struts.action.Action {
             HttpServletRequest request, HttpServletResponse response)
             throws Exception {
         Equipo e = (Equipo) form;
-        if (e.getNombre_vista()==""){
-            request.setAttribute("errorNombreEquipo","error");
+        if (    "".equals(e.getNombre_vista())) {
+            request.setAttribute("errorNombreEquipo", "error");
             return mapping.findForward(FAILURE);
         }
-        if (e.getTipo()==""){
-            request.setAttribute("errorTipoEquipo","error");
+        if (e.getTipo() == "") {
+            request.setAttribute("errorTipoEquipo", "error");
             return mapping.findForward(FAILURE);
         }
-        if (e.getFuncionalidad()==""){
-            request.setAttribute("errorFuncionalidadEquipo","error");
+        if (e.getFuncionalidad() == "") {
+            request.setAttribute("errorFuncionalidadEquipo", "error");
             return mapping.findForward(FAILURE);
         }
-        String path = "/home/cheto/NetBeansProjects/DSI_USB/web/assets/materiales/" + e.getNombre_vista() + ".png";
+        String path = "/home/ivan/NetBeansProjects/DSI_USB/web/assets/materiales/" + e.getNombre_vista() + ".png";
 
 //Controlamos las condiciones para subirlo
 
-try {
+        try {
 
 // se comprueba que la ruta exista
 
-File f = new File(path);
+            File f = new File(path);
 
-if(!f.exists()) f.createNewFile();
+            if (!f.exists()) {
+                f.createNewFile();
+            }
 
-if (makeSureDirectoryExists(parent(f))) {
-System.out.println(path);
+            if (makeSureDirectoryExists(parent(f))) {
+                System.out.println(path);
 // Se graba en la ruta la foto;
 
-FileOutputStream out = new FileOutputStream(f);
+                FileOutputStream out = new FileOutputStream(f);
 
-out.write(e.getFile().getFileData());
+                out.write(e.getFile().getFileData());
 
-out.flush();
+                out.flush();
 
-out.close();
+                out.close();
 
 //indicamos que la intalación tiene ya foto asociada
-e.setImagen(f.getAbsolutePath());
-} //if
+                e.setImagen(f.getAbsolutePath());
+            } //if
 
 
-} //try
+        } //try
+        catch (Exception ex) {
 
-catch (Exception ex) {
+            System.out.println("Lanzada excepcion en agregarEquipo subiendo imagen:" + ex);
 
-System.out.println ( "Lanzada excepcion en agregarEquipo subiendo imagen:" +ex);
+            return null;
 
-return null ;
-
-}
+        }
 
 //Destruimos el archivo temporal
 
-e.getFile().destroy();
-        
+        e.getFile().destroy();
+
         Boolean agregada = DBMS.getInstance().agregarEquipo(e);
         if (agregada) {
             return mapping.findForward(SUCCESS);
         } else {
             Usuario u = new Usuario();
             u.setMensaje("No se pudo cargar a la Base de Datos. ");
-            request.setAttribute("equipoNulo",u);
+            request.setAttribute("equipoNulo", u);
             return mapping.findForward(FAILURE);
         }
     }
-    
+
     private File parent(File f) {
 
-String dirname = f.getParent();
+        String dirname = f.getParent();
 
-if (dirname == null ) {
+        if (dirname == null) {
 
-return new File(File.separator);
+            return new File(File.separator);
 
-}
+        }
 
-return new File(dirname);
+        return new File(dirname);
 
-}
+    }
 
-/**
+    /**
+     *
+     * Crear un subdirectorio si este no existe
+     *
+     * @param dir --> El path del archivo (dirección + nombre)
+     *
+     * @return True -> Existe o se ha creado False --> No existe y no se ha
+     * podido crear
+     *
+     */
+    private boolean makeSureDirectoryExists(File dir) {
 
-* Crear un subdirectorio si este no existe
+        if (!dir.exists()) {
 
-* @param dir --> El path del archivo (dirección + nombre)
+            if (makeSureDirectoryExists(parent(dir))) {
+                dir.mkdir();
+            } else {
+                return false;
+            }
+        }
 
-* @return True -> Existe o se ha creado False --> No existe y no se ha podido crear
+        return true;
 
-*/
-
-private boolean makeSureDirectoryExists(File dir) {
-
-if (!dir.exists()) {
-
-if (makeSureDirectoryExists(parent(dir)))
-
-dir.mkdir();
-
-else{
-return false ;
-}
-}
-
-return true ;
-
-}
-
+    }
 }

@@ -133,6 +133,7 @@
     <definition name="lista-equipos" extends="home">
         <put name="noticias" value="/interfaz/admin/equipo/listar_equipos/content-lista-equipos.jsp"></put>
         <put name="navBarGeneral" value="/interfaz/admin/barras_navegacion/navBarListaEquipos.jsp"></put>
+        <put name="sidebar" value=""></put>
     </definition>
     
     <definition name="formulario-editar-noticia" extends="formulario-agregar-noticia">

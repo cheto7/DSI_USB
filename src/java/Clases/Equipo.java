@@ -18,6 +18,33 @@ public class Equipo extends ValidatorForm {
     private Double evaluacion;
     private String funcionalidad;
     private FormFile file;
+    private String norma;
+    private String vida_util;
+    private String sector;
+
+    public String getNorma() {
+        return norma;
+    }
+
+    public void setNorma(String norma) {
+        this.norma = norma;
+    }
+
+    public String getVida_util() {
+        return vida_util;
+    }
+
+    public void setVida_util(String vida_util) {
+        this.vida_util = vida_util;
+    }
+
+    public String getSector() {
+        return sector;
+    }
+
+    public void setSector(String sector) {
+        this.sector = sector;
+    }
 
     public FormFile getFile() {
         return file;

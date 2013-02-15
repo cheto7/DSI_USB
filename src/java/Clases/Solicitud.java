@@ -15,6 +15,17 @@ public class Solicitud extends ActionForm {
     private String cantidad;
     private String frecuencia;
     private String imagen; 
+    private Integer id;
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    
     
     public String getNombre_vista() {
         return nombre_vista;

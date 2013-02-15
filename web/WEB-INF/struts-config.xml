@@ -90,11 +90,11 @@
             <forward name="success" path="/Ir_pag_usuario.do"></forward>
         </action>
         
-        <action path="/Pedido" type="Pedido.Confirmar_solicitud" scope="request" parameter="method"
+        <!--<action path="/Pedido" type="Pedido.Confirmar_solicitud" scope="request" parameter="method"
                 name="Pedido">
             <forward name="success" path="/vistas/pedido/confirmar_solicitud.jsp"></forward>
             <forward name="page" path="/vistas/error/welcomeStruts.jsp"></forward>
-        </action>
+        </action>-->
         
         <action path="/Almacenar_pedido" type="Pedido.Almacenar_solicitud" scope="request" parameter="method"
                 name="Pedido"> 
@@ -103,7 +103,8 @@
         </action>
         
         <action path="/ListarPedido" type="Pedido.Listar" scope="request" name="Pedido">
-            <forward name="success" path="/vistas/pedido/ver_pedido.jsp"></forward>
+            <!--<forward name="success" path="/vistas/pedido/ver_pedido.jsp"></forward>-->
+            <forward name="success" path="/SiguientePaso.do"></forward>
         </action>
         
         <action path="/EliminarElemSolicitud" type="Pedido.EliminarElem" scope="request" name="Solicitud">
@@ -133,12 +134,6 @@
             <forward name="success" path="/vistas/lista_usuarios/lista_usuarios.jsp"></forward>
             <forward name="failure" path="/vistas/error/welcomeStruts.jsp"></forward>
         </action>
-        
-        <action path="/Ir_pag_pedido" type="Pedido.Solicitud" scope="request" 
-                name="Usuario">
-            <forward name="success" path="/vistas/pedido/interfaz_pedido.jsp"></forward>
-            <forward name="failure" path="/vistas/error/welcomeStruts.jsp"></forward>
-        </action> 
         
         <action path="/Ir_pag_usuario" type="Volver.Volver" scope="request"
                 name="Usuario">
@@ -281,8 +276,25 @@
             <forward name="success" path="/ListarProveedores.do"></forward>
             <forward name="failure" path="/vistas/proveedores/formulario_editar_proveedor.jsp"></forward>  
         </action>
-        <action path="/ListarEquiposSolicitud" type="Solicitudes.ListarEquiposSolicitud"/>
         
+        <action path="/Ir_pag_pedido" type="Solicitudes.ListarEquiposSolicitud" scope="request"
+                name="Usuario">
+            <forward name="success" path="/vistas/pedido/interfaz_pedido.jsp"></forward>
+        </action>
+        <action path="/AgregarEquipoASolicitud" type="Solicitudes.AgregarEquipoASolicitud" scope="request" 
+                name="Usuario">
+            <forward name="success" path="/Ir_pag_pedido.do"></forward>
+        </action>
+        <action path="/SiguientePaso" type="Solicitudes.Confirmar_solicitud" scope="request" parameter="method"
+                name="Usuario">
+            <forward name="success" path="/vistas/pedido/confirmar_solicitud.jsp"></forward>
+            <forward name="page" path="/vistas/error/welcomeStruts.jsp"></forward>
+        </action>
+        <action path="/CulminarSolicitud" type="Solicitudes.CulminarSolicitud" scope="request" parameter="method"
+                name="Usuario">
+            <forward name="success" path="/Ir_pag_usuario.do"></forward>
+        </action>
+
     </action-mappings>
     
     <controller processorClass="org.apache.struts.tiles.TilesRequestProcessor"/>

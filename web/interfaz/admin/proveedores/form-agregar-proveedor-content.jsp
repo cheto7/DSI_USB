@@ -43,10 +43,10 @@
 
     <label>RIF:</label>
     <html:text name="Proveedor" property="rif" styleClass="span5"></html:text><br>  
-    <label>Nombre:</label>
+    <label>Nombre / Razón Social:</label>
     <html:text name="Proveedor" property="nombre" styleClass="span5"></html:text><br>
     <label>Dirección:</label>
-    <html:text name="Proveedor" property="direccion" styleClass="span5"></html:text><br>
+    <html:textarea name="Proveedor" property="direccion" rows="4" styleClass="span5"></html:textarea><br>
     <label>Email:</label>
     <html:text name="Proveedor" property="email" styleClass="span5"></html:text><br>
     <label>Contacto</label>

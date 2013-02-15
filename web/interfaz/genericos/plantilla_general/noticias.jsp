@@ -25,6 +25,11 @@
         </center>
     </logic:notEmpty>
 </logic:present>
+    <logic:present name="solicitudProcesada">
+        <center>
+            <label style="color:blue">Solicitud procesada satisfactoriamente</label>
+        </center>
+    </logic:present>
 
 <logic:present name="mensajePedidoAceptado">
     <logic:notEmpty name="mensajePedidoAceptado">
