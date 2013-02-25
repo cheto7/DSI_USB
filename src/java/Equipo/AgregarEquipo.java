@@ -48,7 +48,14 @@ public class AgregarEquipo extends org.apache.struts.action.Action {
             request.setAttribute("errorFuncionalidadEquipo", "error");
             return mapping.findForward(FAILURE);
         }
-        String path = "/home/cheto/NetBeansProjects/DSI_USB/web/assets/materiales/" + e.getNombre_vista() + ".png";
+        
+        String rutaApp = this.getServlet().getServletContext().getRealPath("/");
+        
+        System.out.println("CHEEEEETTTOOOOOOO"+rutaApp);
+        
+        String path = rutaApp + "assets/materiales/" + e.getNombre_vista() + ".png";
+        
+        String path2 = "/home/cheto/NetBeansProjects/DSI_USB/web/assets/materiales/" + e.getNombre_vista() + ".png";
 
 //Controlamos las condiciones para subirlo
 
