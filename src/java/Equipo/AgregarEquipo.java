@@ -50,12 +50,9 @@ public class AgregarEquipo extends org.apache.struts.action.Action {
         }
         
         String rutaApp = this.getServlet().getServletContext().getRealPath("/");
+             
         
-        System.out.println("CHEEEEETTTOOOOOOO"+rutaApp);
-        
-        String path = rutaApp + "assets/materiales/" + e.getNombre_vista() + ".png";
-        
-        String path2 = "/home/cheto/NetBeansProjects/DSI_USB/web/assets/materiales/" + e.getNombre_vista() + ".png";
+        String path = rutaApp + "assets/materiales/" + e.getNombre_vista() + ".png";               
 
 //Controlamos las condiciones para subirlo
 
