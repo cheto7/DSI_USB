@@ -347,9 +347,9 @@ public class DBMS {
         ArrayList<Usuario> usrs = new ArrayList<Usuario>(0);
         try {
             String sqlquery = "SELECT * FROM \"PREPAS\".usuario "
-                    + "EXCEPT "
-                    + "(SELECT * FROM \"PREPAS\".usuario "
-                    + "WHERE usuario = '" + admin.getUsuario() + "')";
+                    + "WHERE usuario != '" + admin.getUsuario() + "' ";
+
+                    
             Statement stmt = conexion.createStatement();
             System.out.println(sqlquery);
             ResultSet rs = stmt.executeQuery(sqlquery);
@@ -374,9 +374,7 @@ public class DBMS {
         ArrayList<Usuario> usrs = new ArrayList<Usuario>(0);
         try {
             String sqlquery = "SELECT * FROM \"PREPAS\".usuario "
-                    + "EXCEPT "
-                    + "(SELECT * FROM \"PREPAS\".usuario "
-                    + "WHERE usuario = '" + admin.getUsuario() + "')";
+                    + "WHERE usuario != '" + admin.getUsuario() + "' ";
             Statement stmt = conexion.createStatement();
             System.out.println(sqlquery);
             ResultSet rs = stmt.executeQuery(sqlquery);
