@@ -116,7 +116,10 @@ public class DownloadXLS extends org.apache.struts.action.Action {
         cell.setCellValue("Cantidad");
 
         String usuario = (String) session.getAttribute("usuarioAutenticado");
-        ArrayList pedidos = DBMS.getInstance().obtenerPedidoCompleto(usuario);
+        //ArrayList pedidos = DBMS.getInstance().obtenerPedidoCompleto(usuario);
+        // esto lo cambie solo porque la funcion obtenerPedidoCompleto fue borrada
+        // y debe ser realizada nuevamente
+        ArrayList pedidos = null;
 
         HSSFCell celltemp;
         for (short i = 0; i < pedidos.size(); i = (short) (i + 3)) {

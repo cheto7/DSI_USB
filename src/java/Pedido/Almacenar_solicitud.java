@@ -43,7 +43,8 @@ public class Almacenar_solicitud extends DispatchAction {
         HttpSession session = request.getSession();
 
         Pedido p = (Pedido) form;
-        Boolean agregado = DBMS.getInstance().agregarSolicitud(p);
+        //Boolean agregado = DBMS.getInstance().agregarSolicitud(p);
+        Boolean agregado = false;
 
         Usuario u = new Usuario();
         u.setUsuario(p.getUsuario());
