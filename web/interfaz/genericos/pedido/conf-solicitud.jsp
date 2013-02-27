@@ -14,7 +14,6 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
 <h1>Pedido realizado por:</h1>
-<%--<h5><bean:write name="Pedido" property="usuario"/></h5>--%>
 <h5><bean:write name="usuario" property="usuario"/></h5>
 <label> Usted debe confirmar su pedido para continuar. </label>
 <%--<label> En caso que haya olvidado algo, puede volver a modificar su pedido. </label>--%>
