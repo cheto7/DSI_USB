@@ -16,6 +16,17 @@ public class Solicitud extends ActionForm {
     private String frecuencia;
     private String imagen; 
     private Integer id;
+    private String talla;
+
+    public String getTalla() {
+        return talla;
+    }
+
+    public void setTalla(String talla) {
+        this.talla = talla;
+    }
+    
+    
 
     public Integer getId() {
         return id;

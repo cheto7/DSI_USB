@@ -21,6 +21,15 @@ public class Equipo extends ValidatorForm {
     private String norma;
     private String vida_util;
     private String sector;
+    private String tipo_talla;
+
+    public String getTipo_talla() {
+        return tipo_talla;
+    }
+
+    public void setTipo_talla(String tipo_talla) {
+        this.tipo_talla = tipo_talla;
+    }
 
     public String getNorma() {
         return norma;

@@ -1,6 +1,7 @@
 --SELECT * FROM "PREPAS".solicitud;
 SELECT * FROM "PREPAS".equipo;
---SELECT * FROM "PREPAS".contiene;
+--SELECT * FROM "PREPAS".proveedor;
+SELECT * FROM "PREPAS".contiene;
 --SELECT * FROM "PREPAS".usuario;
 
 /*SELECT serial,imagen,nombre_vista,funcionalidad FROM "PREPAS".equipo
@@ -22,3 +23,12 @@ WHERE E.serial=C.serial*/
 --SELECT C.id, C.cantidad,C.frecuencia, E.nombre_vista, E.imagen 
 --FROM "PREPAS".solicitud S,"PREPAS".contiene C,"PREPAS".equipo E
 --WHERE S.usuario = 'mgomez@usb.ve' AND C.id = S.id AND E.serial = C.serial
+
+/*
+SELECT *
+FROM "PREPAS".solicitud
+WHERE usuario='mgomez@usb.ve' and fecha_solicitud= CURRENT_DATE and id IN
+(SELECT MAX(id)
+FROM "PREPAS".solicitud 
+WHERE usuario='mgomez@usb' and fecha_solicitud= CURRENT_DATE)
+*/

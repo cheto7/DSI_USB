@@ -41,6 +41,13 @@
         </center>
     </logic:notEmpty>
 </logic:present>
+<logic:present name="errorTallaEquipo">
+    <logic:notEmpty name="errorTallaEquipo">
+        <center>
+            <label style="color:red">Error: Debe introducir la talla asociada al equipo</label>
+        </center>
+    </logic:notEmpty>
+</logic:present>
 <html:form enctype="multipart/form-data" action = "/AgregarEquipo" acceptCharset="iso-8859-1" onsubmit = "return (this)">
 
     <label>Nombre:</label>
@@ -58,13 +65,24 @@
     <label>Vida útil (Meses):</label>
     <html:text name="Equipo" property="vida_util" styleClass="span5" ></html:text><br>
     <label>Sector universitario asociado:</label>
-    <html:select name="Equipo" property="sector">            
+    <html:select name="Equipo" property="sector">
+        <option> </option>
         <option value="academico">Académico</option>
         <option value="administrativo">Administrativo</option>
         <option value="bombero">Bombero</option>
         <option value="obrero">Obrero</option>
         <option value="generico">Genérico</option>
     </html:select><br>
+    <label>Tipo de talla asociada:</label>
+    <html:select name="Equipo" property="tipo_talla">
+        <option> </option>
+        <option value="camisa">Camisa</option>
+        <option value="guantes">Guantes</option>
+        <option value="mascara">Máscara</option>
+        <option value="pantalon">Pantalón</option>
+        <option value="zapato">Zapato</option>
+        <option value="no aplica">No Aplica</option>
+    </html:select><br>    
     
     <html:submit styleClass="btn btn-primary"> Agregar </html:submit>
 </html:form>

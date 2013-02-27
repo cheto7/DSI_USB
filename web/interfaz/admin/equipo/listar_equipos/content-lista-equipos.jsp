@@ -82,6 +82,7 @@
                             <html:hidden name="equipo" property="funcionalidad"/>
                             <html:hidden name="equipo" property="sector"/>
                             <html:hidden name="equipo" property="vida_util"/>
+                            <html:hidden name="equipo" property="tipo_talla"/>
                             <html:hidden name="equipo" property="norma"/>
                             <html:submit styleClass="btn btn-success"> Editar </html:submit>
                         </html:form> 
