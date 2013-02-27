@@ -12,6 +12,7 @@ import org.apache.struts.action.ActionForm;
  */
 public class ListadoGeneral extends ActionForm {
     private String usuario;
+    
     private String equipo;
     private String periodo;
     private String tipo;
