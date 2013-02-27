@@ -1,5 +1,5 @@
 <%-- 
-    Document   : interfaz_formulario_agregar_noticia
+    Document   : interfaz_formulario_agregar_equipo
     Created on : Ene 30, 2013, 6:20:53 PM
     Author     : Cheto
 --%>

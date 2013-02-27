@@ -160,5 +160,4 @@ public class Equipo extends ValidatorForm {
     public void setFuncionalidad(String funcionalidad) {
         this.funcionalidad = funcionalidad;
     }
-
 }

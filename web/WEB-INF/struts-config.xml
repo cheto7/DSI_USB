@@ -7,13 +7,14 @@
 
 <struts-config>
     <form-beans>
-     <form-bean  name="Usuario" type="Clases.Usuario" />
-     <form-bean name="Solicitud" type="Clases.Solicitud"/>
-     <form-bean name="Pedido"  type="Clases.Pedido"/>
-     <form-bean name="Noticia" type="Clases.Noticia"/>
-     <form-bean name="Proveedor" type="Clases.Proveedor"/>
-     <form-bean name="Equipo" type="Clases.Equipo"/>
-     <form-bean name="UploadFile" type="Clases.UploadFile"/>
+        <form-bean  name="Usuario" type="Clases.Usuario" />
+        <form-bean name="Solicitud" type="Clases.Solicitud"/>
+        <form-bean name="Pedido"  type="Clases.Pedido"/>
+        <form-bean name="Noticia" type="Clases.Noticia"/>
+        <form-bean name="Proveedor" type="Clases.Proveedor"/>
+        <form-bean name="Equipo" type="Clases.Equipo"/>
+        <form-bean name="UploadFile" type="Clases.UploadFile"/>
+        <form-bean name="ListadoGeneral" type="Clases.ListadoGeneral"/>
     </form-beans>
     <global-exceptions>
     
@@ -45,31 +46,48 @@
         
         <action path="/ColeccionUsuarios" type="Usuarios.Listar" scope="request" 
                 name="Usuario">
-              <forward name="success" path="/vistas/lista_usuarios/lista_usuarios.jsp" ></forward>
+            <forward name="success" path="/vistas/lista_usuarios/lista_usuarios.jsp" ></forward>
         </action>
         
         <action path="/VolverListar" type="Volver.VolverListar" scope="request" 
                 name="Usuario">
-              <forward name="success" path="/vistas/lista_usuarios/lista_usuarios.jsp" ></forward>
+            <forward name="success" path="/vistas/lista_usuarios/lista_usuarios.jsp" ></forward>
         </action>
         
         <action path="/CerrarSesion" type="Cerrar.CerrarSesion" scope="request" 
                 name="Usuario">
-              <forward name="success" path="/vistas/genericos/interfaz_pag_principal.jsp" ></forward>
+            <forward name="success" path="/vistas/genericos/interfaz_pag_principal.jsp" ></forward>
         </action>
         
         <action path="/FormularioEditarUsuario" type="Editar.FormularioEditarUsuario" scope="request" 
-                     name= "Usuario">
+                name= "Usuario">
             <forward name="success" path="/vistas/lista_usuarios/formulario_editar_usuario.jsp"></forward>
+        </action>
+        
+        <action path="/Formulario_OtorgarPermiso" type="Editar.Formulario_OtorgarPermiso" scope="request" 
+                name= "Usuario">
+            <forward name="success" path="/vistas/lista_usuarios/formulario_OtorgarPermiso.jsp"></forward>
+        </action>
+        
+        <action path="/otorgarPermisoSupervisor" type="Editar.otorgarPermisoSupervisor" scope="request" 
+                name= "Usuario">
+            <forward name="success" path="/vistas/lista_usuarios/formulario_OtorgarPermiso.jsp"></forward>
+            <forward name="failure" path="/vistas/error/welcomeStruts.jsp"></forward>
+        </action>
+        
+        <action path="/otorgarPermisoInspector" type="Editar.otorgarPermisoInspector" scope="request"
+                name="Usuario">
+            <forward name="success" path="/vistas/lista_usuarios/formulario_OtorgarPermiso.jsp"></forward>
+            <forward name="failure" path="/vistas/error/welcomeStruts.jsp"></forward> 
         </action>
 
         <action path="/FormularioEditarAdmin" type="Editar.FormularioEditarAdmin" scope="request" 
-                     name= "Usuario">
+                name= "Usuario">
             <forward name="success" path="/vistas/genericos/formulario_editar_admin.jsp"></forward>
         </action>
 
         <action path="/Eliminar" type="Eliminar.Eliminar" scope="request" 
-                     name= "Usuario">
+                name= "Usuario">
             <forward name="success" path="/vistas/lista_usuarios/lista_usuarios.jsp"></forward>
             <forward name="failure" path="/vistas/welcomeStruts.jsp"></forward>
         </action>
@@ -81,12 +99,12 @@
         </action>
         
         <action path="/Editar" type="Editar.EditarUsuarioListar" scope="request" 
-                     name= "Usuario">
+                name= "Usuario">
             <forward name="success" path="/ColeccionUsuarios.do"></forward>
         </action>
         
         <action path="/EditarAdmin" type="Editar.EditarUsuario" scope="request" 
-                     name= "Usuario">
+                name= "Usuario">
             <forward name="success" path="/Ir_pag_usuario.do"></forward>
         </action>
         
@@ -112,7 +130,7 @@
         </action>
 
         <action path="/ConfirmarEliminarSolicitud" type="Pedido.ConfirmarEliminarSolicitud" 
-                 parameter="method" scope="request" name="Solicitud">
+                parameter="method" scope="request" name="Solicitud">
             <forward name="success" path="/vistas/pedido/conf_eliminar_pedido.jsp"></forward>
             <forward name="page" path="/vistas/pedido/conf_eliminar_pedido.jsp"></forward>
         </action>
@@ -130,7 +148,7 @@
         
         <action path="/Deshabilitar" type="Editar.Deshabilitar" scope="request"
                 name="Usuario">
-            <forward name="success" path="/vistas/lista_usuarios/lista_usuarios.jsp"></forward>
+            <forward name="success" path="/vistas/lista_usuarios/formulario_OtorgarPermiso.jsp"></forward>
             <forward name="failure" path="/vistas/error/welcomeStruts.jsp"></forward>
         </action>
         
@@ -144,7 +162,7 @@
         
         <action path="/VolverPagInicio" type="Volver.VolverPagInicio" scope="request" 
                 name="Usuario">
-              <forward name="success" path="/vistas/genericos/interfaz_pag_principal.jsp" ></forward>
+            <forward name="success" path="/vistas/genericos/interfaz_pag_principal.jsp" ></forward>
         </action>
         
         <action path="/IrAgregarNoticia" type="Noticias.FormularioAgregarNoticia" scope="request"
@@ -171,6 +189,11 @@
         
         <action path="/ListarEquipo" type="Equipo.Listar" scope="request"
                 name="Equipo">
+            <forward name="success" path="/vistas/equipo/lista_equipos/lista_equipos.jsp"></forward>  
+        </action>
+        
+        <action path="/ListadoGeneral" type="Solicitudes.ListadoGeneral" scope="request"
+                name="ListadoGeneral">
             <forward name="success" path="/vistas/equipo/lista_equipos/lista_equipos.jsp"></forward>  
         </action>
         
@@ -229,34 +252,34 @@
             <forward name="success" path="/vistas/error/welcomeStruts.jsp"></forward>
         </action>
         
-         <action path="/DownloadXLS" type="Reportes.DownloadXLS" >
+        <action path="/DownloadXLS" type="Reportes.DownloadXLS" >
             <forward name="success" path="/vistas/error/welcomeStruts.jsp"></forward>
         </action>
         
-         <action path="/ListadosGenerales" type="Reportes.ListadosGenerales" scope="request"
-         name="Noticia">
+        <action path="/ListadosGenerales" type="Reportes.ListadosGenerales" scope="request"
+                name="Noticia">
             <forward name="success" path="/vistas/listados_generales.jsp"></forward>
         </action>
         
-         <action path="/AgregarProveedor" type="Proveedores.AgregarProveedor" scope="request"
-              name="Proveedor">
-              <forward name="failure" path="/vistas/proveedores/agregarProveedor.jsp"></forward>
-              <forward name="success" path="/vistas/proveedores/lista_proveedores.jsp"></forward>
-         </action>
+        <action path="/AgregarProveedor" type="Proveedores.AgregarProveedor" scope="request"
+                name="Proveedor">
+            <forward name="failure" path="/vistas/proveedores/agregarProveedor.jsp"></forward>
+            <forward name="success" path="/vistas/proveedores/lista_proveedores.jsp"></forward>
+        </action>
          
-         <action path="/ListarProveedores" type="Proveedores.Listar" scope="request"
+        <action path="/ListarProveedores" type="Proveedores.Listar" scope="request"
                 name="Proveedor">
             <forward name="success" path="/vistas/proveedores/lista_proveedores.jsp"></forward>  
-         </action>
+        </action>
          
-         <action path="/EliminarProveedor" type="Proveedores.Eliminar" scope="request"
+        <action path="/EliminarProveedor" type="Proveedores.Eliminar" scope="request"
                 name="Proveedor">
             <forward name="success" path="/vistas/proveedores/lista_proveedores.jsp"></forward>  
-         </action>
+        </action>
 
-         <action path="/VerProveedor" type="Proveedores.Ver" scope="request" name="Proveedor">
-             <forward name="success" path="/vistas/proveedores/verProveedor.jsp"></forward>  
-         </action>
+        <action path="/VerProveedor" type="Proveedores.Ver" scope="request" name="Proveedor">
+            <forward name="success" path="/vistas/proveedores/verProveedor.jsp"></forward>  
+        </action>
          
         <action path="/ConfirmarEliminarProveedor" type="Proveedores.ConfirmarEliminar" scope="request"
                 name="Proveedor">
@@ -267,7 +290,7 @@
             <forward name="success" path="/vistas/proveedores/agregarProveedor.jsp"></forward>  
         </action>
         <action path="/FormularioEditarProveedor" type="Proveedores.FormularioEditarProveedor" scope="request"
-                        name="Proveedor">
+                name="Proveedor">
             <forward name="success" path="/vistas/proveedores/formulario_editar_proveedor.jsp"></forward>  
         </action>
         <action path="/EditarProveedor" type="Proveedores.Editar" scope="request"
@@ -293,6 +316,7 @@
                 name="Usuario">
             <forward name="success" path="/Ir_pag_usuario.do"></forward>
         </action>
+        
 
     </action-mappings>
     

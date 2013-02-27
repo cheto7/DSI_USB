@@ -51,8 +51,12 @@ public class AgregarEquipo extends org.apache.struts.action.Action {
         if (e.getTipo_talla() == "") {
             request.setAttribute("errorTallaEquipo", "error");
             return mapping.findForward(FAILURE);
-        }        
-        String path = "/home/ivan/NetBeansProjects/DSI_USB/web/assets/materiales/" + e.getNombre_vista() + ".png";
+        }         
+        
+        String rutaApp = this.getServlet().getServletContext().getRealPath("/");
+             
+        
+        String path = rutaApp + "assets/materiales/" + e.getNombre_vista() + ".png";               
 
 //Controlamos las condiciones para subirlo
 

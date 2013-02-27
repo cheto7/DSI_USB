@@ -15,6 +15,11 @@
         <put name="footer" value="/interfaz/genericos/plantilla_general/footer.jsp"></put> 
     </definition>
 
+    <definition name="lista_OtorgarPermisos" extends="home">
+        <put name="noticias" value="/interfaz/admin/lista_usuarios/lista_OtorgarPermiso.jsp"></put>
+        <put name="navBarGeneral" value="/interfaz/genericos/barras_navegacion/navBarpedido.jsp"></put>
+    </definition>
+    
     <definition name="lista" extends="home">
         <put name="noticias" value="/interfaz/admin/lista_usuarios/content-lista-usuarios.jsp"></put>
         <put name="navBarGeneral" value="/interfaz/genericos/barras_navegacion/navBarpedido.jsp"></put>
@@ -133,6 +138,12 @@
     <definition name="lista-equipos" extends="home">
         <put name="noticias" value="/interfaz/admin/equipo/listar_equipos/content-lista-equipos.jsp"></put>
         <put name="navBarGeneral" value="/interfaz/admin/barras_navegacion/navBarListaEquipos.jsp"></put>
+        <put name="sidebar" value=""></put>
+    </definition>
+    
+    <definition name="form_listado" extends="home">
+        <put name="noticias" value="/interfaz/admin/equipo/listar_equipos/content-lista-equipos.jsp"></put>
+        <put name="navBarGeneral" value="/interfaz/genericos/barras_navegacion/navBarpedido.jsp"></put>
         <put name="sidebar" value=""></put>
     </definition>
     

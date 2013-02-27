@@ -349,9 +349,9 @@ public class DBMS {
         ArrayList<Usuario> usrs = new ArrayList<Usuario>(0);
         try {
             String sqlquery = "SELECT * FROM \"PREPAS\".usuario "
-                    + "EXCEPT "
-                    + "(SELECT * FROM \"PREPAS\".usuario "
-                    + "WHERE usuario = '" + admin.getUsuario() + "')";
+                    + "WHERE usuario != '" + admin.getUsuario() + "' ";
+
+                    
             Statement stmt = conexion.createStatement();
             System.out.println(sqlquery);
             ResultSet rs = stmt.executeQuery(sqlquery);
@@ -376,9 +376,7 @@ public class DBMS {
         ArrayList<Usuario> usrs = new ArrayList<Usuario>(0);
         try {
             String sqlquery = "SELECT * FROM \"PREPAS\".usuario "
-                    + "EXCEPT "
-                    + "(SELECT * FROM \"PREPAS\".usuario "
-                    + "WHERE usuario = '" + admin.getUsuario() + "')";
+                    + "WHERE usuario != '" + admin.getUsuario() + "' ";
             Statement stmt = conexion.createStatement();
             System.out.println(sqlquery);
             ResultSet rs = stmt.executeQuery(sqlquery);
@@ -428,6 +426,40 @@ public class DBMS {
             return i > 0;
         } catch (SQLException ex) {
             ex.printStackTrace();
+        }
+        return false;
+    }
+    
+    /* Otorgar Permisos de Supervisor */
+    public Boolean serSupervisor (Usuario u) {
+        try {
+            String sqlquery = "UPDATE \"PREPAS\".usuario SET "
+                    + "administrador = 'supervisor' "
+                    + " WHERE usuario = '" + u.getUsuario() + "'";
+
+            Statement stmt = conexion.createStatement();
+            System.out.println(sqlquery);
+            Integer i = stmt.executeUpdate(sqlquery);
+            return i > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+    
+        /* Otorgar Permisos de Supervisor */
+    public Boolean serInspector (Usuario u) {
+        try {
+            String sqlquery = "UPDATE \"PREPAS\".usuario SET "
+                    + "administrador = 'inspector' "
+                    + " WHERE usuario = '" + u.getUsuario() + "'";
+
+            Statement stmt = conexion.createStatement();
+            System.out.println(sqlquery);
+            Integer i = stmt.executeUpdate(sqlquery);
+            return i > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
         return false;
     }
