@@ -463,6 +463,40 @@ public class DBMS {
         }
         return false;
     }
+    
+    /* Otorgar Permisos de Supervisor */
+    public Boolean serSupervisor (Usuario u) {
+        try {
+            String sqlquery = "UPDATE \"PREPAS\".usuario SET "
+                    + "administrador = 'supervisor' "
+                    + " WHERE usuario = '" + u.getUsuario() + "'";
+
+            Statement stmt = conexion.createStatement();
+            System.out.println(sqlquery);
+            Integer i = stmt.executeUpdate(sqlquery);
+            return i > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+    
+        /* Otorgar Permisos de Supervisor */
+    public Boolean serInspector (Usuario u) {
+        try {
+            String sqlquery = "UPDATE \"PREPAS\".usuario SET "
+                    + "administrador = 'inspector' "
+                    + " WHERE usuario = '" + u.getUsuario() + "'";
+
+            Statement stmt = conexion.createStatement();
+            System.out.println(sqlquery);
+            Integer i = stmt.executeUpdate(sqlquery);
+            return i > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
 
     /*Modifica un usuario existente en la base de datos. */
     public Boolean modificarUsuario(Usuario u) {
