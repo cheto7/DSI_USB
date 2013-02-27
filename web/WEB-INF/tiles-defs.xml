@@ -141,6 +141,12 @@
         <put name="sidebar" value=""></put>
     </definition>
     
+    <definition name="form_listado" extends="home">
+        <put name="noticias" value="/interfaz/admin/equipo/listar_equipos/content-lista-equipos.jsp"></put>
+        <put name="navBarGeneral" value="/interfaz/genericos/barras_navegacion/navBarpedido.jsp"></put>
+        <put name="sidebar" value=""></put>
+    </definition>
+    
     <definition name="formulario-editar-noticia" extends="formulario-agregar-noticia">
         <put name="formulario" value="/interfaz/admin/noticias/listar_noticias/form-edit-noticia-content.jsp"></put>
         <put name="navBar" value="/interfaz/admin/barras_navegacion/navBarListaNoticias.jsp"></put>
