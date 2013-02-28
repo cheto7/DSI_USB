@@ -11,7 +11,7 @@
 
 
 <ul id="nav-registro">
-    <li><a href="#box" class ="window">Inciar Sesión</a></li>  
+    <li><a href="#box" class ="window">Iniciar Sesión</a></li>  
          
         
             <html:form action = "/Registro" onsubmit="return (this)">

@@ -4,9 +4,9 @@
  */
 package Solicitudes;
 
-import Clases.Equipo;
 import Clases.Solicitud;
 import DBMS.DBMS;
+import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.apache.struts.action.ActionForm;
@@ -17,11 +17,10 @@ import org.apache.struts.action.ActionMapping;
  *
  * @author ivan
  */
-public class AgregarEquipoASolicitud extends org.apache.struts.action.Action {
+public class ListarSolicitudes extends org.apache.struts.action.Action {
 
     /* forward name="success" path="" */
     private static final String SUCCESS = "success";
-    private static final String FAILURE = "failure";
 
     /**
      * This is the action called from the Struts framework.
@@ -38,27 +37,16 @@ public class AgregarEquipoASolicitud extends org.apache.struts.action.Action {
             HttpServletRequest request, HttpServletResponse response)
             throws Exception {
         
-        Equipo equipo = new Equipo();
-        Solicitud solicitud = new Solicitud();
-        
-        String serial = request.getParameter("serial");
-        String id = request.getParameter("id");
-        String ttalla = request.getParameter("tipo_talla");
-        String frecuencia = request.getParameter("frecuencia");
-        String cantidad = request.getParameter("cantidad");
-        String usuario = request.getParameter("usuario");
-        System.out.println("usuariooooooooooooooo: "+usuario);
-        
-        if ("0".equals(cantidad)){ // Intenta pedir Cero unidades de algun EPP
-            request.setAttribute("errorCantidad", "error");
-            return mapping.findForward(SUCCESS);
+        ArrayList<Solicitud> solModificadas = DBMS.getInstance().obtenerSolicitudesModificadas();
+        ArrayList<Solicitud> solNoModificadas = DBMS.getInstance().obtenerSolicitudesNoModificadas();
+        if (solModificadas.isEmpty()){
+            request.setAttribute("noHayModificadas", "mensaje");
         }
-        
-        solicitud.setId(Integer.parseInt(id));
-        solicitud.setNombre_usuario(usuario);
-        equipo.setSerial(Integer.parseInt(serial));
-        equipo.setTipo_talla(ttalla);
-        DBMS.getInstance().agregarAContiene(equipo,solicitud,frecuencia,cantidad);
+        if (solNoModificadas.isEmpty()){
+            request.setAttribute("noHayNoModificadas", "mensaje");
+        }        
+        request.setAttribute("solModificadas", solModificadas);
+        request.setAttribute("solNoModificadas", solNoModificadas);
         return mapping.findForward(SUCCESS);
     }
 }

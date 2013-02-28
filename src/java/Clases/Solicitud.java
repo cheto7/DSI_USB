@@ -17,6 +17,24 @@ public class Solicitud extends ActionForm {
     private String imagen; 
     private Integer id;
     private String talla;
+    private Integer serialEquipo;
+    private String modificada;
+
+    public String getModificada() {
+        return modificada;
+    }
+
+    public void setModificada(String modificada) {
+        this.modificada = modificada;
+    }
+
+    public Integer getSerialEquipo() {
+        return serialEquipo;
+    }
+
+    public void setSerialEquipo(Integer serialEquipo) {
+        this.serialEquipo = serialEquipo;
+    }
 
     public String getTalla() {
         return talla;

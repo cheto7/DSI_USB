@@ -4,9 +4,8 @@
  */
 package Solicitudes;
 
-import Clases.Equipo;
 import Clases.Solicitud;
-import DBMS.DBMS;
+import Clases.Usuario;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.apache.struts.action.ActionForm;
@@ -17,11 +16,10 @@ import org.apache.struts.action.ActionMapping;
  *
  * @author ivan
  */
-public class AgregarEquipoASolicitud extends org.apache.struts.action.Action {
+public class EditarEquipoEnSolicitudAdmin extends org.apache.struts.action.Action {
 
     /* forward name="success" path="" */
     private static final String SUCCESS = "success";
-    private static final String FAILURE = "failure";
 
     /**
      * This is the action called from the Struts framework.
@@ -38,27 +36,19 @@ public class AgregarEquipoASolicitud extends org.apache.struts.action.Action {
             HttpServletRequest request, HttpServletResponse response)
             throws Exception {
         
-        Equipo equipo = new Equipo();
-        Solicitud solicitud = new Solicitud();
+        Solicitud s = new Solicitud();
+        Usuario u = new Usuario();
+        u.setUsuario(request.getParameter("usuario"));
+        s.setId(Integer.parseInt(request.getParameter("id")));
+        s.setCantidad(request.getParameter("cantidad"));
+        s.setFecha_solicitud(request.getParameter("fecha_solicitud"));
+        s.setTalla(request.getParameter("talla"));
+        s.setFrecuencia(request.getParameter("frecuencia"));
+        s.setSerialEquipo(Integer.parseInt(request.getParameter("serialEquipo")));
+        s.setNombre_vista(request.getParameter("nombre_vista"));
+        request.setAttribute("solicitud", s);
+        request.setAttribute("usuario", u);        
         
-        String serial = request.getParameter("serial");
-        String id = request.getParameter("id");
-        String ttalla = request.getParameter("tipo_talla");
-        String frecuencia = request.getParameter("frecuencia");
-        String cantidad = request.getParameter("cantidad");
-        String usuario = request.getParameter("usuario");
-        System.out.println("usuariooooooooooooooo: "+usuario);
-        
-        if ("0".equals(cantidad)){ // Intenta pedir Cero unidades de algun EPP
-            request.setAttribute("errorCantidad", "error");
-            return mapping.findForward(SUCCESS);
-        }
-        
-        solicitud.setId(Integer.parseInt(id));
-        solicitud.setNombre_usuario(usuario);
-        equipo.setSerial(Integer.parseInt(serial));
-        equipo.setTipo_talla(ttalla);
-        DBMS.getInstance().agregarAContiene(equipo,solicitud,frecuencia,cantidad);
         return mapping.findForward(SUCCESS);
     }
 }

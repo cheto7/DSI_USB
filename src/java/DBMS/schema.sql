@@ -123,7 +123,7 @@ CREATE TABLE "PREPAS".solicitud (
     id SERIAL,
   usuario VARCHAR NOT NULL,
   fecha_solicitud DATE NOT NULL,
-
+  modificada    VARCHAR DEFAULT 'false',
   CONSTRAINT PK_solicitud PRIMARY KEY (id),
   CONSTRAINT FK_solicitud_usuario FOREIGN KEY (usuario) REFERENCES "PREPAS".usuario (usuario)
 ) WITH (
