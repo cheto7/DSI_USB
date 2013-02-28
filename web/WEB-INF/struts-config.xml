@@ -194,7 +194,12 @@
         
         <action path="/ListadoGeneral" type="Solicitudes.ListadoGeneral" scope="request"
                 name="ListadoGeneral">
-            <forward name="success" path="/vistas/equipo/lista_equipos/lista_equipos.jsp"></forward>  
+            <forward name="success" path="/vistas/pedido/form_listado.jsp"></forward>  
+        </action>
+        
+        <action path="/Consulta" type="Solicitudes.Consulta" scope="request"
+                name="ListadoGeneral">
+            <forward name="success" path="/vistas/pedido/consulta.jsp"></forward>  
         </action>
         
         <action path="/ListarNoticia" type="Noticias.Listar" scope="request"

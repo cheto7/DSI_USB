@@ -50,6 +50,70 @@ public class DBMS {
         }
         return false;
     }
+    
+    
+    public ArrayList < ArrayList < String_Cheto > > consultarSolicitudes(ListadoGeneral lg){
+        ArrayList < ArrayList < String_Cheto >>  res = new ArrayList < ArrayList <String_Cheto> >(0);
+        String q = "";
+        ArrayList <String_Cheto> q1 = new ArrayList <String_Cheto> (0);
+        if(lg.getOrganizadoPor().equals("usuario")){
+            q += "select u.usuario as usuario, u.nombre as nombre, u.apellido as apellido,"
+                    + " e.nombre_vista as nombre_equipo, c.talla as talla, c.cantidad as cantidad ";
+            q1.add(new String_Cheto("usuario"));
+            q1.add(new String_Cheto("nombre"));
+            q1.add(new String_Cheto("apellido"));
+            q1.add(new String_Cheto("nombre_equipo"));
+            q1.add(new String_Cheto("talla"));
+            q1.add(new String_Cheto("cantidad"));
+            res.add(q1);
+        } else if(lg.getOrganizadoPor().equals("equipo")){
+            q += "select e.nombre_vista as nombre_equipo, c.talla as talla, SUM(c.cantidad) as cantidad ";
+            q1.add(new String_Cheto("nombre_equipo"));
+            q1.add(new String_Cheto("talla"));
+            q1.add(new String_Cheto("cantidad"));
+            res.add(q1);
+        }
+        q += "from \"PREPAS\".solicitud as s, \"PREPAS\".contiene as c, \"PREPAS\".equipo as e, "
+                + "\"PREPAS\".usuario as u ";
+        q += "where c.id = s.id and c.serial = e.serial and u.usuario = s.usuario ";
+        if(!(lg.getEquipo().equals(""))){
+            q += "and e.nombre_vista = \'"+lg.getEquipo()+"\' ";
+        }
+        if(!(lg.getUsuario().equals(""))){
+            q += "and u.usuario = \'"+lg.getUsuario()+"\' ";
+        }
+        if(!(lg.getSexo().equals(""))){
+            q += "and u.sexo = \'"+lg.getSexo()+"\' ";
+        }
+        if(!(lg.getTipo().equals(""))){
+            q += "and e.sector = \'"+lg.getTipo()+"\' ";
+        }
+        if(lg.getOrganizadoPor().equals("usuario")){
+            q += "order by  u.usuario";
+        } else if(lg.getOrganizadoPor().equals("equipo")){
+            q += "group by e.nombre_vista, c.talla ";
+        }
+        q += ";";
+        try{
+        Statement stmt = conexion.createStatement();
+            System.out.println(q);
+            ResultSet rs = stmt.executeQuery(q);
+
+            while (rs.next()) {
+                ArrayList <String_Cheto> a = new ArrayList <String_Cheto> (0);
+                for(int i = 0;i < res.get(0).size();i++){
+                    a.add(new String_Cheto(rs.getString(res.get(0).get(i).getValue())));
+                }
+                res.add(a);
+            }
+            return res;
+        } catch (SQLException ex) {
+            System.out.println("EXCEPCION");
+            ex.printStackTrace();
+        }
+        return res;
+    }
+    
 
     /*Para el Login se consulta el usuario con la base de datos
      y si existe, entra al sitio. */

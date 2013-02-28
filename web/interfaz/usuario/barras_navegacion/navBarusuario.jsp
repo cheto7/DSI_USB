@@ -105,6 +105,11 @@
             <html:submit style="padding:0px 10px 30px 0px">Proveedores</html:submit>
         </html:form>
     </li>
+    <li>
+        <html:form action="/ListadoGeneral" onsubmit="return (this)"> 
+            <html:submit style="padding:0px 10px 30px 0px">Consulta</html:submit>
+        </html:form>
+    </li>
         </div>
 
 </ul>
