@@ -1,4 +1,4 @@
- DROP SCHEMA "PREPAS" CASCADE;
+DROP SCHEMA "PREPAS" CASCADE;
 
  CREATE SCHEMA "PREPAS"
   AUTHORIZATION postgres;
@@ -77,7 +77,7 @@ CREATE TABLE "PREPAS".equipo (
   tiempo_vida INT default 0,
   sector    VARCHAR,
   norma     VARCHAR,
-
+  tipo_talla VARCHAR,
   CONSTRAINT PK_equipo PRIMARY KEY (serial)
 ) WITH (
 OIDS = FALSE
@@ -119,23 +119,10 @@ CREATE TABLE "PREPAS".noticia (
 OIDS = FALSE
 );
 
-CREATE TABLE "PREPAS".proveedor (
-  rif           VARCHAR NOT NULL,
-  nombre        VARCHAR,
-  telefono      VARCHAR,
-  email         VARCHAR,
-  contacto      VARCHAR,
-  direccion     VARCHAR,
-  habilitado    VARCHAR,
-  CONSTRAINT PK_proveedor PRIMARY KEY (rif)
-) WITH (
-OIDS = FALSE
-);
-
 CREATE TABLE "PREPAS".solicitud (
     id SERIAL,
   usuario VARCHAR NOT NULL,
-  fecha_solicitud VARCHAR NOT NULL,
+  fecha_solicitud DATE NOT NULL,
 
   CONSTRAINT PK_solicitud PRIMARY KEY (id),
   CONSTRAINT FK_solicitud_usuario FOREIGN KEY (usuario) REFERENCES "PREPAS".usuario (usuario)

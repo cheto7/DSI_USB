@@ -14,6 +14,7 @@
         <form-bean name="Proveedor" type="Clases.Proveedor"/>
         <form-bean name="Equipo" type="Clases.Equipo"/>
         <form-bean name="UploadFile" type="Clases.UploadFile"/>
+        <form-bean name="ListadoGeneral" type="Clases.ListadoGeneral"/>
     </form-beans>
     <global-exceptions>
     
@@ -188,6 +189,11 @@
         
         <action path="/ListarEquipo" type="Equipo.Listar" scope="request"
                 name="Equipo">
+            <forward name="success" path="/vistas/equipo/lista_equipos/lista_equipos.jsp"></forward>  
+        </action>
+        
+        <action path="/ListadoGeneral" type="Solicitudes.ListadoGeneral" scope="request"
+                name="ListadoGeneral">
             <forward name="success" path="/vistas/equipo/lista_equipos/lista_equipos.jsp"></forward>  
         </action>
         

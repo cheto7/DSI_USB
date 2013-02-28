@@ -67,6 +67,16 @@
         <option value="obrero">Obrero</option>
         <option value="generico">Genérico</option>
     </html:select><br>
+    <label>Tipo de talla asociada:</label>
+    <html:select name="Equipo" property="tipo_talla">
+        <option><bean:write name="equipo" property="tipo_talla"/></option>
+        <option value="camisa">Camisa</option>
+        <option value="guantes">Guantes</option>
+        <option value="mascara">Máscara</option>
+        <option value="pantalon">Pantalón</option>
+        <option value="zapato">Zapato</option>
+        <option value="no aplica">No Aplica</option>
+    </html:select><br>     
     
     <script>
         $('textarea').jqte();

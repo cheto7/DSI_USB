@@ -45,6 +45,7 @@
                     <div>
                         <html:form action="/AgregarEquipoASolicitud" onsubmit="return (this)">
                             <html:hidden name="eq" property="serial"/>
+                            <html:hidden name="eq" property="tipo_talla"/>
                             <html:hidden name="solicitud" property="id"/>
                             <html:hidden name="autenticado" property="usuario"/>
                             <p style="float:left">Frecuencia de Uso:</p>
@@ -96,6 +97,7 @@
                     <div>
                         <html:form action="/AgregarEquipoASolicitud" onsubmit="return (this)">
                             <html:hidden name="eq" property="serial"/>
+                            <html:hidden name="eq" property="tipo_talla"/>
                             <html:hidden name="solicitud" property="id"/>
                             <html:hidden name="autenticado" property="usuario"/>
                             <p style="float:left">Frecuencia de Uso:</p>
@@ -147,6 +149,7 @@
                     <div>
                         <html:form action="/AgregarEquipoASolicitud" onsubmit="return (this)">
                             <html:hidden name="eq" property="serial"/>
+                            <html:hidden name="eq" property="tipo_talla"/>
                             <html:hidden name="solicitud" property="id"/>
                             <html:hidden name="autenticado" property="usuario"/>
                             <p style="float:left">Frecuencia de Uso:</p>
@@ -198,6 +201,7 @@
                     <div>
                         <html:form action="/AgregarEquipoASolicitud" onsubmit="return (this)">
                             <html:hidden name="eq" property="serial"/>
+                            <html:hidden name="eq" property="tipo_talla"/>
                             <html:hidden name="solicitud" property="id"/>
                             <html:hidden name="autenticado" property="usuario"/>
                             <p style="float:left">Frecuencia de Uso:</p>
@@ -249,6 +253,7 @@
                     <div>
                         <html:form action="/AgregarEquipoASolicitud" onsubmit="return (this)">
                             <html:hidden name="eq" property="serial"/>
+                            <html:hidden name="eq" property="tipo_talla"/>
                             <html:hidden name="solicitud" property="id"/>
                             <html:hidden name="autenticado" property="usuario"/>
                             <p style="float:left">Frecuencia de Uso:</p>
