@@ -13,11 +13,9 @@ import org.apache.struts.action.ActionMapping;
 
 /**
  *
- * @author Azocar
+ * @author azocar
  */
-
-/* Accion que deshabilita cuyo estado es habilotado  */
-public class otorgarPermisoSupervisor extends org.apache.struts.action.Action {
+public class removerPrivilegios extends org.apache.struts.action.Action {
 
     private static final String SUCCESS = "success";
     private static final String FAILURE = "failure";
@@ -40,13 +38,12 @@ public class otorgarPermisoSupervisor extends org.apache.struts.action.Action {
         HttpSession session = request.getSession();
 
         Usuario u = (Usuario) form;
-        Boolean supervisor = DBMS.getInstance().serSupervisor(u);
+        Boolean sinPrivilegio = DBMS.getInstance().removerPrivilegios(u);
 
-        if (supervisor) {
-            String loggueado = (String) session.getAttribute("usuarioAutenticado");
-            Usuario autenticado = new Usuario();
-            autenticado.setUsuario(loggueado);
-
+        if (sinPrivilegio) {       
+        String loggueado = (String) session.getAttribute("usuarioAutenticado");
+        Usuario autenticado = new Usuario();
+        autenticado.setUsuario(loggueado);
 
         ArrayList<Usuario> usuariosHab = DBMS.getInstance().consultarUsuariosSinPermisos();
         request.setAttribute("usuariosHab", usuariosHab);

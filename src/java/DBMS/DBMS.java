@@ -395,6 +395,88 @@ public class DBMS {
         }
         return usrs;
     }
+    
+      /*Consulta todos los usuarios supervisores existentes en la base de datos*/
+    public ArrayList<Usuario> consultarSupervisores() {
+        ArrayList<Usuario> usrs = new ArrayList<Usuario>(0);
+        try {
+            String sqlquery = "SELECT * FROM \"PREPAS\".usuario "
+                    + "WHERE administrador = 'supervisor' ";
+
+                    
+            Statement stmt = conexion.createStatement();
+            System.out.println(sqlquery);
+            ResultSet rs = stmt.executeQuery(sqlquery);
+            while (rs.next()) {
+                if (rs.getBoolean("habilitado")) {
+                    Usuario u = new Usuario();
+                    u.setUsuario(rs.getString("usuario"));
+                    u.setPassword(rs.getString("password"));
+                    u.setHabilitado(rs.getString("habilitado"));
+                    usrs.add(u);
+                }
+            }
+        } catch (SQLException ex) {
+            System.out.println("EXCEPCION");
+            ex.printStackTrace();
+        }
+        return usrs;
+    }
+    
+            /*Consulta todos los usuarios inspectores existentes en la base de datos*/
+    public ArrayList<Usuario> consultarInspectores() {
+        ArrayList<Usuario> usrs = new ArrayList<Usuario>(0);
+        try {
+            String sqlquery = "SELECT * FROM \"PREPAS\".usuario "
+                    + "WHERE administrador = 'inspector' ";
+
+                    
+            Statement stmt = conexion.createStatement();
+            System.out.println(sqlquery);
+            ResultSet rs = stmt.executeQuery(sqlquery);
+            while (rs.next()) {
+                if (rs.getBoolean("habilitado")) {
+                    Usuario u = new Usuario();
+                    u.setUsuario(rs.getString("usuario"));
+                    u.setPassword(rs.getString("password"));
+                    u.setHabilitado(rs.getString("habilitado"));
+                    usrs.add(u);
+                }
+            }
+        } catch (SQLException ex) {
+            System.out.println("EXCEPCION");
+            ex.printStackTrace();
+        }
+        return usrs;
+    }
+    
+    /*Consulta todos los usuarios Sin Privilegios existentes en la base de datos*/
+    public ArrayList<Usuario> consultarUsuariosSinPermisos() {
+        ArrayList<Usuario> usrs = new ArrayList<Usuario>(0);
+        try {
+            String sqlquery = "SELECT * FROM \"PREPAS\".usuario "
+                    + "WHERE administrador != 'inspector' "
+                    + "AND administrador != 'supervisor' "
+                    + "AND administrador != 'administrador' ";
+                    
+            Statement stmt = conexion.createStatement();
+            System.out.println(sqlquery);
+            ResultSet rs = stmt.executeQuery(sqlquery);
+            while (rs.next()) {
+                if (rs.getBoolean("habilitado")) {
+                    Usuario u = new Usuario();
+                    u.setUsuario(rs.getString("usuario"));
+                    u.setPassword(rs.getString("password"));
+                    u.setHabilitado(rs.getString("habilitado"));
+                    usrs.add(u);
+                }
+            }
+        } catch (SQLException ex) {
+            System.out.println("EXCEPCION");
+            ex.printStackTrace();
+        }
+        return usrs;
+    }
 
     /*Habilita un usuario. */
     public Boolean habilitar(Usuario u) {
@@ -430,6 +512,8 @@ public class DBMS {
         return false;
     }
     
+    
+    
     /* Otorgar Permisos de Supervisor */
     public Boolean serSupervisor (Usuario u) {
         try {
@@ -452,6 +536,22 @@ public class DBMS {
         try {
             String sqlquery = "UPDATE \"PREPAS\".usuario SET "
                     + "administrador = 'inspector' "
+                    + " WHERE usuario = '" + u.getUsuario() + "'";
+
+            Statement stmt = conexion.createStatement();
+            System.out.println(sqlquery);
+            Integer i = stmt.executeUpdate(sqlquery);
+            return i > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+    
+        public Boolean removerPrivilegios (Usuario u) {
+        try {
+            String sqlquery = "UPDATE \"PREPAS\".usuario SET "
+                    + "administrador = '' "
                     + " WHERE usuario = '" + u.getUsuario() + "'";
 
             Statement stmt = conexion.createStatement();
