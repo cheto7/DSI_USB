@@ -9,10 +9,15 @@
 <%@ taglib uri="http://struts.apache.org/tags-tiles" prefix="tiles" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <legend>Confirmación de solicitud</legend>
 
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-
+<logic:empty name="solicitud">
+    <center>
+        <label style="color:red">Usted no ha ingresado ningún equipo de protección a la solicitud.</label>
+    </center>    
+</logic:empty>
+<logic:notEmpty name="solicitud">
 <h1>Pedido realizado por:</h1>
 <h5><bean:write name="usuario" property="usuario"/></h5>
 <label> Usted debe confirmar su pedido para continuar. </label>
@@ -24,7 +29,7 @@
         <tr>
             <th>Equipo</th>
             <th>Imagen</th>
-            <th><center>Frecuencia de uso</center></th>
+            <th><center>Frecuencia de uso (días)</center></th>
             <th>Cantidad solicitada</th>
             <th>Talla</th>
             <th colspan="2"><center>Opciones</center></th>
@@ -80,9 +85,9 @@
     <table align="center">
         <tr>
             <td>
-    <html:form action="/Ir_pag_pedido" onsubmit="return (this)">
+    <%--<html:form action="/Ir_pag_pedido" onsubmit="return (this)">
         <html:submit styleClass="btn btn-primary"> Seguir Agregando </html:submit>
-    </html:form>        
+    </html:form>   --%>
     </td>
     <td>
     <html:form action="/CulminarSolicitud" onsubmit="return (this)">
@@ -91,6 +96,7 @@
         </td>
     </tr>
 </table>
+</logic:notEmpty>    
 <%--
     <br>
     <center>

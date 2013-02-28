@@ -19,29 +19,29 @@
         </center>
 </logic:present>
 
-<table>
+<table class="table table-hover">
+    <tbody>
     <tr>
-        <th>Equipo a Editar</th>
+        <th>Equipo</th>
+        <th>Imagen </th>
+        <th>Frecuencia de uso</th>
+        <th>Cantidad</th>
+        <th>Talla</th>
     </tr>
     <tr>
         <td>
             <bean:write name="solicitud" property="nombre_vista"/>
         </td>
         <td style="">
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <img width="120px" src="assets/materiales/<bean:write name="solicitud" property="nombre_vista"/>.png"/>
         </td>
-    </tr>
-    <tr>
-        <td>
+        
             <html:form action = "/ActualizarEquipoEnSolicitud" acceptCharset="iso-8859-1" onsubmit = "return (this)">
                 <html:hidden name="solicitud" property="id"/>
                 <html:hidden name="solicitud" property="serialEquipo"/>
                 <html:hidden name="solicitud" property="nombre_vista"/>
                 <html:hidden name="usuario" property="usuario"/>
-                <label>Frecuencia de Uso:</label>
+                <td>
                 <html:select name="solicitud" property="frecuencia" styleClass="spana">
                     <option>Diaria</option>
                     <option>Semanal</option>
@@ -49,18 +49,26 @@
                     <option>Trimestral</option>
                     <option>Anual</option>
                 </html:select>
-                <label>Cantidad:</label>
+                </td>
+                <td>
                 <html:text name="solicitud" property="cantidad" styleClass="span1" styleId="spinner">
                     <bean:write name="solicitud" property="cantidad"/>
                 </html:text>
-                <label>Talla:</label>
+                </td>
+                <td>
                 <html:text name="solicitud" property="talla" styleClass="span1" styleId="spinner" disabled="true">
                     <bean:write name="solicitud" property="talla"/>
                 </html:text><br>
+                </td>
+                <tr>
+                    <td colspan="5">
                 <center>
                     <html:submit styleClass="btn btn-primary"> Editar </html:submit>
                 </center>
+                    </td>
+                </tr>
             </html:form>
         </td>
-    </tr>    
+    </tr>
+    </tbody>
 </table>

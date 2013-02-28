@@ -53,7 +53,7 @@
     
     <definition name="confirmar" extends="home">
         <put name="noticias" value="/interfaz/genericos/pedido/conf-solicitud.jsp"></put>
-        <put name="navBarGeneral" value=""></put>
+        <put name="navBarGeneral" value="/interfaz/genericos/barras_navegacion/navBarSeguirAgregando.jsp"></put>
         <put name="sidebar" value=""></put>
     </definition>
     
@@ -200,7 +200,7 @@
     </definition>
     <definition name="formulario-editar-equipo-en-solicitud" extends="formulario-agregar-noticia">
         <put name="formulario" value="/interfaz/genericos/pedido/form-edit-equipoEnSol-content.jsp"></put>
-        <put name="navBar" value="/interfaz/admin/barras_navegacion/navBarVerProveedor.jsp"></put>
+        <put name="navBar" value="/interfaz/genericos/barras_navegacion/navBarVolverConfSol.jsp"></put>
     </definition>
     <!--<definition name="lista-todas-solicitudes" extends="home">
         <put name="noticias" value="/interfaz/admin/solicitud/lista-solicitudes-recibidas.jsp"></put>

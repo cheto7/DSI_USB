@@ -81,11 +81,11 @@
     <table align="center">
         <tr>
         <td>
-            
-                <html:form action="/ConfirmarModificacion" onsubmit="return (this)">
-                    <html:hidden name="solicitud" property="id"/>
-                    <html:submit styleClass="btn btn-success"> Confirmar modificación </html:submit>
-                </html:form>
+
+            <html:form action="/ConfirmarModificacion" onsubmit="return (this)">
+                <html:hidden name="solicitud" property="id"/>
+                <html:submit styleClass="btn btn-success"> Confirmar modificación </html:submit>
+            </html:form>
         </td>
     </tr>
 </table>
