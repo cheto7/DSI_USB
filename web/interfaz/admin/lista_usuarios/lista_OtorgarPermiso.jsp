@@ -49,9 +49,9 @@
                     <tr>
                         <th>USB-ID</th>
                         <th>Contraseña</th>
-                        <th></th>
-                        <th>Ortorgar Permiso</th>
-                        <th></th>
+                        <%--<th></th>--%>
+                        <th colspan="3"><center>Ortorgar Permiso</center></th>
+                        <%--<th></th>--%>
                     </tr>
 
                     <logic:iterate name="usuariosHab" id="usuario">

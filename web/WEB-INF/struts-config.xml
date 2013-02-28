@@ -316,6 +316,10 @@
                 name="Usuario">
             <forward name="success" path="/Ir_pag_usuario.do"></forward>
         </action>
+        <action name="Usuario" path="/removerPrivilegios" scope="request" type="Editar.removerPrivilegios">
+            <forward name="success" path="/vistas/lista_usuarios/formulario_OtorgarPermiso.jsp"></forward>
+            <forward name="failure" path="/vistas/error/welcomeStruts.jsp"></forward>
+        </action>        
         <action path="/EditarEquipoEnSolicitud" type="Solicitudes.EditarEquipoEnSolicitud" scope="request" parameter="method"
                 name="Usuario">
             <forward name="success" path="/vistas/pedido/interfaz-form-edit-equipoEnSolicitud.jsp"></forward>
