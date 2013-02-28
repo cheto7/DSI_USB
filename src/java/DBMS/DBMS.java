@@ -459,6 +459,88 @@ public class DBMS {
         }
         return usrs;
     }
+    
+      /*Consulta todos los usuarios supervisores existentes en la base de datos*/
+    public ArrayList<Usuario> consultarSupervisores() {
+        ArrayList<Usuario> usrs = new ArrayList<Usuario>(0);
+        try {
+            String sqlquery = "SELECT * FROM \"PREPAS\".usuario "
+                    + "WHERE administrador = 'supervisor' ";
+
+                    
+            Statement stmt = conexion.createStatement();
+            System.out.println(sqlquery);
+            ResultSet rs = stmt.executeQuery(sqlquery);
+            while (rs.next()) {
+                if (rs.getBoolean("habilitado")) {
+                    Usuario u = new Usuario();
+                    u.setUsuario(rs.getString("usuario"));
+                    u.setPassword(rs.getString("password"));
+                    u.setHabilitado(rs.getString("habilitado"));
+                    usrs.add(u);
+                }
+            }
+        } catch (SQLException ex) {
+            System.out.println("EXCEPCION");
+            ex.printStackTrace();
+        }
+        return usrs;
+    }
+    
+            /*Consulta todos los usuarios inspectores existentes en la base de datos*/
+    public ArrayList<Usuario> consultarInspectores() {
+        ArrayList<Usuario> usrs = new ArrayList<Usuario>(0);
+        try {
+            String sqlquery = "SELECT * FROM \"PREPAS\".usuario "
+                    + "WHERE administrador = 'inspector' ";
+
+                    
+            Statement stmt = conexion.createStatement();
+            System.out.println(sqlquery);
+            ResultSet rs = stmt.executeQuery(sqlquery);
+            while (rs.next()) {
+                if (rs.getBoolean("habilitado")) {
+                    Usuario u = new Usuario();
+                    u.setUsuario(rs.getString("usuario"));
+                    u.setPassword(rs.getString("password"));
+                    u.setHabilitado(rs.getString("habilitado"));
+                    usrs.add(u);
+                }
+            }
+        } catch (SQLException ex) {
+            System.out.println("EXCEPCION");
+            ex.printStackTrace();
+        }
+        return usrs;
+    }
+    
+    /*Consulta todos los usuarios Sin Privilegios existentes en la base de datos*/
+    public ArrayList<Usuario> consultarUsuariosSinPermisos() {
+        ArrayList<Usuario> usrs = new ArrayList<Usuario>(0);
+        try {
+            String sqlquery = "SELECT * FROM \"PREPAS\".usuario "
+                    + "WHERE administrador != 'inspector' "
+                    + "AND administrador != 'supervisor' "
+                    + "AND administrador != 'administrador' ";
+                    
+            Statement stmt = conexion.createStatement();
+            System.out.println(sqlquery);
+            ResultSet rs = stmt.executeQuery(sqlquery);
+            while (rs.next()) {
+                if (rs.getBoolean("habilitado")) {
+                    Usuario u = new Usuario();
+                    u.setUsuario(rs.getString("usuario"));
+                    u.setPassword(rs.getString("password"));
+                    u.setHabilitado(rs.getString("habilitado"));
+                    usrs.add(u);
+                }
+            }
+        } catch (SQLException ex) {
+            System.out.println("EXCEPCION");
+            ex.printStackTrace();
+        }
+        return usrs;
+    }
 
     /*Habilita un usuario. */
     public Boolean habilitar(Usuario u) {
@@ -494,6 +576,8 @@ public class DBMS {
         return false;
     }
     
+    
+    
     /* Otorgar Permisos de Supervisor */
     public Boolean serSupervisor (Usuario u) {
         try {
@@ -516,6 +600,22 @@ public class DBMS {
         try {
             String sqlquery = "UPDATE \"PREPAS\".usuario SET "
                     + "administrador = 'inspector' "
+                    + " WHERE usuario = '" + u.getUsuario() + "'";
+
+            Statement stmt = conexion.createStatement();
+            System.out.println(sqlquery);
+            Integer i = stmt.executeUpdate(sqlquery);
+            return i > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+    
+        public Boolean removerPrivilegios (Usuario u) {
+        try {
+            String sqlquery = "UPDATE \"PREPAS\".usuario SET "
+                    + "administrador = '' "
                     + " WHERE usuario = '" + u.getUsuario() + "'";
 
             Statement stmt = conexion.createStatement();
@@ -1175,7 +1275,7 @@ public class DBMS {
         try {
             String sqlquery;
 
-            sqlquery = "SELECT C.id, C.cantidad,C.frecuencia, E.nombre_vista, E.imagen, C.talla "
+            sqlquery = "SELECT C.id, C.cantidad,C.frecuencia, E.nombre_vista, E.imagen, C.talla,E.serial "
                     + "FROM \"PREPAS\".solicitud S,\"PREPAS\".contiene C,\"PREPAS\".equipo E "
                     + "WHERE S.id= '" + sol.getId() + "' AND S.usuario = '" + u.getUsuario() + "' "
                     + "AND C.id=S.id AND E.serial=C.serial";
@@ -1193,6 +1293,7 @@ public class DBMS {
                 s.setNombre_vista(rs.getString("nombre_vista"));
                 s.setImagen(rs.getString("imagen"));
                 s.setTalla(rs.getString("talla"));
+                s.setSerialEquipo(rs.getInt("serial"));
                 solicitudes.add(s);
             }
             return solicitudes;
@@ -1201,5 +1302,112 @@ public class DBMS {
             ex.printStackTrace();
         }
         return solicitudes;
+    }
+    
+    public void EliminarEquipoEnSolicitud(Solicitud sol) {
+        try {
+            String sqlquery = "DELETE FROM \"PREPAS\".contiene WHERE "
+                    + "id = '" + sol.getId() + "' "
+                    + "AND serial = '" + sol.getSerialEquipo() + "' ";
+            Statement stmt = conexion.createStatement();
+            System.out.println(sqlquery);
+            ResultSet rs = stmt.executeQuery(sqlquery);
+        } catch (SQLException ex) {
+            System.out.println("EXCEPCION");
+            ex.printStackTrace();
+        }
+    }
+    
+    public void modificarEnContiene(Solicitud s) {
+        try {
+            String sqlquery;
+            sqlquery = "UPDATE \"PREPAS\".contiene SET "
+                    + "cantidad = '"+s.getCantidad()+"' , "
+                    + "frecuencia = '"+transformaFrecuencia(s.getFrecuencia())+"' "
+                    + "WHERE id = '"+s.getId()+"' AND "
+                    + "serial = '"+s.getSerialEquipo()+"'";
+            Statement stmt = conexion.createStatement();
+            System.out.println(sqlquery);
+            Integer i = stmt.executeUpdate(sqlquery);
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+    }
+    
+    public ArrayList<Solicitud> obtenerSolicitudesModificadas() {
+        ArrayList<Solicitud> solicitudes = new ArrayList<Solicitud>(0);
+        try{
+            String sqlquery = "SELECT S.id,U.nombre,U.apellido,S.fecha_solicitud "
+                             +"FROM \"PREPAS\".solicitud S NATURAL JOIN \"PREPAS\".usuario U "
+                             +"WHERE S.modificada= 'true'";
+            Statement stmt = conexion.createStatement();
+            System.out.println(sqlquery);
+            ResultSet rs = stmt.executeQuery(sqlquery);
+            while (rs.next()){
+                Solicitud s = new Solicitud();
+                s.setId(Integer.parseInt(rs.getString("id")));
+                s.setNombre_usuario(rs.getString("nombre")+ " "+ rs.getString("apellido"));
+                s.setFecha_solicitud(rs.getString("fecha_solicitud"));
+                solicitudes.add(s);
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return solicitudes;
+    }
+    public ArrayList<Solicitud> obtenerSolicitudesNoModificadas() {
+        ArrayList<Solicitud> solicitudes = new ArrayList<Solicitud>(0);
+        try{
+            String sqlquery = "SELECT S.id,U.nombre,U.apellido,S.fecha_solicitud "
+                             +"FROM \"PREPAS\".solicitud S NATURAL JOIN \"PREPAS\".usuario U "
+                             +"WHERE S.modificada= 'false'";
+            Statement stmt = conexion.createStatement();
+            System.out.println(sqlquery);
+            ResultSet rs = stmt.executeQuery(sqlquery);
+            while (rs.next()){
+                Solicitud s = new Solicitud();
+                s.setId(Integer.parseInt(rs.getString("id")));
+                s.setNombre_usuario(rs.getString("nombre")+ " "+ rs.getString("apellido"));
+                s.setFecha_solicitud(rs.getString("fecha_solicitud"));
+                solicitudes.add(s);
+                
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return solicitudes;
+    }
+    
+    public ResultSet verSolicitud(Solicitud s){
+        try{
+        String sqlquery = "SELECT U.usuario, U.nombre, U.apellido, U.sexo, U.area_laboral, U.email, "
+                + " S.id,S.fecha_solicitud,S.modificada,C.serial,C.cantidad,C.talla,C.frecuencia, "
+                + " E.nombre_vista,E.sector "
+                + "FROM \"PREPAS\".usuario U,\"PREPAS\".solicitud S,\"PREPAS\".contiene C, \"PREPAS\".equipo E "
+                + "WHERE U.usuario = S.usuario AND S.id = '"+s.getId()+"'AND S.fecha_solicitud= '"+s.getFecha_solicitud()
+                +"' AND S.id = C.id AND C.serial = E.serial";
+
+        Statement stmt = conexion.createStatement();
+        System.out.println(sqlquery);
+        return stmt.executeQuery(sqlquery);
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return null;
+
+    }
+
+    public void actualizarSolicitudModificada(Solicitud s) {
+        try{
+            String sqlquery = "UPDATE \"PREPAS\".solicitud SET "
+                    + "modificada = 'true' "
+                    + "WHERE id = '"+s.getId()+"'";
+            Statement stmt = conexion.createStatement();
+            System.out.println(sqlquery);
+            Integer i = stmt.executeUpdate(sqlquery);    
+                    
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
     }
 }

@@ -34,9 +34,9 @@
                 <div id="sidebar-first">
                     <tiles:insert attribute="navBarGeneral"/>
                 </div>
-                <div id="sidebar-second">
-                    <tiles:insert attribute="sidebar"/>
-                </div>
+                    <div id="sidebar-second">
+                        <tiles:insert attribute="sidebar"/>
+                    </div>
             </div>
             <div id="footer">
                 <tiles:insert attribute="footer"/>

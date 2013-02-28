@@ -321,6 +321,53 @@
                 name="Usuario">
             <forward name="success" path="/Ir_pag_usuario.do"></forward>
         </action>
+        <action name="Usuario" path="/removerPrivilegios" scope="request" type="Editar.removerPrivilegios">
+            <forward name="success" path="/vistas/lista_usuarios/formulario_OtorgarPermiso.jsp"></forward>
+            <forward name="failure" path="/vistas/error/welcomeStruts.jsp"></forward>
+        </action>        
+        <action path="/EditarEquipoEnSolicitud" type="Solicitudes.EditarEquipoEnSolicitud" scope="request" parameter="method"
+                name="Usuario">
+            <forward name="success" path="/vistas/pedido/interfaz-form-edit-equipoEnSolicitud.jsp"></forward>
+        </action>
+        <action path="/EliminarEquipoEnSolicitud" type="Solicitudes.EliminarEquipoEnSolicitud" scope="request" parameter="method"
+                name="Usuario">
+            <forward name="success" path="/vistas/pedido/confirmar_solicitud.jsp"></forward>
+        </action>
+        <action path="/ActualizarEquipoEnSolicitud" type="Solicitudes.ActualizarEquipoEnSolicitud" scope="request" parameter="method"
+                name="Usuario">
+            <forward name="success" path="/vistas/pedido/confirmar_solicitud.jsp"></forward>
+            <forward name="failure" path="/EditarEquipoEnSolicitud.do"></forward>
+        </action>
+        <action path="/ListarSolicitudes" type="Solicitudes.ListarSolicitudes" scope="request" parameter="method"
+                name="Usuario">
+            <forward name="success" path="/vistas/pedido/lista-todas-solicitudes.jsp"></forward>
+        </action>
+        <action path="/VerSolicitudRecibida" type="Solicitudes.VerSolicitudRecibida" scope="request" parameter="method"
+                name="Solicitud">
+            <forward name="success" path="/vistas/pedido/revision-pedido.jsp"></forward>
+        </action>   
+        <action path="/EditarEquipoEnSolicitudAdmin" type="Solicitudes.EditarEquipoEnSolicitudAdmin" scope="request" parameter="method"
+                name="Usuario">
+            <forward name="success" path="/vistas/pedido/form-edit-equipoEnSolicitudAdmin.jsp"></forward>
+        </action>
+        <action path="/EliminarEquipoEnSolicitudAdmin" type="Solicitudes.EliminarEquipoEnSolicitudAdmin" scope="request" parameter="method"
+                name="Usuario">
+            <forward name="success" path="/vistas/pedido/revision-pedido.jsp"></forward>
+        </action>
+        <action path="/ActualizarEquipoEnSolicitudAdmin" type="Solicitudes.ActualizarEquipoEnSolicitudAdmin" scope="request" parameter="method"
+                name="Usuario">
+            <forward name="success" path="/vistas/pedido/revision-pedido.jsp"></forward>
+        </action>
+          <action path="/ConfirmarModificacion" type="Solicitudes.ConfirmarModificacion" scope="request" parameter="method"
+                name="Solicitud">
+            <forward name="success" path="/ListarSolicitudes.do"></forward>
+        </action>
+        
+        
+        
+                
+        
+        
         
 
     </action-mappings>

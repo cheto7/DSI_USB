@@ -47,15 +47,14 @@ public class otorgarPermisoInspector extends org.apache.struts.action.Action {
             Usuario autenticado = new Usuario();
             autenticado.setUsuario(loggueado);
 
-            /*Ejecuta de nuevo el codigo de listar usuarios. */
-            ArrayList<Usuario> usuariosHab = DBMS.getInstance().consultarUsuariosHabilitados(autenticado);
-            request.setAttribute("usuariosHab", usuariosHab);
+        ArrayList<Usuario> usuariosHab = DBMS.getInstance().consultarUsuariosSinPermisos();
+        request.setAttribute("usuariosHab", usuariosHab);
 
-            ArrayList<Usuario> usuariosNoHab = DBMS.getInstance().consultarUsuariosNoHabilitados(autenticado);
-            request.setAttribute("usuariosNoHab", usuariosNoHab);
+        ArrayList<Usuario> supervisores = DBMS.getInstance().consultarSupervisores();
+        request.setAttribute("supervisores", supervisores);
 
-            autenticado = DBMS.getInstance().atributosUsuario(autenticado);
-            request.setAttribute("autenticado", autenticado);
+        ArrayList<Usuario> inspectores = DBMS.getInstance().consultarInspectores();
+        request.setAttribute("inspectores", inspectores);
 
             return mapping.findForward(SUCCESS);
         } else {

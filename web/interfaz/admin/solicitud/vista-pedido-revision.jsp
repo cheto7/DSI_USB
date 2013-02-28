@@ -1,46 +1,40 @@
 <%-- 
-    Document   : conf-solicitud
-    Created on : Feb , 2013, 07:09:27 PM
+    Document   : vista-peido-revision
+    Created on : 28/02/2013, 01:37:39 AM
     Author     : ivan
 --%>
+
 <%@ taglib uri="http://struts.apache.org/tags-bean" prefix="bean" %>
 <%@ taglib uri="http://struts.apache.org/tags-html" prefix="html" %>
 <%@ taglib uri="http://struts.apache.org/tags-logic" prefix="logic" %>
 <%@ taglib uri="http://struts.apache.org/tags-tiles" prefix="tiles" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<legend>Confirmación de solicitud</legend>
+<legend>Solicitud</legend>
 
-<logic:empty name="solicitud">
-    <center>
-        <label style="color:red">Usted no ha ingresado ningún equipo de protección a la solicitud.</label>
-    </center>    
-</logic:empty>
-<logic:notEmpty name="solicitud">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
 <h1>Pedido realizado por:</h1>
-<h5><bean:write name="usuario" property="usuario"/></h5>
-<label> Usted debe confirmar su pedido para continuar. </label>
-<%--<label> En caso que haya olvidado algo, puede volver a modificar su pedido. </label>--%>
+<h5>Nombre de usuario: <bean:write name="usuario" property="usuario"/></h5>
+<h5>Nombres: <bean:write name="usuario" property="nombre"/></h5>
+<h5>Apellidos: <bean:write name="usuario" property="apellido"/></h5>
+<h5>Sexo: <bean:write name="usuario" property="sexo"/></h5>
+<h5>Área laboral: <bean:write name="usuario" property="area_laboral"/></h5>
+<h5>Email: <bean:write name="usuario" property="email"/></h5>
 
 <table class="table table-hover">
-    
     <tbody>
         <tr>
             <th>Equipo</th>
             <th>Imagen</th>
-            <th><center>Frecuencia de uso (días)</center></th>
+            <th><center>Frecuencia de uso</center></th>
             <th>Cantidad solicitada</th>
             <th>Talla</th>
             <th colspan="2"><center>Opciones</center></th>
         </tr>
-        
-    <%--<bean:write name="usuario" property="usuario"/>--%>
     <logic:iterate name="solicitud" id="solicitud">
         <tr>
             <td> <bean:write name="solicitud" property="nombre_vista" /> </td>
-            <%--<td> <img src="assets/materiales/img.png" /> </td>--%>
-            <%--<td> <img src="<bean:write name="solicitud" property="imagen"/>" /> </td>--%>
             <td><img width="70px" src="assets/materiales/<bean:write name="solicitud" property="nombre_vista"/>.png" /></td>
             <td>
                 <center> 
@@ -58,21 +52,23 @@
                 </center>
             </td>
             <td>
-                <html:form action="/EditarEquipoEnSolicitud" onsubmit="return (this)" style="display: inline">
+                <html:form action="/EditarEquipoEnSolicitudAdmin" onsubmit="return (this)" style="display: inline">
                         <html:hidden name="solicitud" property="id"/>
                         <html:hidden name="solicitud" property="cantidad"/>
                         <html:hidden name="solicitud" property="frecuencia"/>
                         <html:hidden name="solicitud" property="serialEquipo"/>
-                        <html:hidden name="solicitud" property="nombre_vista"/> 
+                        <html:hidden name="solicitud" property="nombre_vista"/>
+                        <html:hidden name="solicitud" property="fecha_solicitud"/>
                         <html:hidden name="solicitud" property="talla"/>
                         <html:hidden name="usuario" property="usuario"/>
                         <html:submit styleClass="btn btn-primary"> Editar </html:submit>
                 </html:form>
             </td>
             <td>
-                    <html:form action="/EliminarEquipoEnSolicitud" onsubmit="return (this)">
+                    <html:form action="/EliminarEquipoEnSolicitudAdmin" onsubmit="return (this)">
                         <html:hidden name="solicitud" property="id"/>
                         <html:hidden name="solicitud" property="serialEquipo"/>
+                        <html:hidden name="solicitud" property="fecha_solicitud"/>
                         <html:hidden name="usuario" property="usuario"/>
                         <html:submit styleClass="btn btn-danger"> Borrar </html:submit>
                     </html:form>
@@ -84,28 +80,12 @@
     
     <table align="center">
         <tr>
-            <td>
-    <%--<html:form action="/Ir_pag_pedido" onsubmit="return (this)">
-        <html:submit styleClass="btn btn-primary"> Seguir Agregando </html:submit>
-    </html:form>   --%>
-    </td>
-    <td>
-    <html:form action="/CulminarSolicitud" onsubmit="return (this)">
-        <html:submit styleClass="btn btn-success"> Confirmar </html:submit>
-    </html:form>
+        <td>
+
+            <html:form action="/ConfirmarModificacion" onsubmit="return (this)">
+                <html:hidden name="solicitud" property="id"/>
+                <html:submit styleClass="btn btn-success"> Confirmar modificación </html:submit>
+            </html:form>
         </td>
     </tr>
 </table>
-</logic:notEmpty>    
-<%--
-    <br>
-    <center>
-        <a class="btn btn-info" href="javascript: history.go(-1)">Modificar Pedido</a>
-        <html:submit styleClass="btn btn-primary">
-            Confirmar
-        </html:submit>
-    </center>
-    <br>
-    <br>
-</html:form>
---%>

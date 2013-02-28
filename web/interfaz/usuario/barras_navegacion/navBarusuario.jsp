@@ -73,19 +73,6 @@
             <html:submit style="padding:0px 10px 30px 0px">Usuarios</html:submit>
         </html:form>
     </li>
-
-    <%--<li>
-        <html:form action="/IrAgregarNoticia" onsubmit="return (this)">
-            <html:hidden name="autenticado" property="usuario"/>
-            <html:submit style="padding:0px 10px 30px 0px">Agregar noticia</html:submit>
-        </html:form>
-    </li>
-    
-    <li>
-        <html:form action="/IrAgregarEquipo" onsubmit="return (this)">
-            <html:submit style="padding:0px 10px 30px 0px">Agregar Equipo</html:submit>
-        </html:form>
-    </li>--%>
     
     <li>
         <html:form action="/ListarEquipo" onsubmit="return (this)">
@@ -106,7 +93,13 @@
         </html:form>
     </li>
     <li>
-        <html:form action="/ListadoGeneral" onsubmit="return (this)"> 
+        <html:form action="/ListarSolicitudes" onsubmit="return (this)">
+            <html:hidden name="autenticado" property="usuario"/>
+            <html:submit style="padding:0px 10px 30px 0px">Solicitudes</html:submit>
+        </html:form>
+    </li>
+    <li>
+        <html:form action="/ListadoGeneral" onsubmit="return (this)">
             <html:submit style="padding:0px 10px 30px 0px">Consulta</html:submit>
         </html:form>
     </li>

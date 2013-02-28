@@ -53,7 +53,7 @@
     
     <definition name="confirmar" extends="home">
         <put name="noticias" value="/interfaz/genericos/pedido/conf-solicitud.jsp"></put>
-        <put name="navBarGeneral" value=""></put>
+        <put name="navBarGeneral" value="/interfaz/genericos/barras_navegacion/navBarSeguirAgregando.jsp"></put>
         <put name="sidebar" value=""></put>
     </definition>
     
@@ -203,11 +203,40 @@
     <definition name="formulario-editar-proveedor" extends="formulario-agregar-noticia">
         <put name="formulario" value="/interfaz/admin/proveedores/form-edit-proveedor-content.jsp"></put>
         <put name="navBar" value="/interfaz/admin/barras_navegacion/navBarVerProveedor.jsp"></put>
-    </definition>    
+    </definition>
+    <definition name="formulario-editar-equipo-en-solicitud" extends="formulario-agregar-noticia">
+        <put name="formulario" value="/interfaz/genericos/pedido/form-edit-equipoEnSol-content.jsp"></put>
+        <put name="navBar" value="/interfaz/genericos/barras_navegacion/navBarVolverConfSol.jsp"></put>
+    </definition>
+    <!--<definition name="lista-todas-solicitudes" extends="home">
+        <put name="noticias" value="/interfaz/admin/solicitud/lista-solicitudes-recibidas.jsp"></put>
+        <put name="navBarGeneral" value="/interfaz/genericos/barras_navegacion/navBarpedido.jsp"></put>
+    </definition>-->
+   <definition name="lista-todas-solicitudes" path="/interfaz/admin/solicitud/plantilla-lista-solicitudes-recibidas.jsp">
+       <put name="script" value="/interfaz/genericos/pedido/script-pedido.jsp"></put>
+        <put name="formulario" value="/interfaz/admin/solicitud/lista-solicitudes-recibidas.jsp"></put>
+        <put name="navBar" value="/interfaz/genericos/barras_navegacion/navBarpedido.jsp"></put>
+        <put name="sidebar-second" value="/interfaz/genericos/plantilla_general/sidebar-second.jsp"></put>
+        <put name="footer" value="/interfaz/genericos/plantilla_general/footer.jsp"></put> 
+    </definition>
+    
+    <definition name="revision-pedido" extends="formulario-agregar-noticia">
+        <put name="formulario" value="/interfaz/admin/solicitud/vista-pedido-revision.jsp"></put>
+        <put name="navBar" value="/interfaz/admin/barras_navegacion/navBarVolverRevisionSolicitudes.jsp"></put>
+        <put name="navBar" value="/interfaz/admin/barras_navegacion/navBarVolverListaSolicitudes.jsp"></put>
+    </definition>
+    <definition name="form-editar-equipo-en-solicitud-admin" extends="formulario-agregar-noticia">
+        <put name="formulario" value="/vistas/pedido/form-content-equipoEnSolAdmin.jsp"></put>
+        <put name="navBar" value="/interfaz/admin/barras_navegacion/navBarVolverRevisionSolicitud.jsp"></put>
+    </definition>        
     
     
     
     
+    
+    
+    
+   
     
     <!--    <definition name="" extends="home">
         <put name="" value=""></put>
