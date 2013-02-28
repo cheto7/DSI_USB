@@ -15,9 +15,10 @@ import org.apache.struts.action.ActionMapping;
  * @author sibs
  */
 
-/*Accion que llama a la clase DBMS.java para consultar todos los usuarios
- que estan en la base de datos para luego mandarlos a la vista 
- correspondiente. */
+/*
+ * Accion que llama a la clase DBMS.java para consultar todos los usuarios que
+ * estan en la base de datos para luego mandarlos a la vista correspondiente.
+ */
 public class Formulario_OtorgarPermiso extends org.apache.struts.action.Action {
 
     /*
@@ -35,19 +36,27 @@ public class Formulario_OtorgarPermiso extends org.apache.struts.action.Action {
      * @throws java.lang.Exception
      * @return
      */
-   @Override
+    @Override
     public ActionForward execute(ActionMapping mapping, ActionForm form,
             HttpServletRequest request, HttpServletResponse response)
             throws Exception {
 
-        /*NUEVO!*/
+        /*
+         * NUEVO!
+         */
         HttpSession session = request.getSession();
         String loggueado = (String) session.getAttribute("usuarioAutenticado");
         Usuario autenticado = new Usuario();
         autenticado.setUsuario(loggueado);
-        
-        ArrayList<Usuario> usuariosHab = DBMS.getInstance().consultarUsuariosHabilitados(autenticado);
+
+        ArrayList<Usuario> usuariosHab = DBMS.getInstance().consultarUsuariosSinPermisos();
         request.setAttribute("usuariosHab", usuariosHab);
+
+        ArrayList<Usuario> supervisores = DBMS.getInstance().consultarSupervisores();
+        request.setAttribute("supervisores", supervisores);
+
+        ArrayList<Usuario> inspectores = DBMS.getInstance().consultarInspectores();
+        request.setAttribute("inspectores", inspectores);
 
         return mapping.findForward(SUCCESS);
     }

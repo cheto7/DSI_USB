@@ -310,6 +310,10 @@
                 name="Usuario">
             <forward name="success" path="/Ir_pag_usuario.do"></forward>
         </action>
+        <action name="Usuario" path="/removerPrivilegios" scope="request" type="Editar.removerPrivilegios">
+            <forward name="success" path="/vistas/lista_usuarios/formulario_OtorgarPermiso.jsp"></forward>
+            <forward name="failure" path="/vistas/error/welcomeStruts.jsp"></forward>
+        </action>
         
 
     </action-mappings>
