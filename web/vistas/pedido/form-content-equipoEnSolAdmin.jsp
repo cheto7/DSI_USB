@@ -23,11 +23,11 @@
     <tbody>
     <tr>
         <th>Equipo</th>
-        <th><center>Imagen</center> </th>
-        <th>Frecuencia de uso</th>
+        <th><center>Imagen</center></th>
+        <th>Frecuencia de uso (días)</th>
         <th>Cantidad</th>
         <th>Talla</th>
-    </tr>    
+    </tr>
     <tr>
         <td>
             <bean:write name="solicitud" property="nombre_vista"/>
