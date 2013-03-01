@@ -14,7 +14,7 @@
 
 <legend>Listado de Solicitudes</legend>
 
-<html:form enctype="multipart/form-data" action = "/ListarSolicitudes" acceptCharset="iso-8859-1" onsubmit = "return (this)">
+<html:form enctype="multipart/form-data" action = "/Consulta" acceptCharset="iso-8859-1" onsubmit = "return (this)">
 
     <label>Usuario:</label>
     <html:text name="ListadoGeneral" property="usuario" styleClass="span5"></html:text><br>  
@@ -40,11 +40,9 @@
         <option value="masculino">Masculino</option>
     </html:select><br>
     <label>Organizado por:</label>
-    <html:select name="ListadoGeneral" property="organizadoPor">            
-        <option value="">No Aplica</option>            
+    <html:select name="ListadoGeneral" property="organizadoPor">          
         <option value="usuario">Usuarios</option>
         <option value="equipo">Equipos/tallas</option>
-        <option value="masPedidos">Los mas pedidos</option>
     </html:select><br>
     
     <html:submit styleClass="btn btn-primary"> Consultar </html:submit>

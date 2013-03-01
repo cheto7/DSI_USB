@@ -141,8 +141,14 @@
         <put name="sidebar" value=""></put>
     </definition>
     
+    <definition name="consulta" extends="home">
+        <put name="noticias" value="/interfaz/admin/pedido/content-consulta.jsp"></put>
+        <put name="navBarGeneral" value="/interfaz/admin/barras_navegacion/navBarListaEquipos.jsp"></put>
+        <put name="sidebar" value=""></put>
+    </definition>
+    
     <definition name="form_listado" extends="home">
-        <put name="noticias" value="/interfaz/admin/equipo/listar_equipos/content-lista-equipos.jsp"></put>
+        <put name="noticias" value="/interfaz/admin/pedido/listado_content.jsp"></put>
         <put name="navBarGeneral" value="/interfaz/genericos/barras_navegacion/navBarpedido.jsp"></put>
         <put name="sidebar" value=""></put>
     </definition>
