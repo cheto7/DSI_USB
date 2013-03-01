@@ -143,7 +143,7 @@
     
     <definition name="consulta" extends="home">
         <put name="noticias" value="/interfaz/admin/pedido/content-consulta.jsp"></put>
-        <put name="navBarGeneral" value="/interfaz/admin/barras_navegacion/navBarListaEquipos.jsp"></put>
+        <put name="navBarGeneral" value="/interfaz/admin/barras_navegacion/navBarConsulta.jsp"></put>
         <put name="sidebar" value=""></put>
     </definition>
     
