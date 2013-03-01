@@ -94,7 +94,7 @@
                         <html:form action="/ConfirmarEliminarEquipo" onsubmit="return (this)">
                             <html:hidden name="equipo" property="nombre_vista"/>
                             <html:hidden name="equipo" property="serial"/>
-                            <html:submit styleClass="btn btn-danger"> Eliminar </html:submit>
+                            <html:submit styleClass="btn btn-danger"> Descontinuar </html:submit>
                         </html:form>
                     </center>
                     </td>
