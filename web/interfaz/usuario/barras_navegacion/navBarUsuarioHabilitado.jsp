@@ -37,7 +37,7 @@
     
     <li>
         <html:form action="/ListarPedido" onsubmit="return (this)"> 
-            <html:submit style="padding:10px 20px 40px 20px">Ver solicitud</html:submit>
+            <html:submit style="padding:10px 20px 40px 20px">Solicitudes Anteriores</html:submit>
         </html:form> 
     </li>
     

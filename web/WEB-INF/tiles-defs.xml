@@ -17,9 +17,9 @@
 
     <definition name="lista_OtorgarPermisos" extends="home">
         <put name="noticias" value="/interfaz/admin/lista_usuarios/lista_OtorgarPermiso.jsp"></put>
-        <put name="navBarGeneral" value="/interfaz/genericos/barras_navegacion/navBarpedido.jsp"></put>
+        <put name="navBarGeneral" value="/interfaz/admin/barras_navegacion/navBarVolverListaUsuario.jsp"></put>
     </definition>
-    
+
     <definition name="lista" extends="home">
         <put name="noticias" value="/interfaz/admin/lista_usuarios/content-lista-usuarios.jsp"></put>
         <put name="navBarGeneral" value="/interfaz/genericos/barras_navegacion/navBarpedido.jsp"></put>
