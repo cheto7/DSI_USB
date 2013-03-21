@@ -1410,4 +1410,49 @@ public class DBMS {
             ex.printStackTrace();
         }
     }
+    
+    public ArrayList<Factura> listarFacturas (){
+        try{
+            String sqlquery = "SELECT fecha, numero_factura, nombre_proveedor "
+                    + "FROM \"PREPAS\".factura "
+                    + "WHERE validado = \'FALSO\'";
+
+            Statement stmt = conexion.createStatement();
+            System.out.println(sqlquery);
+            ResultSet rs = stmt.executeQuery(sqlquery);
+            ArrayList<Factura> ar = new ArrayList<Factura>();
+            while(rs.next()){
+                Factura f = new Factura();
+                f.setFecha(rs.getDate("fecha"));
+                f.setNumero_factura(rs.getInt("numero_factura"));
+                f.setProveedor(rs.getString("nombre_proveedor"));
+                f.setValidado("FALSO");
+                ar.add(f);
+            }
+            return ar;
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return null;
+
+    }
+    
+    public boolean agregarFactura(Factura f){
+        Date dNow = new Date( );
+      SimpleDateFormat ft = 
+      new SimpleDateFormat ("dd MM yyyy");
+        try {
+            String sqlquery;
+            sqlquery = "INSERT INTO \"PREPAS\".factura (nombre_proveedor, validado, fecha)  VALUES "
+                    + "('" + f.getProveedor() + "' , 'FALSO' , "
+                    +"to_date('"+ ft.format(dNow).toString() + "','DD MM YYYY') )";
+            Statement stmt = conexion.createStatement();
+            System.out.println(sqlquery);
+            stmt.executeUpdate(sqlquery);
+            return true;
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            return false;
+        }
+    }
 }

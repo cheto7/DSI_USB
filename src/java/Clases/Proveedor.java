@@ -85,4 +85,11 @@ public class Proveedor extends ActionForm{
     }
     
     
+    public String getLabel(){
+        return this.nombre;
+    }
+    public String getValue(){
+        return this.nombre;
+    }
+    
 }

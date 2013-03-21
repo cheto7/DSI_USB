@@ -85,7 +85,7 @@ OIDS = FALSE
 
 CREATE TABLE "PREPAS".proveedor (
     RIF VARCHAR NOT NULL,
-    nombre VARCHAR,
+    nombre VARCHAR UNIQUE,
     telefono VARCHAR,
     email VARCHAR,
     contacto VARCHAR,
@@ -100,11 +100,12 @@ OIDS = FALSE
 
 CREATE TABLE "PREPAS".factura (
     numero_factura SERIAL,
-    RIF VARCHAR,
+    nombre_proveedor VARCHAR,
+    validado VARCHAR, -- FALSO si aun se esta modificando, VERDAD si ya esta comprometido.
     fecha DATE NOT NULL,
 
     CONSTRAINT PK_factura PRIMARY KEY (numero_factura),
-    CONSTRAINT FK_factura_proveedor FOREIGN KEY (RIF) REFERENCES "PREPAS".proveedor (RIF)
+    CONSTRAINT FK_factura_proveedor FOREIGN KEY (nombre_proveedor) REFERENCES "PREPAS".proveedor (nombre)
 
 ) WITH (
 OIDS = FALSE

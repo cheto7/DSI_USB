@@ -15,6 +15,7 @@
         <form-bean name="Equipo" type="Clases.Equipo"/>
         <form-bean name="UploadFile" type="Clases.UploadFile"/>
         <form-bean name="ListadoGeneral" type="Clases.ListadoGeneral"/>
+        <form-bean name="Factura" type="Clases.Factura"/>
     </form-beans>
     <global-exceptions>
     
@@ -308,6 +309,33 @@
                 name="Usuario">
             <forward name="success" path="/vistas/pedido/interfaz_pedido.jsp"></forward>
         </action>
+        
+        <action path="/ListarFacturas" type="Facturas.ListarFacturas" scope="request"
+                name="Factura">
+            <forward name="success" path="/vistas/factura/interfaz_factura.jsp"></forward>
+        </action>
+        
+        <action path="/IrAgregarFactura" type="Facturas.IrAgregarFactura" scope="request"
+                name="Factura">
+            <forward name="success" path="/vistas/factura/interfaz_formulario_agregar_factura.jsp"></forward>
+        </action>
+        
+        <action path="/AgregarFactura" type="Facturas.AgregarFactura" scope="request"
+                name="Factura">
+            <forward name="success" path="/ListarFacturas.do"></forward>
+            <forward name="failure" path="/IrAgregarFactura.do"></forward>
+        </action>
+        
+        <action path="/FormularioEditarFactura" type="Facturas.FormularioEditarFactura" scope="request"
+                name="Factura">
+            <forward name="success" path="/vistas/factura/interfaz_factura.jsp"></forward>
+        </action>
+        
+        <action path="/validarFactura" type="Facturas.validarFactura" scope="request"
+                name="Factura">
+            <forward name="success" path="/vistas/factura/interfaz_factura.jsp"></forward>
+        </action>
+        
         <action path="/AgregarEquipoASolicitud" type="Solicitudes.AgregarEquipoASolicitud" scope="request" 
                 name="Usuario">
             <forward name="success" path="/Ir_pag_pedido.do"></forward>

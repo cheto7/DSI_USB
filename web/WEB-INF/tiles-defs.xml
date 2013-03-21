@@ -87,6 +87,11 @@
         <put name="navBar" value="/interfaz/genericos/barras_navegacion/navBarpedido.jsp"></put>
         <put name="sidebar-second" value="/interfaz/genericos/plantilla_general/sidebar-second.jsp"></put>
         <put name="footer" value="/interfaz/genericos/plantilla_general/footer.jsp"></put> 
+    </definition>
+    
+     <definition name="formulario-factura" extends="home">
+        <put name="noticias" value="/interfaz/admin/factura/listar_factura/content-lista-factura.jsp"></put>
+        <put name="navBarGeneral" value="/interfaz/admin/barras_navegacion/navBarFactura.jsp"></put> 
     </definition> 
     
     <definition name="formulario-editar-usuario" path="/interfaz/genericos/editar_datos/plantilla-formulario-editar.jsp">
@@ -104,6 +109,13 @@
     
     <definition name="formulario-agregar-noticia" path="/interfaz/admin/noticias/plantilla-form-agregar-noticia.jsp">
         <put name="formulario" value="/interfaz/admin/noticias/form-agregar-noticia-content.jsp"></put>
+        <put name="navBar" value="/interfaz/admin/barras_navegacion/navBarListaNoticias.jsp"></put>
+        <put name="sidebar-second" value="/interfaz/genericos/plantilla_general/sidebar-second.jsp"></put>
+        <put name="footer" value="/interfaz/genericos/plantilla_general/footer.jsp"></put> 
+    </definition>
+    
+    <definition name="formulario-agregar-factura" path="/interfaz/admin/noticias/plantilla-form-agregar-noticia.jsp">
+        <put name="formulario" value="/interfaz/admin/factura/form-agregar-factura-content.jsp"></put>
         <put name="navBar" value="/interfaz/admin/barras_navegacion/navBarListaNoticias.jsp"></put>
         <put name="sidebar-second" value="/interfaz/genericos/plantilla_general/sidebar-second.jsp"></put>
         <put name="footer" value="/interfaz/genericos/plantilla_general/footer.jsp"></put> 
