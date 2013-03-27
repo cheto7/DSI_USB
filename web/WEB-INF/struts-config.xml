@@ -28,6 +28,8 @@
     <action-mappings>
         <action path="/Login" type="Login.Login" scope="request" name="Usuario">
             <forward name="administrador" path="/vistas/genericos/interfaz_administrador.jsp"></forward>
+            <forward name="supervisor" path="/vistas/genericos/interfaz_supervisor.jsp"></forward>
+            <forward name="inspector" path="/vistas/genericos/interfaz_inspector.jsp"></forward>
             <forward name="habilitado" path="/vistas/genericos/interfaz_simple_mortal.jsp"></forward>
             <forward name="no_habilitado" path="/vistas/genericos/interfaz_menos_de_simple_mortal.jsp"></forward>
             <forward name="failure" path="/vistas/genericos/interfaz_pag_principal.jsp"></forward>
@@ -159,6 +161,8 @@
             <forward name="habilitado" path="/vistas/genericos/interfaz_simple_mortal.jsp"></forward>
             <forward name="failure" path="/vistas/error/welcomeStruts.jsp"></forward>
             <forward name="administrador" path="/vistas/genericos/interfaz_administrador.jsp"></forward>
+            <forward name="supervisor" path="/vistas/genericos/interfaz_supervisor.jsp"></forward>
+            <forward name="inspector" path="/vistas/genericos/interfaz_inspector.jsp"></forward>
         </action>
         
         <action path="/VolverPagInicio" type="Volver.VolverPagInicio" scope="request" 
@@ -386,10 +390,13 @@
                 name="Usuario">
             <forward name="success" path="/vistas/pedido/revision-pedido.jsp"></forward>
         </action>
-          <action path="/ConfirmarModificacion" type="Solicitudes.ConfirmarModificacion" scope="request" parameter="method"
-                name="Solicitud">
+        <action path="/ConfirmarModificacion" type="Solicitudes.ConfirmarModificacion" scope="request" parameter="method"
+                  name="Solicitud">
             <forward name="success" path="/ListarSolicitudes.do"></forward>
-        </action>
+        </action>          
+        <action  path="/gestionarUnidad" scope="session" type="Unidad.listarUnidadAdscripcion" name="Usuario">
+            <forward name="success" path="/vistas/lista_usuarios/formulario_agregarUnidad.jsp"></forward>
+        </action>        
         
         
         

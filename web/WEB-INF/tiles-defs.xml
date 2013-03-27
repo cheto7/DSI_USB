@@ -66,7 +66,17 @@
         <put name="noticias" value="/interfaz/genericos/plantilla_general/noticias.jsp"></put>
         <put name="navBarGeneral" value="/interfaz/usuario/barras_navegacion/navBarusuario.jsp"></put>
     </definition>
+    
+    <definition name="interfaz-supervisor" extends="home">
+        <put name="noticias" value="/interfaz/genericos/plantilla_general/noticias.jsp"></put>
+        <put name="navBarGeneral" value="/interfaz/usuario/barras_navegacion/navBarSupervisor.jsp"></put>
+    </definition>    
 
+    <definition name="interfaz-inspector" extends="home">
+        <put name="noticias" value="/interfaz/genericos/plantilla_general/noticias.jsp"></put>
+        <put name="navBarGeneral" value="/interfaz/usuario/barras_navegacion/navBarInspector.jsp"></put>
+    </definition>    
+    
     <definition name="interfaz-sesion-no-iniciada" extends="home">
         <put name="noticias" value="/interfaz/genericos/plantilla_general/content-sesion-no-iniciada.jsp"></put>
         <put name="navBarGeneral" value=""></put>
@@ -241,6 +251,14 @@
         <put name="formulario" value="/vistas/pedido/form-content-equipoEnSolAdmin.jsp"></put>
         <put name="navBar" value="/interfaz/admin/barras_navegacion/navBarVolverRevisionSolicitud.jsp"></put>
     </definition>        
+    <definition name="listar-unidad" extends="home">
+        <put name="noticias" value="/vistas/lista_usuarios/agregarUnidad.jsp"></put>
+        <put name="navBarGeneral" value="/interfaz/admin/barras_navegacion/navBarVolverListaUsuario.jsp"></put>
+    </definition>    
+       <definition name="agregar-unidad" extends="home">
+        <put name="noticias" value="/interfaz/admin/lista_usuarios/content-lista-usuarios.jsp"></put>
+        <put name="navBarGeneral" value="/interfaz/genericos/barras_navegacion/navBarUnidad.jsp"></put>
+    </definition>
     
     
     

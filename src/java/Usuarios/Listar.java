@@ -23,6 +23,7 @@ public class Listar extends org.apache.struts.action.Action {
 
     /* forward name="success" path="" */
     private static final String SUCCESS = "success";
+    private static final String ADMINISTRADOR = "administrador";
 
     /**
      * This is the action called from the Struts framework.
@@ -41,18 +42,20 @@ public class Listar extends org.apache.struts.action.Action {
 
         /*NUEVO!*/
         HttpSession session = request.getSession();
-        String loggueado = (String) session.getAttribute("usuarioAutenticado");
+        String loggueado = (String) session.getAttribute("usuarioAutenticado");        
         Usuario autenticado = new Usuario();
         autenticado.setUsuario(loggueado);
+        
+    //    if (autenticado.getAdministrador().equals("administrador"))  {}
         
         ArrayList<Usuario> usuariosHab = DBMS.getInstance().consultarUsuariosHabilitados(autenticado);
         request.setAttribute("usuariosHab", usuariosHab);
 
         ArrayList<Usuario> usuariosNoHab = DBMS.getInstance().consultarUsuariosNoHabilitados(autenticado);
         request.setAttribute("usuariosNoHab", usuariosNoHab);
-
-        /*u = DBMS.getInstance().atributosUsuario(u);
-        request.setAttribute("autenticado", u);*/
+        
+       /* if (autenticado.getAdministrador().equals("administrador"))
+            return mapping.findForward(ADMINISTRADOR); */
 
         return mapping.findForward(SUCCESS);
     }

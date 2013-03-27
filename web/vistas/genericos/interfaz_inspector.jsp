@@ -1,28 +1,23 @@
 <%-- 
-    Document   : coleccion
-    Created on : Oct 18, 2012, 8:04:53 AM
-    Author     : Azocar, Karen
+    Document   : interfaz_supervisor
+    Created on : 22/03/2013, 11:48:04 AM
+    Author     : Karen
 --%>
 <%@ taglib uri="http://struts.apache.org/tags-bean" prefix="bean" %>
 <%@ taglib uri="http://struts.apache.org/tags-html" prefix="html" %>
 <%@ taglib uri="http://struts.apache.org/tags-logic" prefix="logic" %>
 <%@ taglib uri="http://struts.apache.org/tags-tiles" prefix="tiles" %>
+
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <%
-    if (session.getAttribute("usuarioAdministrador") != null)  {
-        if (session.getAttribute("usuarioAdministrador").equals("administrador")){
-%>
-<tiles:insert definition="agregar-unidad"/>
-<%
-        } else {
+    if (session.getAttribute("sesionIniciada") == null) {
 %>
 <tiles:insert definition="interfaz-sesion-no-iniciada"/>
 <%
-        }
-    }  else {
+    } else {
 %>
-<tiles:insert definition="interfaz-sesion-no-iniciada"/>
+<tiles:insert definition="interfaz-inspector"/>
 <%
-    }     
+    }
 %>

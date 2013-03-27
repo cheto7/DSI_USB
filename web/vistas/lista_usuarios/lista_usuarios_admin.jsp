@@ -1,6 +1,6 @@
 <%-- 
-    Document   : coleccion
-    Created on : Oct 18, 2012, 8:04:53 AM
+    Document   : lista_usuarios_admin
+    Created on : 27/03/2013, 12:52:27 PM
     Author     : Azocar, Karen
 --%>
 <%@ taglib uri="http://struts.apache.org/tags-bean" prefix="bean" %>
@@ -10,19 +10,13 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <%
-    if (session.getAttribute("usuarioAdministrador") != null)  {
-        if (session.getAttribute("usuarioAdministrador").equals("administrador")){
+    if (session.getAttribute("sesionIniciada") == null) {
+%>
+<tiles:insert definition="interfaz-sesion-no-iniciada"/>
+<%
+    } else {
 %>
 <tiles:insert definition="agregar-unidad"/>
 <%
-        } else {
-%>
-<tiles:insert definition="interfaz-sesion-no-iniciada"/>
-<%
-        }
-    }  else {
-%>
-<tiles:insert definition="interfaz-sesion-no-iniciada"/>
-<%
-    }     
+    }
 %>
