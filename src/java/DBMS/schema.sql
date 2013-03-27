@@ -182,3 +182,11 @@ CREATE TABLE "PREPAS".supervisa (
 ) WITH (
 OIDS = FALSE
 );
+
+CREATE TABLE "PREPAS".unidadAdscripcion (
+    id SERIAL,
+    nombre VARCHAR NOT NULL,
+    CONSTRAINT PK_unidadAdscripcion PRIMARY KEY (id) 
+)   WITH (
+OIDS = FALSE
+);
