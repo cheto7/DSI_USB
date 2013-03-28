@@ -60,14 +60,14 @@
                         <td >
                             <h1>
                                 <p> <bean:write name="usuario" property="usuario"></bean:write></p>
-                                </h1>
-                            </td>
+                            </h1>
+                        </td>
 
-                            <td>
-                                <p> <bean:write name="usuario" property="password"></bean:write> </p>
-                            </td>
+                        <td>
+                            <p> <bean:write name="usuario" property="password"></bean:write> </p>
+                        </td>
 
-                            <td >
+                        <td >
                             <html:form action = "/otorgarPermisoSupervisor" onsubmit = "return (this)">
                                 <html:hidden name="usuario" property="usuario"/>
                                 <html:hidden name="autenticado" property="usuario"/>
@@ -102,13 +102,14 @@
 
     <h1> Unidades Adscripción: </h1>
 
-   
 
-    <legend>Noticias</legend> 
 
+    <legend>Unidades Registradas</legend> 
+
+    <h1>Unidades Adscripción</h1>
     <logic:notPresent name="unidadAdscripcion">
         <label>
-            <center> No hay noticias que mostrar.</center>
+            <center> No hay unidades que mostrar.</center>
         </label>
     </logic:notPresent>
 
@@ -116,19 +117,59 @@
 
         <logic:empty name="unidadAdscripcion">
             <label>
-                <center> No hay noticias que mostrar.</center>
+                <center> No hay unidades que mostrar.</center>
             </label>
         </logic:empty>
+        <br>
 
-        <logic:iterate name="unidadAdscripcion" id="unidadAdscripcion">
+        <logic:notEmpty name="unidadAdscripcion">
+            <table class="table table-hover">
+                <tbody>
+                    <tr>
+                        <th>Nombre</th>
+                        <th></th>
+                        <th></th>
+                        <th> </th>
+                        <th></th>
+                    </tr>
 
-            <h1>
-                <p style="float:left; font-size: 15px;"> <bean:write name="unidadAdscripcion" property="nombre"></bean:write> </p>
-                <bean:write name="unidadAdscripcion" property="nombre"></bean:write>
-            </h1>
-                        
-                <br><br><br>
-        </logic:iterate>
+                    <logic:iterate name="unidadAdscripcion" id="unidadAdscripcion">
+
+
+                        <tr>
+                            <td >
+                                <h1>
+                                    <p> <bean:write name="unidadAdscripcion" property="nombre"></bean:write>
+                                    </h1>
+                                </td>
+
+                                <td>
+                                    
+                                </td>
+
+                                <td >
+
+                            </td>
+
+                            <td>
+                                <html:form action = "/FormularioEditarUsuario" onsubmit = "return (this)">
+                                    <html:hidden name="unidadAdscripcion" property="nombre"/>
+                                    <html:hidden name="autenticado" property="usuario"/>
+                                    <html:submit styleClass="btn btn-success"> Editar </html:submit>
+                                </html:form> 
+                            </td>
+
+                            <td>
+                                <html:form method="POST" action="/ConfirmarEliminar?method=save" onsubmit="return (this)">
+                                    <html:hidden name="unidadAdscripcion" property="nombre"/>                                    
+                                    <html:submit styleClass="btn btn-danger"> Eliminar </html:submit>
+                                </html:form>
+                            </td>
+                        </tr>
+                    </logic:iterate>
+                </tbody>
+            </table>
+        </logic:notEmpty>
     </logic:present>
 
 
