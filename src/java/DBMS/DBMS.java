@@ -1479,5 +1479,30 @@ public class DBMS {
             ex.printStackTrace();
         }
         return usrs;
-    }    
+    }
+    
+        public ArrayList<unidadAdscripcion> obtenerUnidadesAdscripcion() {
+        ArrayList<unidadAdscripcion> unidades = new ArrayList<unidadAdscripcion>(0);
+        try {
+            String sqlquery;
+            sqlquery = "SELECT * FROM \"PREPAS\".unidadAdscripcion";
+
+            Statement stmt = conexion.createStatement();
+            System.out.println(sqlquery);
+            ResultSet rs = stmt.executeQuery(sqlquery);
+
+            while (rs.next()) {
+                unidadAdscripcion n = new unidadAdscripcion();
+                n.setId(rs.getString("id"));
+                n.setNombre(rs.getString("nombre"));
+
+                unidades.add(n);
+            }
+            return unidades;
+        } catch (SQLException ex) {
+            System.out.println("EXCEPCION");
+            ex.printStackTrace();
+        }
+        return unidades;
+    }
 }

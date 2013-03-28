@@ -102,26 +102,33 @@
 
     <h1> Unidades Adscripción: </h1>
 
-    <logic:notPresent name="unidad">
-        <center>
-            <label> No hay unidades que mostrar.</label>
-        </center>
+   
+
+    <legend>Noticias</legend> 
+
+    <logic:notPresent name="unidadAdscripcion">
+        <label>
+            <center> No hay noticias que mostrar.</center>
+        </label>
     </logic:notPresent>
 
-    <logic:present name="unidad">
+    <logic:present name="unidadAdscripcion">
 
-        <br>
-        <logic:empty name="unidad">
-            <center>
-                <label> Aloha.</label>
-            </center>
+        <logic:empty name="unidadAdscripcion">
+            <label>
+                <center> No hay noticias que mostrar.</center>
+            </label>
         </logic:empty>
-        <br>
 
-        <logic:notEmpty name="unidad">
-              <label> Aloha</label>
-              <p> <bean:write name="unidad" property="nombre"></bean:write></p>
-        </logic:notEmpty>
+        <logic:iterate name="unidadAdscripcion" id="unidadAdscripcion">
+
+            <h1>
+                <p style="float:left; font-size: 15px;"> <bean:write name="unidadAdscripcion" property="nombre"></bean:write> </p>
+                <bean:write name="unidadAdscripcion" property="nombre"></bean:write>
+            </h1>
+                        
+                <br><br><br>
+        </logic:iterate>
     </logic:present>
 
 
