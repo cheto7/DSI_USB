@@ -1456,30 +1456,6 @@ public class DBMS {
         }
     }
     
-    /*Consulta todos los usuarios habilitado existentes en la base de datos*/
-    public ArrayList<Unidad> consultarUnidades() {
-        ArrayList<Unidad> usrs = new ArrayList<Unidad>(0);
-        try {
-            String sqlquery = "SELECT * FROM \"PREPAS\".unidadAdscripcion ";
-
-                    
-            Statement stmt = conexion.createStatement();
-            System.out.println(sqlquery);
-            ResultSet rs = stmt.executeQuery(sqlquery);
-            while (rs.next()) {                
-                    Unidad ua = new Unidad();
-                    ua.setId(rs.getInt("id"));
-                    ua.setNombre(rs.getString("nombre"));
-                    usrs.add(ua);
-                    System.out.println(ua.getNombre());
-                
-            }
-        } catch (SQLException ex) {
-            System.out.println("EXCEPCION");
-            ex.printStackTrace();
-        }
-        return usrs;
-    }
     
         public ArrayList<unidadAdscripcion> obtenerUnidadesAdscripcion() {
         ArrayList<unidadAdscripcion> unidades = new ArrayList<unidadAdscripcion>(0);
