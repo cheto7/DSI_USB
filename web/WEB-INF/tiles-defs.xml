@@ -252,7 +252,7 @@
         <put name="navBar" value="/interfaz/admin/barras_navegacion/navBarVolverRevisionSolicitud.jsp"></put>
     </definition>        
     <definition name="agregarUnidad" extends="home">
-        <put name="noticias" value="/vistas/lista_usuarios/agregarUnidad.jsp"></put>
+        <put name="noticias" value="/vistas/unidad/agregarUnidad.jsp"></put>
         <put name="navBarGeneral" value="/interfaz/admin/barras_navegacion/navBarVolverListaUsuario.jsp"></put>
     </definition>    
        <definition name="agregar-unidad" extends="home">

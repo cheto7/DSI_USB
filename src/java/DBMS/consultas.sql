@@ -2,7 +2,7 @@
 -- SELECT * FROM "PREPAS".equipo;
 -- SELECT * FROM "PREPAS".proveedor;
  --SELECT * FROM "PREPAS".contiene;
-INSERT INTO "PREPAS".unidadadscripcion (nombre) VALUES ('Consejo Directivo');
+--
 SELECT * FROM "PREPAS".unidadadscripcion;
 
 

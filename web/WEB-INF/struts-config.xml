@@ -394,7 +394,7 @@
                   name="Solicitud">
             <forward name="success" path="/ListarSolicitudes.do"></forward>
         </action>          
-        <action  path="/gestionarUnidad" scope="session" type="Unidad.listarUnidadAdscripcion" name="Usuario">
+        <action  path="/gestionarUnidad" scope="request" type="Unidad.listarUnidadAdscripcion" name="Usuario" >
             <forward name="success" path="/vistas/lista_usuarios/formulario_agregarUnidad.jsp"></forward>
         </action>        
         

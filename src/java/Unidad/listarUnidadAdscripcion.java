@@ -4,8 +4,13 @@
  */
 package Unidad;
 
+import Clases.Usuario;
+import Clases.Unidad;
+import DBMS.DBMS;
+import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
@@ -35,7 +40,22 @@ public class listarUnidadAdscripcion extends org.apache.struts.action.Action {
     public ActionForward execute(ActionMapping mapping, ActionForm form,
             HttpServletRequest request, HttpServletResponse response)
             throws Exception {
+
+        /*NUEVO!*/
+        HttpSession session = request.getSession();
+        String loggueado = (String) session.getAttribute("usuarioAutenticado");        
+        Usuario autenticado = new Usuario();
+        autenticado.setUsuario(loggueado);
         
+    //    if (autenticado.getAdministrador().equals("administrador"))  {}
+        
+        ArrayList<Usuario> usuariosHab = DBMS.getInstance().consultarUsuariosHabilitados(autenticado);
+        request.setAttribute("usuariosHab", usuariosHab);
+
+        ArrayList<Unidad> unidad = DBMS.getInstance().consultarUnidades();
+        request.setAttribute("unidad", unidad);
+
+
         return mapping.findForward(SUCCESS);
     }
 }
