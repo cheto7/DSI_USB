@@ -400,6 +400,15 @@
         <action path="/eliminarUnidadAdscripcion" scope="request" type="Unidad.eliminarUnidadAdscripcion" name="Usuario">
             <forward name="success" path="/vistas/unidad/formulario_agregarUnidad.jsp"/>
         </action>
+        <action path="/editarUnidadAdscripcion" type="Unidad.editarUnidadAdscripcion" name="Usuario" scope="request">
+            <forward name="success" path="/vistas/unidad/formulario_agregarUnidad.jsp"/>
+        </action>
+        <action  path="/editarUnidad" type="Unidad.editarUnidad" name="Usuario" scope="request">
+            <forward name="success" path="/vistas/unidad/formulario_agregarUnidad.jsp"/>
+        </action>
+        <action path="/registrarUnidadAdscripcion" type="Unidad.registrarUnidadAdscripcion" name="Usuario" scope="request">
+            <forward name="success" path="/vistas/unidad/formulario_agregarUnidad.jsp"/>
+        </action>
         
 
         

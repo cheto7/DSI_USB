@@ -4,8 +4,8 @@
  */
 package Unidad;
 
-import Clases.unidadAdscripcion;
 import Clases.Usuario;
+import Clases.unidadAdscripcion;
 import DBMS.DBMS;
 import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
@@ -16,9 +16,9 @@ import org.apache.struts.action.ActionMapping;
 
 /**
  *
- * @author Azocar
+ * @author daniel
  */
-public class eliminarUnidadAdscripcion extends org.apache.struts.action.Action {
+public class editarUnidad extends org.apache.struts.action.Action {
 
     /*
      * forward name="success" path=""
@@ -39,23 +39,31 @@ public class eliminarUnidadAdscripcion extends org.apache.struts.action.Action {
     public ActionForward execute(ActionMapping mapping, ActionForm form,
             HttpServletRequest request, HttpServletResponse response)
             throws Exception {
-                
-        String idUnidad = request.getParameter("id");
-        Boolean eliminado = DBMS.getInstance().eliminarUnidad(idUnidad);
+      unidadAdscripcion editar = new unidadAdscripcion();
 
-        ArrayList<unidadAdscripcion> unidadAdscripcion = DBMS.getInstance().obtenerUnidadesAdscripcion();
-        request.setAttribute("unidadAdscripcion", unidadAdscripcion);
+        editar.setId(request.getParameter("id"));
+        editar.setNombre(request.getParameter("nombre"));
+
+        Boolean modificado = DBMS.getInstance().editarUnidad(editar);
+
+        ArrayList<unidadAdscripcion> listaUnidades = new ArrayList<unidadAdscripcion>(0);
+        listaUnidades.add(editar);
+
+        ArrayList<unidadAdscripcion> resto = DBMS.getInstance().obtenerRestoUnidades(editar.getId());
+        listaUnidades.addAll(resto);
+
+        request.setAttribute("unidadAdscripcion", listaUnidades);
         
-        if (eliminado) {
+        if (modificado) {
             Usuario u = new Usuario();
-            u.setMensaje("La Unidad ha sido Eliminada. ");
+            u.setMensaje("La Unidad ha sido Modificada. ");
             request.setAttribute("mensajeUsuarioEditado", u);
         } else {
             Usuario u = new Usuario();
-            u.setMensaje("Algo ha ocurrido y no se pudo Eliminar la Unidad. ");
+            u.setMensaje("Algo ha ocurrido y no se pudo Modificar la Unidad. ");
             request.setAttribute("mensajeUsuarioNoEditado", u);
         }
-        
+
         return mapping.findForward(SUCCESS);
     }
 }

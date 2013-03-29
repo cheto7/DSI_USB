@@ -1498,4 +1498,64 @@ public class DBMS {
         }
         return false;
     }
+    
+    public ArrayList<unidadAdscripcion> obtenerRestoUnidades(String id) {
+        ArrayList<unidadAdscripcion> unidades = new ArrayList<unidadAdscripcion>(0);
+        try {
+            String sqlquery;
+            sqlquery = "SELECT * FROM \"PREPAS\".unidadAdscripcion";
+
+            Statement stmt = conexion.createStatement();
+            System.out.println(sqlquery);
+            ResultSet rs = stmt.executeQuery(sqlquery);
+
+            while (rs.next()) {
+                if (rs.getString("id").equals(id)) {
+                    System.out.println("Removiendo unidad de la Lista");
+                }   else {
+                        unidadAdscripcion n = new unidadAdscripcion();
+                        n.setId(rs.getString("id"));
+                        n.setNombre(rs.getString("nombre"));                
+                        unidades.add(n);                        
+                    }
+            }
+            return unidades;
+        } catch (SQLException ex) {
+            System.out.println("EXCEPCION");
+            ex.printStackTrace();
+        }
+        return unidades;
+    }
+            
+    public Boolean editarUnidad (unidadAdscripcion u) {
+        try {
+            String sqlquery = "UPDATE \"PREPAS\".unidadAdscripcion "
+                    + "SET  nombre = '"+u.getNombre()+"' "
+                    + "     WHERE id = "+u.getId()+ " ";
+
+            Statement stmt = conexion.createStatement();
+            System.out.println(sqlquery);
+            Integer i = stmt.executeUpdate(sqlquery);
+            return i > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+    
+        public Boolean agregarUnidad(String n) {
+        try {
+            String sqlquery;
+            sqlquery = "INSERT INTO \"PREPAS\".unidadAdscripcion (nombre) "
+                    + "VALUES ('"+n+"')";
+
+            Statement stmt = conexion.createStatement();
+            System.out.println(sqlquery);
+            Integer i = stmt.executeUpdate(sqlquery);
+            return i > 0;
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return false;
+    }
 }

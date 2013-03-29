@@ -4,8 +4,8 @@
  */
 package Unidad;
 
-import Clases.unidadAdscripcion;
 import Clases.Usuario;
+import Clases.unidadAdscripcion;
 import DBMS.DBMS;
 import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
@@ -18,7 +18,7 @@ import org.apache.struts.action.ActionMapping;
  *
  * @author Azocar
  */
-public class eliminarUnidadAdscripcion extends org.apache.struts.action.Action {
+public class editarUnidadAdscripcion extends org.apache.struts.action.Action {
 
     /*
      * forward name="success" path=""
@@ -39,22 +39,24 @@ public class eliminarUnidadAdscripcion extends org.apache.struts.action.Action {
     public ActionForward execute(ActionMapping mapping, ActionForm form,
             HttpServletRequest request, HttpServletResponse response)
             throws Exception {
-                
-        String idUnidad = request.getParameter("id");
-        Boolean eliminado = DBMS.getInstance().eliminarUnidad(idUnidad);
-
-        ArrayList<unidadAdscripcion> unidadAdscripcion = DBMS.getInstance().obtenerUnidadesAdscripcion();
-        request.setAttribute("unidadAdscripcion", unidadAdscripcion);
         
-        if (eliminado) {
-            Usuario u = new Usuario();
-            u.setMensaje("La Unidad ha sido Eliminada. ");
-            request.setAttribute("mensajeUsuarioEditado", u);
-        } else {
-            Usuario u = new Usuario();
-            u.setMensaje("Algo ha ocurrido y no se pudo Eliminar la Unidad. ");
-            request.setAttribute("mensajeUsuarioNoEditado", u);
-        }
+                        
+        String idUnidad = request.getParameter("id");
+        String nombreUnidad = request.getParameter("nombre");
+        unidadAdscripcion editar = new unidadAdscripcion();
+        
+        editar.setId(idUnidad);
+        editar.setNombre(nombreUnidad);        
+
+        ArrayList<unidadAdscripcion> listaUnidades = new ArrayList<unidadAdscripcion>(0);
+        listaUnidades.add(editar);
+        
+        ArrayList<unidadAdscripcion> resto = DBMS.getInstance().obtenerRestoUnidades(idUnidad);
+        listaUnidades.addAll(resto);
+        
+        request.setAttribute("unidadAdscripcion", listaUnidades);
+        request.setAttribute("editar", "Activado");
+        
         
         return mapping.findForward(SUCCESS);
     }

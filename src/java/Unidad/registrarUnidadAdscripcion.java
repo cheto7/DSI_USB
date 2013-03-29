@@ -4,8 +4,8 @@
  */
 package Unidad;
 
-import Clases.unidadAdscripcion;
 import Clases.Usuario;
+import Clases.unidadAdscripcion;
 import DBMS.DBMS;
 import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
@@ -18,7 +18,7 @@ import org.apache.struts.action.ActionMapping;
  *
  * @author Azocar
  */
-public class eliminarUnidadAdscripcion extends org.apache.struts.action.Action {
+public class registrarUnidadAdscripcion extends org.apache.struts.action.Action {
 
     /*
      * forward name="success" path=""
@@ -39,23 +39,32 @@ public class eliminarUnidadAdscripcion extends org.apache.struts.action.Action {
     public ActionForward execute(ActionMapping mapping, ActionForm form,
             HttpServletRequest request, HttpServletResponse response)
             throws Exception {
-                
-        String idUnidad = request.getParameter("id");
-        Boolean eliminado = DBMS.getInstance().eliminarUnidad(idUnidad);
+
+        Usuario nombreUnidad = (Usuario) form;        
+        Boolean agregado = false;
 
         ArrayList<unidadAdscripcion> unidadAdscripcion = DBMS.getInstance().obtenerUnidadesAdscripcion();
         request.setAttribute("unidadAdscripcion", unidadAdscripcion);
-        
-        if (eliminado) {
+
+        if (nombreUnidad.getNombre().equals("")) { //HACER CHEQUEO DE ESPACIOS EN BLANCO            
+            nombreUnidad.setMensaje("El Campo esta Vacio. ");
+            request.setAttribute("mensajeUsuarioNoEditado", nombreUnidad);
+            return mapping.findForward(SUCCESS);
+
+        } else {
+            agregado = DBMS.getInstance().agregarUnidad(nombreUnidad.getNombre());            
+        }
+
+        if (agregado) {
             Usuario u = new Usuario();
-            u.setMensaje("La Unidad ha sido Eliminada. ");
+            u.setMensaje("La Unidad ha sido Registrada. ");
             request.setAttribute("mensajeUsuarioEditado", u);
         } else {
             Usuario u = new Usuario();
-            u.setMensaje("Algo ha ocurrido y no se pudo Eliminar la Unidad. ");
+            u.setMensaje("Algo ha ocurrido y no se pudo Registrar la Unidad. ");
             request.setAttribute("mensajeUsuarioNoEditado", u);
         }
-        
+
         return mapping.findForward(SUCCESS);
     }
 }

@@ -47,10 +47,6 @@ public class listarUnidadAdscripcion extends org.apache.struts.action.Action {
         Usuario autenticado = new Usuario();
         autenticado.setUsuario(loggueado);
         
-    //    if (autenticado.getAdministrador().equals("administrador"))  {}
-        
-        //ArrayList<Usuario> usuariosHab = DBMS.getInstance().consultarUsuariosHabilitados(autenticado);
-        //request.setAttribute("usuariosHab", usuariosHab);
 
         ArrayList<unidadAdscripcion> unidadAdscripcion = DBMS.getInstance().obtenerUnidadesAdscripcion();
         request.setAttribute("unidadAdscripcion", unidadAdscripcion);
