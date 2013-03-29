@@ -391,20 +391,23 @@
             <forward name="success" path="/vistas/pedido/revision-pedido.jsp"></forward>
         </action>
         <action path="/ConfirmarModificacion" type="Solicitudes.ConfirmarModificacion" scope="request" parameter="method"
-                  name="Solicitud">
+                name="Solicitud">
             <forward name="success" path="/ListarSolicitudes.do"></forward>
-        </action>          
+        </action>              
         <action  path="/gestionarUnidad" scope="request" type="Unidad.listarUnidadAdscripcion" name="Usuario" >
-            <forward name="success" path="/vistas/lista_usuarios/formulario_agregarUnidad.jsp"></forward>
-        </action>        
+            <forward name="success" path="/vistas/unidad/formulario_agregarUnidad.jsp"/>            
+        </action>
+        <action path="/eliminarUnidadAdscripcion" scope="request" type="Unidad.eliminarUnidadAdscripcion" name="Usuario">
+            <forward name="success" path="/vistas/unidad/formulario_agregarUnidad.jsp"/>
+        </action>
         
+
         
         
                 
         
         
         
-
     </action-mappings>
     
     <controller processorClass="org.apache.struts.tiles.TilesRequestProcessor"/>

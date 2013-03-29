@@ -1,7 +1,7 @@
 <%-- 
     Document   : coleccion
-    Created on : Oct 18, 2012, 8:04:53 AM
-    Author     : Azocar, Karen
+    Created on : Oct 18, 2012, 8:10:53 AM
+    Author     : Azocar, Karen 
 --%>
 <%@ taglib uri="http://struts.apache.org/tags-bean" prefix="bean" %>
 <%@ taglib uri="http://struts.apache.org/tags-html" prefix="html" %>

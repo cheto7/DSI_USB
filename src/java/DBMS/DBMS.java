@@ -1481,4 +1481,21 @@ public class DBMS {
         }
         return unidades;
     }
+        
+            /* Elimina un usuario de la base de datos */
+    public Boolean eliminarUnidad(String id) {
+        try {
+            String sqlquery = "DELETE FROM \"PREPAS\".unidadAdscripcion WHERE "                    
+                    + "id = '" + id + "' ";
+
+            Statement stmt = conexion.createStatement();
+            System.out.println(sqlquery);
+            Integer i = stmt.executeUpdate(sqlquery);
+
+            return i > 0;
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return false;
+    }
 }

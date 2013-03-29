@@ -13,7 +13,7 @@
     if (session.getAttribute("usuarioAdministrador") != null)  {
         if (session.getAttribute("usuarioAdministrador").equals("administrador")){
 %>
-<tiles:insert definition="agregar-unidad"/>
+<tiles:insert definition="coleccion-usuarios"/>
 <%
         } else {
 %>

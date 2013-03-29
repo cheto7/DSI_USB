@@ -252,10 +252,10 @@
         <put name="navBar" value="/interfaz/admin/barras_navegacion/navBarVolverRevisionSolicitud.jsp"></put>
     </definition>        
     <definition name="agregarUnidad" extends="home">
-        <put name="noticias" value="/vistas/unidad/agregarUnidad.jsp"></put>
+        <put name="noticias" value="/interfaz/admin/unidad/agregarUnidad.jsp"></put>
         <put name="navBarGeneral" value="/interfaz/admin/barras_navegacion/navBarVolverListaUsuario.jsp"></put>
     </definition>    
-       <definition name="agregar-unidad" extends="home">
+       <definition name="coleccion-usuarios" extends="home">
         <put name="noticias" value="/interfaz/admin/lista_usuarios/content-lista-usuarios.jsp"></put>
         <put name="navBarGeneral" value="/interfaz/genericos/barras_navegacion/navBarUnidad.jsp"></put>
     </definition>

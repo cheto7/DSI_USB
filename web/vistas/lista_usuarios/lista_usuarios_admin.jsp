@@ -16,7 +16,7 @@
 <%
     } else {
 %>
-<tiles:insert definition="agregar-unidad"/>
+<tiles:insert definition="coleccion-usuarios"/>
 <%
     }
 %>

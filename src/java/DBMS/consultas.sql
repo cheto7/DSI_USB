@@ -3,7 +3,11 @@
 -- SELECT * FROM "PREPAS".proveedor;
  --SELECT * FROM "PREPAS".contiene;
 --
+--SELECT * FROM "PREPAS".usuario;
+--INSERT INTO "PREPAS".unidadAdscripcion (nombre) VALUES ('prueba');
+--DELETE FROM "PREPAS".unidadAdscripcion WHERE id = 4 ;             
 SELECT * FROM "PREPAS".unidadadscripcion;
+
 
 
 /*SELECT serial,imagen,nombre_vista,funcionalidad FROM "PREPAS".equipo

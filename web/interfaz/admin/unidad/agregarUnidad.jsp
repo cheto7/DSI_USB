@@ -8,8 +8,7 @@
 <logic:present name="mensajeUsuarioEditado">
     <logic:notEmpty name="mensajeUsuarioEditado">
         <center>
-            <label style="color:blue"><bean:write name="mensajeUsuarioEditado" property="mensaje"/>
-                <bean:write name="usuario" property="usuario"/> han sido modificados.
+            <label style="color:blue"><bean:write name="mensajeUsuarioEditado" property="mensaje"/>                
             </label>
         </center>
     </logic:notEmpty>
@@ -160,8 +159,8 @@
                             </td>
 
                             <td>
-                                <html:form method="POST" action="/ConfirmarEliminar?method=save" onsubmit="return (this)">
-                                    <html:hidden name="unidadAdscripcion" property="nombre"/>                                    
+                                <html:form method="POST" action="/eliminarUnidadAdscripcion" onsubmit="return (this)">
+                                    <html:hidden name="unidadAdscripcion" property="id"/>                                    
                                     <html:submit styleClass="btn btn-danger"> Eliminar </html:submit>
                                 </html:form>
                             </td>
