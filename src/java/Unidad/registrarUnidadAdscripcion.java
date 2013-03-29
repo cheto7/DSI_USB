@@ -40,19 +40,18 @@ public class registrarUnidadAdscripcion extends org.apache.struts.action.Action 
             HttpServletRequest request, HttpServletResponse response)
             throws Exception {
 
-        Usuario nombreUnidad = (Usuario) form;        
+        Usuario nombreUnidad = (Usuario) form;
         Boolean agregado = false;
-
-        ArrayList<unidadAdscripcion> unidadAdscripcion = DBMS.getInstance().obtenerUnidadesAdscripcion();
-        request.setAttribute("unidadAdscripcion", unidadAdscripcion);
 
         if (nombreUnidad.getNombre().equals("")) { //HACER CHEQUEO DE ESPACIOS EN BLANCO            
             nombreUnidad.setMensaje("El Campo esta Vacio. ");
             request.setAttribute("mensajeUsuarioNoEditado", nombreUnidad);
+            ArrayList<unidadAdscripcion> unidadAdscripcion = DBMS.getInstance().obtenerUnidadesAdscripcion();
+            request.setAttribute("unidadAdscripcion", unidadAdscripcion);
             return mapping.findForward(SUCCESS);
 
         } else {
-            agregado = DBMS.getInstance().agregarUnidad(nombreUnidad.getNombre());            
+            agregado = DBMS.getInstance().agregarUnidad(nombreUnidad.getNombre());
         }
 
         if (agregado) {
@@ -64,7 +63,8 @@ public class registrarUnidadAdscripcion extends org.apache.struts.action.Action 
             u.setMensaje("Algo ha ocurrido y no se pudo Registrar la Unidad. ");
             request.setAttribute("mensajeUsuarioNoEditado", u);
         }
-
+        ArrayList<unidadAdscripcion> unidadAdscripcion = DBMS.getInstance().obtenerUnidadesAdscripcion();
+        request.setAttribute("unidadAdscripcion", unidadAdscripcion);
         return mapping.findForward(SUCCESS);
     }
 }
