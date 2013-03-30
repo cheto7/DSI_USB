@@ -66,6 +66,11 @@
             <html:submit style="padding:0px 10px 30px 0px">Consolidados</html:submit>
         </html:form>
     </li>    
+    <li>
+        <html:form action="/listarSolicitantes" onsubmit="return (this)"> 
+            <html:submit style="padding:0px 10px 30px 0px">Entregas</html:submit>
+        </html:form>
+    </li>    
 
     <li>
         <html:form action="/ColeccionUsuarios" onsubmit="return (this)">

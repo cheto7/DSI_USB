@@ -29,7 +29,7 @@
     <html:form styleId="Form" method="POST" action="/registrarUnidadAdscripcion" onsubmit="return (this)">
         <label>Nombre Unidad:</label>
         <html:text name="Usuario" value="" property="nombre" styleClass="span2" style="width:342px"></html:text>
-         <html:submit styleClass="btn btn-primary"> Registrar </html:submit>
+        <html:submit styleClass="btn btn-primary"> Registrar </html:submit>
     </html:form>
 
 
@@ -157,7 +157,27 @@
         </logic:notEmpty>
     </logic:present>
 
+    <logic:present name="select">
 
+        <logic:empty name="select">            
+            <label>
+                <center> La Lista esta Vacia.</center>
+            </label>
+        </logic:empty>
+
+        <logic:notEmpty name="select">
+            <html:select name="unidadAdscripcion" property="id" styleClass="span1" style="width:250px">
+                
+                <logic:iterate name="select" id="unidadAdscripcion">
+                    <html:option value="1">
+                        <bean:write name="unidadAdscripcion" property="nombre"></bean:write>
+                    </html:option>
+                </logic:iterate>
+                
+            </html:select>
+        </logic:notEmpty>
+
+    </logic:present>
 
 
     <br>   

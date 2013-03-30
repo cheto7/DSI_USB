@@ -2,12 +2,10 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package Unidad;
+package Entregas;
 
-import Clases.unidadAdscripcion;
 import Clases.Usuario;
 import DBMS.DBMS;
-import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -17,9 +15,9 @@ import org.apache.struts.action.ActionMapping;
 
 /**
  *
- * @author Azocar
+ * @author Azpcar
  */
-public class listarUnidadAdscripcion extends org.apache.struts.action.Action {
+public class listarSolicitantes extends org.apache.struts.action.Action {
 
     /*
      * forward name="success" path=""
@@ -41,20 +39,12 @@ public class listarUnidadAdscripcion extends org.apache.struts.action.Action {
             HttpServletRequest request, HttpServletResponse response)
             throws Exception {
 
-        /*
-         * NUEVO!
-         */
         HttpSession session = request.getSession();
         String loggueado = (String) session.getAttribute("usuarioAutenticado");
         Usuario autenticado = new Usuario();
         autenticado.setUsuario(loggueado);
-
-
-        ArrayList<unidadAdscripcion> unidadAdscripcion = DBMS.getInstance().obtenerUnidadesAdscripcion();
-        request.setAttribute("unidadAdscripcion", unidadAdscripcion);
-
-        ArrayList<unidadAdscripcion> select = DBMS.getInstance().obtenerUnidadesAdscripcion();
-        request.setAttribute("select", select);      
+        
+        
 
         return mapping.findForward(SUCCESS);
     }

@@ -7,6 +7,7 @@
 
 <struts-config>
     <form-beans>
+        <form-bean name="Entregas" type="Clases.Entregas"/>        
         <form-bean  name="Usuario" type="Clases.Usuario" />
         <form-bean name="Solicitud" type="Clases.Solicitud"/>
         <form-bean name="Pedido"  type="Clases.Pedido"/>
@@ -408,6 +409,9 @@
         </action>
         <action path="/registrarUnidadAdscripcion" type="Unidad.registrarUnidadAdscripcion" name="Usuario" scope="request">
             <forward name="success" path="/vistas/unidad/formulario_agregarUnidad.jsp"/>
+        </action>
+        <action path="/listarSolicitantes" type="Entregas.listarSolicitantes" scope="request" name="Entregas">
+            <forward name="success" path="/vistas/entrega/listar_Solicitantes.jsp"/>
         </action>
         
 

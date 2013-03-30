@@ -1536,16 +1536,42 @@ public class DBMS {
         return false;
     }
 
-    public Boolean agregarUnidad(String n) {
+        public Boolean noExisteUnidad(String n) {
         try {
             String sqlquery;
-            sqlquery = "INSERT INTO \"PREPAS\".unidadAdscripcion (nombre) "
-                    + "VALUES ('" + n + "')";
+            sqlquery = "SELECT * FROM \"PREPAS\".unidadAdscripcion";
 
             Statement stmt = conexion.createStatement();
             System.out.println(sqlquery);
-            Integer i = stmt.executeUpdate(sqlquery);
-            return i > 0;
+            ResultSet rs = stmt.executeQuery(sqlquery);
+
+            while (rs.next()) {
+                if (rs.getString("nombre").equals(n)) {
+                    System.out.println("La Uniad Existe");
+                    return false;
+                } 
+            }
+            return true;
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return true;
+    }
+        
+    public Boolean agregarUnidad(String n) {
+        try {
+            Boolean noExiste = noExisteUnidad(n);
+            if (noExiste) {
+                String sqlquery;
+                sqlquery = "INSERT INTO \"PREPAS\".unidadAdscripcion (nombre) "
+                        + "VALUES ('" + n + "')";
+
+                Statement stmt = conexion.createStatement();
+                System.out.println(sqlquery);
+                Integer i = stmt.executeUpdate(sqlquery);
+                return i > 0;
+            }
+            return false;
         } catch (SQLException ex) {
             ex.printStackTrace();
         }

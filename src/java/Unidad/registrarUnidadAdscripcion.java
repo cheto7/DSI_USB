@@ -42,6 +42,7 @@ public class registrarUnidadAdscripcion extends org.apache.struts.action.Action 
 
         Usuario nombreUnidad = (Usuario) form;
         Boolean agregado = false;
+        Boolean noExiste = false;
 
         if (nombreUnidad.getNombre().equals("")) { //HACER CHEQUEO DE ESPACIOS EN BLANCO            
             nombreUnidad.setMensaje("El Campo esta Vacio. ");
@@ -49,20 +50,23 @@ public class registrarUnidadAdscripcion extends org.apache.struts.action.Action 
             ArrayList<unidadAdscripcion> unidadAdscripcion = DBMS.getInstance().obtenerUnidadesAdscripcion();
             request.setAttribute("unidadAdscripcion", unidadAdscripcion);
             return mapping.findForward(SUCCESS);
+        }   else {
+                agregado = DBMS.getInstance().agregarUnidad(nombreUnidad.getNombre());
+            }
 
-        } else {
-            agregado = DBMS.getInstance().agregarUnidad(nombreUnidad.getNombre());
-        }
-
-        if (agregado) {
-            Usuario u = new Usuario();
+        Usuario u = new Usuario();
+        if (agregado) {            
             u.setMensaje("La Unidad ha sido Registrada. ");
             request.setAttribute("mensajeUsuarioEditado", u);
-        } else {
-            Usuario u = new Usuario();
-            u.setMensaje("Algo ha ocurrido y no se pudo Registrar la Unidad. ");
-            request.setAttribute("mensajeUsuarioNoEditado", u);
-        }
+        }   else {                
+                noExiste = DBMS.getInstance().noExisteUnidad(nombreUnidad.getNombre());
+                if (noExiste) {
+                    u.setMensaje("Algo ha ocurrido y no se pudo Registrar la Unidad. ");                    
+                }   else
+                        u.setMensaje("Unidad Ya Registrada. ");
+                
+                request.setAttribute("mensajeUsuarioNoEditado", u);
+            }
         ArrayList<unidadAdscripcion> unidadAdscripcion = DBMS.getInstance().obtenerUnidadesAdscripcion();
         request.setAttribute("unidadAdscripcion", unidadAdscripcion);
         return mapping.findForward(SUCCESS);

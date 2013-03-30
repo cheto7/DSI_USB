@@ -259,6 +259,10 @@
         <put name="noticias" value="/interfaz/admin/lista_usuarios/content-lista-usuarios.jsp"></put>
         <put name="navBarGeneral" value="/interfaz/genericos/barras_navegacion/navBarUnidad.jsp"></put>
     </definition>
+       <definition name="listar-solicitantes" extends="home">  
+       <put name="noticias" value="/interfaz/admin/entrega/listaSolicitantes.jsp"></put>
+        <put name="navBarGeneral" value="/interfaz/genericos/barras_navegacion/navBarpedido.jsp"></put>
+    </definition>
     
     
     
