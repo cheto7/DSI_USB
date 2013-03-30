@@ -13,7 +13,7 @@ CREATE TABLE "PREPAS".usuario (
   apellido VARCHAR NOT NULL,
   fecha VARCHAR NOT NULL,
   telefono VARCHAR NOT NULL,
-  direccion VARCHAR NOT NULL,
+  unidad_adscripcion VARCHAR NOT NULL,
   sexo VARCHAR NOT NULL,
   talla_mascara VARCHAR NOT NULL,
   talla_camisa VARCHAR NOT NULL,
@@ -23,6 +23,7 @@ CREATE TABLE "PREPAS".usuario (
   habilitado VARCHAR NOT NULL,
   administrador VARCHAR DEFAULT 'usuario',
   area_laboral   VARCHAR,
+
   
   CONSTRAINT PK_usuario PRIMARY KEY (usuario)
 ) WITH (

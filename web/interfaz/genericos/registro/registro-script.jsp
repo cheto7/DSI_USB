@@ -2,6 +2,9 @@
     Document   : registro-script.jsp
     Created on : Nov 3, 2012, 9:43:10 PM
     Author     : sibs
+
+    Modified on : Mar 29, 2012
+    Author     : Karen
 --%>
 <%@ taglib uri="http://struts.apache.org/tags-bean" prefix="bean" %>
 <%@ taglib uri="http://struts.apache.org/tags-html" prefix="html" %>
@@ -38,7 +41,8 @@
         $("#tele").attr('placeholder', 'Número de teléfono');
         $("#tele").attr('title', 'Ingrese su número de teléfono');
     
-        $("#dir").attr('title', 'Ingrese su dirección de residencia');
+        $("#unidadads").attr('placeholder', 'Unidad Adscripción');
+        $("#unidadads").attr('title', 'Ingrese la unidad de adscripcion donde labora');
     });
     
 </script>
@@ -70,8 +74,8 @@
         $("#Form").validate({
             rules: {
                 password: {required: true,minlength: 5},
-                confirm_password: {	required: true,	minlength: 5, equalTo: "#password"},
-                email: { required: false, email: true }
+                confirm_password: {	required: true,	minlength: 5, equalTo: "#password"}
+       
             },
 				
             messages: {
@@ -83,10 +87,8 @@
                     required: "Por favor introduzca una contraseña",
                     minlength: "La contraseña debe tener mínimo 5 caracteres",
                     equalTo: "Las contraseñas no coinciden"
-                },
-                email: { 
-                    required: "Por favor introduzca un correo electrónico", 
-                    email: "la sintaxis de correo debe ser correcta" }
+                }
+
 				
             } 
 			 

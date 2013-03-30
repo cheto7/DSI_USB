@@ -50,13 +50,12 @@ public class DBMS {
         }
         return false;
     }
-    
-    
-    public ArrayList < ArrayList < String_Cheto > > consultarSolicitudes(ListadoGeneral lg){
-        ArrayList < ArrayList < String_Cheto >>  res = new ArrayList < ArrayList <String_Cheto> >(0);
+
+    public ArrayList< ArrayList< String_Cheto>> consultarSolicitudes(ListadoGeneral lg) {
+        ArrayList< ArrayList< String_Cheto>> res = new ArrayList< ArrayList<String_Cheto>>(0);
         String q = "";
-        ArrayList <String_Cheto> q1 = new ArrayList <String_Cheto> (0);
-        if(lg.getOrganizadoPor().equals("usuario")){
+        ArrayList<String_Cheto> q1 = new ArrayList<String_Cheto>(0);
+        if (lg.getOrganizadoPor().equals("usuario")) {
             q += "select u.usuario as usuario, u.nombre as nombre, u.apellido as apellido,"
                     + " e.nombre_vista as nombre_equipo, c.talla as talla, c.cantidad as cantidad ";
             q1.add(new String_Cheto("usuario"));
@@ -66,7 +65,7 @@ public class DBMS {
             q1.add(new String_Cheto("talla"));
             q1.add(new String_Cheto("cantidad"));
             res.add(q1);
-        } else if(lg.getOrganizadoPor().equals("equipo")){
+        } else if (lg.getOrganizadoPor().equals("equipo")) {
             q += "select e.nombre_vista as nombre_equipo, c.talla as talla, SUM(c.cantidad) as cantidad ";
             q1.add(new String_Cheto("nombre_equipo"));
             q1.add(new String_Cheto("talla"));
@@ -76,32 +75,32 @@ public class DBMS {
         q += "from \"PREPAS\".solicitud as s, \"PREPAS\".contiene as c, \"PREPAS\".equipo as e, "
                 + "\"PREPAS\".usuario as u ";
         q += "where c.id = s.id and c.serial = e.serial and u.usuario = s.usuario ";
-        if(!(lg.getEquipo().equals(""))){
-            q += "and e.nombre_vista = \'"+lg.getEquipo()+"\' ";
+        if (!(lg.getEquipo().equals(""))) {
+            q += "and e.nombre_vista = \'" + lg.getEquipo() + "\' ";
         }
-        if(!(lg.getUsuario().equals(""))){
-            q += "and u.usuario = \'"+lg.getUsuario()+"\' ";
+        if (!(lg.getUsuario().equals(""))) {
+            q += "and u.usuario = \'" + lg.getUsuario() + "\' ";
         }
-        if(!(lg.getSexo().equals(""))){
-            q += "and u.sexo = \'"+lg.getSexo()+"\' ";
+        if (!(lg.getSexo().equals(""))) {
+            q += "and u.sexo = \'" + lg.getSexo() + "\' ";
         }
-        if(!(lg.getTipo().equals(""))){
-            q += "and e.sector = \'"+lg.getTipo()+"\' ";
+        if (!(lg.getTipo().equals(""))) {
+            q += "and e.sector = \'" + lg.getTipo() + "\' ";
         }
-        if(lg.getOrganizadoPor().equals("usuario")){
+        if (lg.getOrganizadoPor().equals("usuario")) {
             q += "order by  u.usuario";
-        } else if(lg.getOrganizadoPor().equals("equipo")){
+        } else if (lg.getOrganizadoPor().equals("equipo")) {
             q += "group by e.nombre_vista, c.talla ";
         }
         q += ";";
-        try{
-        Statement stmt = conexion.createStatement();
+        try {
+            Statement stmt = conexion.createStatement();
             System.out.println(q);
             ResultSet rs = stmt.executeQuery(q);
 
             while (rs.next()) {
-                ArrayList <String_Cheto> a = new ArrayList <String_Cheto> (0);
-                for(int i = 0;i < res.get(0).size();i++){
+                ArrayList<String_Cheto> a = new ArrayList<String_Cheto>(0);
+                for (int i = 0; i < res.get(0).size(); i++) {
                     a.add(new String_Cheto(rs.getString(res.get(0).get(i).getValue())));
                 }
                 res.add(a);
@@ -113,7 +112,7 @@ public class DBMS {
         }
         return res;
     }
-    
+
 
     /*Para el Login se consulta el usuario con la base de datos
      y si existe, entra al sitio. */
@@ -161,7 +160,7 @@ public class DBMS {
                     + "('" + e.getTipo() + "' , '" + e.getImagen()
                     + "' , '" + e.getNombre_vista() + "' , '" + e.getFuncionalidad()
                     + "' , '" + e.getVida_util() + "' , '" + e.getSector()
-                    + "' , '" + e.getNorma() + "' , '"+e.getTipo_talla()+"')";
+                    + "' , '" + e.getNorma() + "' , '" + e.getTipo_talla() + "')";
 
             Statement stmt = conexion.createStatement();
             System.out.println(sqlquery);
@@ -275,7 +274,7 @@ public class DBMS {
                     + "sector = '" + e.getSector() + "' , "
                     + "tiempo_vida = '" + e.getVida_util() + "' , "
                     + "norma = '" + e.getNorma() + "' , "
-                    + "tipo_talla = '"+e.getTipo_talla()+"' , "
+                    + "tipo_talla = '" + e.getTipo_talla() + "' , "
                     + "funcionalidad = '" + e.getFuncionalidad() + "'"
                     + " WHERE serial = '" + e.getSerial() + "'";
 
@@ -338,7 +337,6 @@ public class DBMS {
             u.setEmail(rs.getString("email"));
             u.setFecha(rs.getString("fecha"));
             u.setSexo(rs.getString("sexo"));
-            u.setDireccion(rs.getString("direccion"));
             u.setTalla_mascara(rs.getString("talla_mascara"));
             u.setTalla_camisa(rs.getString("talla_camisa"));
             u.setTalla_pantalon(rs.getString("talla_pantalon"));
@@ -347,6 +345,7 @@ public class DBMS {
             u.setHabilitado(rs.getString("habilitado"));
             u.setAdministrador(rs.getString("administrador"));
             u.setArea_laboral(rs.getString("area_laboral"));
+            u.setUnidad_adscripcion(rs.getString("unidad_adscripcion"));
 
             return u;
 
@@ -365,7 +364,7 @@ public class DBMS {
                     + "('" + u.getUsuario() + "' , '" + u.getPassword()
                     + "' , '" + u.getEmail() + "' , '" + u.getNombre()
                     + "' , '" + u.getApellido() + "' , '" + u.getFecha()
-                    + "' , '" + u.getTelefono() + "' , '" + u.getDireccion()
+                    + "' , '" + u.getTelefono() + "' , '" + u.getUnidad_adscripcion()
                     + "' , '" + u.getSexo() + "' , '" + u.getTalla_mascara()
                     + "' , '" + u.getTalla_camisa() + "' , '" + u.getTalla_pantalon()
                     + "' , '" + u.getTalla_guantes()
@@ -415,7 +414,7 @@ public class DBMS {
             String sqlquery = "SELECT * FROM \"PREPAS\".usuario "
                     + "WHERE usuario != '" + admin.getUsuario() + "' ";
 
-                    
+
             Statement stmt = conexion.createStatement();
             System.out.println(sqlquery);
             ResultSet rs = stmt.executeQuery(sqlquery);
@@ -459,15 +458,15 @@ public class DBMS {
         }
         return usrs;
     }
-    
-      /*Consulta todos los usuarios supervisores existentes en la base de datos*/
+
+    /*Consulta todos los usuarios supervisores existentes en la base de datos*/
     public ArrayList<Usuario> consultarSupervisores() {
         ArrayList<Usuario> usrs = new ArrayList<Usuario>(0);
         try {
             String sqlquery = "SELECT * FROM \"PREPAS\".usuario "
                     + "WHERE administrador = 'supervisor' ";
 
-                    
+
             Statement stmt = conexion.createStatement();
             System.out.println(sqlquery);
             ResultSet rs = stmt.executeQuery(sqlquery);
@@ -486,15 +485,15 @@ public class DBMS {
         }
         return usrs;
     }
-    
-            /*Consulta todos los usuarios inspectores existentes en la base de datos*/
+
+    /*Consulta todos los usuarios inspectores existentes en la base de datos*/
     public ArrayList<Usuario> consultarInspectores() {
         ArrayList<Usuario> usrs = new ArrayList<Usuario>(0);
         try {
             String sqlquery = "SELECT * FROM \"PREPAS\".usuario "
                     + "WHERE administrador = 'inspector' ";
 
-                    
+
             Statement stmt = conexion.createStatement();
             System.out.println(sqlquery);
             ResultSet rs = stmt.executeQuery(sqlquery);
@@ -513,7 +512,7 @@ public class DBMS {
         }
         return usrs;
     }
-    
+
     /*Consulta todos los usuarios Sin Privilegios existentes en la base de datos*/
     public ArrayList<Usuario> consultarUsuariosSinPermisos() {
         ArrayList<Usuario> usrs = new ArrayList<Usuario>(0);
@@ -522,7 +521,7 @@ public class DBMS {
                     + "WHERE administrador != 'inspector' "
                     + "AND administrador != 'supervisor' "
                     + "AND administrador != 'administrador' ";
-                    
+
             Statement stmt = conexion.createStatement();
             System.out.println(sqlquery);
             ResultSet rs = stmt.executeQuery(sqlquery);
@@ -575,11 +574,9 @@ public class DBMS {
         }
         return false;
     }
-    
-    
-    
+
     /* Otorgar Permisos de Supervisor */
-    public Boolean serSupervisor (Usuario u) {
+    public Boolean serSupervisor(Usuario u) {
         try {
             String sqlquery = "UPDATE \"PREPAS\".usuario SET "
                     + "administrador = 'supervisor' "
@@ -594,9 +591,9 @@ public class DBMS {
         }
         return false;
     }
-    
-        /* Otorgar Permisos de Supervisor */
-    public Boolean serInspector (Usuario u) {
+
+    /* Otorgar Permisos de Supervisor */
+    public Boolean serInspector(Usuario u) {
         try {
             String sqlquery = "UPDATE \"PREPAS\".usuario SET "
                     + "administrador = 'inspector' "
@@ -611,8 +608,8 @@ public class DBMS {
         }
         return false;
     }
-    
-        public Boolean removerPrivilegios (Usuario u) {
+
+    public Boolean removerPrivilegios(Usuario u) {
         try {
             String sqlquery = "UPDATE \"PREPAS\".usuario SET "
                     + "administrador = '' "
@@ -627,7 +624,7 @@ public class DBMS {
         }
         return false;
     }
-    
+
 
     /*Modifica un usuario existente en la base de datos. */
     public Boolean modificarUsuario(Usuario u) {
@@ -636,14 +633,14 @@ public class DBMS {
                     + "password = '" + u.getPassword() + "' , "
                     + "telefono = '" + u.getTelefono() + "' , "
                     + "email = '" + u.getEmail() + "' , "
-                    + "direccion = '" + u.getDireccion() + "' , "
+                    + "unidad_adscripcion = '" + u.getUnidad_adscripcion() + "' , "
                     + "talla_mascara = '" + u.getTalla_mascara() + "' , "
                     + "talla_camisa = '" + u.getTalla_camisa() + "' , "
                     + "talla_pantalon = '" + u.getTalla_pantalon() + "' , "
                     + "talla_guantes = '" + u.getTalla_guantes() + "' , "
-                    + "talla_zapato = '" + u.getTalla_zapato() + "' , "
-                    + "area_laboral = '" + u.getArea_laboral() + "'"
+                    + "talla_zapato = '" + u.getTalla_zapato() + "'"
                     + "WHERE usuario = '" + u.getUsuario() + "'";
+
 
             Statement stmt = conexion.createStatement();
             System.out.println(sqlquery);
@@ -653,9 +650,10 @@ public class DBMS {
             ex.printStackTrace();
         }
         return false;
+
+
     }
 
-    
     //CREO QUE SE PUEDE BORRAR
     public ArrayList<Solicitud> obtenerSolicitudes(Usuario u) {
         ArrayList<Solicitud> solicitudes = new ArrayList<Solicitud>(0);
@@ -754,67 +752,66 @@ public class DBMS {
     }
 
     /*public ArrayList<String> obtenerPedidoCompleto(String usuario) {
-        ArrayList<String> pedido = new ArrayList<String>(0);
-        try {
-            String sqlquery;
-            sqlquery = "SELECT nombre_vista, talla, cantidad FROM ("
-                    + "SELECT nombre_vista, talla_pantalon AS talla, SUM(cantidad) AS cantidad, tipo "
-                    + "    FROM \"PREPAS\".solicitud NATURAL JOIN \"PREPAS\".usuario NATURAL JOIN \"PREPAS\".equipo "
-                    + "    WHERE tipo = 'pantalon' "
-                    + "    GROUP BY nombre_vista, talla_pantalon, tipo "
-                    + "UNION "
-                    + "SELECT nombre_vista, talla_camisa AS talla, SUM(cantidad) AS cantidad, tipo "
-                    + "   FROM \"PREPAS\".solicitud NATURAL JOIN \"PREPAS\".usuario NATURAL JOIN \"PREPAS\".equipo "
-                    + "   WHERE tipo = 'camisa'"
-                    + "   GROUP BY nombre_vista, talla_camisa, tipo "
-                    + "UNION "
-                    + "SELECT nombre_vista, '' AS talla, SUM(cantidad) AS cantidad, tipo "
-                    + "    FROM \"PREPAS\".solicitud NATURAL JOIN \"PREPAS\".usuario NATURAL JOIN \"PREPAS\".equipo "
-                    + "    WHERE tipo = 'otros' "
-                    + "    GROUP BY nombre_vista, tipo "
-                    + "UNION "
-                    + "SELECT nombre_vista, talla_mascara AS talla, SUM(cantidad) AS cantidad, tipo "
-                    + "    FROM \"PREPAS\".solicitud NATURAL JOIN \"PREPAS\".usuario NATURAL JOIN \"PREPAS\".equipo "
-                    + "    WHERE tipo = 'cabeza' "
-                    + "    GROUP BY nombre_vista, talla_mascara, tipo "
-                    + "UNION "
-                    + "SELECT nombre_vista, talla_guantes AS talla, SUM(cantidad) AS cantidad, tipo "
-                    + "    FROM \"PREPAS\".solicitud NATURAL JOIN \"PREPAS\".usuario NATURAL JOIN \"PREPAS\".equipo "
-                    + "    WHERE tipo = 'guantes' "
-                    + "    GROUP BY nombre_vista, talla_guantes, tipo "
-                    + "UNION "
-                    + "SELECT nombre_vista, talla_zapato AS talla, SUM(cantidad) AS cantidad, tipo "
-                    + "    FROM \"PREPAS\".solicitud NATURAL JOIN \"PREPAS\".usuario NATURAL  JOIN \"PREPAS\".equipo "
-                    + "    WHERE tipo = 'zapato' "
-                    + "    GROUP BY nombre_vista, talla_zapato, tipo ) d "
-                    + " GROUP BY tipo, talla, cantidad, nombre_vista ORDER BY tipo, talla";
+     ArrayList<String> pedido = new ArrayList<String>(0);
+     try {
+     String sqlquery;
+     sqlquery = "SELECT nombre_vista, talla, cantidad FROM ("
+     + "SELECT nombre_vista, talla_pantalon AS talla, SUM(cantidad) AS cantidad, tipo "
+     + "    FROM \"PREPAS\".solicitud NATURAL JOIN \"PREPAS\".usuario NATURAL JOIN \"PREPAS\".equipo "
+     + "    WHERE tipo = 'pantalon' "
+     + "    GROUP BY nombre_vista, talla_pantalon, tipo "
+     + "UNION "
+     + "SELECT nombre_vista, talla_camisa AS talla, SUM(cantidad) AS cantidad, tipo "
+     + "   FROM \"PREPAS\".solicitud NATURAL JOIN \"PREPAS\".usuario NATURAL JOIN \"PREPAS\".equipo "
+     + "   WHERE tipo = 'camisa'"
+     + "   GROUP BY nombre_vista, talla_camisa, tipo "
+     + "UNION "
+     + "SELECT nombre_vista, '' AS talla, SUM(cantidad) AS cantidad, tipo "
+     + "    FROM \"PREPAS\".solicitud NATURAL JOIN \"PREPAS\".usuario NATURAL JOIN \"PREPAS\".equipo "
+     + "    WHERE tipo = 'otros' "
+     + "    GROUP BY nombre_vista, tipo "
+     + "UNION "
+     + "SELECT nombre_vista, talla_mascara AS talla, SUM(cantidad) AS cantidad, tipo "
+     + "    FROM \"PREPAS\".solicitud NATURAL JOIN \"PREPAS\".usuario NATURAL JOIN \"PREPAS\".equipo "
+     + "    WHERE tipo = 'cabeza' "
+     + "    GROUP BY nombre_vista, talla_mascara, tipo "
+     + "UNION "
+     + "SELECT nombre_vista, talla_guantes AS talla, SUM(cantidad) AS cantidad, tipo "
+     + "    FROM \"PREPAS\".solicitud NATURAL JOIN \"PREPAS\".usuario NATURAL JOIN \"PREPAS\".equipo "
+     + "    WHERE tipo = 'guantes' "
+     + "    GROUP BY nombre_vista, talla_guantes, tipo "
+     + "UNION "
+     + "SELECT nombre_vista, talla_zapato AS talla, SUM(cantidad) AS cantidad, tipo "
+     + "    FROM \"PREPAS\".solicitud NATURAL JOIN \"PREPAS\".usuario NATURAL  JOIN \"PREPAS\".equipo "
+     + "    WHERE tipo = 'zapato' "
+     + "    GROUP BY nombre_vista, talla_zapato, tipo ) d "
+     + " GROUP BY tipo, talla, cantidad, nombre_vista ORDER BY tipo, talla";
 
-            System.out.println(sqlquery);
+     System.out.println(sqlquery);
 
-            Statement stmt = conexion.createStatement();
-            System.out.println(sqlquery);
-            ResultSet rs = stmt.executeQuery(sqlquery);
+     Statement stmt = conexion.createStatement();
+     System.out.println(sqlquery);
+     ResultSet rs = stmt.executeQuery(sqlquery);
 
-            while (rs.next()) {
-                String eps;
-                eps = rs.getString("nombre_vista");
-                pedido.add(eps);
-                eps = rs.getString("talla");
-                pedido.add(eps);
-                eps = rs.getString("cantidad");
-                pedido.add(eps);
-            }
+     while (rs.next()) {
+     String eps;
+     eps = rs.getString("nombre_vista");
+     pedido.add(eps);
+     eps = rs.getString("talla");
+     pedido.add(eps);
+     eps = rs.getString("cantidad");
+     pedido.add(eps);
+     }
 
 
-            return pedido;
+     return pedido;
 
-        } catch (SQLException ex) {
-            System.out.println("EXCEPCION");
-            ex.printStackTrace();
-        }
-        return null;
-    }*/
-
+     } catch (SQLException ex) {
+     System.out.println("EXCEPCION");
+     ex.printStackTrace();
+     }
+     return null;
+     }*/
     public Boolean existeSolicitud(String usuario, String equipo) {
 
         String sqlquery = "SELECT * FROM \"PREPAS\".solicitud"
@@ -1167,13 +1164,13 @@ public class DBMS {
             String sqlquery;
             //Busca la ultima solicitud del usuario
             sqlquery = "SELECT * FROM \"PREPAS\".solicitud "
-                    +  "WHERE usuario = '" +u.getUsuario()+"' "
-                    +  "AND fecha_solicitud = CURRENT_DATE AND " 
-                    +  "id IN (SELECT MAX(id) "
-                    +  "FROM \"PREPAS\".solicitud "
-                    +  "WHERE usuario = '"+u.getUsuario()+"' AND "
-                    +  "fecha_solicitud = CURRENT_DATE)";
-            
+                    + "WHERE usuario = '" + u.getUsuario() + "' "
+                    + "AND fecha_solicitud = CURRENT_DATE AND "
+                    + "id IN (SELECT MAX(id) "
+                    + "FROM \"PREPAS\".solicitud "
+                    + "WHERE usuario = '" + u.getUsuario() + "' AND "
+                    + "fecha_solicitud = CURRENT_DATE)";
+
             Statement stmt = conexion.createStatement();
             System.out.println(sqlquery);
             ResultSet rs = stmt.executeQuery(sqlquery);
@@ -1208,7 +1205,7 @@ public class DBMS {
             String sqlquery;
             sqlquery = "INSERT INTO \"PREPAS\".contiene (id, serial,cantidad,talla,frecuencia)  VALUES "
                     + "('" + s.getId() + "' , '" + e.getSerial() + "' , '" + Integer.parseInt(cantidad) + "' , '"
-                    +tallaAsociada(e.getTipo_talla(),s.getNombre_usuario())+"' , ' "
+                    + tallaAsociada(e.getTipo_talla(), s.getNombre_usuario()) + "' , ' "
                     + transformaFrecuencia(frecuencia) + "')";
             Statement stmt = conexion.createStatement();
             System.out.println(sqlquery);
@@ -1217,36 +1214,32 @@ public class DBMS {
             ex.printStackTrace();
         }
     }
-    
-    private String tallaAsociada (String tipo_talla, String usuario) throws SQLException{
-        String sqlquery= "SELECT talla_mascara,talla_camisa,talla_pantalon, "
+
+    private String tallaAsociada(String tipo_talla, String usuario) throws SQLException {
+        String sqlquery = "SELECT talla_mascara,talla_camisa,talla_pantalon, "
                 + "talla_guantes,talla_zapato "
                 + "FROM \"PREPAS\".usuario "
-                + "WHERE usuario = '"+usuario+"'";
-        System.out.println("tipo tallaaaaaaaaa: "+ tipo_talla);
-        try{
+                + "WHERE usuario = '" + usuario + "'";
+        System.out.println("tipo tallaaaaaaaaa: " + tipo_talla);
+        try {
             Statement stmt = conexion.createStatement();
             System.out.println(sqlquery);
             ResultSet rs = stmt.executeQuery(sqlquery);
             rs.next();
-            if ("mascara".equals(tipo_talla)){
+            if ("mascara".equals(tipo_talla)) {
                 return rs.getString("talla_mascara");
-            }
-            else if("camisa".equals(tipo_talla)){
+            } else if ("camisa".equals(tipo_talla)) {
                 return rs.getString("talla_camisa");
-            }
-            else if("guantes".equals(tipo_talla)){
+            } else if ("guantes".equals(tipo_talla)) {
                 return rs.getString("talla_guantes");
-            }
-            else if("pantalon".equals(tipo_talla)){
+            } else if ("pantalon".equals(tipo_talla)) {
                 return rs.getString("talla_pantalon");
-            }
-            else if("zapato".equals(tipo_talla)){
+            } else if ("zapato".equals(tipo_talla)) {
                 return rs.getString("talla_zapato");
             }
         } catch (SQLException ex) {
             ex.printStackTrace();
-        }     
+        }
         return "No aplica";
     }
 
@@ -1303,7 +1296,7 @@ public class DBMS {
         }
         return solicitudes;
     }
-    
+
     public void EliminarEquipoEnSolicitud(Solicitud sol) {
         try {
             String sqlquery = "DELETE FROM \"PREPAS\".contiene WHERE "
@@ -1317,15 +1310,15 @@ public class DBMS {
             ex.printStackTrace();
         }
     }
-    
+
     public void modificarEnContiene(Solicitud s) {
         try {
             String sqlquery;
             sqlquery = "UPDATE \"PREPAS\".contiene SET "
-                    + "cantidad = '"+s.getCantidad()+"' , "
-                    + "frecuencia = '"+transformaFrecuencia(s.getFrecuencia())+"' "
-                    + "WHERE id = '"+s.getId()+"' AND "
-                    + "serial = '"+s.getSerialEquipo()+"'";
+                    + "cantidad = '" + s.getCantidad() + "' , "
+                    + "frecuencia = '" + transformaFrecuencia(s.getFrecuencia()) + "' "
+                    + "WHERE id = '" + s.getId() + "' AND "
+                    + "serial = '" + s.getSerialEquipo() + "'";
             Statement stmt = conexion.createStatement();
             System.out.println(sqlquery);
             Integer i = stmt.executeUpdate(sqlquery);
@@ -1333,20 +1326,20 @@ public class DBMS {
             ex.printStackTrace();
         }
     }
-    
+
     public ArrayList<Solicitud> obtenerSolicitudesModificadas() {
         ArrayList<Solicitud> solicitudes = new ArrayList<Solicitud>(0);
-        try{
+        try {
             String sqlquery = "SELECT S.id,U.nombre,U.apellido,S.fecha_solicitud "
-                             +"FROM \"PREPAS\".solicitud S NATURAL JOIN \"PREPAS\".usuario U "
-                             +"WHERE S.modificada= 'true'";
+                    + "FROM \"PREPAS\".solicitud S NATURAL JOIN \"PREPAS\".usuario U "
+                    + "WHERE S.modificada= 'true'";
             Statement stmt = conexion.createStatement();
             System.out.println(sqlquery);
             ResultSet rs = stmt.executeQuery(sqlquery);
-            while (rs.next()){
+            while (rs.next()) {
                 Solicitud s = new Solicitud();
                 s.setId(Integer.parseInt(rs.getString("id")));
-                s.setNombre_usuario(rs.getString("nombre")+ " "+ rs.getString("apellido"));
+                s.setNombre_usuario(rs.getString("nombre") + " " + rs.getString("apellido"));
                 s.setFecha_solicitud(rs.getString("fecha_solicitud"));
                 solicitudes.add(s);
             }
@@ -1355,41 +1348,42 @@ public class DBMS {
         }
         return solicitudes;
     }
+
     public ArrayList<Solicitud> obtenerSolicitudesNoModificadas() {
         ArrayList<Solicitud> solicitudes = new ArrayList<Solicitud>(0);
-        try{
+        try {
             String sqlquery = "SELECT S.id,U.nombre,U.apellido,S.fecha_solicitud "
-                             +"FROM \"PREPAS\".solicitud S NATURAL JOIN \"PREPAS\".usuario U "
-                             +"WHERE S.modificada= 'false'";
+                    + "FROM \"PREPAS\".solicitud S NATURAL JOIN \"PREPAS\".usuario U "
+                    + "WHERE S.modificada= 'false'";
             Statement stmt = conexion.createStatement();
             System.out.println(sqlquery);
             ResultSet rs = stmt.executeQuery(sqlquery);
-            while (rs.next()){
+            while (rs.next()) {
                 Solicitud s = new Solicitud();
                 s.setId(Integer.parseInt(rs.getString("id")));
-                s.setNombre_usuario(rs.getString("nombre")+ " "+ rs.getString("apellido"));
+                s.setNombre_usuario(rs.getString("nombre") + " " + rs.getString("apellido"));
                 s.setFecha_solicitud(rs.getString("fecha_solicitud"));
                 solicitudes.add(s);
-                
+
             }
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
         return solicitudes;
     }
-    
-    public ResultSet verSolicitud(Solicitud s){
-        try{
-        String sqlquery = "SELECT U.usuario, U.nombre, U.apellido, U.sexo, U.area_laboral, U.email, "
-                + " S.id,S.fecha_solicitud,S.modificada,C.serial,C.cantidad,C.talla,C.frecuencia, "
-                + " E.nombre_vista,E.sector "
-                + "FROM \"PREPAS\".usuario U,\"PREPAS\".solicitud S,\"PREPAS\".contiene C, \"PREPAS\".equipo E "
-                + "WHERE U.usuario = S.usuario AND S.id = '"+s.getId()+"'AND S.fecha_solicitud= '"+s.getFecha_solicitud()
-                +"' AND S.id = C.id AND C.serial = E.serial";
 
-        Statement stmt = conexion.createStatement();
-        System.out.println(sqlquery);
-        return stmt.executeQuery(sqlquery);
+    public ResultSet verSolicitud(Solicitud s) {
+        try {
+            String sqlquery = "SELECT U.usuario, U.nombre, U.apellido, U.sexo, U.area_laboral, U.email, "
+                    + " S.id,S.fecha_solicitud,S.modificada,C.serial,C.cantidad,C.talla,C.frecuencia, "
+                    + " E.nombre_vista,E.sector "
+                    + "FROM \"PREPAS\".usuario U,\"PREPAS\".solicitud S,\"PREPAS\".contiene C, \"PREPAS\".equipo E "
+                    + "WHERE U.usuario = S.usuario AND S.id = '" + s.getId() + "'AND S.fecha_solicitud= '" + s.getFecha_solicitud()
+                    + "' AND S.id = C.id AND C.serial = E.serial";
+
+            Statement stmt = conexion.createStatement();
+            System.out.println(sqlquery);
+            return stmt.executeQuery(sqlquery);
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
@@ -1398,21 +1392,21 @@ public class DBMS {
     }
 
     public void actualizarSolicitudModificada(Solicitud s) {
-        try{
+        try {
             String sqlquery = "UPDATE \"PREPAS\".solicitud SET "
                     + "modificada = 'true' "
-                    + "WHERE id = '"+s.getId()+"'";
+                    + "WHERE id = '" + s.getId() + "'";
             Statement stmt = conexion.createStatement();
             System.out.println(sqlquery);
-            Integer i = stmt.executeUpdate(sqlquery);    
-                    
+            Integer i = stmt.executeUpdate(sqlquery);
+
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
     }
-    
-    public ArrayList<Factura> listarFacturas (){
-        try{
+
+    public ArrayList<Factura> listarFacturas() {
+        try {
             String sqlquery = "SELECT fecha, numero_factura, nombre_proveedor "
                     + "FROM \"PREPAS\".factura "
                     + "WHERE validado = \'FALSO\'";
@@ -1421,7 +1415,7 @@ public class DBMS {
             System.out.println(sqlquery);
             ResultSet rs = stmt.executeQuery(sqlquery);
             ArrayList<Factura> ar = new ArrayList<Factura>();
-            while(rs.next()){
+            while (rs.next()) {
                 Factura f = new Factura();
                 f.setFecha(rs.getDate("fecha"));
                 f.setNumero_factura(rs.getInt("numero_factura"));
@@ -1436,16 +1430,16 @@ public class DBMS {
         return null;
 
     }
-    
-    public boolean agregarFactura(Factura f){
-        Date dNow = new Date( );
-      SimpleDateFormat ft = 
-      new SimpleDateFormat ("dd MM yyyy");
+
+    public boolean agregarFactura(Factura f) {
+        Date dNow = new Date();
+        SimpleDateFormat ft =
+                new SimpleDateFormat("dd MM yyyy");
         try {
             String sqlquery;
             sqlquery = "INSERT INTO \"PREPAS\".factura (nombre_proveedor, validado, fecha)  VALUES "
                     + "('" + f.getProveedor() + "' , 'FALSO' , "
-                    +"to_date('"+ ft.format(dNow).toString() + "','DD MM YYYY') )";
+                    + "to_date('" + ft.format(dNow).toString() + "','DD MM YYYY') )";
             Statement stmt = conexion.createStatement();
             System.out.println(sqlquery);
             stmt.executeUpdate(sqlquery);
@@ -1455,9 +1449,8 @@ public class DBMS {
             return false;
         }
     }
-    
-    
-        public ArrayList<unidadAdscripcion> obtenerUnidadesAdscripcion() {
+
+    public ArrayList<unidadAdscripcion> obtenerUnidadesAdscripcion() {
         ArrayList<unidadAdscripcion> unidades = new ArrayList<unidadAdscripcion>(0);
         try {
             String sqlquery;
@@ -1481,11 +1474,11 @@ public class DBMS {
         }
         return unidades;
     }
-        
-            /* Elimina un usuario de la base de datos */
+
+    /* Elimina un usuario de la base de datos */
     public Boolean eliminarUnidad(String id) {
         try {
-            String sqlquery = "DELETE FROM \"PREPAS\".unidadAdscripcion WHERE "                    
+            String sqlquery = "DELETE FROM \"PREPAS\".unidadAdscripcion WHERE "
                     + "id = '" + id + "' ";
 
             Statement stmt = conexion.createStatement();
@@ -1498,7 +1491,7 @@ public class DBMS {
         }
         return false;
     }
-    
+
     public ArrayList<unidadAdscripcion> obtenerRestoUnidades(String id) {
         ArrayList<unidadAdscripcion> unidades = new ArrayList<unidadAdscripcion>(0);
         try {
@@ -1512,12 +1505,12 @@ public class DBMS {
             while (rs.next()) {
                 if (rs.getString("id").equals(id)) {
                     System.out.println("Removiendo unidad de la Lista");
-                }   else {
-                        unidadAdscripcion n = new unidadAdscripcion();
-                        n.setId(rs.getString("id"));
-                        n.setNombre(rs.getString("nombre"));                
-                        unidades.add(n);                        
-                    }
+                } else {
+                    unidadAdscripcion n = new unidadAdscripcion();
+                    n.setId(rs.getString("id"));
+                    n.setNombre(rs.getString("nombre"));
+                    unidades.add(n);
+                }
             }
             return unidades;
         } catch (SQLException ex) {
@@ -1526,12 +1519,12 @@ public class DBMS {
         }
         return unidades;
     }
-            
-    public Boolean editarUnidad (unidadAdscripcion u) {
+
+    public Boolean editarUnidad(unidadAdscripcion u) {
         try {
             String sqlquery = "UPDATE \"PREPAS\".unidadAdscripcion "
-                    + "SET  nombre = '"+u.getNombre()+"' "
-                    + "     WHERE id = "+u.getId()+ " ";
+                    + "SET  nombre = '" + u.getNombre() + "' "
+                    + "     WHERE id = " + u.getId() + " ";
 
             Statement stmt = conexion.createStatement();
             System.out.println(sqlquery);
@@ -1542,12 +1535,12 @@ public class DBMS {
         }
         return false;
     }
-    
-        public Boolean agregarUnidad(String n) {
+
+    public Boolean agregarUnidad(String n) {
         try {
             String sqlquery;
             sqlquery = "INSERT INTO \"PREPAS\".unidadAdscripcion (nombre) "
-                    + "VALUES ('"+n+"')";
+                    + "VALUES ('" + n + "')";
 
             Statement stmt = conexion.createStatement();
             System.out.println(sqlquery);

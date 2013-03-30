@@ -2,6 +2,9 @@
     Document   : registro-content
     Created on : Nov 3, 2012, 11:03:42 PM
     Author     : sibs
+
+    Modified on : Mar 29, 2012
+    Author     : Karen
 --%>
 
 <%@ taglib uri="http://struts.apache.org/tags-bean" prefix="bean" %>
@@ -12,9 +15,9 @@
 
 <!-- FORMULARIO DE REGISTRO -->
 
-    <logic:present name="Usuario" property="mensaje">
-        <center><label style="color: red"><bean:write name="Usuario" property="mensaje" /></label></center>
-    </logic:present>
+<logic:present name="Usuario" property="mensaje">
+    <center><label style="color: red"><bean:write name="Usuario" property="mensaje" /></label></center>
+</logic:present>
 
 <html:form styleId="Form" method="POST" action="/Verificar?method=save" onsubmit="return (this)">
     <fieldset>
@@ -22,37 +25,37 @@
 
         <label style="color:red">USB-ID:</label>
         <html:text name="Usuario" property="usuario" styleId="usbid"></html:text>
-            <span class="help-block">Ejemplo: usuario@usb.ve</span>
+        <span class="help-block">Ejemplo: usuario@usb.ve</span>
 
-            <label style="color:red" >Contraseña:</label>
+        <label style="color:red" >Contraseña:</label>
         <html:password name="Usuario" property="password" styleId="password"></html:password>
 
-            <label style="color:red">Confirmar Contraseña:</label>
-            <input id="confirm_password" type="password" class="text" name="confirm_password" placeholder="Confirmar Contraseña" title="Ingrese su contraseña"/>
-            <br>
+        <label style="color:red">Confirmar Contraseña:</label>
+        <input id="confirm_password" type="password" class="text" name="confirm_password" placeholder="Confirmar Contraseña" title="Ingrese su contraseña"/>
+        <br>
 
-            <label style="color:red">Datos Personales:</label>
-            <div class="controls controls-row">
+        <label style="color:red">Datos Personales:</label>
+        <div class="controls controls-row">
             <html:text name="Usuario" property="nombre" styleId="nombre" styleClass="span2"></html:text>
             <html:text name="Usuario" property="apellido" styleId="apellido" styleClass="span2"></html:text>
-            </div>
+        </div>
 
-            <label>Correo electrónico alternativo:</label>
+        <label>Correo electrónico alternativo:</label>
         <html:text name="Usuario" property="email" styleId="email"></html:text>
-            <span class="help-block">Ejemplo: usuario@gmail.com</span>
+        <span class="help-block">Ejemplo: usuario@gmail.com</span>
 
-            <label>Fecha de Nacimiento</label>
+        <label>Fecha de Nacimiento</label>
         <html:text name="Usuario" property="fecha" styleId="fechanac"></html:text>
-            <span class="help-block">Ejemplo: 16/07/89 </span>   
+        <span class="help-block">Ejemplo: 16/07/89 </span>   
 
-            <label>Teléfono</label>
+        <label>Teléfono</label>
         <html:text name="Usuario" property="telefono" styleId="tele"></html:text>
 
-            <label>Dirección:</label>
-        <html:textarea name="Usuario" property="direccion" rows="5" styleId="dir" styleClass="span5" ></html:textarea>
+        <label>Unidad Adscripción:</label>
+        <html:text name="Usuario" property="unidad_adscripcion" styleId="unidadads"></html:text>
 
-            <label style="color:red"> Sexo: </label>
-            <label class="radio">
+        <label style="color:red"> Sexo: </label>
+        <label class="radio">
             <html:radio property="sexo" value="masculino">
                 Masculino
             </html:radio>
@@ -125,7 +128,7 @@
             <option>44.5</option>
             <option>45</option>
         </html:select>
-            
+
         <legend style="color:red">Área laboral:</legend>
         <html:select name="Usuario" property="area_laboral" styleClass="span1" style="width: 5">
             <option value="administrativo">Administrativa</option>
@@ -133,6 +136,7 @@
             <option value="bombero">Bombero</option>
             <option value="obrero">Obrero</option> 
         </html:select>
+
 
         <br />
         <p style="color:red">NOTA: Todos los campos indicados en rojo deben ser llenados</p>
