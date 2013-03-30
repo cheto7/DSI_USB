@@ -39,7 +39,7 @@
 
 
 
-    <label>Correo electrónico alternativo:</label>
+    <label>Correo electrónico:</label>
     <html:text name="autenticado" property="email"></html:text>
     <br>
 

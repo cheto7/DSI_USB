@@ -1,4 +1,3 @@
-
 package Registro;
 
 import Clases.Noticia;
@@ -46,7 +45,7 @@ public class Verificar extends DispatchAction {
             u.setMensaje("El nombre de usuario ya existe.");
             return mapping.findForward(FAILURE);
         }
-        
+
         /*Verificaciones de password. */
         if (u.getPassword().contains(";") || u.getPassword().contains("<")
                 || u.getPassword().contains(">") || u.getPassword().contains("'")
@@ -55,7 +54,7 @@ public class Verificar extends DispatchAction {
                     + "'<' , '>', '&' , '$' , '''");
             return mapping.findForward(FAILURE);
         }
-        
+
         /*Verificaciones de USB-ID. */
         if (u.getUsuario().contains(";") || u.getUsuario().contains("<")
                 || u.getUsuario().contains(">") || u.getUsuario().contains("'")
@@ -64,7 +63,7 @@ public class Verificar extends DispatchAction {
                     + "'<' , '>', '&' , '$' , '''");
             return mapping.findForward(FAILURE);
         }
-        
+
         /*Verificaciones de password, USB-ID, Nombre y Apellido no pueden ser
          * vacias. */
         if (u.getUsuario().equals("") || u.getPassword().equals("")
@@ -73,60 +72,71 @@ public class Verificar extends DispatchAction {
                     + "'Apellido' no pueden ser vacíos. ");
             return mapping.findForward(FAILURE);
         }
-        
+
         /*Verificaciones de sexo. */
         if (u.getSexo() == null) {
             u.setMensaje("Por favor seleccione sexo. ");
             return mapping.findForward(FAILURE);
         }
-        
+
         /*Verificacion carnet USB-ID.*/
         if (!u.getUsuario().contains("@usb.ve")) {
             u.setMensaje("No es un USB-ID válido. ");
             return mapping.findForward(FAILURE);
         }
-        
+
         /*Verificaciones de e-mail. */
-        if (!u.getEmail().equals("")) {
-            if (!u.getEmail().contains("@") || !u.getEmail().contains(".")) {
+        if (u.getEmail().equals("")) {
+        } else {
+            if (!u.getEmail().contains("@")) {
+                return mapping.findForward(FAILURE);
+            }
+            if (!u.getEmail().contains(".")) {
                 u.setMensaje("No es un e-mail válido. ");
                 return mapping.findForward(FAILURE);
             }
+
         }
-        
-        /*Verificacion con respecto al nombre y el apellido. */
-        if (u.getNombre().contains(";") || u.getNombre().contains("<")
+    
+
+
+/*Verificacion con respecto al nombre y el apellido. */
+if (u.getNombre ().contains(";") || u.getNombre().contains("<")
                 || u.getNombre().contains(">") || u.getNombre().contains("'")
                 || u.getNombre().contains("&") || u.getNombre().contains("$")
                 || u.getApellido().contains(";") || u.getApellido().contains("<")
                 || u.getApellido().contains(">") || u.getApellido().contains("'")
                 || u.getApellido().contains("&") || u.getApellido().contains("$")) {
             u.setMensaje("Nombre o apellido invalido, contiene alguno de estos caracteres ';' , "
-                    + "'<' , '>', '&' , '$' , '''");
-            return mapping.findForward(FAILURE);
-        }
-
-        /* if (!u.getFecha().matches("([012][0-9]|3[01])/(0[1-9]|1[012])/(0[1-9]|[12][0-9]|3[01])$")) {
-         u.setMensaje("Fecha invalida. Formato dd/mm/yy");
-         return mapping.findForward(FAILURE);
-         }*/
-        Boolean agregado = DBMS.getInstance().agregarUsuario(u);
-        if (agregado) {
-            ArrayList<Noticia> noticias = DBMS.getInstance().obtenerNoticias();
-            request.setAttribute("informacion", noticias);
-            u.setMensaje("Usuario registrado exitósamente. ");
-            request.setAttribute("mensajeRegistrado",u);
-            
-            return mapping.findForward(SUCCESS);
-        } else {
-            u.setMensaje("Campo incorrecto");
-            request.setAttribute("usuario", u);
-            return mapping.findForward(FAILURE);
-        }
-
+                + "'<' , '>', '&' , '$' , '''");
+        return mapping.findForward(FAILURE);
     }
 
-    public ActionForward page(ActionMapping mapping, ActionForm form,
+    /* if (!u.getFecha().matches("([012][0-9]|3[01])/(0[1-9]|1[012])/(0[1-9]|[12][0-9]|3[01])$")) {
+     u.setMensaje("Fecha invalida. Formato dd/mm/yy");
+     return mapping.findForward(FAILURE);
+     }*/
+    Boolean agregado = DBMS.getInstance().agregarUsuario(u);
+    if (agregado
+
+    
+        ) {
+            ArrayList<Noticia> noticias = DBMS.getInstance().obtenerNoticias();
+        request.setAttribute("informacion", noticias);
+        u.setMensaje("Usuario registrado exitósamente. ");
+        request.setAttribute("mensajeRegistrado", u);
+
+        return mapping.findForward(SUCCESS);
+    }
+
+    
+        else {
+            u.setMensaje("Campo incorrecto");
+        request.setAttribute("usuario", u);
+        return mapping.findForward(FAILURE);
+    }
+}
+public ActionForward page(ActionMapping mapping, ActionForm form,
             HttpServletRequest request, HttpServletResponse response)
             throws Exception {
         return mapping.findForward(PAGE);
