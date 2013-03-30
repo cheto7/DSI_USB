@@ -155,10 +155,13 @@ public class DBMS {
     public Boolean agregarEquipo(Equipo e) {
         try {
             String sqlquery;
-            sqlquery = "INSERT INTO \"PREPAS\".equipo (tipo, imagen, nombre_vista, funcionalidad,tiempo_vida,"
+            sqlquery = "INSERT INTO \"PREPAS\".equipo (tipo, imagen, nombre_vista, "
+                    + "cantidad,funcionalidad,tiempo_vida,"
                     + "sector,norma,tipo_talla)  VALUES "
                     + "('" + e.getTipo() + "' , '" + e.getImagen()
-                    + "' , '" + e.getNombre_vista() + "' , '" + e.getFuncionalidad()
+                    + "' , '" + e.getNombre_vista() + "' , '"
+                    + e.getCantidad() + "' , '"
+                    + e.getFuncionalidad()
                     + "' , '" + e.getVida_util() + "' , '" + e.getSector()
                     + "' , '" + e.getNorma() + "' , '" + e.getTipo_talla() + "')";
 
@@ -171,6 +174,7 @@ public class DBMS {
         }
         return false;
     }
+
 
     public Boolean agregarNoticia(Noticia n) {
         try {
