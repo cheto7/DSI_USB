@@ -25,7 +25,26 @@ public class Usuario extends Root {
     private String administrador;
     private String area_laboral;
     private String unidad_adscripcion;
+    private String ci;
+    private String cargo;
+    
 
+    public String getCargo() {
+        return cargo;
+    }
+
+    public void setCargo(String cargo) {
+        this.cargo = cargo;
+    }
+
+    public String getCi() {
+        return ci;
+    }
+
+    public void setCi(String ci) {
+        this.ci = ci;
+    }
+        
     public String getUnidad_adscripcion() {
         return unidad_adscripcion;
     }

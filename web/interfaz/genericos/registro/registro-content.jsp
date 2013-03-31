@@ -37,14 +37,18 @@
         <label style="color:red">Datos Personales:</label>
         <div class="controls controls-row">
             <html:text name="Usuario" property="nombre" styleId="nombre" styleClass="span2"></html:text>
-            <html:text name="Usuario" property="apellido" styleId="apellido" styleClass="span2"></html:text>
+            <html:text name="Usuario" property="apellido" styleId="apellido" styleClass="span2"></html:text>                        
+        </div>
+        
+        <div class="controls controls-row">
+            <html:text name="Usuario" property="ci" styleId="apellido" styleClass="span2"></html:text>                                    
         </div>
 
         <label style="color: red">Correo electrónico:</label>
         <html:text name="Usuario" property="email" styleId="email"></html:text>
         <span class="help-block">Ejemplo: usuario@gmail.com</span>
 
-        <label>Fecha de Nacimiento</label>
+        <label>Fecha de Ingreso a la USB</label>
         <html:text name="Usuario" property="fecha" styleId="fechanac"></html:text>
         <span class="help-block">Ejemplo: 16/07/89 </span>   
 
@@ -52,7 +56,22 @@
         <html:text name="Usuario" property="telefono" styleId="tele"></html:text>
 
         <label>Unidad Adscripción:</label>
-        <html:text name="Usuario" property="unidad_adscripcion" styleId="unidadads"></html:text>
+    <logic:present name="select">
+
+
+        <logic:notEmpty name="select">
+            <html:select name="Usuario" property="unidad_adscripcion" styleClass="span1" style="width:250px">
+                
+                <logic:iterate name="select" id="unidadAdscripcion">
+                    <html:option value= "" >
+                        <bean:write name="unidadAdscripcion" property="nombre"></bean:write>
+                    </html:option>
+                </logic:iterate>
+                
+            </html:select>
+        </logic:notEmpty>
+
+    </logic:present>
 
         <label style="color:red"> Sexo: </label>
         <label class="radio">
@@ -129,7 +148,7 @@
             <option>45</option>
         </html:select>
 
-        <legend style="color:red">Área laboral:</legend>
+        <legend style="color:red">Sector Universitario:</legend>
         <html:select name="Usuario" property="area_laboral" styleClass="span1" style="width: 5">
             <option value="administrativo">Administrativa</option>
             <option value="academico">Académica</option>
@@ -137,9 +156,12 @@
             <option value="obrero">Obrero</option> 
         </html:select>
 
+        <label>Cargo:</label>
+        <html:text name="Usuario" property="cargo" styleId="apellido"></html:text> 
 
-        <br />
-        <p style="color:red">NOTA: Todos los campos indicados en rojo deben ser llenados</p>
+
+            <br />
+            <p style="color:red">NOTA: Todos los campos indicados en rojo deben ser llenados</p>
         <html:submit>Registrarse</html:submit>
         </fieldset>
 </html:form>   

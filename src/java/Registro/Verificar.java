@@ -64,12 +64,14 @@ public class Verificar extends DispatchAction {
             return mapping.findForward(FAILURE);
         }
 
-        /*Verificaciones de password, USB-ID, Nombre y Apellido no pueden ser
+        /*Verificaciones de password, USB-ID, Nombre, Apellido, CI
+         * y Sector Universitario(area_laboral) no pueden ser
          * vacias. */
         if (u.getUsuario().equals("") || u.getPassword().equals("")
-                || u.getApellido().equals("") || u.getNombre().equals("")) {
-            u.setMensaje("Campo de 'USB-ID', 'Contraseña', 'Nombre' o "
-                    + "'Apellido' no pueden ser vacíos. ");
+                || u.getApellido().equals("") || u.getCi().equals("") 
+                || u.getArea_laboral().equals("") || u.getNombre().equals("")) {
+            u.setMensaje("Campo de 'USB-ID', 'Contraseña', 'Nombre', "
+                    + "'Apellido', 'CI' o 'Sector Universitario' no pueden ser vacíos. ");
             return mapping.findForward(FAILURE);
         }
 

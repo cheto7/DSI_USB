@@ -48,7 +48,7 @@
                 <tbody>
                     <tr>
                         <th>USB-ID</th>
-                        <th>Contraseña</th>
+                        <th>CI</th>
                         <%--<th></th>--%>
                         <th colspan="3"><center>Ortorgar Permiso</center></th>
                         <%--<th></th>--%>
@@ -64,7 +64,7 @@
                                 </td>
 
                                 <td>
-                                    <p> <bean:write name="usuario" property="password"></bean:write> </p>
+                                    <p> <bean:write name="usuario" property="ci"></bean:write> </p>
                                 </td>
 
                                 <td >
@@ -122,7 +122,7 @@
                 <tbody>
                     <tr>
                         <th>USB-ID</th>
-                        <th>Contraseña</th>
+                        <th>CI</th>
                         <th>Ortorgar Permiso</th>
                         <th>Quitar Permiso</th>
                         <th>Deshabilitar</th>
@@ -138,7 +138,7 @@
                                 </td>
 
                                 <td>
-                                    <p> <bean:write name="usuario" property="password"></bean:write> </p>
+                                    <p> <bean:write name="usuario" property="ci"></bean:write> </p>
                                 </td>
 
                                 <td >
@@ -196,7 +196,7 @@
                 <tbody>
                     <tr>
                         <th>USB-ID</th>
-                        <th>Contraseña</th>
+                        <th>CI</th>
                         <th>Ortorgar Permiso</th>
                         <th>Quitar Permiso</th>
                         <th>Deshabilitar</th>
@@ -212,7 +212,7 @@
                                 </td>
 
                                 <td>
-                                    <p> <bean:write name="usuario" property="password"></bean:write> </p>
+                                    <p> <bean:write name="usuario" property="ci"></bean:write> </p>
                                 </td>
 
                                 <td >

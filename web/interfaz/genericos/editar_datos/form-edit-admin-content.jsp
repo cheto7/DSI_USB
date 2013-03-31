@@ -4,7 +4,7 @@
     Author     : sibs
 
     Modified on : Mar 29, 2012
-    Author     : Karen
+    Author     : Karen, Azocar
 --%>
 <%@ taglib uri="http://struts.apache.org/tags-bean" prefix="bean" %>
 <%@ taglib uri="http://struts.apache.org/tags-html" prefix="html" %>
@@ -24,6 +24,10 @@
 
 <h1 style="display: inline">Apellido: </h1>
 <bean:write name="autenticado" property="apellido"/><br>
+<br>
+
+<h1 style="display: inline">CI: </h1>
+<bean:write name="autenticado" property="ci"/><br>
 <br>
 
 <html:form styleId="Form" method="POST" action="/EditarAdmin" onsubmit="return (this)">
@@ -49,6 +53,10 @@
 
     <label>Unidad Adscripción:</label>
     <html:text name="autenticado" property="unidad_adscripcion" styleId="unidadads"></html:text>
+    <br>
+
+    <label>Cargo:</label>
+    <html:text name="autenticado" property="cargo" styleId="unidadads"></html:text>
     <br>
     <br>
 

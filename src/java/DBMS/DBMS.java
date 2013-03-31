@@ -350,6 +350,8 @@ public class DBMS {
             u.setAdministrador(rs.getString("administrador"));
             u.setArea_laboral(rs.getString("area_laboral"));
             u.setUnidad_adscripcion(rs.getString("unidad_adscripcion"));
+            u.setCi(rs.getString("ci"));
+            u.setCargo(rs.getString("cargo"));
 
             return u;
 
@@ -367,15 +369,15 @@ public class DBMS {
             sqlquery = "INSERT INTO \"PREPAS\".usuario VALUES "
                     + "('" + u.getUsuario() + "' , '" + u.getPassword()
                     + "' , '" + u.getEmail() + "' , '" + u.getNombre()
-                    + "' , '" + u.getApellido() + "' , '" + u.getFecha()
+                    + "' , '" + u.getApellido() + "' , '"+u.getCi()+"', '"+ u.getFecha()
                     + "' , '" + u.getTelefono() + "' , '" + u.getUnidad_adscripcion()
                     + "' , '" + u.getSexo() + "' , '" + u.getTalla_mascara()
                     + "' , '" + u.getTalla_camisa() + "' , '" + u.getTalla_pantalon()
                     + "' , '" + u.getTalla_guantes()
                     + "' , '" + u.getTalla_zapato()
                     + "' , '" + "false"
-                    + "' , '" + "false"
-                    + "' , '" + u.getArea_laboral() + "')";
+                    + "' , '" + "usuario"
+                    + "' , '" + u.getArea_laboral() + "', '"+u.getCargo()+"' )";
 
             Statement stmt = conexion.createStatement();
             System.out.println(sqlquery);
@@ -426,7 +428,7 @@ public class DBMS {
                 if (rs.getBoolean("habilitado")) {
                     Usuario u = new Usuario();
                     u.setUsuario(rs.getString("usuario"));
-                    u.setPassword(rs.getString("password"));
+                    u.setCi(rs.getString("ci"));
                     u.setHabilitado(rs.getString("habilitado"));
                     usrs.add(u);
                 }
@@ -451,7 +453,7 @@ public class DBMS {
                 if (!rs.getBoolean("habilitado")) {
                     Usuario u = new Usuario();
                     u.setUsuario(rs.getString("usuario"));
-                    u.setPassword(rs.getString("password"));
+                    u.setCi(rs.getString("ci"));
                     u.setHabilitado(rs.getString("habilitado"));
                     usrs.add(u);
                 }
@@ -478,7 +480,7 @@ public class DBMS {
                 if (rs.getBoolean("habilitado")) {
                     Usuario u = new Usuario();
                     u.setUsuario(rs.getString("usuario"));
-                    u.setPassword(rs.getString("password"));
+                    u.setCi(rs.getString("ci"));
                     u.setHabilitado(rs.getString("habilitado"));
                     usrs.add(u);
                 }
@@ -505,7 +507,7 @@ public class DBMS {
                 if (rs.getBoolean("habilitado")) {
                     Usuario u = new Usuario();
                     u.setUsuario(rs.getString("usuario"));
-                    u.setPassword(rs.getString("password"));
+                    u.setCi(rs.getString("ci"));
                     u.setHabilitado(rs.getString("habilitado"));
                     usrs.add(u);
                 }
@@ -533,7 +535,7 @@ public class DBMS {
                 if (rs.getBoolean("habilitado")) {
                     Usuario u = new Usuario();
                     u.setUsuario(rs.getString("usuario"));
-                    u.setPassword(rs.getString("password"));
+                    u.setCi(rs.getString("ci"));
                     u.setHabilitado(rs.getString("habilitado"));
                     usrs.add(u);
                 }
@@ -1378,7 +1380,7 @@ public class DBMS {
 
     public ResultSet verSolicitud(Solicitud s) {
         try {
-            String sqlquery = "SELECT U.usuario, U.nombre, U.apellido, U.sexo, U.area_laboral, U.email, "
+            String sqlquery = "SELECT U.usuario, U.nombre, U.apellido,U.ci, U.sexo, U.area_laboral, U.email, "
                     + " S.id,S.fecha_solicitud,S.modificada,C.serial,C.cantidad,C.talla,C.frecuencia, "
                     + " E.nombre_vista,E.sector "
                     + "FROM \"PREPAS\".usuario U,\"PREPAS\".solicitud S,\"PREPAS\".contiene C, \"PREPAS\".equipo E "
@@ -1746,4 +1748,5 @@ public class DBMS {
         }
         return false;
     }
+        
 }

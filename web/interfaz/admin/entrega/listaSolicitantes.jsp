@@ -105,14 +105,6 @@
                     <th colspan="2"><center>Opciones</center></th>
                     </tr>
 
-
-                    <br>
-                    <logic:empty name="solicitud">
-                        <label>
-                            <center> VACIA.</center>
-                        </label>
-                    </logic:empty>
-
                     <logic:notEmpty name="solicitud">
                         <logic:iterate name="solicitud" id="solicitud">
                             <tr>

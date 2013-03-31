@@ -47,7 +47,7 @@
                 <tbody>
                     <tr>
                         <th>USB-ID</th>
-                        <th>Contraseña</th>
+                        <th>CI</th>
                         <th>Modificador</th>
                         <th>Eliminar</th>
                     </tr>
@@ -62,7 +62,7 @@
                                 </td>
 
                                 <td>
-                                    <p> <bean:write name="usuario" property="password"></bean:write> </p>
+                                    <p> <bean:write name="usuario" property="ci"></bean:write> </p>
                                 </td>
 
                                 <td >
@@ -110,7 +110,7 @@
                 <tbody>
                     <tr>
                         <th>USB-ID</th>
-                        <th>Contraseña</th>
+                        <th>CI</th>
                         <th>Modificador</th>
                         <th>Ortorgar Permisos</th>
                         <th>Eliminar</th>
@@ -126,7 +126,7 @@
                                 </td>
 
                                 <td>
-                                    <p> <bean:write name="usuario" property="password"></bean:write> </p>
+                                    <p> <bean:write name="usuario" property="ci"></bean:write> </p>
                                 </td>
 
                                 <td >

@@ -159,11 +159,6 @@
 
     <logic:present name="select">
 
-        <logic:empty name="select">            
-            <label>
-                <center> La Lista esta Vacia.</center>
-            </label>
-        </logic:empty>
 
         <logic:notEmpty name="select">
             <html:select name="unidadAdscripcion" property="id" styleClass="span1" style="width:250px">
