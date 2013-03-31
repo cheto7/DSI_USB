@@ -413,6 +413,12 @@
         <action path="/listarSolicitantes" type="Entregas.listarSolicitantes" scope="request" name="Entregas">
             <forward name="success" path="/vistas/entrega/listar_Solicitantes.jsp"/>
         </action>
+        <action  path="/hacerEntrega" type="Entregas.hacerEntrega" scope="request" name="Entregas">
+            <forward name="success" path="/vistas/entrega/listar_Solicitantes.jsp"/>
+        </action>
+        <action name="Entregas" path="/entregarEquipo" scope="request" type="Entregas.entregarEquipo">
+            <forward name="success" path="/vistas/entrega/listar_Solicitantes.jsp"/>
+        </action>
         
 
         

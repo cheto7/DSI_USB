@@ -1581,4 +1581,169 @@ public class DBMS {
         }
         return false;
     }
+    
+        public ArrayList<Entregas> consultarSolicitudes() {
+        ArrayList<Entregas> solicitudes = new ArrayList<Entregas>(0);
+        try {
+            String sqlquery;
+            sqlquery = "SELECT * FROM \"PREPAS\".solicitud";
+
+            Statement stmt = conexion.createStatement();
+            System.out.println(sqlquery);
+            ResultSet rs = stmt.executeQuery(sqlquery);
+
+            while (rs.next()) {
+                Entregas e = new Entregas();                                  
+                e.setUsuario(rs.getString("usuario"));
+                e.setIdSolicitud(rs.getString("id"));
+                e.setFecha_solicitud(rs.getString("fecha_solicitud"));               
+                solicitudes.add(e);
+            }
+            return solicitudes;
+        } catch (SQLException ex) {
+            System.out.println("EXCEPCION");
+            ex.printStackTrace();
+        }
+        return solicitudes;
+    }
+        
+       public ArrayList<Entregas> consultarRestoSolicitudes(String u, String f) {
+        ArrayList<Entregas> solicitudes = new ArrayList<Entregas>(0);
+        try {
+            String sqlquery;
+            sqlquery = "SELECT * FROM \"PREPAS\".solicitud";
+
+            Statement stmt = conexion.createStatement();
+            System.out.println(sqlquery);
+            ResultSet rs = stmt.executeQuery(sqlquery);
+
+            while (rs.next()) {
+                if((rs.getString("usuario").equals(u)) && (rs.getString("fecha_solicitud").equals(f))) {
+                    System.out.println("Removiendo solicitud de la Lista");
+                } else {
+                    Entregas e = new Entregas();                                  
+                    e.setUsuario(rs.getString("usuario"));
+                    e.setFecha_solicitud(rs.getString("fecha_solicitud"));               
+                    e.setIdSolicitud(rs.getString("id"));              
+                    solicitudes.add(e);
+                }
+            }
+            return solicitudes;
+        } catch (SQLException ex) {
+            System.out.println("EXCEPCION");
+            ex.printStackTrace();
+        }
+        return solicitudes;
+    }
+       
+        public ArrayList<Entregas> obtenerSolicitud(int s, String f) {
+        ArrayList<Entregas> solicitudes = new ArrayList<Entregas>(0);
+        try {
+                       
+                        String sqlquery = "SELECT U.usuario, U.nombre, U.apellido, U.sexo, U.area_laboral, U.email, "
+                    + " S.id,S.fecha_solicitud,S.modificada,C.serial,C.cantidad,C.talla,C.frecuencia, "
+                    + " E.nombre_vista,E.sector "
+                    + "FROM \"PREPAS\".usuario U,\"PREPAS\".solicitud S,\"PREPAS\".contiene C, \"PREPAS\".equipo E "
+                    + "WHERE U.usuario = S.usuario AND S.id = '" + s + "' AND S.fecha_solicitud= '" + f + "' AND S.id = C.id AND C.serial = E.serial";
+
+            Statement stmt = conexion.createStatement();
+            System.out.println(sqlquery);
+            ResultSet rs = stmt.executeQuery(sqlquery);
+            
+            while (rs.next()) {
+                Entregas nueva = new Entregas(); 
+                System.out.println("Agregando a la Lista: "+nueva.getUsuario());
+                nueva.setUsuario(rs.getString("usuario"));
+                nueva.setIdSolicitud(rs.getString("id"));
+                nueva.setFrecuencia(rs.getString("frecuencia"));                
+                nueva.setCantidad(rs.getString("cantidad"));                
+                nueva.setTalla(rs.getString("talla"));                
+                nueva.setEquipo(rs.getString("nombre_vista"));
+                solicitudes.add(nueva);
+                System.out.println("Agregando a la Lista: "+nueva.getUsuario());
+            }
+        return solicitudes;
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return solicitudes;
+    }
+        
+        public int obtenerCantidadSolicitada (int serial, int id) {
+            try {
+                String sqlquery = "SELECT cantidad FROM  \"PREPAS\".contiene "                    
+                    + "WHERE id = "+id+" AND serial = "+serial+" ";
+                
+                Statement stmt = conexion.createStatement();
+                System.out.println(sqlquery);
+                ResultSet rs = stmt.executeQuery(sqlquery);
+                
+                if (rs.next())
+                    return rs.getInt("cantidad");
+                
+            }   catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            return 0;
+        }
+        public int obtenerCantidadExistencia (String e) {
+            try {
+                String sqlquery = "SELECT cantidad FROM  \"PREPAS\".equipo "                    
+                    + "WHERE nombre_vista = '"+e+"' ";
+                
+                Statement stmt = conexion.createStatement();
+                System.out.println(sqlquery);
+                ResultSet rs = stmt.executeQuery(sqlquery);
+                
+                if (rs.next())
+                    return rs.getInt("cantidad");
+                
+            }   catch (SQLException ex) {
+                    ex.printStackTrace();
+                }
+            return 0;
+        }
+        
+        public int obtenerSerial (String e) {
+            try {
+                String sqlquery = "SELECT serial FROM  \"PREPAS\".equipo "                    
+                    + "WHERE nombre_vista = '"+e+"' ";
+                
+                Statement stmt = conexion.createStatement();
+                System.out.println(sqlquery);
+                ResultSet rs = stmt.executeQuery(sqlquery);
+                
+                if (rs.next()) {                    
+                    return rs.getInt("serial");
+                }
+                
+            }   catch (SQLException ex) {
+                    ex.printStackTrace();
+                }
+            return 0;
+        }
+        
+        public Boolean restarCantidad(int s,int id, int ec, int cc) {
+        try {
+            String sqlquery = "UPDATE \"PREPAS\".equipo "
+                    + "SET  cantidad = " +ec+ " "
+                    + "     WHERE serial = '" +s+ "' ";
+
+            Statement stmt = conexion.createStatement();
+            System.out.println(sqlquery);
+            Integer i = stmt.executeUpdate(sqlquery);            
+
+            String query = "UPDATE \"PREPAS\".contiene "
+                    + "SET  cantidad = " +cc+ " "
+                    + "     WHERE serial = "+s+" AND  id = "+id+" ";
+            
+            System.out.println(query);
+            Integer j = stmt.executeUpdate(query);
+            
+            return ((i > 0) && (j > 0));
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
 }

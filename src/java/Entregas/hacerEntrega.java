@@ -4,9 +4,10 @@
  */
 package Entregas;
 
-import Clases.Usuario;
 import Clases.Entregas;
+import Clases.Usuario;
 import DBMS.DBMS;
+import java.sql.ResultSet;
 import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -17,9 +18,9 @@ import org.apache.struts.action.ActionMapping;
 
 /**
  *
- * @author Azpcar
+ * @author daniel
  */
-public class listarSolicitantes extends org.apache.struts.action.Action {
+public class hacerEntrega extends org.apache.struts.action.Action {
 
     /*
      * forward name="success" path=""
@@ -45,9 +46,28 @@ public class listarSolicitantes extends org.apache.struts.action.Action {
         String loggueado = (String) session.getAttribute("usuarioAutenticado");
         Usuario autenticado = new Usuario();
         autenticado.setUsuario(loggueado);
-        
-        ArrayList<Entregas> solicitudes = DBMS.getInstance().consultarSolicitudes();      
-        request.setAttribute("listaSolicitudes", solicitudes);        
+
+        String idSolicitud = request.getParameter("idSolicitud");
+        int id = Integer.parseInt(idSolicitud);
+        String usuario = request.getParameter("usuario");
+        String fecha = request.getParameter("fecha_solicitud");
+
+        Entregas entregar = new Entregas();
+        entregar.setUsuario(usuario);
+        entregar.setFecha_solicitud(fecha);
+        entregar.setIdSolicitud(idSolicitud);
+
+        ArrayList<Entregas> listaSolicitudes = new ArrayList<Entregas>(0);
+        listaSolicitudes.add(entregar);
+        ArrayList<Entregas> resto = DBMS.getInstance().consultarRestoSolicitudes(usuario, fecha);
+        listaSolicitudes.addAll(resto);
+        request.setAttribute("listaSolicitudes", listaSolicitudes);
+        request.setAttribute("entregar", "Activado");
+  
+
+        ArrayList<Entregas> solicitudes = DBMS.getInstance().obtenerSolicitud(id,fecha);        
+        request.setAttribute("solicitud", solicitudes);
+
 
         return mapping.findForward(SUCCESS);
     }
