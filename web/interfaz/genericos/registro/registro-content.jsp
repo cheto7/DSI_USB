@@ -38,12 +38,9 @@
         <div class="controls controls-row">
             <html:text name="Usuario" property="nombre" styleId="nombre" styleClass="span2"></html:text>
             <html:text name="Usuario" property="apellido" styleId="apellido" styleClass="span2"></html:text>                        
+            <html:text name="Usuario" property="ci" styleId="cedula" styleClass="span2"></html:text> 
         </div>
         
-        <div class="controls controls-row">
-            <html:text name="Usuario" property="ci" styleId="apellido" styleClass="span2"></html:text>                                    
-        </div>
-
         <label style="color: red">Correo electrónico:</label>
         <html:text name="Usuario" property="email" styleId="email"></html:text>
         <span class="help-block">Ejemplo: usuario@gmail.com</span>
