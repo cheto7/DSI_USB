@@ -97,7 +97,7 @@ public class DownloadPDF extends org.apache.struts.action.Action {
             pa.setSpacingAfter(10);
             pa.setIndentationLeft(50);
             com.itextpdf.text.Font fuente2 = new com.itextpdf.text.Font(com.itextpdf.text.Font.getFamily("ARIAL"), 11, com.itextpdf.text.Font.BOLD);
-            com.itextpdf.text.pdf.PdfPTable tableUsuario = new com.itextpdf.text.pdf.PdfPTable(2);
+            com.itextpdf.text.pdf.PdfPTable tableUsuario = new com.itextpdf.text.pdf.PdfPTable(3);
             com.itextpdf.text.pdf.PdfPTable tableUsuario1 = new com.itextpdf.text.pdf.PdfPTable(3);
            
             
@@ -112,6 +112,12 @@ public class DownloadPDF extends org.apache.struts.action.Action {
             c1 = new PdfPCell(par2);
             c1.setHorizontalAlignment(Element.ALIGN_CENTER);
             tableUsuario.addCell(c1);
+            
+            parrafo = "C.I";
+            par2 = new Paragraph(parrafo, fuente2);
+            c1 = new PdfPCell(par2);
+            c1.setHorizontalAlignment(Element.ALIGN_CENTER);
+            tableUsuario.addCell(c1);            
 
             parrafo = "Ingreso";
             par2 = new Paragraph(parrafo, fuente2);
@@ -137,12 +143,14 @@ public class DownloadPDF extends org.apache.struts.action.Action {
 
             PdfPCell nombre = new PdfPCell(new Paragraph(u.getNombre() + " " + u.getApellido()));
             PdfPCell usuario = new PdfPCell(new Paragraph(u.getUsuario()));
+            PdfPCell cedula = new PdfPCell(new Paragraph(u.getCi()));
             PdfPCell ingreso = new PdfPCell(new Paragraph(u.getFecha()));
             PdfPCell sexo = new PdfPCell(new Paragraph(u.getSexo()));
             PdfPCell area = new PdfPCell(new Paragraph(u.getArea_laboral()));
 
             tableUsuario.addCell(nombre);
             tableUsuario.addCell(usuario);
+            tableUsuario.addCell(cedula);
             tableUsuario1.addCell(ingreso);
             tableUsuario1.addCell(sexo);
             tableUsuario1.addCell(area);

@@ -119,10 +119,7 @@ if (u.getNombre ().contains(";") || u.getNombre().contains("<")
      return mapping.findForward(FAILURE);
      }*/
     Boolean agregado = DBMS.getInstance().agregarUsuario(u);
-    if (agregado
-
-    
-        ) {
+    if (agregado) {
             ArrayList<Noticia> noticias = DBMS.getInstance().obtenerNoticias();
         request.setAttribute("informacion", noticias);
         u.setMensaje("Usuario registrado exitósamente. ");

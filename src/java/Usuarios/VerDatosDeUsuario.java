@@ -5,6 +5,9 @@
 package Usuarios;
 
 import Clases.Usuario;
+import Clases.unidadAdscripcion;
+import DBMS.DBMS;
+import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.apache.struts.action.ActionForm;
@@ -44,7 +47,6 @@ public class VerDatosDeUsuario extends org.apache.struts.action.Action {
         u.setEmail(request.getParameter("email"));
         u.setFecha(request.getParameter("fecha"));
         u.setSexo(request.getParameter("sexo"));
-        u.setDireccion(request.getParameter("direccion"));
         u.setTalla_mascara(request.getParameter("talla_mascara"));
         u.setTalla_camisa(request.getParameter("talla_camisa"));
         u.setTalla_pantalon(request.getParameter("talla_pantalon"));
@@ -53,6 +55,7 @@ public class VerDatosDeUsuario extends org.apache.struts.action.Action {
         u.setHabilitado(request.getParameter("habilitado"));
         u.setAdministrador(request.getParameter("administrador"));
         u.setArea_laboral(request.getParameter("area_laboral"));
+        u.setUnidad_adscripcion(request.getParameter("unidad_adscripcion"));
         
 
         if (u.getHabilitado().equals("true")) {
@@ -73,7 +76,7 @@ public class VerDatosDeUsuario extends org.apache.struts.action.Action {
         else{
             request.setAttribute("usuarioAdministrador", "mensaje");
         }
-        
+       
         request.setAttribute("Usuario", u);
         request.setAttribute("autenticado", request.getParameter("autenticado"));
         

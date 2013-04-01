@@ -27,7 +27,6 @@
         <fieldset>
             <legend>Datos Personales</legend> 
 
-
             <table class="table table-hover">
                 <tbody>
                     <tr>
@@ -45,8 +44,8 @@
                     </tr>
                     <tr>
                         <td>
-                            <h1 style="display: inline">Fecha de nacimiento:</h1>
-                            <bean:write name="Usuario" property="fecha"></bean:write>
+                            <h1 style="display: inline">Fecha de ingreso a la USB:</h1>
+                            <bean:write name="Usuario" property="unidad_adscripcion"></bean:write>
                             </td>
                     </tr>
                     <tr>
@@ -59,12 +58,6 @@
                         <td>
                                 <h1 style="display: inline">Email: </h1>
                             <bean:write name="Usuario" property="email"></bean:write>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <h1 style="display: inline">Dirección:</h1>
-                            <bean:write name="Usuario" property="direccion"></bean:write>
                         </td>
                     </tr>
                     <tr>
@@ -130,10 +123,10 @@
                             <html:hidden name="Usuario" property="habilitado"/>
                             <html:hidden name="Usuario" property="apellido"/>
                             <html:hidden name="Usuario" property="telefono"/>
-                            <html:hidden name="Usuario" property="direccion"/>
                             <html:hidden name="Usuario" property="habilitado"/>
                             <html:hidden name="Usuario" property="administrador"/>
                             <html:hidden name="Usuario" property="area_laboral"/>
+                            <html:hidden name="Usuario" property="unidad_adscripcion"/>
                             <html:submit styleClass="btn btn-primary"> Editar mis datos </html:submit>
                         </html:form>
                     </td>

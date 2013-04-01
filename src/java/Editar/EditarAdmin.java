@@ -38,6 +38,7 @@ public class EditarAdmin extends org.apache.struts.action.Action {
         
         Usuario u = new Usuario();
         u.setUsuario(request.getParameter("usuario"));
+        u.setCi(request.getParameter("ci"));
         u.setPassword(request.getParameter("password"));
         u.setTelefono(request.getParameter("telefono"));
         u.setNombre(request.getParameter("nombre"));
@@ -45,7 +46,6 @@ public class EditarAdmin extends org.apache.struts.action.Action {
         u.setEmail(request.getParameter("email"));
         u.setFecha(request.getParameter("fecha"));
         u.setSexo(request.getParameter("sexo"));
-        u.setDireccion(request.getParameter("direccion"));
         u.setTalla_mascara(request.getParameter("talla_mascara"));
         u.setTalla_camisa(request.getParameter("talla_camisa"));
         u.setTalla_pantalon(request.getParameter("talla_pantalon"));
@@ -53,7 +53,8 @@ public class EditarAdmin extends org.apache.struts.action.Action {
         u.setTalla_zapato(request.getParameter("talla_zapato"));
         u.setHabilitado(request.getParameter("habilitado"));
         u.setAdministrador(request.getParameter("administrador"));
-        u.setArea_laboral(request.getParameter("area_laboral")); 
+        u.setArea_laboral(request.getParameter("area_laboral"));
+        u.setUnidad_adscripcion(request.getParameter("unidad_adscripcion"));
 
         DBMS.getInstance().modificarUsuarioAdmin(u);
         request.setAttribute("Usuario", u);

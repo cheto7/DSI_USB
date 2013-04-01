@@ -16,6 +16,7 @@
         <form-bean name="Equipo" type="Clases.Equipo"/>
         <form-bean name="UploadFile" type="Clases.UploadFile"/>
         <form-bean name="ListadoGeneral" type="Clases.ListadoGeneral"/>
+        <form-bean name="Factura" type="Clases.Factura"/>
         <form-bean name="Periodo" type="Clases.Periodo"/>
     </form-beans>
     <global-exceptions>

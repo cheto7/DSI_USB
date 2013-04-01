@@ -65,8 +65,8 @@
                     </tr>
                     <tr>
                         <td>
-                            <h1 style="display: inline">Dirección:</h1>
-                            <bean:write name="Usuario" property="direccion"></bean:write>
+                            <h1 style="display: inline">Unidad de adscripción:</h1>
+                            <bean:write name="Usuario" property="unidad_adscripcion"></bean:write>
                         </td>
                     </tr>
                     <tr>
@@ -141,7 +141,7 @@
                             <html:hidden name="Usuario" property="apellido"/>
                             <html:hidden name="Usuario" property="apellido"/>
                             <html:hidden name="Usuario" property="telefono"/>
-                            <html:hidden name="Usuario" property="direccion"/>
+                            <html:hidden name="Usuario" property="unidad_adscripcion"/>
                             <html:hidden name="Usuario" property="administrador"/>
                             <html:hidden name="Usuario" property="area_laboral"/>
                             <html:hidden name="autenticado" property="usuario"/>

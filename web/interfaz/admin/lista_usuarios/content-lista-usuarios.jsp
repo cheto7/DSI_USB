@@ -73,7 +73,7 @@
     </logic:present>
 
     <fieldset>
-        <legend>Lista de Usuarios</legend> 
+        <legend>Lista de Usuarios</legend>
     </fieldset>
     <div id="tabs">
         <ul>
@@ -136,7 +136,7 @@
                                         <html:hidden name="usuario" property="habilitado"/>
                                         <html:hidden name="usuario" property="apellido"/>
                                         <html:hidden name="usuario" property="telefono"/>
-                                        <html:hidden name="usuario" property="direccion"/>
+                                        <html:hidden name="usuario" property="unidad_adscripcion"/>
                                         <html:hidden name="usuario" property="administrador"/>
                                         <html:hidden name="usuario" property="area_laboral"/>                                      
                                         <html:hidden name="autenticado" property="usuario"/>
@@ -230,10 +230,10 @@
                                         <html:hidden name="usuario" property="habilitado"/>
                                         <html:hidden name="usuario" property="apellido"/>
                                         <html:hidden name="usuario" property="telefono"/>
-                                        <html:hidden name="usuario" property="direccion"/>
                                         <html:hidden name="usuario" property="administrador"/>
                                         <html:hidden name="usuario" property="area_laboral"/>                                      
                                         <html:hidden name="autenticado" property="usuario"/>
+                                        <html:hidden name="usuario" property="unidad_adscripcion"/>
                                         <html:submit styleClass="btn btn-success"> Ver </html:submit>
                                     </html:form> 
                                 </td>                                    

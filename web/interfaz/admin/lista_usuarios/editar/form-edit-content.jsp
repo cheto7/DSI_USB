@@ -13,7 +13,6 @@
 
 
 <legend>Datos Personales</legend>
-
 <h1 style="display: inline">Nombre de usuario:</h1> 
 <bean:write name="Usuario" property="usuario"/><br>
 <h1 style="display: inline"><br>Nombres y Apellidos:</h1> 
@@ -21,6 +20,7 @@
 
 <html:form action = "/Editar" styleId="Form" onsubmit = "return (this)">
     <html:hidden name="Usuario" property="usuario"/>
+    <html:hidden name="Usuario" property="administrador"/>
     <html:hidden name="autenticado" property="usuario"/>
 
     <label><br>Contraseña: </label>

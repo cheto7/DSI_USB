@@ -36,7 +36,7 @@
             <html:hidden name="Usuario" property="habilitado"/>
             <html:hidden name="Usuario" property="apellido"/>
             <html:hidden name="Usuario" property="telefono"/>
-            <html:hidden name="Usuario" property="direccion"/>
+            <html:hidden name="Usuario" property="unidad_adscripcion"/>
             <html:hidden name="Usuario" property="administrador"/>
             <html:hidden name="Usuario" property="area_laboral"/>                                      
             <html:hidden name="autenticado" property="usuario"/>

@@ -52,8 +52,24 @@
     <h1 style="display: inline"><br>Teléfono: </h1>
     <html:text name="Usuario" property="telefono"></html:text><br>
     
-    <h1><br>Dirección: </h1>
-    <html:textarea name="Usuario" property="direccion" rows="5" styleId="dir" styleClass="span5"></html:textarea><br>    
+    <h1><br>Unidad adscripción: </h1>
+    <bean:write name="Usuario" property="unidad_adscripcion"/>
+    <%--<html:textarea name="Usuario" property="unidad_adscripcion" rows="5" styleId="dir" styleClass="span5"></html:textarea><br>    --%>
+        <logic:present name="select">
+            <logic:notEmpty name="select">
+                <html:select name="Usuario" property="unidad_adscripcion" styleClass="span1" style="width:250px">
+                        <option value="<bean:write name="Usuario" property="unidad_adscripcion"/>">
+                            <bean:write name="Usuario" property="unidad_adscripcion"/>
+                        </option>
+                    <logic:iterate name="select" id="unidadAdscripcion">
+                        <option value="<bean:write name="unidadAdscripcion" property="nombre"/>">
+                            <bean:write name="unidadAdscripcion" property="nombre"></bean:write>
+                        </option>
+                    </logic:iterate>
+
+                </html:select>
+            </logic:notEmpty>
+        </logic:present>
     <br/>
 
     <legend>Tallas corporales:</legend>

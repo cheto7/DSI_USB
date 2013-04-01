@@ -5,7 +5,9 @@
 package Editar;
 
 import Clases.Usuario;
+import Clases.unidadAdscripcion;
 import DBMS.DBMS;
+import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.apache.struts.action.ActionForm;
@@ -51,14 +53,16 @@ public class FormularioEditarUsuarioAdmin extends org.apache.struts.action.Actio
         u.setHabilitado(DBMS.getInstance().estaHabilitado(u));
         u.setApellido(request.getParameter("apellido"));
         u.setTelefono(request.getParameter("telefono"));
-        u.setDireccion(request.getParameter("direccion"));
         u.setAdministrador(request.getParameter("administrador"));
         //u.setAdministrador(DBMS.getInstance().PrivilegiosUsuario(u));
         u.setArea_laboral(request.getParameter("area_laboral"));
 
         request.setAttribute("Usuario", u);
         request.setAttribute("autenticado", request.getParameter("autenticado"));
-
+        
+        u.setUnidad_adscripcion(request.getParameter("unidad_adscripcion"));
+        ArrayList<unidadAdscripcion> select = DBMS.getInstance().obtenerUnidadesAdscripcion();
+        request.setAttribute("select", select); 
         return mapping.findForward(SUCCESS);
     }
 }

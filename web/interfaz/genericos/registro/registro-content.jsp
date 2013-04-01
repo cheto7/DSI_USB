@@ -40,6 +40,7 @@
             <html:text name="Usuario" property="apellido" styleId="apellido" styleClass="span2"></html:text>                        
         </div>
         
+        <label style="color:red">Cédula de identidad:</label>
         <div class="controls controls-row">
             <html:text name="Usuario" property="ci" styleId="apellido" styleClass="span2"></html:text>                                    
         </div>
@@ -63,9 +64,9 @@
             <html:select name="Usuario" property="unidad_adscripcion" styleClass="span1" style="width:250px">
                 
                 <logic:iterate name="select" id="unidadAdscripcion">
-                    <html:option value= "" >
+                    <option value="<bean:write name="unidadAdscripcion" property="nombre"/>">
                         <bean:write name="unidadAdscripcion" property="nombre"></bean:write>
-                    </html:option>
+                    </option>
                 </logic:iterate>
                 
             </html:select>
