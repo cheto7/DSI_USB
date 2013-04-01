@@ -4,6 +4,9 @@
  */
 package Solicitudes;
 
+import Clases.Periodo;
+import DBMS.DBMS;
+import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.apache.struts.action.Action;
@@ -24,6 +27,9 @@ public class ListadoGeneral extends Action{
             HttpServletRequest request, HttpServletResponse response)
             throws Exception {
         
+        ArrayList<Periodo> periodos = new ArrayList<Periodo>(0);
+        periodos = DBMS.getInstance().obtenerPeriodos();
+        request.setAttribute("periodos", periodos);
         return mapping.findForward(SUCCESS);
         
     }

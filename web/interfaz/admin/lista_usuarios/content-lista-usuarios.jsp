@@ -1,167 +1,250 @@
+<%-- 
+    Document   : content-lista-usuarios
+    Created on : 
+    Author     : azocar
+--%>
+
 <%@ taglib uri="http://struts.apache.org/tags-bean" prefix="bean" %>
 <%@ taglib uri="http://struts.apache.org/tags-html" prefix="html" %>
 <%@ taglib uri="http://struts.apache.org/tags-logic" prefix="logic" %>
 <%@ taglib uri="http://struts.apache.org/tags-tiles" prefix="tiles" %>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 
-<%@page contentType="text/html" pageEncoding="UTF-8"%> 
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Dirección de Seguridad Integral</title>
+<script type="text/javascript" src="assets/js/jquery-1.8.2.js"></script>
+<script type="text/javascript" src="assets/js/jquery-ui.js"></script>
+<script type="text/javascript" src="assets/bootstrap/js/bootstrap.js"></script>
+<script type="text/javascript" src="assets/js/scroll-startstop.events.jquery.js"></script>
+<link href="assets/bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css"/>
+<link href="assets/bootstrap/css/bootstrap-responsive.css" rel="stylesheet" type="text/css"/>
+<link href="assets/css/style.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" href="assets/css/jquery-ui.css" />
+<html>
+    <head>
+        <script>
 
-<logic:present name="mensajeUsuarioEditado">
-    <logic:notEmpty name="mensajeUsuarioEditado">
-        <center>
-            <label style="color:blue"><bean:write name="mensajeUsuarioEditado" property="mensaje"/>
-                <bean:write name="usuario" property="usuario"/> han sido modificados.
-            </label>
-        </center>
-    </logic:notEmpty>
-</logic:present>
+            $(function() {
+                $( "#tabs" ).tabs();
 
-<logic:present name="mensajeUsuarioNoEditado">
-    <logic:notEmpty name="mensajeUsuarioNoEditado">
-        <center>
-            <label style="color:red">Error:<bean:write name="mensajeUsuarioNoEditado" property="mensaje"/></label>
-        </center>
-    </logic:notEmpty>
-</logic:present>
+                var $elem = $('#content');
 
-<fieldset>
-    <legend>Lista de Usuarios</legend> 
+                $('#nav_up').fadeIn('slow');
+                $('#nav_down').fadeIn('slow');  
 
-    <h1> Usuarios habilitados: </h1>
+                $(window).bind('scrollstart', function(){
+                    $('#nav_up,#nav_down').stop().animate({'opacity':'0.2'});
+                });
 
-    <logic:notPresent name="usuariosHab">
-        <center>
-            <label> No hay usuarios habilitados que mostrar.</label>
-        </center>
-    </logic:notPresent>
+                $(window).bind('scrollstop', function(){
+                    $('#nav_up,#nav_down').stop().animate({'opacity':'1'});
+                });
 
-    <logic:present name="usuariosHab">
+                $('#nav_down').click(
+                function (e) {
+                    $('html, body').animate({scrollTop: $elem.height()}, 800);
+                }
+            );
 
-        <logic:empty name="usuariosHab">
+                $('#nav_up').click(
+                function (e) {
+                    $('html, body').animate({scrollTop: '0px'}, 800);
+                }
+            );
+            });
+        </script>
+    </head>
+    <logic:present name="mensajeUsuarioEditado">
+        <logic:notEmpty name="mensajeUsuarioEditado">
             <center>
-                <label> No hay usuarios habilitados que mostrar.</label>
+                <label style="color:blue"><bean:write name="mensajeUsuarioEditado" property="mensaje"/>
+                    <bean:write name="usuario" property="usuario"/> han sido modificados.
+                </label>
             </center>
-        </logic:empty>
-        <br>
+        </logic:notEmpty>
+    </logic:present>
 
-        <logic:notEmpty name="usuariosHab">
-            <table class="table table-hover">
-                <tbody>
-                    <tr>
-                        <th>USB-ID</th>
-                        <th>Contraseña</th>
-                        <th>Modificador</th>
-                        <th>Ortorgar Permisos</th>
-                        <th>Eliminar</th>
-                    </tr>
+    <logic:present name="mensajeUsuarioNoEditado">
+        <logic:notEmpty name="mensajeUsuarioNoEditado">
+            <center>
+                <label style="color:red">Error:<bean:write name="mensajeUsuarioNoEditado" property="mensaje"/></label>
+            </center>
+        </logic:notEmpty>
+    </logic:present>
 
-                    <logic:iterate name="usuariosHab" id="usuario">
+    <fieldset>
+        <legend>Lista de Usuarios</legend> 
+    </fieldset>
+    <div id="tabs">
+        <ul>
+            <li><a href="#tabs-1">No Habilitados</a></li>
+            <li><a href="#tabs-2">Habilitados</a></li>
+        </ul>
+        <div id="tabs-2">
 
-                        <tr>
-                            <td >
-                                <h1>
-                                    <p> <bean:write name="usuario" property="usuario"></bean:write></p>
+            <logic:notPresent name="usuariosHab">
+                <center>
+                    <label> No hay usuarios habilitados que mostrar.</label>
+                </center>
+            </logic:notPresent>
+
+            <logic:present name="usuariosHab">
+
+                <logic:empty name="usuariosHab">
+                    <center>
+                        <label> No hay usuarios habilitados que mostrar.</label>
+                    </center>
+                </logic:empty>
+                <br>
+
+                <logic:notEmpty name="usuariosHab">
+                    <table class="table table-hover">
+                        <tbody>
+                            <tr>
+                                <th>USB-ID</th>
+                                <th>Nombres y Apellidos</th>
+                                <th colspan="3"><center>Opciones</center></th>
+                        </tr>
+
+                        <logic:iterate name="usuariosHab" id="usuario">
+
+                            <tr>
+                                <td >
+                                    <h1>
+                                        <p> <bean:write name="usuario" property="usuario"></bean:write></p>
                                     </h1>
                                 </td>
 
                                 <td>
-                                    <p> <bean:write name="usuario" property="password"></bean:write> </p>
-                                </td>
-
-                                <td >
-                                <html:form action = "/FormularioEditarUsuario" onsubmit = "return (this)">
-                                    <html:hidden name="usuario" property="usuario"/>
-                                    <html:hidden name="autenticado" property="usuario"/>
-                                    <html:submit styleClass="btn btn-success"> Editar </html:submit>
-                                </html:form> 
-                            </td>
-
-                            <td>
-                                <%-- html:form action = "/Deshabilitar" onsubmit = "return (this)"--%>
-                                <html:form action = "/Formulario_OtorgarPermiso" onsubmit = "return (this)">
-                                    <html:hidden name="usuario" property="usuario"/>
-                                    <html:hidden name="autenticado" property="usuario"/>
-                                    <html:submit styleClass="btn btn-warning"> Permisos </html:submit>
-                                </html:form>
-                            </td>
-
-                            <td>
-                                <html:form method="POST" action="/ConfirmarEliminar?method=save" onsubmit="return (this)">
-                                    <html:hidden name="usuario" property="usuario"/>                                    
-                                    <html:submit styleClass="btn btn-danger"> Eliminar </html:submit>
-                                </html:form>
-                            </td>
-                        </tr>
-
-                    </logic:iterate>
-                </tbody>
-            </table>
-        </logic:notEmpty>
-    </logic:present>
-
-    <br>    
-
-    <h1> Usuarios no habilitados: </h1>
-
-    <logic:notPresent name="usuariosNoHab">
-        <center>
-            <label>No hay usuarios deshabilitados que mostrar</label>
-        </center>
-    </logic:notPresent>
-
-    <logic:present name="usuariosNoHab">
-
-        <logic:empty name="usuariosNoHab">
-            <center>
-                <label>No hay usuarios deshabilitados que mostrar</label>
-            </center>
-        </logic:empty>
-
-        <logic:notEmpty name="usuariosNoHab">
-            <table class="table table-hover">
-                <tbody>
-                    <tr>
-                        <th>USB-ID</th>
-                        <th>Contraseña</th>
-                        <th>Modificador</th>
-                        <th>Eliminar</th>
-                    </tr>
-
-                    <logic:iterate name="usuariosNoHab" id="usuario">
-
-                        <tr>
-                            <td >
-                                <h1>
-                                    <p> <bean:write name="usuario" property="usuario"></bean:write></p>
-                                    </h1>
+                                    <p> <bean:write name="usuario" property="nombre"/>
+                                    <bean:write name="usuario" property="apellido"/> </p>
                                 </td>
 
                                 <td>
-                                    <p> <bean:write name="usuario" property="password"></bean:write> </p>
+                                    <html:form action = "/VerDatosDeUsuario" onsubmit = "return (this)">
+                                        <html:hidden name="usuario" property="usuario"/>
+                                        <html:hidden name="usuario" property="nombre"/>
+                                        <html:hidden name="usuario" property="email"/>
+                                        <html:hidden name="usuario" property="password"/>
+                                        <html:hidden name="usuario" property="fecha"/>
+                                        <html:hidden name="usuario" property="sexo"/>
+                                        <html:hidden name="usuario" property="talla_mascara"/>
+                                        <html:hidden name="usuario" property="talla_camisa"/>
+                                        <html:hidden name="usuario" property="talla_pantalon"/>
+                                        <html:hidden name="usuario" property="talla_guantes"/>
+                                        <html:hidden name="usuario" property="talla_zapato"/>
+                                        <html:hidden name="usuario" property="habilitado"/>
+                                        <html:hidden name="usuario" property="apellido"/>
+                                        <html:hidden name="usuario" property="telefono"/>
+                                        <html:hidden name="usuario" property="direccion"/>
+                                        <html:hidden name="usuario" property="administrador"/>
+                                        <html:hidden name="usuario" property="area_laboral"/>                                      
+                                        <html:hidden name="autenticado" property="usuario"/>
+                                        <html:submit styleClass="btn btn-success"> Ver </html:submit>
+                                    </html:form> 
                                 </td>
 
-                                <td >
-                                <html:form action = "/Habilitar" onsubmit = "return (this)">
-                                    <html:hidden name="usuario" property="usuario"/>
-                                    <html:hidden name="autenticado" property="usuario"/>
-                                    <html:submit styleClass="btn btn-warning"> Habilitar </html:submit>
-                                </html:form> 
-                            </td>
+                                <td>
+                                    <%-- html:form action = "/Deshabilitar" onsubmit = "return (this)"--%>
+                                    <%--<html:form action = "/Formulario_OtorgarPermiso" onsubmit = "return (this)">
+                                        <html:hidden name="usuario" property="usuario"/>
+                                        <html:hidden name="autenticado" property="usuario"/>
+                                        <html:submit styleClass="btn btn-warning"> Permisos </html:submit>
+                                    </html:form>--%>
+                                </td>
+                            </tr>
 
-                            <td>
-                                <html:form method="POST" action="/ConfirmarEliminar?method=save" onsubmit="return (this)">
-                                    <html:hidden name="usuario" property="usuario"/>
-                                    <html:submit styleClass="btn btn-danger"> Eliminar </html:submit>
-                                </html:form>
-                            </td>
-                        </tr>
+                        </logic:iterate>
+                        </tbody>
+                    </table>
+                </logic:notEmpty>
+            </logic:present>
+        </div>                
 
-                    </logic:iterate>
-                </tbody>
-            </table>
-        </logic:notEmpty>
-    </logic:present>
+        <div id="tabs-1">
 
+            <logic:notPresent name="usuariosNoHab">
+                <center>
+                    <label>No hay usuarios deshabilitados que mostrar</label>
+                </center>
+            </logic:notPresent>
 
-</fielset>           	
+            <logic:present name="usuariosNoHab">
 
+                <logic:empty name="usuariosNoHab">
+                    <center>
+                        <label>No hay usuarios deshabilitados que mostrar</label>
+                    </center>
+                </logic:empty>
+
+                <logic:notEmpty name="usuariosNoHab">
+                    <table class="table table-hover">
+                        <tbody>
+                            <tr>
+                                <th>USB-ID</th>
+                                <th>Nombres y Apellidos</th>
+                                <th>Opciones</th>
+                            </tr>
+
+                            <logic:iterate name="usuariosNoHab" id="usuario">
+
+                                <tr>
+                                    <td >
+                                        <h1>
+                                            <p> <bean:write name="usuario" property="usuario"></bean:write></p>
+                                        </h1>
+                                    </td>
+
+                                    <td>
+                                        <p> <bean:write name="usuario" property="nombre"/>
+                                            <bean:write name="usuario" property="apellido"/></p>
+                                    </td>
+
+                                    <%--<td>
+                                        <html:form action = "/Habilitar" onsubmit = "return (this)">
+                                            <html:hidden name="usuario" property="usuario"/>
+                                            <html:hidden name="autenticado" property="usuario"/>
+                                            <html:submit styleClass="btn btn-warning"> Habilitar </html:submit>
+                                        </html:form> 
+                                    </td>
+
+                                    <td>
+                                        <html:form method="POST" action="/ConfirmarEliminar?method=save" onsubmit="return (this)">
+                                            <html:hidden name="usuario" property="usuario"/>
+                                            <html:submit styleClass="btn btn-danger"> Eliminar </html:submit>
+                                        </html:form>
+                                    </td>--%>
+                                <td>
+                                    <html:form action = "/VerDatosDeUsuario" onsubmit = "return (this)">
+                                        <html:hidden name="usuario" property="usuario"/>
+                                        <html:hidden name="usuario" property="nombre"/>
+                                        <html:hidden name="usuario" property="email"/>
+                                        <html:hidden name="usuario" property="password"/>
+                                        <html:hidden name="usuario" property="fecha"/>
+                                        <html:hidden name="usuario" property="sexo"/>
+                                        <html:hidden name="usuario" property="talla_mascara"/>
+                                        <html:hidden name="usuario" property="talla_camisa"/>
+                                        <html:hidden name="usuario" property="talla_pantalon"/>
+                                        <html:hidden name="usuario" property="talla_guantes"/>
+                                        <html:hidden name="usuario" property="talla_zapato"/>
+                                        <html:hidden name="usuario" property="habilitado"/>
+                                        <html:hidden name="usuario" property="apellido"/>
+                                        <html:hidden name="usuario" property="telefono"/>
+                                        <html:hidden name="usuario" property="direccion"/>
+                                        <html:hidden name="usuario" property="administrador"/>
+                                        <html:hidden name="usuario" property="area_laboral"/>                                      
+                                        <html:hidden name="autenticado" property="usuario"/>
+                                        <html:submit styleClass="btn btn-success"> Ver </html:submit>
+                                    </html:form> 
+                                </td>                                    
+                                </tr>
+
+                            </logic:iterate>
+                        </tbody>
+                    </table>
+                </logic:notEmpty>
+            </logic:present>
+        </div>
+    </div>
+</html>
 

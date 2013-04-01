@@ -4,6 +4,7 @@
  */
 package Solicitudes;
 
+import Clases.Periodo;
 import Clases.Solicitud;
 import DBMS.DBMS;
 import java.util.ArrayList;
@@ -37,8 +38,14 @@ public class ListarSolicitudes extends org.apache.struts.action.Action {
             HttpServletRequest request, HttpServletResponse response)
             throws Exception {
         
-        ArrayList<Solicitud> solModificadas = DBMS.getInstance().obtenerSolicitudesModificadas();
-        ArrayList<Solicitud> solNoModificadas = DBMS.getInstance().obtenerSolicitudesNoModificadas();
+        Periodo p = new Periodo();
+        int idPeriodo = Integer.parseInt(request.getParameter("id"));
+        System.out.println("PERIODOO A LISTAR: "+idPeriodo);
+        p.setId(idPeriodo);
+
+        p = DBMS.getInstance().obtenerPeriodo(p);
+        ArrayList<Solicitud> solModificadas = DBMS.getInstance().obtenerSolicitudesModificadas(p);
+        ArrayList<Solicitud> solNoModificadas = DBMS.getInstance().obtenerSolicitudesNoModificadas(p);
         if (solModificadas.isEmpty()){
             request.setAttribute("noHayModificadas", "mensaje");
         }
@@ -47,6 +54,7 @@ public class ListarSolicitudes extends org.apache.struts.action.Action {
         }        
         request.setAttribute("solModificadas", solModificadas);
         request.setAttribute("solNoModificadas", solNoModificadas);
+        request.setAttribute("periodo",p);
         return mapping.findForward(SUCCESS);
     }
 }

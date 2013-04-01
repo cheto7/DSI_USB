@@ -15,32 +15,32 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
         <tiles:insert attribute="script"/>
-        </head>
-        <body>
+    </head>
+    <body>
 
-            <div id="container">
+        <div id="container">
 
-                <header id="header">
-                </header>
+            <header id="header">
+            </header>
 
-                <div id="main">
-                    <div id="content">
+            <div id="main">
+                <div id="content">
 
-                        <tiles:insert attribute="content"/>
-                    </div>
-                    <div id="sidebar-first">
-
-                        <tiles:insert attribute="navBar"/>
-
-                    </div>
-                    <div id="sidebar-second">
-                       <tiles:insert attribute="sidebar-second"/>
-                    </div>
+                    <tiles:insert attribute="content"/>
                 </div>
+                <div id="sidebar-first">
 
-                <div id="footer">
-                    <tiles:insert attribute="footer"/>
+                    <tiles:insert attribute="navBar"/>
+
+                </div>
+                <div id="sidebar-second">
+                    <tiles:insert attribute="sidebar-second"/>
+                </div>
             </div>
 
-        </body>
-    </html>
+            <div id="footer">
+                <tiles:insert attribute="footer"/>
+            </div>
+
+    </body>
+</html>

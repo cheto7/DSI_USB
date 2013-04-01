@@ -84,7 +84,7 @@
 
             <html:form action="/ConfirmarModificacion" onsubmit="return (this)">
                 <html:hidden name="solicitud" property="id"/>
-                <html:submit styleClass="btn btn-success"> Confirmar modificación </html:submit>
+                <html:submit styleClass="btn btn-success"> Aprobar solicitud </html:submit>
             </html:form>
         </td>
     </tr>

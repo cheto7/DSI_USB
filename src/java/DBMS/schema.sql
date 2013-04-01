@@ -119,13 +119,28 @@ CREATE TABLE "PREPAS".noticia (
 OIDS = FALSE
 );
 
+CREATE TABLE "PREPAS".periodo (
+  id                    SERIAL,
+  fecha_inicio          DATE NOT NULL,
+  fecha_fin             DATE,
+  cantidad_recibida     INT DEFAULT '0',
+  cantidad_procesada    INT DEFAULT '0',
+  habilitado            VARCHAR DEFAULT 'true',
+  ultimo                VARCHAR DEFAULT 'true',
+  CONSTRAINT PK_periodo PRIMARY KEY (id)
+) WITH (
+OIDS = FALSE
+);
+
 CREATE TABLE "PREPAS".solicitud (
-    id SERIAL,
+  id SERIAL,
+  id_periodo SERIAL,
   usuario VARCHAR NOT NULL,
   fecha_solicitud DATE NOT NULL,
   modificada    VARCHAR DEFAULT 'false',
   CONSTRAINT PK_solicitud PRIMARY KEY (id),
-  CONSTRAINT FK_solicitud_usuario FOREIGN KEY (usuario) REFERENCES "PREPAS".usuario (usuario)
+  CONSTRAINT FK_solicitud_usuario FOREIGN KEY (usuario) REFERENCES "PREPAS".usuario (usuario),
+  CONSTRAINT FK_solicitud_periodo FOREIGN KEY (id_periodo) REFERENCES "PREPAS".periodo (id)
 ) WITH (
 OIDS = FALSE
 );

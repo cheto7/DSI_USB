@@ -51,7 +51,7 @@ public class EditarUsuarioListar extends org.apache.struts.action.Action {
         }
 
         u = DBMS.getInstance().atributosUsuario(u);
-        request.setAttribute("usuario", u);
+        request.setAttribute("Usuario", u);
         return mapping.findForward(SUCCESS);
     }
 }

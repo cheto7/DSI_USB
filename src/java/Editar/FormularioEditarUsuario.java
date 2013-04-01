@@ -38,9 +38,8 @@ public class FormularioEditarUsuario extends org.apache.struts.action.Action {
             throws Exception {
         
             Usuario u = (Usuario) form;
-            u = DBMS.getInstance().atributosUsuario(u);
             request.setAttribute("Usuario", u);
-            
+
             return mapping.findForward(SUCCESS);
     }
 }

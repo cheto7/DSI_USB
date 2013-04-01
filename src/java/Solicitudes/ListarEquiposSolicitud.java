@@ -24,6 +24,7 @@ public class ListarEquiposSolicitud extends org.apache.struts.action.Action {
 
     /* forward name="success" path="" */
     private static final String SUCCESS = "success";
+    private static final String FAILURE = "failure";
 
     /**
      * This is the action called from the Struts framework.
@@ -50,6 +51,10 @@ public class ListarEquiposSolicitud extends org.apache.struts.action.Action {
          * equipos se van a listar
          */
         Solicitud solicitud = DBMS.getInstance().agregarASolicitud(u);
+        if (solicitud==null){
+            request.setAttribute("periodoCerrado", "error");
+            return mapping.findForward(FAILURE);
+        }
         ArrayList<Equipo> equiposAcad = DBMS.getInstance().obtenerEquiposSolicitudAcademico(u);
         ArrayList<Equipo> equiposAdmin = DBMS.getInstance().obtenerEquiposSolicitudAdmin(u);
         ArrayList<Equipo> equiposBomb = DBMS.getInstance().obtenerEquiposSolicitudBombero(u);

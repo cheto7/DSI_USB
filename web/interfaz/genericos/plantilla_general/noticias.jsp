@@ -8,8 +8,13 @@
 <%@ taglib uri="http://struts.apache.org/tags-logic" prefix="logic" %>
 <%@ taglib uri="http://struts.apache.org/tags-tiles" prefix="tiles" %>
 
-<%@page contentType="text/html" pageEncoding="UTF-8"%> 
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 
+<logic:present name="periodoCerrado">
+    <center>
+        <label style="color:red">El período de solicitud de equipos se encuentra cerrado.</label>
+    </center>
+</logic:present>
 <logic:present name="mensaje">
     <logic:notEmpty name="mensaje">
         <center>
@@ -27,7 +32,7 @@
 </logic:present>
     <logic:present name="solicitudProcesada">
         <center>
-            <label style="color:blue">Solicitud procesada satisfactoriamente</label>
+            <label style="color:blue">Solicitud procesada satisfactoriamente. Podrá descargar su comprobante en 'Solicitudes Anteriores'</label>
         </center>
     </logic:present>
 

@@ -12,6 +12,17 @@
 <html>
 <fieldset>
     <legend>Lista de Solicitudes recibidas</legend>
+    <h1 style="display: inline">Fecha inicio: </h1><bean:write name="periodo" property="fecha_inicio"></bean:write><br>
+    <h1 style="display: inline">Fecha fin: </h1> <bean:write name="periodo" property="fecha_fin"></bean:write><br>
+    <%--<h1 style="display: inline">Solicitudes recibidas: </h1><bean:write name="periodo" property="cantidadRecibida"></bean:write><br>
+    <h1 style="display: inline">Solicitudes procesadas: </h1><bean:write name="periodo" property="cantidadProcesada"></bean:write><br>--%>
+    <h1 style="display: inline">Estado: </h1><logic:equal name="periodo" property="habilitado" value="true">
+            Abierto
+            </logic:equal>
+            <logic:equal name="periodo" property="habilitado" value="false">
+            Cerrado
+            </logic:equal>            
+    
 </fieldset>
 <div id="tabs">
     <ul>

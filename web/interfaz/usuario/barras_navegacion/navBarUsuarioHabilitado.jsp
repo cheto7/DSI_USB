@@ -20,11 +20,11 @@
 
     <ul id="navbar">   
 
-        <li>
-        <html:form action = "/FormularioEditarAdmin" onsubmit="return (this)">
+    <li>
+        <html:form action = "/VerInforPersonal" onsubmit="return (this)">
             <html:hidden name="autenticado" property="usuario"/>
-            <html:submit style="padding:10px 20px 40px 20px"> Editar Información </html:submit>
-        </html:form> 
+            <html:submit style="padding:10px 20px 40px 20px"> Datos Personales </html:submit>
+        </html:form>
     </li>
 
     <li>

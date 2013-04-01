@@ -15,6 +15,7 @@
         <form-bean name="Equipo" type="Clases.Equipo"/>
         <form-bean name="UploadFile" type="Clases.UploadFile"/>
         <form-bean name="ListadoGeneral" type="Clases.ListadoGeneral"/>
+        <form-bean name="Periodo" type="Clases.Periodo"/>
     </form-beans>
     <global-exceptions>
     
@@ -100,13 +101,13 @@
         
         <action path="/Editar" type="Editar.EditarUsuarioListar" scope="request" 
                 name= "Usuario">
-            <forward name="success" path="/ColeccionUsuarios.do"></forward>
+            <forward name="success" path="/VerInforPersonal.do"></forward>
         </action>
         
-        <action path="/EditarAdmin" type="Editar.EditarUsuario" scope="request" 
+        <!--<action path="/EditarAdmin" type="Editar.EditarUsuario" scope="request" 
                 name= "Usuario">
             <forward name="success" path="/Ir_pag_usuario.do"></forward>
-        </action>
+        </action>-->
         
         <!--<action path="/Pedido" type="Pedido.Confirmar_solicitud" scope="request" parameter="method"
                 name="Pedido">
@@ -253,7 +254,7 @@
             <forward name="failure" path="/vistas/genericos/interfaz_pag_principal.jsp"></forward>
         </action>
         
-        <action path="/Download" type="Reportes.DownloadPDF" >
+        <action path="/Download" type="Reportes.DownloadPDF" name="Solicitud">
             <forward name="success" path="/vistas/error/welcomeStruts.jsp"></forward>
         </action>
         
@@ -307,6 +308,7 @@
         <action path="/Ir_pag_pedido" type="Solicitudes.ListarEquiposSolicitud" scope="request"
                 name="Usuario">
             <forward name="success" path="/vistas/pedido/interfaz_pedido.jsp"></forward>
+            <forward name="failure" path="/Ir_pag_usuario.do"></forward>
         </action>
         <action path="/AgregarEquipoASolicitud" type="Solicitudes.AgregarEquipoASolicitud" scope="request" 
                 name="Usuario">
@@ -362,7 +364,41 @@
                 name="Solicitud">
             <forward name="success" path="/ListarSolicitudes.do"></forward>
         </action>
-        
+        <action path="/VerInforPersonal" type="Editar.VerInforPersonal" scope="request" parameter="method"
+                name="Usuario">
+            <forward name="success" path="/vistas/lista_usuarios/datos-usuario.jsp"></forward>
+        </action>        
+        <action path="/VerDatosDeUsuario" type="Usuarios.VerDatosDeUsuario" scope="request" parameter="method"
+                name="Usuario">
+            <forward name="success" path="/vistas/lista_usuarios/datos-usuario-admin.jsp"></forward>
+        </action>
+        <action path="/FormularioEditarUsuarioAdmin" type="Editar.FormularioEditarUsuarioAdmin" scope="request" 
+                name= "Usuario">
+            <forward name="success" path="/vistas/lista_usuarios/formulario_editar_usuario_admin.jsp"></forward>
+        </action>
+        <action path="/EditarAdmin" type="Editar.EditarAdmin" scope="request" 
+                name= "Usuario">
+            <forward name="success" path="/VerDatosDeUsuario.do"></forward>
+        </action>
+        <action path="/VerSolicitud" type="Solicitudes.VerSolicitudRecibida" scope="request" parameter="method"
+                name="Solicitud">
+            <forward name="success" path="/vistas/pedido/miPedido.jsp"></forward>
+        </action>
+        <action path="/ListarPeriodos" type="Periodos.Listar" scope="request" parameter="method"
+                name="Periodo">
+            <forward name="success" path="/vistas/periodos/ListaPeriodos.jsp"></forward>
+        </action>
+        <action path="/NuevoPeriodo" type="Periodos.NuevoPeriodo" scope="request" parameter="method"
+                name="Periodo">
+            <forward name="success" path="/vistas/periodos/form-nuevoPeriodo.jsp"></forward>
+            <forward name="failure" path="/ListarPeriodos.do"></forward>
+        </action>
+        <action path="/AgregarPeriodo" type="Periodos.AgregarPeriodo" scope="request" parameter="method"
+                name="Periodo">
+            <forward name="success" path="/ListarPeriodos.do"></forward>
+            <forward name="failure" path="/vistas/periodos/form-nuevoPeriodo.jsp"></forward>
+        </action>
+
         
         
                 

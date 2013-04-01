@@ -19,6 +19,7 @@ public class Solicitud extends ActionForm {
     private String talla;
     private Integer serialEquipo;
     private String modificada;
+    private Integer periodo;
 
     public String getModificada() {
         return modificada;
@@ -110,5 +111,13 @@ public class Solicitud extends ActionForm {
 
     public void setFecha_solicitud(String fecha_solicitud) {
         this.fecha_solicitud = fecha_solicitud;
+    }
+
+    public Integer getPeriodo() {
+        return periodo;
+    }
+
+    public void setPeriodo(Integer periodo) {
+        this.periodo = periodo;
     }
 }
