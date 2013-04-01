@@ -63,15 +63,8 @@
             </logic:empty>
 
             <logic:notEmpty name="select">
-                <html:select name="Usuario" property="unidad_adscripcion" styleClass="span1" style="width:250px">
-
-                    <logic:iterate name="select" id="unidadAdscripcion">
-                        <html:option value= "opcion.values" >
-                            <bean:write  name="unidadAdscripcion" property="nombre" ></bean:write>
-                            <bean:define id="opcion" name="unidadAdscripcion" property="nombre" ></bean:define>
-                        </html:option>
-                    </logic:iterate>
-
+                <html:select name="Usuario" property="unidad_adscripcion" styleClass="span1" style="width:250px">                                   
+                            <html:optionsCollection name="select" value="nombre" label="nombre"/>                                            
                 </html:select>
             </logic:notEmpty>
 

@@ -52,7 +52,7 @@
     <br>  
 
     <label>Unidad Adscripción:</label>
-            <logic:present name="select">
+        <logic:present name="select">
             <logic:empty name="select">
                 <html:select name="Usuario" property="unidad_adscripcion" styleClass="span1" style="width:250px">
                    
@@ -62,14 +62,8 @@
             </logic:empty>
 
             <logic:notEmpty name="select">
-                <html:select name="Usuario" property="unidad_adscripcion" styleClass="span1" style="width:250px">
-
-                    <logic:iterate name="select" id="unidadAdscripcion">
-                        <html:option value= "" >
-                            <bean:write  name="unidadAdscripcion" property="nombre" ></bean:write>                            
-                        </html:option>
-                    </logic:iterate>
-
+                <html:select name="Usuario" property="unidad_adscripcion" styleClass="span1" style="width:250px">                                   
+                            <html:optionsCollection name="select" value="nombre" label="nombre"/>                                            
                 </html:select>
             </logic:notEmpty>
 
