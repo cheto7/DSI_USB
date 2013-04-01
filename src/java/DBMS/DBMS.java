@@ -132,7 +132,7 @@ public class DBMS {
             ResultSet rs = stmt.executeQuery(sqlquery);
             Boolean b = rs.next();
             return b;
-        } catch (SQLException ex) {
+        } catch (SQLException ex){
             Logger.getLogger(DBMS.class.getName()).log(Level.SEVERE, null, ex);
         }
         return false;
@@ -140,7 +140,7 @@ public class DBMS {
 
     /* Consulta si al momento de registrarse el nombre de usuario ya se 
      * encuentra en uso. */
-    public Boolean existeUsuario(Usuario u) {
+    public Boolean existeUsuario(Usuario u){
 
         String sqlquery = "SELECT * FROM \"PREPAS\".usuario"
                 + " WHERE usuario ='" + u.getUsuario() + "'";
@@ -1942,8 +1942,8 @@ public Boolean modificarUsuarioAdmin(Usuario u) {
         try {
             String sqlquery;
             
-            sqlquery = "UPDATE \"PREPAS\".periodo SET "
-                    + "ultimo = 'false'"
+            sqlquery = "UPDATE \"PREPAS\".periodo SET"
+                    + " ultimo = 'false'"
                     + " WHERE ultimo = 'true' ";
             Statement stmt = conexion.createStatement();            
             Integer i = stmt.executeUpdate(sqlquery);            
@@ -2003,7 +2003,7 @@ public Boolean modificarUsuarioAdmin(Usuario u) {
             rs.next();
             per.setId(rs.getInt("id"));
             per.setCantidadProcesada(rs.getInt("cantidad_procesada"));
-            per.setCantidadRecibida(rs.getInt("cantidad_recibida"));
+            per.setCantidadRecibida(rs.getInt("cantidad_recibida")); 
             per.setFecha_inicio(rs.getString("fecha_inicio"));
             per.setFecha_fin(rs.getString("fecha_fin"));
             per.setHabilitado(rs.getBoolean("habilitado"));

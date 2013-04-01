@@ -59,10 +59,9 @@ public class FormularioEditarUsuarioAdmin extends org.apache.struts.action.Actio
 
         request.setAttribute("Usuario", u);
         request.setAttribute("autenticado", request.getParameter("autenticado"));
-        
         u.setUnidad_adscripcion(request.getParameter("unidad_adscripcion"));
         ArrayList<unidadAdscripcion> select = DBMS.getInstance().obtenerUnidadesAdscripcion();
         request.setAttribute("select", select); 
-        return mapping.findForward(SUCCESS);
+        return mapping.findForward(SUCCESS); 
     }
 }
