@@ -52,7 +52,28 @@
     <br>  
 
     <label>Unidad Adscripción:</label>
-    <html:text name="autenticado" property="unidad_adscripcion" styleId="unidadads"></html:text>
+            <logic:present name="select">
+            <logic:empty name="select">
+                <html:select name="Usuario" property="unidad_adscripcion" styleClass="span1" style="width:250px">
+                   
+                        <html:option value= "" > Unidad de Adscripcion</html:option>                    
+
+                </html:select>
+            </logic:empty>
+
+            <logic:notEmpty name="select">
+                <html:select name="Usuario" property="unidad_adscripcion" styleClass="span1" style="width:250px">
+
+                    <logic:iterate name="select" id="unidadAdscripcion">
+                        <html:option value= "" >
+                            <bean:write  name="unidadAdscripcion" property="nombre" ></bean:write>                            
+                        </html:option>
+                    </logic:iterate>
+
+                </html:select>
+            </logic:notEmpty>
+
+        </logic:present>
     <br>
 
     <label>Cargo:</label>

@@ -25,51 +25,57 @@
 
         <label style="color:red">USB-ID:</label>
         <html:text name="Usuario" property="usuario" styleId="usbid"></html:text>
-        <span class="help-block">Ejemplo: usuario@usb.ve</span>
+            <span class="help-block">Ejemplo: usuario@usb.ve</span>
 
-        <label style="color:red" >Contraseña:</label>
+            <label style="color:red" >Contraseña:</label>
         <html:password name="Usuario" property="password" styleId="password"></html:password>
 
-        <label style="color:red">Confirmar Contraseña:</label>
-        <input id="confirm_password" type="password" class="text" name="confirm_password" placeholder="Confirmar Contraseña" title="Ingrese su contraseña"/>
-        <br>
+            <label style="color:red">Confirmar Contraseña:</label>
+            <input id="confirm_password" type="password" class="text" name="confirm_password" placeholder="Confirmar Contraseña" title="Ingrese su contraseña"/>
+            <br>
 
-        <label style="color:red">Datos Personales:</label>
-        <div class="controls controls-row">
+            <label style="color:red">Datos Personales:</label>
+            <div class="controls controls-row">
             <html:text name="Usuario" property="nombre" styleId="nombre" styleClass="span2"></html:text>
             <html:text name="Usuario" property="apellido" styleId="apellido" styleClass="span2"></html:text>                        
             <html:text name="Usuario" property="ci" styleId="cedula" styleClass="span2"></html:text> 
-        </div>
-        
-        <label style="color: red">Correo electrónico:</label>
+            </div>
+
+            <label style="color: red">Correo electrónico:</label>
         <html:text name="Usuario" property="email" styleId="email"></html:text>
-        <span class="help-block">Ejemplo: usuario@gmail.com</span>
+            <span class="help-block">Ejemplo: usuario@gmail.com</span>
 
-        <label>Fecha de Ingreso a la USB</label>
+            <label>Fecha de Ingreso a la USB</label>
         <html:text name="Usuario" property="fecha" styleId="fechanac"></html:text>
-        <span class="help-block">Ejemplo: 16/07/89 </span>   
+            <span class="help-block">Ejemplo: 16/07/89 </span>   
 
-        <label>Teléfono</label>
+            <label>Teléfono</label>
         <html:text name="Usuario" property="telefono" styleId="tele"></html:text>
 
-        <label>Unidad Adscripción:</label>
-    <logic:present name="select">
+            <label>Unidad Adscripción:</label>
+        <logic:present name="select">
+            <logic:empty name="select">
+                <html:select name="Usuario" property="unidad_adscripcion" styleClass="span1" style="width:250px">
+                   
+                        <html:option value= "" > Unidad de Adscripcion</html:option>                    
 
+                </html:select>
+            </logic:empty>
 
-        <logic:notEmpty name="select">
-            <html:select name="Usuario" property="unidad_adscripcion" styleClass="span1" style="width:250px">
-                
-                <logic:iterate name="select" id="unidadAdscripcion">
-                    <html:option value= "opcion.values" >
-                        <bean:write  name="unidadAdscripcion" property="nombre" ></bean:write>
-                        <bean:define id="opcion" name="unidadAdscripcion" property="nombre" ></bean:define>
-                    </html:option>
-                </logic:iterate>
-                
-            </html:select>
-        </logic:notEmpty>
+            <logic:notEmpty name="select">
+                <html:select name="Usuario" property="unidad_adscripcion" styleClass="span1" style="width:250px">
 
-    </logic:present>
+                    <logic:iterate name="select" id="unidadAdscripcion">
+                        <html:option value= "opcion.values" >
+                            <bean:write  name="unidadAdscripcion" property="nombre" ></bean:write>
+                            <bean:define id="opcion" name="unidadAdscripcion" property="nombre" ></bean:define>
+                        </html:option>
+                    </logic:iterate>
+
+                </html:select>
+            </logic:notEmpty>
+
+        </logic:present>
 
         <label style="color:red"> Sexo: </label>
         <label class="radio">

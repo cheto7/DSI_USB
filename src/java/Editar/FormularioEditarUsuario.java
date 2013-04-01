@@ -1,13 +1,14 @@
-
 package Editar;
 
 import Clases.Usuario;
+import Clases.unidadAdscripcion;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 import DBMS.*;
+import java.util.ArrayList;
 
 /**
  *
@@ -31,16 +32,18 @@ public class FormularioEditarUsuario extends org.apache.struts.action.Action {
      * @throws java.lang.Exception
      * @return
      */
-    
     @Override
-     public ActionForward execute(ActionMapping mapping, ActionForm form,
+    public ActionForward execute(ActionMapping mapping, ActionForm form,
             HttpServletRequest request, HttpServletResponse response)
             throws Exception {
-        
-            Usuario u = (Usuario) form;
-            u = DBMS.getInstance().atributosUsuario(u);
-            request.setAttribute("Usuario", u);
-            
-            return mapping.findForward(SUCCESS);
+
+        Usuario u = (Usuario) form;
+        u = DBMS.getInstance().atributosUsuario(u);
+        request.setAttribute("Usuario", u);
+
+        ArrayList<unidadAdscripcion> select = DBMS.getInstance().obtenerUnidadesAdscripcion();
+        request.setAttribute("select", select);
+
+        return mapping.findForward(SUCCESS);
     }
 }
