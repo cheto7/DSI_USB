@@ -17,8 +17,11 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
 public class Volver extends org.apache.struts.action.Action {
+    
 
     private static final String ADMINISTRADOR = "administrador";
+    private static final String SUPERVISOR = "supervisor";
+    private static final String INSPECTOR = "inspector";
     private static final String HABILITADO = "habilitado";
     private static final String NO_HABILITADO = "no_habilitado";
     private static final String FAILURE = "failure";
@@ -48,19 +51,25 @@ public class Volver extends org.apache.struts.action.Action {
         ArrayList<Noticia> noticias = DBMS.getInstance().obtenerNoticias();
         request.setAttribute("informacion", noticias);
         
-        if (autenticado.getAdministrador().equals("administrador")) {
+        if (autenticado.getAdministrador().equals("administrador")) 
             return mapping.findForward(ADMINISTRADOR);
-        } else {
+        else if (autenticado.getAdministrador().equals("supervisor")) 
+            return mapping.findForward(SUPERVISOR); 
+        else if (autenticado.getAdministrador().equals("inspector")) 
+            return mapping.findForward(INSPECTOR);   
+
             /*el usuario esta deshabilitado. */
-            if (autenticado.getHabilitado() == null
-                    || autenticado.getHabilitado().equals("false")) {
+            else if (autenticado.getHabilitado() == null
+                    || autenticado.getHabilitado().equals("false")) 
                 return mapping.findForward(NO_HABILITADO);
                 /* el usuario esta habilitado. */
-            } else if (autenticado.getHabilitado() != null
+             else if (autenticado.getHabilitado() != null
                     && autenticado.getHabilitado().equals("true")) {
                 return mapping.findForward(HABILITADO);
+            } else if (autenticado.getAdministrador().equals("supervisor")) {
+                return mapping.findForward(SUPERVISOR);
             }
-        }
+
         return mapping.findForward(FAILURE);
     }
 }

@@ -4,6 +4,8 @@ package Clases;
 /**
  *
  * @author cheo
+ * modified @karen
+ * 
  */
 public class Usuario extends Root {
     private String usuario;
@@ -13,7 +15,6 @@ public class Usuario extends Root {
     private String apellido;
     private String email;
     private String fecha;
-    private String direccion;
     private String sexo;
     private String talla_mascara;
     private String talla_camisa;
@@ -23,6 +24,35 @@ public class Usuario extends Root {
     private String habilitado;
     private String administrador;
     private String area_laboral;
+    private String unidad_adscripcion;
+    private String ci;
+    private String cargo;
+    
+
+    public String getCargo() {
+        return cargo;
+    }
+
+    public void setCargo(String cargo) {
+        this.cargo = cargo;
+    }
+
+    public String getCi() {
+        return ci;
+    }
+
+    public void setCi(String ci) {
+        this.ci = ci;
+    }
+        
+    public String getUnidad_adscripcion() {
+        return unidad_adscripcion;
+    }
+
+    public void setUnidad_adscripcion(String unidad_adscripcion) {
+        this.unidad_adscripcion = unidad_adscripcion;
+    }
+
 
     public String getArea_laboral() {
         return area_laboral;
@@ -64,14 +94,6 @@ public class Usuario extends Root {
 
     public void setFecha(String fecha) {
         this.fecha = fecha;
-    }
-
-    public String getDireccion() {
-        return direccion;
-    }
-
-    public void setDireccion(String direccion) {
-        this.direccion = direccion;
     }
 
     public String getSexo() {
@@ -161,4 +183,6 @@ public class Usuario extends Root {
     public void setApellido(String apellido) {
         this.apellido = apellido;
     }
+
+
 }

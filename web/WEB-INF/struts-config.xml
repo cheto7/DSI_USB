@@ -7,6 +7,7 @@
 
 <struts-config>
     <form-beans>
+        <form-bean name="Entregas" type="Clases.Entregas"/>        
         <form-bean  name="Usuario" type="Clases.Usuario" />
         <form-bean name="Solicitud" type="Clases.Solicitud"/>
         <form-bean name="Pedido"  type="Clases.Pedido"/>
@@ -28,6 +29,8 @@
     <action-mappings>
         <action path="/Login" type="Login.Login" scope="request" name="Usuario">
             <forward name="administrador" path="/vistas/genericos/interfaz_administrador.jsp"></forward>
+            <forward name="supervisor" path="/vistas/genericos/interfaz_supervisor.jsp"></forward>
+            <forward name="inspector" path="/vistas/genericos/interfaz_inspector.jsp"></forward>
             <forward name="habilitado" path="/vistas/genericos/interfaz_simple_mortal.jsp"></forward>
             <forward name="no_habilitado" path="/vistas/genericos/interfaz_menos_de_simple_mortal.jsp"></forward>
             <forward name="failure" path="/vistas/genericos/interfaz_pag_principal.jsp"></forward>
@@ -159,6 +162,8 @@
             <forward name="habilitado" path="/vistas/genericos/interfaz_simple_mortal.jsp"></forward>
             <forward name="failure" path="/vistas/error/welcomeStruts.jsp"></forward>
             <forward name="administrador" path="/vistas/genericos/interfaz_administrador.jsp"></forward>
+            <forward name="supervisor" path="/vistas/genericos/interfaz_supervisor.jsp"></forward>
+            <forward name="inspector" path="/vistas/genericos/interfaz_inspector.jsp"></forward>
         </action>
         
         <action path="/VolverPagInicio" type="Volver.VolverPagInicio" scope="request" 
@@ -310,6 +315,33 @@
             <forward name="success" path="/vistas/pedido/interfaz_pedido.jsp"></forward>
             <forward name="failure" path="/Ir_pag_usuario.do"></forward>
         </action>
+        
+        <action path="/ListarFacturas" type="Facturas.ListarFacturas" scope="request"
+                name="Factura">
+            <forward name="success" path="/vistas/factura/interfaz_factura.jsp"></forward>
+        </action>
+        
+        <action path="/IrAgregarFactura" type="Facturas.IrAgregarFactura" scope="request"
+                name="Factura">
+            <forward name="success" path="/vistas/factura/interfaz_formulario_agregar_factura.jsp"></forward>
+        </action>
+        
+        <action path="/AgregarFactura" type="Facturas.AgregarFactura" scope="request"
+                name="Factura">
+            <forward name="success" path="/ListarFacturas.do"></forward>
+            <forward name="failure" path="/IrAgregarFactura.do"></forward>
+        </action>
+        
+        <action path="/FormularioEditarFactura" type="Facturas.FormularioEditarFactura" scope="request"
+                name="Factura">
+            <forward name="success" path="/vistas/factura/interfaz_factura.jsp"></forward>
+        </action>
+        
+        <action path="/validarFactura" type="Facturas.validarFactura" scope="request"
+                name="Factura">
+            <forward name="success" path="/vistas/factura/interfaz_factura.jsp"></forward>
+        </action>
+        
         <action path="/AgregarEquipoASolicitud" type="Solicitudes.AgregarEquipoASolicitud" scope="request" 
                 name="Usuario">
             <forward name="success" path="/Ir_pag_pedido.do"></forward>
@@ -360,9 +392,33 @@
                 name="Usuario">
             <forward name="success" path="/vistas/pedido/revision-pedido.jsp"></forward>
         </action>
-          <action path="/ConfirmarModificacion" type="Solicitudes.ConfirmarModificacion" scope="request" parameter="method"
+        <action path="/ConfirmarModificacion" type="Solicitudes.ConfirmarModificacion" scope="request" parameter="method"
                 name="Solicitud">
             <forward name="success" path="/ListarSolicitudes.do"></forward>
+        </action>              
+        <action  path="/gestionarUnidad" scope="request" type="Unidad.listarUnidadAdscripcion" name="Usuario" >
+            <forward name="success" path="/vistas/unidad/formulario_agregarUnidad.jsp"/>            
+        </action>
+        <action path="/eliminarUnidadAdscripcion" scope="request" type="Unidad.eliminarUnidadAdscripcion" name="Usuario">
+            <forward name="success" path="/vistas/unidad/formulario_agregarUnidad.jsp"/>
+        </action>
+        <action path="/editarUnidadAdscripcion" type="Unidad.editarUnidadAdscripcion" name="Usuario" scope="request">
+            <forward name="success" path="/vistas/unidad/formulario_agregarUnidad.jsp"/>
+        </action>
+        <action  path="/editarUnidad" type="Unidad.editarUnidad" name="Usuario" scope="request">
+            <forward name="success" path="/vistas/unidad/formulario_agregarUnidad.jsp"/>
+        </action>
+        <action path="/registrarUnidadAdscripcion" type="Unidad.registrarUnidadAdscripcion" name="Usuario" scope="request">
+            <forward name="success" path="/vistas/unidad/formulario_agregarUnidad.jsp"/>
+        </action>
+        <action path="/listarSolicitantes" type="Entregas.listarSolicitantes" scope="request" name="Entregas">
+            <forward name="success" path="/vistas/entrega/listar_Solicitantes.jsp"/>
+        </action>
+        <action  path="/hacerEntrega" type="Entregas.hacerEntrega" scope="request" name="Entregas">
+            <forward name="success" path="/vistas/entrega/listar_Solicitantes.jsp"/>
+        </action>
+        <action name="Entregas" path="/entregarEquipo" scope="request" type="Entregas.entregarEquipo">
+            <forward name="success" path="/vistas/entrega/listar_Solicitantes.jsp"/>
         </action>
         <action path="/VerInforPersonal" type="Editar.VerInforPersonal" scope="request" parameter="method"
                 name="Usuario">
@@ -405,7 +461,6 @@
         
         
         
-
     </action-mappings>
     
     <controller processorClass="org.apache.struts.tiles.TilesRequestProcessor"/>

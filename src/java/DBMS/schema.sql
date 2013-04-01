@@ -11,9 +11,10 @@ CREATE TABLE "PREPAS".usuario (
   email VARCHAR NOT NULL UNIQUE,
   nombre VARCHAR NOT NULL,
   apellido VARCHAR NOT NULL,
+  ci VARCHAR NOT NULL UNIQUE,
   fecha VARCHAR NOT NULL,
   telefono VARCHAR NOT NULL,
-  direccion VARCHAR NOT NULL,
+  unidad_adscripcion VARCHAR NOT NULL,
   sexo VARCHAR NOT NULL,
   talla_mascara VARCHAR NOT NULL,
   talla_camisa VARCHAR NOT NULL,
@@ -23,6 +24,8 @@ CREATE TABLE "PREPAS".usuario (
   habilitado VARCHAR NOT NULL,
   administrador VARCHAR DEFAULT 'usuario',
   area_laboral   VARCHAR,
+  cargo VARCHAR,
+
   
   CONSTRAINT PK_usuario PRIMARY KEY (usuario)
 ) WITH (
@@ -85,7 +88,7 @@ OIDS = FALSE
 
 CREATE TABLE "PREPAS".proveedor (
     RIF VARCHAR NOT NULL,
-    nombre VARCHAR,
+    nombre VARCHAR UNIQUE,
     telefono VARCHAR,
     email VARCHAR,
     contacto VARCHAR,
@@ -100,11 +103,12 @@ OIDS = FALSE
 
 CREATE TABLE "PREPAS".factura (
     numero_factura SERIAL,
-    RIF VARCHAR,
+    nombre_proveedor VARCHAR,
+    validado VARCHAR, -- FALSO si aun se esta modificando, VERDAD si ya esta comprometido.
     fecha DATE NOT NULL,
 
     CONSTRAINT PK_factura PRIMARY KEY (numero_factura),
-    CONSTRAINT FK_factura_proveedor FOREIGN KEY (RIF) REFERENCES "PREPAS".proveedor (RIF)
+    CONSTRAINT FK_factura_proveedor FOREIGN KEY (nombre_proveedor) REFERENCES "PREPAS".proveedor (nombre)
 
 ) WITH (
 OIDS = FALSE
@@ -194,5 +198,13 @@ CREATE TABLE "PREPAS".supervisa (
     CONSTRAINT FK_supervisa_supervisor FOREIGN KEY (supervisor) REFERENCES "PREPAS".supervisor (usuario),
     CONSTRAINT FK_supervisa_individuo FOREIGN KEY (individuo) REFERENCES "PREPAS".individuo (usuario)
 ) WITH (
+OIDS = FALSE
+);
+
+CREATE TABLE "PREPAS".unidadAdscripcion (
+    id SERIAL,
+    nombre VARCHAR NOT NULL,
+    CONSTRAINT PK_unidadAdscripcion PRIMARY KEY (id) 
+)   WITH (
 OIDS = FALSE
 );

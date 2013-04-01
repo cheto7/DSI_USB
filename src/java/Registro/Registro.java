@@ -1,6 +1,8 @@
-
 package Registro;
 
+import Clases.unidadAdscripcion;
+import DBMS.DBMS;
+import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.apache.struts.action.ActionForm;
@@ -12,10 +14,13 @@ import org.apache.struts.action.ActionMapping;
  * @author cheo
  */
 
-/*Accion que lleva a la pagina de registro. */
+/*
+ * Accion que lleva a la pagina de registro.
+ */
 public class Registro extends org.apache.struts.action.Action {
 
     private static final String SUCCESS = "success";
+
     /**
      * This is the action called from the Struts framework.
      *
@@ -27,10 +32,13 @@ public class Registro extends org.apache.struts.action.Action {
      * @return
      */
     @Override
-    
-     public ActionForward execute(ActionMapping mapping, ActionForm form,
+    public ActionForward execute(ActionMapping mapping, ActionForm form,
             HttpServletRequest request, HttpServletResponse response)
             throws Exception {
-            return mapping.findForward(SUCCESS);
+
+        ArrayList<unidadAdscripcion> select = DBMS.getInstance().obtenerUnidadesAdscripcion();
+        request.setAttribute("select", select); 
+        
+        return mapping.findForward(SUCCESS);
     }
 }

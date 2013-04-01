@@ -50,6 +50,7 @@ public class VerSolicitudRecibida extends org.apache.struts.action.Action {
             u.setSexo(rs.getString("sexo"));
             u.setArea_laboral(rs.getString("area_laboral"));
             u.setEmail(rs.getString("email"));
+            u.setCi(rs.getString("ci"));
             Solicitud nueva = new Solicitud();
             nueva.setId(rs.getInt("id"));
             nueva.setCantidad(rs.getString("cantidad"));

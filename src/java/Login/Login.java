@@ -17,6 +17,7 @@ import org.apache.struts.chain.contexts.ServletActionContext;
 /**
  *
  * @author andreth
+ * Modificado por Azocar
  */
 
 /*Accion que consulta el usuario y el login en la base de datos para darle
@@ -25,6 +26,8 @@ import org.apache.struts.chain.contexts.ServletActionContext;
 public class Login extends org.apache.struts.action.Action {
 
     private final String ADMINISTRADOR = "administrador";
+    private final String SUPERVISOR = "supervisor";
+    private final String INSPECTOR = "inspector";
     private final String HABILITADO = "habilitado";
     private final String NO_HABILITADO = "no_habilitado";
     private final String FAILURE = "failure";
@@ -61,26 +64,32 @@ public class Login extends org.apache.struts.action.Action {
              a la aplicacion si se ha iniciado
              sesion. */
             session.setAttribute("usuarioAutenticado", u.getUsuario());
+            session.setAttribute("usuarioAdministrador", u.getAdministrador());
             session.setAttribute("autenticado", u);
             session.setAttribute("sesionIniciada", sesionIniciada);
 
-            /* el usuario es el administrador del sistema. */
-            if (u.getAdministrador().equals("administrador")) {
+            
+            if (u.getAdministrador().equals("administrador")) /* el usuario es el administrador del sistema. */
                 return mapping.findForward(ADMINISTRADOR);
-            } else {
-                /*el usuario esta deshabilitado. */
-                if (u.getHabilitado() == null
-                        || u.getHabilitado().equals("false")) {
-                    return mapping.findForward(NO_HABILITADO);
-                    /* el usuario esta habilitado. */
-                } else if (u.getHabilitado() != null
+
+            if (u.getAdministrador().equals("supervisor")) /* el usuario es un Supervisor. */
+                return mapping.findForward(SUPERVISOR);
+            
+            if (u.getAdministrador().equals("inspector")) /* el usuario es un Inspector. */
+                return mapping.findForward(INSPECTOR);
+            
+            else if (u.getHabilitado() == null  /*el usuario esta deshabilitado. */
+                        || u.getHabilitado().equals("false"))
+                return mapping.findForward(NO_HABILITADO);                
+            
+            else if (u.getHabilitado() != null  /* el usuario esta habilitado. */
                         && u.getHabilitado().equals("true")) {
                     return mapping.findForward(HABILITADO);
-                }
             }
-            /*Casos en el que todo falla (no esta en la BD)*/
+            
             return mapping.findForward(FAILURE);
-        } else {
+                                                    
+        } else { /*Casos en el que todo falla (no esta en la BD)*/
             u.setMensaje("Clave o nombre de usuario incorrecta. ");
             request.setAttribute("mensaje",u);
             return mapping.findForward(FAILURE);

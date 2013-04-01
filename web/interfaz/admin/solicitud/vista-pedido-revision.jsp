@@ -18,9 +18,10 @@
 <h5>Nombre de usuario: <bean:write name="usuario" property="usuario"/></h5>
 <h5>Nombres: <bean:write name="usuario" property="nombre"/></h5>
 <h5>Apellidos: <bean:write name="usuario" property="apellido"/></h5>
-<h5>Sexo: <bean:write name="usuario" property="sexo"/></h5>
-<h5>Área laboral: <bean:write name="usuario" property="area_laboral"/></h5>
+<h5>CI: <bean:write name="usuario" property="ci"/></h5>
 <h5>Email: <bean:write name="usuario" property="email"/></h5>
+<h5>Sexo: <bean:write name="usuario" property="sexo"/></h5>
+<h5>Sector Universitario: <bean:write name="usuario" property="area_laboral"/></h5>
 
 <table class="table table-hover">
     <tbody>

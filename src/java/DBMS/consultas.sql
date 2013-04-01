@@ -1,9 +1,14 @@
-SELECT * FROM "PREPAS".solicitud;
---SELECT * FROM "PREPAS".equipo;
+ --SELECT * FROM "PREPAS".solicitud;
+-- SELECT * FROM "PREPAS".equipo;
 -- SELECT * FROM "PREPAS".proveedor;
-SELECT * FROM "PREPAS".contiene;
+ --SELECT * FROM "PREPAS".contiene;
+--
 --SELECT * FROM "PREPAS".usuario;
-SELECT * FROM "PREPAS".periodo;
+--INSERT INTO "PREPAS".unidadAdscripcion (nombre) VALUES ('prueba');
+--DELETE FROM "PREPAS".unidadAdscripcion WHERE id = 4 ;             
+SELECT * FROM "PREPAS".unidadadscripcion;
+
+
 
 /*SELECT serial,imagen,nombre_vista,funcionalidad FROM "PREPAS".equipo
 EXCEPT
