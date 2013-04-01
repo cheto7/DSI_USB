@@ -193,3 +193,20 @@ CREATE TABLE "PREPAS".unidadAdscripcion (
 )   WITH (
 OIDS = FALSE
 );
+
+CREATE TABLE "PREPAS".tiene (
+    idTiene SERIAL NOT NULL,
+    id INT NOT NULL,
+    usuario VARCHAR NOT NULL, 
+    serial  INT NOT NULL,
+    cantidad INT NOT NULL,
+    fecha_entrega DATE NOT NULL,
+
+    CONSTRAINT PK_tiene PRIMARY KEY (idTiene),
+    CONSTRAINT FK_tiene_solicitud FOREIGN KEY (id) REFERENCES "PREPAS".solicitud (id),
+    CONSTRAINT FK_tiene_equipo FOREIGN KEY (serial) REFERENCES "PREPAS".equipo (serial),
+    CONSTRAINT FK_tiene_usuario FOREIGN KEY (usuario) REFERENCES "PREPAS".usuario (usuario)
+
+) WITH (
+OIDS = FALSE
+);

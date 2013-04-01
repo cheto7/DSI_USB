@@ -18,7 +18,15 @@ public class Entregas extends ActionForm {
     private String cantidad;
     private String frecuencia;
     private String talla;
+    private String fecha_entrega;
 
+    public String getFecha_entrega() {
+        return fecha_entrega;
+    }
+
+    public void setFecha_entrega(String fecha_entrega) {
+        this.fecha_entrega = fecha_entrega;
+    }
     
     public String getFrecuencia() {
         return frecuencia;

@@ -52,7 +52,7 @@
             <label>Teléfono</label>
         <html:text name="Usuario" property="telefono" styleId="tele"></html:text>
 
-            <label>Unidad Adscripción:</label>
+            <label style="color:red">Unidad Adscripción:</label>
         <logic:present name="select">
             <logic:empty name="select">
                 <html:select name="Usuario" property="unidad_adscripcion" styleClass="span1" style="width:250px">
