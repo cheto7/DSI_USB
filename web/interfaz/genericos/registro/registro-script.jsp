@@ -26,7 +26,7 @@
         $("#password").attr('placeholder', 'Contraseña');
         $("#password").attr('title', 'Ingrese su contraseña');  
     
-        $("#email").attr('placeholder', 'Email');
+        $("#email").attr('placeholder', 'Correo Electrónico');
         $("#email").attr('title', 'Ingrese su correo electrónico'); 
     
         $("#nombre").attr('placeholder', 'Nombre');
@@ -34,6 +34,9 @@
     
         $("#apellido").attr('placeholder', 'Apellido');
         $("#apellido").attr('title', 'Ingrese su primer apellido');
+        
+        $("#cedula").attr('placeholder', 'Cedula');
+        $("#cedula").attr('title', 'Ingrese su cedula de identidad');
     
         $("#fechanac").attr('placeholder', 'Fecha de nacimiento');
         $("#fechanac").attr('title', 'Ingrese su fecha de nacimiento con la sintaxis del ejemplo');

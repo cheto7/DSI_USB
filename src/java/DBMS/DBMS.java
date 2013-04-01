@@ -1839,6 +1839,9 @@ public class DBMS {
         }
         return false;
     }
+        //Existe en .tiene
+        //obtener de .tiene
+        //obtener serial .equipo
         
 public Boolean modificarUsuarioAdmin(Usuario u) {
         try {

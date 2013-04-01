@@ -68,7 +68,7 @@ public class Verificar extends DispatchAction {
          * y Sector Universitario(area_laboral) no pueden ser
          * vacias. */
         if (u.getUsuario().equals("") || u.getPassword().equals("")
-                || u.getApellido().equals("") || u.getCi().equals("") 
+                || u.getApellido().equals("") || u.getCi().equals("") || u.getUnidad_adscripcion().isEmpty()
                 || u.getArea_laboral().equals("") || u.getNombre().equals("")) {
             u.setMensaje("Campo de 'USB-ID', 'Contraseña', 'Nombre', "
                     + "'Apellido', 'CI' o 'Sector Universitario' no pueden ser vacíos. ");
