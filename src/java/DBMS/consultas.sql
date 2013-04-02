@@ -3,11 +3,14 @@
 -- SELECT * FROM "PREPAS".proveedor;
  --SELECT * FROM "PREPAS".contiene;
 --
---SELECT * FROM "PREPAS".usuario;
+SELECT * FROM "PREPAS".usuario;
 --INSERT INTO "PREPAS".unidadAdscripcion (nombre) VALUES ('prueba');
 --DELETE FROM "PREPAS".unidadAdscripcion WHERE id = 4 ;             
 --SELECT * FROM "PREPAS".unidadadscripcion;
+<<<<<<< HEAD
 SELECT * FROM "PREPAS".usuario;
+=======
+>>>>>>> branch 'master' of https://github.com/cheto7/DSI_USB.git
 
 
 
