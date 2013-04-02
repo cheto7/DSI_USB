@@ -59,6 +59,12 @@ public class entregarEquipo extends org.apache.struts.action.Action {
 
         int cantidadTiene = DBMS.getInstance().obtenerCantidadTiene(serial, id);
         int cantidadExistencia = DBMS.getInstance().obtenerCantidadExistencia(serial);
+        
+        if (cantidadTiene == 0){
+            Boolean agregado = false;
+            agregado = DBMS.getInstance().agregarTiene(id, usuario, serial);
+        }
+            
 
         int nuevaCantidadT = cantidadTiene + cantidad_entregada;
         int nuevaCantidadE = cantidadExistencia - cantidad_entregada;

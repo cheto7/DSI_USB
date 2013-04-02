@@ -2070,6 +2070,22 @@ public class DBMS {
         }
         return null;
     }
+    
+        public Boolean agregarTiene(int idS, String u, int serial) {
+        try {
+
+            String sqlquery = "INSERT INTO \"PREPAS\".tiene (id,usuario,serial,cantidad,fecha_entrega) VALUES "
+                    + "("+idS+",'"+u+"',"+serial+",0,(SELECT CURRENT_DATE) )";
+
+            Statement stmt = conexion.createStatement();
+            Integer i = stmt.executeUpdate(sqlquery);
+            System.out.println(sqlquery);
+            return i > 0;
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            return false;
+        }
+    }
 }
 //Existe en .tiene (id,serial) existe
 //obtener de .tiene
