@@ -157,24 +157,6 @@
         </logic:notEmpty>
     </logic:present>
 
-    <logic:present name="select">
-
-
-        <logic:notEmpty name="select">
-            <html:select name="unidadAdscripcion" property="id" styleClass="span1" style="width:250px">
-                
-                <logic:iterate name="select" id="unidadAdscripcion">
-                    <html:option value="1">
-                        <bean:write name="unidadAdscripcion" property="nombre"></bean:write>
-                    </html:option>
-                </logic:iterate>
-                
-            </html:select>
-        </logic:notEmpty>
-
-    </logic:present>
-
-
     <br>   
 
     </fielset>           	

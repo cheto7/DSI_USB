@@ -11,7 +11,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <%
-    if (session.getAttribute("sesionIniciada") == null) {
+    if (session!=null && session.getAttribute("sesionIniciada") == null) {
 %>
 <tiles:insert definition="interfaz-sesion-no-iniciada"/>
 <%

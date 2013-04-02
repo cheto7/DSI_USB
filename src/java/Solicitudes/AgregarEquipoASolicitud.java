@@ -43,6 +43,7 @@ public class AgregarEquipoASolicitud extends org.apache.struts.action.Action {
         
         String serial = request.getParameter("serial");
         String id = request.getParameter("id");
+        String idPeriodo = request.getParameter("periodo");
         String ttalla = request.getParameter("tipo_talla");
         String frecuencia = request.getParameter("frecuencia");
         String cantidad = request.getParameter("cantidad");
@@ -55,6 +56,7 @@ public class AgregarEquipoASolicitud extends org.apache.struts.action.Action {
         }
         
         solicitud.setId(Integer.parseInt(id));
+        solicitud.setPeriodo(Integer.parseInt(idPeriodo));
         solicitud.setNombre_usuario(usuario);
         equipo.setSerial(Integer.parseInt(serial));
         equipo.setTipo_talla(ttalla);

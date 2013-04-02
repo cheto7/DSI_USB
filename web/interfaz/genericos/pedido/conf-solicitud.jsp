@@ -18,81 +18,82 @@
     </center>    
 </logic:empty>
 <logic:notEmpty name="solicitud">
-<h1>Pedido realizado por:</h1>
-<h5><bean:write name="usuario" property="usuario"/></h5>
-<label> Usted debe confirmar su pedido para continuar. </label>
-<%--<label> En caso que haya olvidado algo, puede volver a modificar su pedido. </label>--%>
+    <h1>Pedido realizado por:</h1>
+    <h5><bean:write name="usuario" property="usuario"/></h5>
+    <label> Usted debe confirmar su pedido para continuar. </label>
+    <%--<label> En caso que haya olvidado algo, puede volver a modificar su pedido. </label>--%>
 
-<table class="table table-hover">
-    
-    <tbody>
-        <tr>
-            <th>Equipo</th>
-            <th>Imagen</th>
-            <th><center>Frecuencia de uso (días)</center></th>
-            <th>Cantidad solicitada</th>
-            <th>Talla</th>
-            <th colspan="2"><center>Opciones</center></th>
-        </tr>
-        
-    <%--<bean:write name="usuario" property="usuario"/>--%>
-    <logic:iterate name="solicitud" id="solicitud">
-        <tr>
-            <td> <bean:write name="solicitud" property="nombre_vista" /> </td>
-            <%--<td> <img src="assets/materiales/img.png" /> </td>--%>
-            <%--<td> <img src="<bean:write name="solicitud" property="imagen"/>" /> </td>--%>
-            <td><img width="70px" src="assets/materiales/<bean:write name="solicitud" property="nombre_vista"/>.png" /></td>
-            <td>
-                <center> 
-                    <bean:write name="solicitud" property="frecuencia" />
-                </center>
-            </td>
-            <td>
-                <center>
-                    <bean:write name="solicitud" property="cantidad" />
-                </center>
-            </td>
-            <td>
-                <center>
-                    <bean:write name="solicitud" property="talla" />
-                </center>
-            </td>
-            <td>
-                <html:form action="/EditarEquipoEnSolicitud" onsubmit="return (this)" style="display: inline">
-                        <html:hidden name="solicitud" property="id"/>
-                        <html:hidden name="solicitud" property="cantidad"/>
-                        <html:hidden name="solicitud" property="frecuencia"/>
-                        <html:hidden name="solicitud" property="serialEquipo"/>
-                        <html:hidden name="solicitud" property="nombre_vista"/> 
-                        <html:hidden name="solicitud" property="talla"/>
-                        <html:hidden name="usuario" property="usuario"/>
-                        <html:submit styleClass="btn btn-primary"> Editar </html:submit>
-                </html:form>
-            </td>
-            <td>
-                    <html:form action="/EliminarEquipoEnSolicitud" onsubmit="return (this)">
-                        <html:hidden name="solicitud" property="id"/>
-                        <html:hidden name="solicitud" property="serialEquipo"/>
-                        <html:hidden name="usuario" property="usuario"/>
-                        <html:submit styleClass="btn btn-danger"> Borrar </html:submit>
-                    </html:form>
-            </td>              
-        </tr>
-    </logic:iterate>
-    </tbody>
-    </table>
-    
-    <table align="center">
-        <tr>
-            <td>
-    <%--<html:form action="/Ir_pag_pedido" onsubmit="return (this)">
-        <html:submit styleClass="btn btn-primary"> Seguir Agregando </html:submit>
-    </html:form>   --%>
-    </td>
-    <td>
-    <html:form action="/CulminarSolicitud" onsubmit="return (this)">
-        <html:submit styleClass="btn btn-success"> Confirmar </html:submit>
+    <table class="table table-hover">
+
+        <tbody>
+            <tr>
+                <th>Equipo</th>
+                <th>Imagen</th>
+                <th><center>Frecuencia de uso (días)</center></th>
+    <th>Cantidad solicitada</th>
+    <th>Talla</th>
+    <th colspan="2"><center>Opciones</center></th>
+</tr>
+
+<%--<bean:write name="usuario" property="usuario"/>--%>
+<logic:iterate name="solicitud" id="solicitud">
+    <tr>
+        <td> <bean:write name="solicitud" property="nombre_vista" /> </td>
+        <%--<td> <img src="assets/materiales/img.png" /> </td>--%>
+        <%--<td> <img src="<bean:write name="solicitud" property="imagen"/>" /> </td>--%>
+        <td><img width="70px" src="assets/materiales/<bean:write name="solicitud" property="nombre_vista"/>.png" /></td>
+        <td>
+    <center> 
+        <bean:write name="solicitud" property="frecuencia" />
+    </center>
+</td>
+<td>
+<center>
+    <bean:write name="solicitud" property="cantidad" />
+</center>
+</td>
+<td>
+<center>
+    <bean:write name="solicitud" property="talla" />
+</center>
+</td>
+<td>
+    <html:form action="/EditarEquipoEnSolicitud" onsubmit="return (this)" style="display: inline">
+        <html:hidden name="solicitud" property="id"/>
+        <html:hidden name="solicitud" property="cantidad"/>
+        <html:hidden name="solicitud" property="frecuencia"/>
+        <html:hidden name="solicitud" property="serialEquipo"/>
+        <html:hidden name="solicitud" property="nombre_vista"/> 
+        <html:hidden name="solicitud" property="talla"/>
+        <html:hidden name="usuario" property="usuario"/>
+        <html:submit styleClass="btn btn-primary"> Editar </html:submit>
     </html:form>
+</td>
+<td>
+    <html:form action="/EliminarEquipoEnSolicitud" onsubmit="return (this)">
+        <html:hidden name="solicitud" property="id"/>
+        <html:hidden name="solicitud" property="serialEquipo"/>
+        <html:hidden name="usuario" property="usuario"/>
+        <html:submit styleClass="btn btn-danger"> Borrar </html:submit>
+    </html:form>
+</td>              
+</tr>
+</logic:iterate>
+</tbody>
+</table>
+
+<table align="center">
+    <tr>
+        <td>
+            <%--<html:form action="/Ir_pag_pedido" onsubmit="return (this)">
+                <html:submit styleClass="btn btn-primary"> Seguir Agregando </html:submit>
+            </html:form>   --%>
+        </td>
+        <td>
+            <html:form action="/CulminarSolicitud" onsubmit="return (this)">
+                <html:hidden name="solicitud" property="id"/>
+                <html:submit styleClass="btn btn-success"> Confirmar </html:submit>
+            </html:form>
         </td>
     </tr>
 </table>

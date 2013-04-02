@@ -46,30 +46,43 @@ public class entregarEquipo extends org.apache.struts.action.Action {
         Usuario autenticado = new Usuario();
         autenticado.setUsuario(loggueado);
 
-        String idSolicitud = request.getParameter("idSolicitud");
-        int id = Integer.parseInt(idSolicitud);
-        String usuario = request.getParameter("usuario");
-        String equipo = request.getParameter("equipo");
+        Usuario u = new Usuario();
         String fecha = request.getParameter("fecha_solicitud");
-        String c = request.getParameter("cantidad");
-        int cantidad = Integer.parseInt(c);
+        String idSolicitud = request.getParameter("idSolicitud");
+        String s = request.getParameter("serialEquipo");
+        String usuario = request.getParameter("usuario");
+        String c = request.getParameter("cantidad_entregada");
 
-        int serial = DBMS.getInstance().obtenerSerial(equipo);
-        int cantidadSolicitadada = DBMS.getInstance().obtenerCantidadSolicitada(serial, id);
-        int cantidadExistencia = DBMS.getInstance().obtenerCantidadExistencia(equipo);
+        int id = Integer.parseInt(idSolicitud);
+        int serial = Integer.parseInt(s);
+        int cantidad_entregada = Integer.parseInt(c);
 
-        int nuevaCantidadS = cantidadSolicitadada - cantidad;
-        int nuevaCantidadE = cantidadExistencia - cantidad;
+        int cantidadTiene = DBMS.getInstance().obtenerCantidadTiene(serial, id);
+        int cantidadExistencia = DBMS.getInstance().obtenerCantidadExistencia(serial);
+        
+        if (cantidadTiene == 0){
+            Boolean agregado = false;
+            agregado = DBMS.getInstance().agregarTiene(id, usuario, serial);
+        }
+            
 
-        Boolean resta = DBMS.getInstance().restarCantidad(serial, id, nuevaCantidadE, nuevaCantidadS);
+        int nuevaCantidadT = cantidadTiene + cantidad_entregada;
+        int nuevaCantidadE = cantidadExistencia - cantidad_entregada;
 
-        if (resta) {
-            Usuario u = new Usuario();
-            u.setMensaje("Entrega Procesada. ");
-            request.setAttribute("mensajeUsuarioEditado", u);
+        //VERIFICAR QUE cantidad_entrega > 0
+
+        if (nuevaCantidadE >= 0) {
+            Boolean resta = DBMS.getInstance().nuevaCantidad(serial, id, nuevaCantidadE, nuevaCantidadT);
+            if (resta) {
+                u.setMensaje("Entrega Procesada. ");
+                request.setAttribute("mensajeUsuarioEditado", u);
+            } else {
+                u.setMensaje("Algo ha ocurrido y no se pudo Procesar la Entrega. ");
+                request.setAttribute("mensajeUsuarioNoEditado", u);
+            }
+
         } else {
-            Usuario u = new Usuario();
-            u.setMensaje("Algo ha ocurrido y no se pudo Procesar la Entrega. ");
+            u.setMensaje("No Existen suficientes equipos. Quedan: "+cantidadExistencia);
             request.setAttribute("mensajeUsuarioNoEditado", u);
         }
 

@@ -21,8 +21,14 @@
     <label>Equipo:</label>
     <html:text name="ListadoGeneral" property="equipo" styleClass="span5" ></html:text><br>
     <label>Periodo:</label>
-    <html:select name="ListadoGeneral" property="periodo">            
-        <option value="actual">Actual</option>
+    <html:select name="ListadoGeneral" property="periodo" styleClass="span5">         
+        <option value="todos">Todos</option>
+        <logic:iterate name="periodos" id="periodo">
+            <option value="<bean:write name="periodo" property="id"/>">
+                    Del <bean:write name="periodo" property="fecha_inicio"/> 
+                    al <bean:write name="periodo" property="fecha_fin"/>
+            </option>
+        </logic:iterate>
     </html:select><br>
     <label>Tipo:</label>
     <html:select name="ListadoGeneral" property="tipo">            
@@ -45,5 +51,7 @@
         <option value="equipo">Equipos/tallas</option>
     </html:select><br>
     
-    <html:submit styleClass="btn btn-primary"> Consultar </html:submit>
+    <center>
+        <html:submit styleClass="btn btn-primary"> Consultar </html:submit>
+    </center>        
 </html:form>

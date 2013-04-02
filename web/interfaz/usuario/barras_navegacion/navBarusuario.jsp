@@ -30,12 +30,18 @@
 </div>
 
 <ul id="navbar">
-    <li>
+    <%--<li>
         <html:form action = "/FormularioEditarAdmin" onsubmit="return (this)">
             <html:hidden name="autenticado" property="usuario"/>
             <html:submit style="padding:10px 20px 40px 20px"> Editar Información </html:submit>
         </html:form> 
-    </li>
+    </li>--%>
+    <li>
+        <html:form action = "/VerInforPersonal" onsubmit="return (this)">
+            <html:hidden name="autenticado" property="usuario"/>
+            <html:submit style="padding:10px 20px 40px 20px"> Datos Personales </html:submit>
+        </html:form>
+    </li>    
 
     <li>
         <html:form action="/Ir_pag_pedido" onsubmit="return (this)">
@@ -50,7 +56,7 @@
             <html:submit style="padding:10px 20px 40px 20px">Solicitudes Anteriores</html:submit>
         </html:form> 
     </li>
-    
+
     <li>
         <html:form action="/CerrarSesion" onsubmit="return (this)"> 
             <html:submit style="padding:10px 20px 40px 20px">Cerrar Sesión</html:submit>
@@ -58,64 +64,70 @@
     </li>
 
     <div id="accordion">
-    <h3>Administración</h3>
+        <h3>Administración</h3>
         <div>
-            
-    <li>
-        <html:form action="/ListadosGenerales" onsubmit="return (this)"> 
-            <html:submit style="padding:0px 10px 30px 0px">Consolidados</html:submit>
-        </html:form>
-    </li>    
-    <li>
-        <html:form action="/listarSolicitantes" onsubmit="return (this)"> 
-            <html:submit style="padding:0px 10px 30px 0px">Entregas</html:submit>
-        </html:form>
-    </li>    
 
-    <li>
-        <html:form action="/ColeccionUsuarios" onsubmit="return (this)">
-            <html:hidden name="autenticado" property="usuario"/>
-            <html:submit style="padding:0px 10px 30px 0px">Usuarios</html:submit>
-        </html:form>
-    </li>
-    
-    <li>
-        <html:form action="/ListarEquipo" onsubmit="return (this)">
-            <html:submit style="padding:0px 10px 30px 0px">Equipos</html:submit>
-        </html:form>
-    </li>
-    
-    <li>
-        <html:form action="/ListarNoticia" onsubmit="return (this)">
-            <html:hidden name="autenticado" property="usuario"/>
-            <html:submit style="padding:0px 10px 30px 0px">Noticias</html:submit>
-        </html:form>
-    </li>
-    <li>
-        <html:form action="/ListarProveedores" onsubmit="return (this)">
-            <html:hidden name="autenticado" property="usuario"/>
-            <html:submit style="padding:0px 10px 30px 0px">Proveedores</html:submit>
-        </html:form>
-    </li>
-    <li>
-        <html:form action="/ListarFacturas" onsubmit="return (this)">
-            <html:hidden name="autenticado" property="usuario"/>
-            <html:submit style="padding:0px 10px 30px 0px">Facturas</html:submit>
-        </html:form>
-    </li>
-    <li>
-        <html:form action="/ListarSolicitudes" onsubmit="return (this)">
-            <html:hidden name="autenticado" property="usuario"/>
-            <html:submit style="padding:0px 10px 30px 0px">Solicitudes</html:submit>
-        </html:form>
-    </li>
-    <li>
-        <html:form action="/ListadoGeneral" onsubmit="return (this)">
-            <html:submit style="padding:0px 10px 30px 0px">Consultar</html:submit>
-        </html:form>
-    </li>
+            <li>
+                <html:form action="/ListadosGenerales" onsubmit="return (this)"> 
+                    <html:submit style="padding:0px 10px 30px 0px">Consolidados</html:submit>
+                </html:form>
+            </li>    
+            <li>
+                <html:form action="/listarSolicitantes" onsubmit="return (this)"> 
+                    <html:submit style="padding:0px 10px 30px 0px">Entregas</html:submit>
+                </html:form>
+            </li>    
+
+            <li>
+                <html:form action="/ColeccionUsuarios" onsubmit="return (this)">
+                    <html:hidden name="autenticado" property="usuario"/>
+                    <html:submit style="padding:0px 10px 30px 0px">Usuarios</html:submit>
+                </html:form>
+            </li>
+
+            <li>
+                <html:form action="/ListarEquipo" onsubmit="return (this)">
+                    <html:submit style="padding:0px 10px 30px 0px">Equipos</html:submit>
+                </html:form>
+            </li>
+
+            <li>
+                <html:form action="/ListarNoticia" onsubmit="return (this)">
+                    <html:hidden name="autenticado" property="usuario"/>
+                    <html:submit style="padding:0px 10px 30px 0px">Noticias</html:submit>
+                </html:form>
+            </li>
+            <li>
+                <html:form action="/ListarProveedores" onsubmit="return (this)">
+                    <html:hidden name="autenticado" property="usuario"/>
+                    <html:submit style="padding:0px 10px 30px 0px">Proveedores</html:submit>
+                </html:form>
+            </li>
+            <li>
+                <html:form action="/ListarFacturas" onsubmit="return (this)">
+                    <html:hidden name="autenticado" property="usuario"/>
+                    <html:submit style="padding:0px 10px 30px 0px">Facturas</html:submit>
+                </html:form>
+            </li>
+            <%--BORRAR Solicitudes--%>
+            <%--<li>
+                <html:form action="/ListarSolicitudes" onsubmit="return (this)">
+                    <html:hidden name="autenticado" property="usuario"/>
+                    <html:submit style="padding:0px 10px 30px 0px">Solicitudes</html:submit>
+                </html:form>
+            </li>--%>
+            <li>
+                <html:form action="/ListadoGeneral" onsubmit="return (this)">
+                    <html:submit style="padding:0px 10px 30px 0px">Consultar</html:submit>
+                </html:form>
+            </li>
+            <li>
+                <html:form action="/ListarPeriodos" onsubmit="return (this)">
+                    <html:submit style="padding:0px 10px 30px 0px">Períodos</html:submit>
+                </html:form>
+            </li>    
         </div>
 
-    
+
 </ul>
 

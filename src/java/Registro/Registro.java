@@ -36,7 +36,12 @@ public class Registro extends org.apache.struts.action.Action {
             HttpServletRequest request, HttpServletResponse response)
             throws Exception {
 
-        ArrayList<unidadAdscripcion> select = DBMS.getInstance().obtenerUnidadesAdscripcion();
+        unidadAdscripcion vacia = new unidadAdscripcion();
+        vacia.setNombre("");
+        ArrayList<unidadAdscripcion> select = new ArrayList<unidadAdscripcion>(0);
+        ArrayList<unidadAdscripcion> resto = DBMS.getInstance().obtenerUnidadesAdscripcion();
+        select.add(vacia);
+        select.addAll(resto);
         request.setAttribute("select", select); 
         
         return mapping.findForward(SUCCESS);

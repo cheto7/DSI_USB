@@ -12,13 +12,19 @@
 <%@ taglib uri="http://struts.apache.org/tags-tiles" prefix="tiles" %>
 
 
-<legend>Editar información usuario</legend>
+<legend>Datos Personales</legend>
+<h1 style="display: inline">Nombre de usuario:</h1> 
+<bean:write name="Usuario" property="usuario"/><br>
+<h1 style="display: inline"><br>Nombres y Apellidos:</h1> 
+<bean:write name="Usuario" property="nombre"/> <bean:write name="Usuario" property="apellido"/><br><br>
+<h1 style="display: inline">Cedula:</h1> 
+<bean:write name="Usuario" property="ci"/><br><br>
+<h1 style="display: inline">Fecha de Ingreso a la USB:</h1> 
+<bean:write name="Usuario" property="fecha"/><br><br>
 
-<legend>Datos Personales:</legend> 
-<label>Usuario:</label> <bean:write name="Usuario" property="usuario"/><br>
-
-<html:form styleId="Form" method="POST" action="/Editar" onsubmit="return (this)">
+<html:form action = "/Editar" styleId="Form" onsubmit = "return (this)">
     <html:hidden name="Usuario" property="usuario"/>
+    <html:hidden name="Usuario" property="administrador"/>
     <html:hidden name="autenticado" property="usuario"/>
 
     <label><br>Contraseña: </label>
@@ -35,15 +41,32 @@
     <html:text name="Usuario" property="telefono"></html:text>
     <br>  
 
-    <label>Unidad Adscripción:</label>
-    <html:text name="Usuario" property="unidad_adscripcion" ></html:text>
-    <br>
-    <br>    
+        <label>Unidad Adscripción:</label>
+    <logic:present name="select">
+        <logic:empty name="select">
+            <html:select name="Usuario" property="unidad_adscripcion" styleClass="span1" style="width:250px">
+
+                <html:option value= "" > Unidad de Adscripcion</html:option>                    
+
+            </html:select>
+        </logic:empty>
+
+        <logic:notEmpty name="select">
+            <html:select name="Usuario" property="unidad_adscripcion" styleClass="span1" style="width:250px">                  
+                <html:optionsCollection name="select" value="nombre" label="nombre" />                                            
+            </html:select>
+        </logic:notEmpty>
+
+    </logic:present>
+    <br>   
+    <label>Cargo </label>
+    <html:text name="Usuario" property="cargo"></html:text>
+    <br>  
     <br/>
 
     <legend>Talla de equipos:</legend>
-    <label>Talla de Máscara:</label>
-    <html:select name="Usuario" property="talla_mascara">
+    <h1 style="display: inline">Talla Mascara:</h1>
+    <html:select name="Usuario" property="talla_mascara" style="width: 55px">
         <option>
             <bean:write name="Usuario" property="talla_mascara"></bean:write>
         </option>
@@ -53,8 +76,8 @@
         <option>XL</option>
     </html:select>
     <br>
-    <label>Talla de Camisa:</label>
-    <html:select name="Usuario" property="talla_camisa">
+    <h1 style="display: inline">Talla de Camisa:</h1>
+    <html:select name="Usuario" property="talla_camisa" style="width: 55px">
         <option>
             <bean:write name="Usuario" property="talla_camisa"></bean:write>
         </option>
@@ -64,8 +87,8 @@
         <option>XL</option>
     </html:select>
     <br>
-    <label>Talla de Pantalón:</label>
-    <html:select name="Usuario" property="talla_pantalon">
+    <h1 style="display: inline">Talla de Pantalón:</h1>
+    <html:select name="Usuario" property="talla_pantalon" style="width: 55px">
         <option>
             <bean:write name="Usuario" property="talla_pantalon"></bean:write>
         </option>
@@ -81,8 +104,8 @@
         <option>48</option>
     </html:select>
     <br>
-    <label>Talla de Guantes:</label>
-    <html:select name="Usuario" property="talla_guantes">
+    <h1 style="display: inline">Talla de Guantes:</h1>
+    <html:select name="Usuario" property="talla_guantes" style="width: 55px">
         <option>
             <bean:write name="Usuario" property="talla_guantes"></bean:write>
         </option>
@@ -92,8 +115,8 @@
         <option>XL</option>
     </html:select>
     <br>
-    <label>Talla de Zapato:</label>
-    <html:select name="Usuario" property="talla_zapato">
+    <h1 style="display: inline">Talla de Zapato:</h1>
+    <html:select name="Usuario" property="talla_zapato" style="width: 55px">
         <option>
             <bean:write name="Usuario" property="talla_zapato"></bean:write>
         </option>
@@ -116,7 +139,7 @@
         <option>45</option>
     </html:select>
     <legend>Área laboral:</legend>
-    <html:select name="Usuario" property="area_laboral" styleClass="span1">
+    <html:select name="Usuario" property="area_laboral" styleClass="span1" style="width: 150px">
         <option>
             <bean:write name="Usuario" property="area_laboral"></bean:write>
         </option>
@@ -127,5 +150,8 @@
     </html:select> 
 
     <br>
-    <html:submit> Modificar </html:submit>
+    <br>
+    <center>
+        <html:submit styleClass="btn btn-primary">Modificar </html:submit>
+    </center>
 </html:form>

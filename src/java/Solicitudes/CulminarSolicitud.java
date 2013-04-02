@@ -4,6 +4,8 @@
  */
 package Solicitudes;
 
+import Clases.Solicitud;
+import DBMS.DBMS;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.apache.struts.action.ActionForm;
@@ -34,6 +36,11 @@ public class CulminarSolicitud extends org.apache.struts.action.Action {
             HttpServletRequest request, HttpServletResponse response)
             throws Exception {
         
+        Solicitud s = new Solicitud();
+        int id = Integer.parseInt(request.getParameter("id"));
+        s.setId(id);
+        //DBMS.getInstance().actualizarPeriodoRecibido(s);
+        request.setAttribute("solicitud", s);
         request.setAttribute("solicitudProcesada", "solicitud");
         
         return mapping.findForward(SUCCESS);
