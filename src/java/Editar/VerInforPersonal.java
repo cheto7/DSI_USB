@@ -40,6 +40,8 @@ public class VerInforPersonal extends org.apache.struts.action.Action {
             Usuario u = (Usuario) form;
             u = DBMS.getInstance().atributosUsuario(u);
             request.setAttribute("Usuario", u);
+            
+            
 
             return mapping.findForward(SUCCESS);
     }

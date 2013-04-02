@@ -99,10 +99,10 @@
                         <tr>
                             <th>Equipo</th>
                             <th>Imagen</th>
-                            <th><center>Frecuencia de uso</center></th>
-                    <th>Cantidad solicitada</th>
-                    <th>Talla</th>
-                    <th colspan="2"><center>Opciones</center></th>
+                            <th><center>Cantidad solicitada</center></th>
+                    <th>Tiene</th>
+                    <th><center>Entregar</center></th>
+                    <th colspan="2"></th>
                     </tr>
 
                     <logic:notEmpty name="solicitud">
@@ -113,17 +113,17 @@
                                 <td><img width="70px" src="assets/materiales/<bean:write name="solicitud" property="equipo"/>.png" /></td>
                                 <td>
                             <center> 
-                                <bean:write name="solicitud" property="frecuencia" />
+                                <bean:write name="solicitud" property="cantidad_solicitada" />
                             </center>
                             </td>
                             <td>
                             <center>
-                                <html:text name="solicitud" property="cantidad" style="width:20px" />
+                                <bean:write name="solicitud" property="cantidad_entregada" />
                             </center>
                             </td>
                             <td>
                             <center>
-                                <bean:write name="solicitud" property="talla" />
+                                <html:text name="solicitud" property="cantidad_entregada" style="width:20px" />
                             </center>
                             </td>
                             <td>
@@ -131,9 +131,9 @@
                             <td>                               
                                     <html:hidden name="listaSolicitudes" property="fecha_solicitud"/>
                                     <html:hidden name="solicitud" property="idSolicitud"/>                                    
-                                    <html:hidden name="solicitud" property="cantidad"/>                                    
+                                    <html:hidden name="solicitud" property="cantidad_entregada"/>                                    
                                     <html:hidden name="solicitud" property="usuario"/>
-                                    <html:hidden name="solicitud" property="equipo"/>
+                                    <html:hidden name="solicitud" property="serialEquipo"/>
                                     <html:submit styleClass="btn btn-success"> Entregar</html:submit>
                                 </html:form>
                             </td>              

@@ -44,9 +44,33 @@
                     </tr>
                     <tr>
                         <td>
-                            <h1 style="display: inline">Fecha de ingreso a la USB:</h1>
-                            <bean:write name="Usuario" property="unidad_adscripcion"></bean:write>
+                            <h1 style="display: inline">Cedula:</h1>
+                            <bean:write name="Usuario" property="ci"></bean:write>
                             </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <h1 style="display: inline">Fecha de ingreso a la USB:</h1>
+                            <bean:write name="Usuario" property="fecha"></bean:write>
+                            </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <h1 style="display: inline">Unidad Adscripción: </h1>
+                            <bean:write name="Usuario" property="unidad_adscripcion"></bean:write>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <h1 style="display: inline">Cargo: </h1>
+                            <bean:write name="Usuario" property="cargo"></bean:write>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <h1 style="display: inline">Sector Universitario: </h1>
+                            <bean:write name="Usuario" property="area_laboral"></bean:write>
+                        </td>
                     </tr>
                     <tr>
                         <td>
@@ -64,12 +88,6 @@
                         <td>
                             <h1 style="display: inline">Teléfono: </h1>
                             <bean:write name="Usuario" property="telefono"></bean:write>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <h1 style="display: inline">Área laboral: </h1>
-                            <bean:write name="Usuario" property="area_laboral"></bean:write>
                         </td>
                     </tr>
                     <tr>

@@ -16,7 +16,11 @@
 <h1 style="display: inline">Nombre de usuario:</h1> 
 <bean:write name="Usuario" property="usuario"/><br>
 <h1 style="display: inline"><br>Nombres y Apellidos:</h1> 
-<bean:write name="Usuario" property="nombre"/> <bean:write name="Usuario" property="apellido"/><br>
+<bean:write name="Usuario" property="nombre"/> <bean:write name="Usuario" property="apellido"/><br><br>
+<h1 style="display: inline">Cedula:</h1> 
+<bean:write name="Usuario" property="ci"/><br><br>
+<h1 style="display: inline">Fecha de Ingreso a la USB:</h1> 
+<bean:write name="Usuario" property="fecha"/><br><br>
 
 <html:form action = "/Editar" styleId="Form" onsubmit = "return (this)">
     <html:hidden name="Usuario" property="usuario"/>
@@ -37,15 +41,32 @@
     <html:text name="Usuario" property="telefono"></html:text>
     <br>  
 
-    <label>Unidad Adscripción:</label>
-    <html:text name="Usuario" property="unidad_adscripcion" ></html:text>
-    <br>
-    <br>    
+        <label>Unidad Adscripción:</label>
+    <logic:present name="select">
+        <logic:empty name="select">
+            <html:select name="Usuario" property="unidad_adscripcion" styleClass="span1" style="width:250px">
+
+                <html:option value= "" > Unidad de Adscripcion</html:option>                    
+
+            </html:select>
+        </logic:empty>
+
+        <logic:notEmpty name="select">
+            <html:select name="Usuario" property="unidad_adscripcion" styleClass="span1" style="width:250px">                  
+                <html:optionsCollection name="select" value="nombre" label="nombre" />                                            
+            </html:select>
+        </logic:notEmpty>
+
+    </logic:present>
+    <br>   
+    <label>Cargo </label>
+    <html:text name="Usuario" property="cargo"></html:text>
+    <br>  
     <br/>
 
     <legend>Talla de equipos:</legend>
-    <label>Talla de Máscara:</label>
-    <html:select name="Usuario" property="talla_mascara">
+    <h1 style="display: inline">Talla Mascara:</h1>
+    <html:select name="Usuario" property="talla_mascara" style="width: 55px">
         <option>
             <bean:write name="Usuario" property="talla_mascara"></bean:write>
         </option>
@@ -56,7 +77,7 @@
     </html:select>
     <br>
     <h1 style="display: inline">Talla de Camisa:</h1>
-    <html:select name="Usuario" property="talla_camisa">
+    <html:select name="Usuario" property="talla_camisa" style="width: 55px">
         <option>
             <bean:write name="Usuario" property="talla_camisa"></bean:write>
         </option>
@@ -67,7 +88,7 @@
     </html:select>
     <br>
     <h1 style="display: inline">Talla de Pantalón:</h1>
-    <html:select name="Usuario" property="talla_pantalon">
+    <html:select name="Usuario" property="talla_pantalon" style="width: 55px">
         <option>
             <bean:write name="Usuario" property="talla_pantalon"></bean:write>
         </option>
@@ -84,7 +105,7 @@
     </html:select>
     <br>
     <h1 style="display: inline">Talla de Guantes:</h1>
-    <html:select name="Usuario" property="talla_guantes">
+    <html:select name="Usuario" property="talla_guantes" style="width: 55px">
         <option>
             <bean:write name="Usuario" property="talla_guantes"></bean:write>
         </option>
@@ -95,7 +116,7 @@
     </html:select>
     <br>
     <h1 style="display: inline">Talla de Zapato:</h1>
-    <html:select name="Usuario" property="talla_zapato">
+    <html:select name="Usuario" property="talla_zapato" style="width: 55px">
         <option>
             <bean:write name="Usuario" property="talla_zapato"></bean:write>
         </option>
@@ -118,7 +139,7 @@
         <option>45</option>
     </html:select>
     <legend>Área laboral:</legend>
-    <html:select name="Usuario" property="area_laboral" styleClass="span1">
+    <html:select name="Usuario" property="area_laboral" styleClass="span1" style="width: 150px">
         <option>
             <bean:write name="Usuario" property="area_laboral"></bean:write>
         </option>

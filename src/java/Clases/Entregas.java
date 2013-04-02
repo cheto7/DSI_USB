@@ -12,44 +12,28 @@ import org.apache.struts.action.ActionForm;
 public class Entregas extends ActionForm {
        
     private String idSolicitud;
-    private String usuario;
+    private String serialEquipo;
     private String equipo;    
+    private String usuario;
+    private int cantidad_solicitada;
+    private int cantidad_entregada;
     private String fecha_solicitud;
-    private String cantidad;
-    private String frecuencia;
-    private String talla;
     private String fecha_entrega;
 
-    public String getFecha_entrega() {
-        return fecha_entrega;
+    public int getCantidad_entregada() {
+        return cantidad_entregada;
     }
 
-    public void setFecha_entrega(String fecha_entrega) {
-        this.fecha_entrega = fecha_entrega;
-    }
-    
-    public String getFrecuencia() {
-        return frecuencia;
+    public void setCantidad_entregada(int cantidad_entregada) {
+        this.cantidad_entregada = cantidad_entregada;
     }
 
-    public void setFrecuencia(String frecuencia) {
-        this.frecuencia = frecuencia;
-    }
-    
-    public String getIdSolicitud() {
-        return idSolicitud;
+    public int getCantidad_solicitada() {
+        return cantidad_solicitada;
     }
 
-    public void setIdSolicitud(String idSolicitud) {
-        this.idSolicitud = idSolicitud;
-    }      
-
-    public String getCantidad() {
-        return cantidad;
-    }
-
-    public void setCantidad(String cantidad) {
-        this.cantidad = cantidad;
+    public void setCantidad_solicitada(int cantidad_solicitada) {
+        this.cantidad_solicitada = cantidad_solicitada;
     }
 
     public String getEquipo() {
@@ -60,6 +44,14 @@ public class Entregas extends ActionForm {
         this.equipo = equipo;
     }
 
+    public String getFecha_entrega() {
+        return fecha_entrega;
+    }
+
+    public void setFecha_entrega(String fecha_entrega) {
+        this.fecha_entrega = fecha_entrega;
+    }
+
     public String getFecha_solicitud() {
         return fecha_solicitud;
     }
@@ -68,12 +60,20 @@ public class Entregas extends ActionForm {
         this.fecha_solicitud = fecha_solicitud;
     }
 
-    public String getTalla() {
-        return talla;
+    public String getIdSolicitud() {
+        return idSolicitud;
     }
 
-    public void setTalla(String talla) {
-        this.talla = talla;
+    public void setIdSolicitud(String idSolicitud) {
+        this.idSolicitud = idSolicitud;
+    }
+
+    public String getSerialEquipo() {
+        return serialEquipo;
+    }
+
+    public void setSerialEquipo(String serialEquipo) {
+        this.serialEquipo = serialEquipo;
     }
 
     public String getUsuario() {
@@ -82,6 +82,8 @@ public class Entregas extends ActionForm {
 
     public void setUsuario(String usuario) {
         this.usuario = usuario;
-    }        
+    }
+
+   
 
 }
