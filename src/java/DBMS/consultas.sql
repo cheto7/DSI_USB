@@ -6,7 +6,8 @@
 --SELECT * FROM "PREPAS".usuario;
 --INSERT INTO "PREPAS".unidadAdscripcion (nombre) VALUES ('prueba');
 --DELETE FROM "PREPAS".unidadAdscripcion WHERE id = 4 ;             
-SELECT * FROM "PREPAS".unidadadscripcion;
+--SELECT * FROM "PREPAS".unidadadscripcion;
+SELECT * FROM "PREPAS".usuario;
 
 
 

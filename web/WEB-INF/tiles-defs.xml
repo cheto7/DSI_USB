@@ -57,6 +57,12 @@
         <put name="sidebar" value=""></put>
     </definition>
     
+    <definition name="confirmar-factura" extends="home">
+        <put name="noticias" value="/interfaz/genericos/factura/conf-factura.jsp"></put>
+        <put name="navBarGeneral" value="/interfaz/genericos/barras_navegacion/navBarAgregar.jsp"></put>
+        <put name="sidebar" value=""></put>
+    </definition>
+    
     <definition name="confirmar-eliminar" extends="home">
         <put name="noticias" value="/interfaz/admin/lista_usuarios/eliminar/conf-eliminar.jsp"></put>
         <put name="navBarGeneral" value="/interfaz/admin/barras_navegacion/navBarListar.jsp"></put>
@@ -97,6 +103,18 @@
         <put name="navBar" value="/interfaz/genericos/barras_navegacion/navBarpedido.jsp"></put>
         <put name="sidebar-second" value="/interfaz/genericos/plantilla_general/sidebar-second.jsp"></put>
         <put name="footer" value="/interfaz/genericos/plantilla_general/footer.jsp"></put> 
+    </definition>
+    
+    <definition name="formulario-factura-agregar-equipo" path="/interfaz/genericos/pedido/plantilla-pedido.jsp">
+        <put name="script" value="/interfaz/genericos/pedido/script-pedido.jsp"></put>
+        <put name="formulario" value="/interfaz/genericos/factura/formulario-factura.jsp"></put>
+        <put name="navBar" value="/interfaz/genericos/barras_navegacion/navBarpedido.jsp"></put>
+        <put name="sidebar-second" value="/interfaz/genericos/plantilla_general/sidebar-second.jsp"></put>
+        <put name="footer" value="/interfaz/genericos/plantilla_general/footer.jsp"></put> 
+    </definition>
+    
+    <definition name="formulario-factura-agregar-talla" extends="formulario-factura-agregar-equipo">
+        <put name="formulario" value="/interfaz/genericos/factura/formulario-talla.jsp"></put>
     </definition>
     
      <definition name="formulario-factura" extends="home">

@@ -15,7 +15,11 @@
 <fieldset>
     <legend>Lista de Facturas (no validadas)</legend> 
     
-    
+    <logic:present name="no_eliminado">
+        <center>
+            <label> No pudo ser eliminado.</label>
+        </center>
+    </logic:present>
 
     <logic:notPresent name="facturas">
         <center>
@@ -39,6 +43,7 @@
                         <th><center>Fecha</center></th>
                 <th><center>Proveedor</center></th>
                 <th><center>Modificar</center></th>
+                <th><center>Eliminar</center></th>
                 <th><center>Validar</center></th>
                 </tr>
 
@@ -60,8 +65,17 @@
                         <html:form action = "/FormularioEditarFactura" onsubmit = "return (this)">
                             <html:hidden name="factura" property="numero_factura"/>
                             <html:hidden name="factura" property="proveedor"/>
-                            <html:hidden name="factura" property="fecha"/>
                             <html:submit styleClass="btn btn-success"> Editar </html:submit>
+                        </html:form> 
+                    </center>
+                    </td>
+                    
+                        <td>
+                    <center>
+                        <html:form action = "/EliminarFactura" onsubmit = "return (this)">
+                            <html:hidden name="factura" property="numero_factura"/>
+                            <html:hidden name="factura" property="proveedor"/>
+                            <html:submit styleClass="btn btn-danger"> Eliminar </html:submit>
                         </html:form> 
                     </center>
                     </td>
@@ -71,7 +85,6 @@
                         <html:form action="/validarFactura" onsubmit="return (this)">
                             <html:hidden name="factura" property="numero_factura"/>
                             <html:hidden name="factura" property="proveedor"/>
-                            <html:hidden name="factura" property="fecha"/>
                             <html:submit styleClass="btn btn-danger"> Validar </html:submit>
                         </html:form>
                     </center>

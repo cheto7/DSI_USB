@@ -22,6 +22,7 @@ public class Equipo extends ValidatorForm {
     private String vida_util;
     private String sector;
     private String tipo_talla;
+    private String talla;
 
     public String getTipo_talla() {
         return tipo_talla;
@@ -159,5 +160,19 @@ public class Equipo extends ValidatorForm {
      */
     public void setFuncionalidad(String funcionalidad) {
         this.funcionalidad = funcionalidad;
+    }
+
+    /**
+     * @return the talla
+     */
+    public String getTalla() {
+        return talla;
+    }
+
+    /**
+     * @param talla the talla to set
+     */
+    public void setTalla(String talla) {
+        this.talla = talla;
     }
 }

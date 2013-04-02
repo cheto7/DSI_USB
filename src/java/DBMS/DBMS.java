@@ -8,12 +8,8 @@ import java.sql.Connection;
 import Clases.*;
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.ListIterator;
-import java.util.List;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.GregorianCalendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -1454,6 +1450,158 @@ public class DBMS {
             ex.printStackTrace();
             return false;
         }
+    }
+    
+    public Boolean eliminarFactura(int numero_factura) {
+        try {
+            String sqlquery = "DELETE FROM \"PREPAS\".factura WHERE "
+                    + "numero_factura = '" + numero_factura + "' ";
+
+            Statement stmt = conexion.createStatement();
+            System.out.println(sqlquery);
+            Integer i = stmt.executeUpdate(sqlquery);
+
+            return i > 0;
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return false;
+    }
+    
+    public ArrayList<Equipo> obtenerEquipoFactura(Factura f) {
+        ArrayList<Equipo> equipos = new ArrayList<Equipo>(0);
+        try {
+            String sqlquery;
+
+            sqlquery = "SELECT E.serial AS seri, E.imagen AS ima, E.nombre_vista AS nom, F.cantidad AS cant , F.talla AS tal "
+                    + "FROM \"PREPAS\".equipo E, \"PREPAS\".facturado F "
+                    + "WHERE E.serial = F.serial AND F.numero_factura = \'"
+                    + f.getNumero_factura() +"\'";
+            
+            System.out.println(sqlquery);
+
+            Statement stmt = conexion.createStatement();
+            System.out.println(sqlquery);
+            ResultSet rs = stmt.executeQuery(sqlquery);
+
+            while (rs.next()) {
+                Equipo e = new Equipo();
+                e.setCantidad(rs.getInt("cant"));
+                e.setSerial(rs.getInt("seri"));
+                e.setImagen(rs.getString("ima"));
+                e.setNombre_vista(rs.getString("nom"));
+                e.setTalla(rs.getString("tal"));
+                equipos.add(e);
+            }
+            return equipos;
+        } catch (SQLException ex) {
+            System.out.println("EXCEPCION");
+            ex.printStackTrace();
+        }
+        return equipos;
+    }
+    
+    public ArrayList<Equipo> obtenerEquiposFacturaAgregar(Facturado f,String sector) {
+        ArrayList<Equipo> equipos = new ArrayList<Equipo>(0);
+        try {
+            String sqlquery = "SELECT serial,imagen,nombre_vista,funcionalidad,tipo_talla "
+                    + "FROM \"PREPAS\".equipo "
+                    + "WHERE habilitado='true' AND sector= '"+sector+"' ";
+
+
+            Statement stmt = conexion.createStatement();
+            System.out.println(sqlquery);
+            ResultSet rs = stmt.executeQuery(sqlquery);
+
+            while (rs.next()) {
+                Equipo e = new Equipo();
+                e.setSerial(rs.getInt("serial"));
+                e.setImagen(rs.getString("imagen"));
+                e.setNombre_vista(rs.getString("nombre_vista"));
+                e.setFuncionalidad(rs.getString("funcionalidad"));
+                e.setTipo_talla(rs.getString("tipo_talla"));
+                equipos.add(e);
+            }
+            return equipos;
+        } catch (SQLException ex) {
+            System.out.println("EXCEPCION");
+            ex.printStackTrace();
+        }
+        return equipos;
+    }
+    
+    public Boolean existeFacturado(Facturado f) {
+        try {
+            String sqlquery;
+            sqlquery = "SELECT * FROM \"PREPAS\".facturado F "
+                    + "WHERE F.numero_factura = '" + f.getNumero_factura() 
+                    +"' AND F.serial = '" + f.getSerial() 
+                    +"' AND F.talla = '"+ f.getTalla() +"'";
+
+            Statement stmt = conexion.createStatement();
+            System.out.println(sqlquery);
+            ResultSet rs = stmt.executeQuery(sqlquery);
+
+            while (rs.next()) {
+                return true;
+            }
+            return false;
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return false;
+    }
+    
+    public Boolean agregarAFacturado(Facturado f) {
+        try {
+            Boolean existe = existeFacturado(f);
+            if (!existe) {
+                String sqlquery;
+                sqlquery = "INSERT INTO \"PREPAS\".facturado (numero_factura,serial,talla,cantidad,costo_unidad) "
+                        + "VALUES ('" + f.getNumero_factura() + "','"
+                        +f.getSerial() +"','"
+                        +f.getTalla() +"','"
+                        +f.getCantidad() +"','0')";
+                
+                System.out.println(sqlquery);
+
+                Statement stmt = conexion.createStatement();
+                System.out.println(sqlquery);
+                Integer i = stmt.executeUpdate(sqlquery);
+                return i > 0;
+            }
+            return false;
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return false;
+    }
+
+    
+    public String_Cheto obtenerProveedor(Factura f) {
+        String_Cheto proveedor = new String_Cheto("");
+        try {
+            String sqlquery;
+
+            sqlquery = "SELECT nombre_proveedor "
+                    + "FROM \"PREPAS\".factura "
+                    + "WHERE numero_factura = \'"
+                    + f.getNumero_factura() +"\'";
+
+
+            Statement stmt = conexion.createStatement();
+            System.out.println(sqlquery);
+            ResultSet rs = stmt.executeQuery(sqlquery);
+
+            while (rs.next()) {
+                proveedor.setValue(rs.getString("nombre_proveedor"));
+            }
+            return proveedor;
+        } catch (SQLException ex) {
+            System.out.println("EXCEPCION");
+            ex.printStackTrace();
+        }
+        return proveedor;
     }
 
     public ArrayList<unidadAdscripcion> obtenerUnidadesAdscripcion() {
