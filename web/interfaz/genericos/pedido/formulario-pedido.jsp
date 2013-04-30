@@ -10,373 +10,349 @@
 <%@ taglib uri="http://struts.apache.org/tags-tiles" prefix="tiles" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
-<!-- FORMULARIO DE REGISTRO -->
 <div id="tabs">
     <ul>
         <li><a href="#tabs-1">Académico</a></li>
         <li><a href="#tabs-2">Administrativo</a></li>
         <li><a href="#tabs-3">Bombero</a></li>
         <li><a href="#tabs-4">Obrero</a></li>
-        <%--<li><a href="#tabs-5">Genéricos</a></li>--%>
     </ul>
-
-    <%--<html:form method="POST" action="/Pedido?method=save" onsubmit="return (this)">
-        <html:hidden name="autenticado" property="usuario"/>--%>
-
-        <div id="tabs-1">
-            <logic:present name="errorCantidad">
-                <center>
-                    <label style="color:red">Error: Debe introducir una cantidad mayor a cero para agregar</label>
-                </center>
-            </logic:present>
-            <div class="selector">
-                <logic:iterate name="equiposAcad" id="eq">
-                <div class="casilla">
-                    <label class="checkbox inline">
-                        <%--<html:checkbox value="true" name="Pedido" property="cascoSeguridad"/>--%>
-                        <bean:write name="eq" property="nombre_vista"/>
-                    </label>
-                    <center>
-                        <div class="casillaimg">
-                            <img width="70" src="assets/materiales/<bean:write name="eq" property="nombre_vista"/>.png" />
-                        </div>
-                    </center>
-                    <!--- TODO ESTO ES LO QUE HAY QUE COPIAR EN CADA CUADRO CON LA RESPECTIVA PROPIEDAD --->
-                    <div>
-                        <html:form action="/AgregarEquipoASolicitud" onsubmit="return (this)">
-                            <html:hidden name="eq" property="serial"/>
-                            <html:hidden name="eq" property="tipo_talla"/>
-                            <html:hidden name="solicitud" property="id"/>
-                            <html:hidden name="solicitud" property="periodo"/>
-                            <html:hidden name="autenticado" property="usuario"/>
-                            <p style="float:left">Frecuencia de Uso:</p>
-                            <html:select name="solicitud" property="frecuencia" styleClass="spana">
-                                <option>Diaria</option>
-                                <option>Semanal</option>
-                                <option>Mensual</option>
-                                <option>Trimestral</option>
-                                <option>Anual</option>
-                            </html:select>
-                            <p style="float:left; display: inline">Cantidad:
-                            <html:text name="solicitud" property="cantidad" styleClass="span1" styleId="spinner" value="0">                
-                            </html:text></p>
-                            <html:submit style="btn btn-primary"> Agregar </html:submit>
-                        </html:form>
-                    </div>
-                    <!--- HASTA AQUI --->
-                </div>
-                </logic:iterate>
-                <logic:iterate name="equiposGen" id="eq">
-                <div class="casilla">
-                    <label class="checkbox inline">
-                        <bean:write name="eq" property="nombre_vista"/>
-                    </label>
-                    <center>
-                        <div class="casillaimg">
-                            <img width="70" src="assets/materiales/<bean:write name="eq" property="nombre_vista"/>.png" />
-                        </div>
-                    </center>
-                    <!--- TODO ESTO ES LO QUE HAY QUE COPIAR EN CADA CUADRO CON LA RESPECTIVA PROPIEDAD --->
-                    <div>
-                        <html:form action="/AgregarEquipoASolicitud" onsubmit="return (this)">
-                            <html:hidden name="eq" property="serial"/>
-                            <html:hidden name="eq" property="tipo_talla"/>
-                            <html:hidden name="solicitud" property="id"/>
-                            <html:hidden name="solicitud" property="periodo"/>
-                            <html:hidden name="autenticado" property="usuario"/>
-                            <p style="float:left">Frecuencia de Uso:</p>
-                            <html:select name="solicitud" property="frecuencia" styleClass="spana">
-                                <option>Diaria</option>
-                                <option>Semanal</option>
-                                <option>Mensual</option>
-                                <option>Trimestral</option>
-                                <option>Anual</option>
-                            </html:select>
-                            <p style="float:left; display: inline">Cantidad:
-                            <html:text name="solicitud" property="cantidad" styleClass="span1" styleId="spinner" value="0">                
-                            </html:text></p>
-                            <html:submit style="btn btn-primary"> Agregar </html:submit>
-                        </html:form>
-                    </div>
-                    <!--- HASTA AQUI --->
-                </div>
-                </logic:iterate>                
-
-            </div>
+    <div id="tabs-1">
+        <logic:present name="errorCantidad">
             <center>
-                <logic:empty name="equiposAcad">
-                    <logic:empty name="equiposGen">
-                        <center>
-                            <label>No hay equipos para personal académico disponibles</label>
-                        </center>
-                    </logic:empty>
+                <label style="color:red">Error: Debe introducir una cantidad mayor a cero para agregar</label>
+            </center>
+        </logic:present>
+                <table class="table table-hover">
+                    <tbody>
+                        <tr>
+                            <th><center>Nombre de Equipo</center></th>
+                    <th><center>Imagen</center></th>
+                    <th><center>Frecuencia de uso</center></th>
+                    <th><center>Cantidad</center></th>
+                    <th><center>Opciones</center></th>
+                    </tr>
+                    <logic:iterate name="equiposAcad" id="eq">
+                        <tr>
+                            <td><bean:write name="eq" property="nombre_vista"/></td>
+                            <td><img width="70" src="assets/materiales/<bean:write name="eq" property="nombre_vista"/>.png" /></td>
+                                <html:form action="/AgregarEquipoASolicitud" onsubmit="return (this)">
+                                    <html:hidden name="eq" property="serial"/>
+                                    <html:hidden name="eq" property="tipo_talla"/>
+                                    <html:hidden name="solicitud" property="id"/>
+                                    <html:hidden name="solicitud" property="periodo"/>
+                                    <html:hidden name="autenticado" property="usuario"/>
+                                <td>
+                                    <html:select name="solicitud" property="frecuencia" styleClass="spana">
+                                <option>Diaria</option>
+                                <option>Semanal</option>
+                                <option>Mensual</option>
+                                <option>Trimestral</option>
+                                <option>Anual</option>
+                            </html:select>
+                            </td>
+                            <td>
+                                <html:text name="solicitud" property="cantidad" styleClass="span1" styleId="spinner" value="0">                
+                                </html:text></p>
+                            </td>
+                            <td>
+                                <html:submit style="btn btn-primary"> Agregar </html:submit>
+                            </td>
+                        </html:form>
+                        </tr>
+                    </logic:iterate>
+
+                    <logic:iterate name="equiposGen" id="eq">
+                        <tr>
+                            <td><bean:write name="eq" property="nombre_vista"/></td>
+                            <td><img width="70" src="assets/materiales/<bean:write name="eq" property="nombre_vista"/>.png" /></td>
+                                <html:form action="/AgregarEquipoASolicitud" onsubmit="return (this)">
+                                    <html:hidden name="eq" property="serial"/>
+                                    <html:hidden name="eq" property="tipo_talla"/>
+                                    <html:hidden name="solicitud" property="id"/>
+                                    <html:hidden name="solicitud" property="periodo"/>
+                                    <html:hidden name="autenticado" property="usuario"/>
+                                <td>
+                                    <html:select name="solicitud" property="frecuencia" styleClass="spana">
+                                <option>Diaria</option>
+                                <option>Semanal</option>
+                                <option>Mensual</option>
+                                <option>Trimestral</option>
+                                <option>Anual</option>
+                            </html:select>
+                            </td>
+                            <td>
+                                <html:text name="solicitud" property="cantidad" styleClass="span1" styleId="spinner" value="0">                
+                                </html:text></p>
+                            </td>
+                            <td>
+                                <html:submit style="btn btn-primary"> Agregar </html:submit>
+                            </td>
+                        </html:form>
+                        </tr>
+                    </logic:iterate>
+
+                    </tbody>
+                </table>
+        <center>
+            <logic:empty name="equiposAcad">
+                <logic:empty name="equiposGen">
+                    <center>
+                        <label>No hay equipos para personal académico disponibles</label>
+                    </center>
                 </logic:empty>
+            </logic:empty>
+        </center>        
+    </div>
+    <div id="tabs-2">
+        <logic:present name="errorCantidad">
+            <center>
+                <label style="color:red">Error: Debe introducir una cantidad mayor a cero para agregar</label>
             </center>
-        </div>
-        <div id="tabs-2">
-            <logic:present name="errorCantidad">
-                <center>
-                    <label style="color:red">Error: Debe introducir una cantidad mayor a cero para agregar</label>
-                </center>
-            </logic:present>
-            <div class="selector">
-                <logic:iterate name="equiposAdmin" id="eq">
-                <div class="casilla">
-                    <label class="checkbox inline">
-                        <%--<html:checkbox value="true" name="Pedido" property="cascoSeguridad"/>--%>
-                        <bean:write name="eq" property="nombre_vista"/>
-                    </label>
-                    <center>
-                        <div class="casillaimg">
-                            <img width="70" src="assets/materiales/<bean:write name="eq" property="nombre_vista"/>.png" />
-                        </div>
-                    </center>
-                    <!--- TODO ESTO ES LO QUE HAY QUE COPIAR EN CADA CUADRO CON LA RESPECTIVA PROPIEDAD --->
-                    <div>
-                        <html:form action="/AgregarEquipoASolicitud" onsubmit="return (this)">
-                            <html:hidden name="eq" property="serial"/>
-                            <html:hidden name="eq" property="tipo_talla"/>
-                            <html:hidden name="solicitud" property="id"/>
-                            <html:hidden name="solicitud" property="periodo"/>
-                            <html:hidden name="autenticado" property="usuario"/>
-                            <p style="float:left">Frecuencia de Uso:</p>
-                            <html:select name="solicitud" property="frecuencia" styleClass="spana">
+        </logic:present>
+                <table class="table table-hover">
+                    <tbody>
+                        <tr>
+                            <th><center>Nombre de Equipo</center></th>
+                    <th><center>Imagen</center></th>
+                    <th><center>Frecuencia de uso</center></th>
+                    <th><center>Cantidad</center></th>
+                    <th><center>Opciones</center></th>
+                    </tr>  
+                    <logic:iterate name="equiposAdmin" id="eq">
+                        <tr>
+                            <td><bean:write name="eq" property="nombre_vista"/></td>
+                            <td><img width="70" src="assets/materiales/<bean:write name="eq" property="nombre_vista"/>.png" /></td>
+                                <html:form action="/AgregarEquipoASolicitud" onsubmit="return (this)">
+                                    <html:hidden name="eq" property="serial"/>
+                                    <html:hidden name="eq" property="tipo_talla"/>
+                                    <html:hidden name="solicitud" property="id"/>
+                                    <html:hidden name="solicitud" property="periodo"/>
+                                    <html:hidden name="autenticado" property="usuario"/>
+                                <td>
+                                    <html:select name="solicitud" property="frecuencia" styleClass="spana">
                                 <option>Diaria</option>
                                 <option>Semanal</option>
                                 <option>Mensual</option>
                                 <option>Trimestral</option>
                                 <option>Anual</option>
                             </html:select>
-                            <p style="float:left; display: inline">Cantidad:
-                            <html:text name="solicitud" property="cantidad" styleClass="span1" styleId="spinner" value="0">                
-                            </html:text></p>
-                            <html:submit style="btn btn-primary"> Agregar </html:submit>
+                            </td>
+                            <td>
+                                <html:text name="solicitud" property="cantidad" styleClass="span1" styleId="spinner" value="0">                
+                                </html:text></p>
+                            </td>
+                            <td>
+                                <html:submit style="btn btn-primary"> Agregar </html:submit>
+                            </td>
                         </html:form>
-                    </div>
-                    <!--- HASTA AQUI --->
-                </div>
-                </logic:iterate>
-                <logic:iterate name="equiposGen" id="eq">
-                <div class="casilla">
-                    <label class="checkbox inline">
-                        <%--<html:checkbox value="true" name="Pedido" property="cascoSeguridad"/>--%>
-                        <bean:write name="eq" property="nombre_vista"/>
-                    </label>
-                    <center>
-                        <div class="casillaimg">
-                            <img width="70" src="assets/materiales/<bean:write name="eq" property="nombre_vista"/>.png" />
-                        </div>
-                    </center>
-                    <!--- TODO ESTO ES LO QUE HAY QUE COPIAR EN CADA CUADRO CON LA RESPECTIVA PROPIEDAD --->
-                    <div>
-                        <html:form action="/AgregarEquipoASolicitud" onsubmit="return (this)">
-                            <html:hidden name="eq" property="serial"/>
-                            <html:hidden name="eq" property="tipo_talla"/>
-                            <html:hidden name="solicitud" property="id"/>
-                            <html:hidden name="solicitud" property="periodo"/>
-                            <html:hidden name="autenticado" property="usuario"/>
-                            <p style="float:left">Frecuencia de Uso:</p>
-                            <html:select name="solicitud" property="frecuencia" styleClass="spana">
+                        </tr>
+                    </logic:iterate>
+                    <logic:iterate name="equiposGen" id="eq">
+                        <tr>
+                            <td><bean:write name="eq" property="nombre_vista"/></td>
+                            <td><img width="70" src="assets/materiales/<bean:write name="eq" property="nombre_vista"/>.png" /></td>
+                                <html:form action="/AgregarEquipoASolicitud" onsubmit="return (this)">
+                                    <html:hidden name="eq" property="serial"/>
+                                    <html:hidden name="eq" property="tipo_talla"/>
+                                    <html:hidden name="solicitud" property="id"/>
+                                    <html:hidden name="solicitud" property="periodo"/>
+                                    <html:hidden name="autenticado" property="usuario"/>
+                                <td>
+                                    <html:select name="solicitud" property="frecuencia" styleClass="spana">
                                 <option>Diaria</option>
                                 <option>Semanal</option>
                                 <option>Mensual</option>
                                 <option>Trimestral</option>
                                 <option>Anual</option>
                             </html:select>
-                            <p style="float:left; display: inline">Cantidad:
-                            <html:text name="solicitud" property="cantidad" styleClass="span1" styleId="spinner" value="0">                
-                            </html:text></p>
-                            <html:submit style="btn btn-primary"> Agregar </html:submit>
+                            </td>
+                            <td>
+                                <html:text name="solicitud" property="cantidad" styleClass="span1" styleId="spinner" value="0">                
+                                </html:text></p>
+                            </td>
+                            <td>
+                                <html:submit style="btn btn-primary"> Agregar </html:submit>
+                            </td>
                         </html:form>
-                    </div>
-                    <!--- HASTA AQUI --->
-                </div>
-                </logic:iterate>                
+                        </tr>
+                    </logic:iterate>
 
-            </div>
-            <center>  
-                <logic:empty name="equiposAdmin">
-                    <logic:empty name="equiposGen">
-                        <center>
-                            <label>No hay equipos para personal administrativo disponibles</label>
-                        </center>
-                    </logic:empty>
-                </logic:empty>                  
-            </center>
-        </div>
-        <div id="tabs-3">
-            <logic:present name="errorCantidad">
-                <center>
-                    <label style="color:red">Error: Debe introducir una cantidad mayor a cero para agregar</label>
-                </center>
-            </logic:present>
-            <div class="selector">
-                <logic:iterate name="equiposBomb" id="eq">
-                <div class="casilla">
-                    <label class="checkbox inline">
-                        <%--<html:checkbox value="true" name="Pedido" property="cascoSeguridad"/>--%>
-                        <bean:write name="eq" property="nombre_vista"/>
-                    </label>
+
+                    </tbody>
+                </table> 
+        <center>  
+            <logic:empty name="equiposAdmin">
+                <logic:empty name="equiposGen">
                     <center>
-                        <div class="casillaimg">
-                            <img width="70" src="assets/materiales/<bean:write name="eq" property="nombre_vista"/>.png" />
-                        </div>
+                        <label>No hay equipos para personal administrativo disponibles</label>
                     </center>
-                    <!--- TODO ESTO ES LO QUE HAY QUE COPIAR EN CADA CUADRO CON LA RESPECTIVA PROPIEDAD --->
-                    <div>
-                        <html:form action="/AgregarEquipoASolicitud" onsubmit="return (this)">
-                            <html:hidden name="eq" property="serial"/>
-                            <html:hidden name="eq" property="tipo_talla"/>
-                            <html:hidden name="solicitud" property="id"/>
-                            <html:hidden name="solicitud" property="periodo"/>
-                            <html:hidden name="autenticado" property="usuario"/>
-                            <p style="float:left">Frecuencia de Uso:</p>
-                            <html:select name="solicitud" property="frecuencia" styleClass="spana">
-                                <option>Diaria</option>
-                                <option>Semanal</option>
-                                <option>Mensual</option>
-                                <option>Trimestral</option>
-                                <option>Anual</option>
-                            </html:select>
-                            <p style="float:left; display: inline">Cantidad:
-                            <html:text name="solicitud" property="cantidad" styleClass="span1" styleId="spinner" value="0">                
-                            </html:text></p>
-                            <html:submit style="btn btn-primary"> Agregar </html:submit>
-                        </html:form>
-                    </div>
-                    <!--- HASTA AQUI --->
-                </div>
-                </logic:iterate>
-                <logic:iterate name="equiposGen" id="eq">
-                <div class="casilla">
-                    <label class="checkbox inline">
-                        <%--<html:checkbox value="true" name="Pedido" property="cascoSeguridad"/>--%>
-                        <bean:write name="eq" property="nombre_vista"/>
-                    </label>
-                    <center>
-                        <div class="casillaimg">
-                            <img width="70" src="assets/materiales/<bean:write name="eq" property="nombre_vista"/>.png" />
-                        </div>
-                    </center>
-                    <!--- TODO ESTO ES LO QUE HAY QUE COPIAR EN CADA CUADRO CON LA RESPECTIVA PROPIEDAD --->
-                    <div>
-                        <html:form action="/AgregarEquipoASolicitud" onsubmit="return (this)">
-                            <html:hidden name="eq" property="serial"/>
-                            <html:hidden name="eq" property="tipo_talla"/>
-                            <html:hidden name="solicitud" property="id"/>
-                            <html:hidden name="solicitud" property="periodo"/>
-                            <html:hidden name="autenticado" property="usuario"/>
-                            <p style="float:left">Frecuencia de Uso:</p>
-                            <html:select name="solicitud" property="frecuencia" styleClass="spana">
-                                <option>Diaria</option>
-                                <option>Semanal</option>
-                                <option>Mensual</option>
-                                <option>Trimestral</option>
-                                <option>Anual</option>
-                            </html:select>
-                            <p style="float:left; display: inline">Cantidad:
-                            <html:text name="solicitud" property="cantidad" styleClass="span1" styleId="spinner" value="0">                
-                            </html:text></p>
-                            <html:submit style="btn btn-primary"> Agregar </html:submit>
-                        </html:form>
-                    </div>
-                    <!--- HASTA AQUI --->
-                </div>
-                </logic:iterate>                
-            </div>
-            <center>
-               <logic:empty name="equiposBomb">
-                    <logic:empty name="equiposGen">
-                        <center>
-                            <label>No hay equipos para bomberos disponibles</label>
-                        </center>
-                    </logic:empty>
                 </logic:empty>
-            </center>
-        </div>
-        <div id="tabs-4">
-            <logic:present name="errorCantidad">
-                <center>
-                    <label style="color:red">Error: Debe introducir una cantidad mayor a cero para agregar</label>
-                </center>
-            </logic:present>
-            <div class="selector">
-                <logic:present name="equiposObrero">
-                <logic:iterate name="equiposObrero" id="eq">
-                <div class="casilla">
-                    <label class="checkbox inline">
-                        <%--<html:checkbox value="true" name="Pedido" property="cascoSeguridad"/>--%>
-                        <bean:write name="eq" property="nombre_vista"/>
-                    </label>
-                    <center>
-                        <div class="casillaimg">
-                            <img width="70" src="assets/materiales/<bean:write name="eq" property="nombre_vista"/>.png" />
-                        </div>
-                    </center>
-                    <!--- TODO ESTO ES LO QUE HAY QUE COPIAR EN CADA CUADRO CON LA RESPECTIVA PROPIEDAD --->
-                    <div>
-                        <html:form action="/AgregarEquipoASolicitud" onsubmit="return (this)">
-                            <html:hidden name="eq" property="serial"/>
-                            <html:hidden name="eq" property="tipo_talla"/>
-                            <html:hidden name="solicitud" property="id"/>
-                            <html:hidden name="solicitud" property="periodo"/>
-                            <html:hidden name="autenticado" property="usuario"/>
-                            <p style="float:left">Frecuencia de Uso:</p>
-                            <html:select name="solicitud" property="frecuencia" styleClass="spana">
-                                <option>Diaria</option>
-                                <option>Semanal</option>
-                                <option>Mensual</option>
-                                <option>Trimestral</option>
-                                <option>Anual</option>
-                            </html:select>
-                            <p style="float:left; display: inline">Cantidad:
-                            <html:text name="solicitud" property="cantidad" styleClass="span1" styleId="spinner" value="0">                
-                            </html:text></p>
-                            <html:submit style="btn btn-primary"> Agregar </html:submit>
-                        </html:form>
-                    </div>
-                    <!--- HASTA AQUI --->
-                </div>
-                </logic:iterate>
-                <logic:iterate name="equiposGen" id="eq">
-                <div class="casilla">
-                    <label class="checkbox inline">
-                        <%--<html:checkbox value="true" name="Pedido" property="cascoSeguridad"/>--%>
-                        <bean:write name="eq" property="nombre_vista"/>
-                    </label>
-                    <center>
-                        <div class="casillaimg">
-                            <img width="70" src="assets/materiales/<bean:write name="eq" property="nombre_vista"/>.png" />
-                        </div>
-                    </center>
-                    <!--- TODO ESTO ES LO QUE HAY QUE COPIAR EN CADA CUADRO CON LA RESPECTIVA PROPIEDAD --->
-                    <div>
-                        <html:form action="/AgregarEquipoASolicitud" onsubmit="return (this)">
-                            <html:hidden name="eq" property="serial"/>
-                            <html:hidden name="eq" property="tipo_talla"/>
-                            <html:hidden name="solicitud" property="id"/>
-                            <html:hidden name="solicitud" property="periodo"/>
-                            <html:hidden name="autenticado" property="usuario"/>
-                            <p style="float:left">Frecuencia de Uso:</p>
-                            <html:select name="solicitud" property="frecuencia" styleClass="spana">
-                                <option>Diaria</option>
-                                <option>Semanal</option>
-                                <option>Mensual</option>
-                                <option>Trimestral</option>
-                                <option>Anual</option>
-                            </html:select>
-                            <p style="float:left; display: inline">Cantidad:
-                            <html:text name="solicitud" property="cantidad" styleClass="span1" styleId="spinner" value="0">                
-                            </html:text></p>
-                            <html:submit style="btn btn-primary"> Agregar </html:submit>
-                        </html:form>
-                    </div>
-                    <!--- HASTA AQUI --->
-                </div>
-                </logic:iterate>                
-                </logic:present>
-            </div>
+            </logic:empty>                  
+        </center>
+    </div>
+    <div id="tabs-3">
+        <logic:present name="errorCantidad">
             <center>
+                <label style="color:red">Error: Debe introducir una cantidad mayor a cero para agregar</label>
+            </center>
+        </logic:present>
+                <table class="table table-hover">
+                    <tbody>
+                        <tr>
+                            <th><center>Nombre de Equipo</center></th>
+                    <th><center>Imagen</center></th>
+                    <th><center>Frecuencia de uso</center></th>
+                    <th><center>Cantidad</center></th>
+                    <th><center>Opciones</center></th>
+                    </tr>
+                    <logic:iterate name="equiposBomb" id="eq">
+                        <tr>
+                            <td><bean:write name="eq" property="nombre_vista"/></td>
+                            <td><img width="70" src="assets/materiales/<bean:write name="eq" property="nombre_vista"/>.png" /></td>
+                                <html:form action="/AgregarEquipoASolicitud" onsubmit="return (this)">
+                                    <html:hidden name="eq" property="serial"/>
+                                    <html:hidden name="eq" property="tipo_talla"/>
+                                    <html:hidden name="solicitud" property="id"/>
+                                    <html:hidden name="solicitud" property="periodo"/>
+                                    <html:hidden name="autenticado" property="usuario"/>
+                                <td>
+                                    <html:select name="solicitud" property="frecuencia" styleClass="spana">
+                                <option>Diaria</option>
+                                <option>Semanal</option>
+                                <option>Mensual</option>
+                                <option>Trimestral</option>
+                                <option>Anual</option>
+                            </html:select>
+                            </td>
+                            <td>
+                                <html:text name="solicitud" property="cantidad" styleClass="span1" styleId="spinner" value="0">                
+                                </html:text></p>
+                            </td>
+                            <td>
+                                <html:submit style="btn btn-primary"> Agregar </html:submit>
+                            </td>
+                        </html:form>
+                        </tr>
+                    </logic:iterate>
+                    <logic:iterate name="equiposGen" id="eq">
+                        <tr>
+                            <td><bean:write name="eq" property="nombre_vista"/></td>
+                            <td><img width="70" src="assets/materiales/<bean:write name="eq" property="nombre_vista"/>.png" /></td>
+                                <html:form action="/AgregarEquipoASolicitud" onsubmit="return (this)">
+                                    <html:hidden name="eq" property="serial"/>
+                                    <html:hidden name="eq" property="tipo_talla"/>
+                                    <html:hidden name="solicitud" property="id"/>
+                                    <html:hidden name="solicitud" property="periodo"/>
+                                    <html:hidden name="autenticado" property="usuario"/>
+                                <td>
+                                    <html:select name="solicitud" property="frecuencia" styleClass="spana">
+                                <option>Diaria</option>
+                                <option>Semanal</option>
+                                <option>Mensual</option>
+                                <option>Trimestral</option>
+                                <option>Anual</option>
+                            </html:select>
+                            </td>
+                            <td>
+                                <html:text name="solicitud" property="cantidad" styleClass="span1" styleId="spinner" value="0">                
+                                </html:text></p>
+                            </td>
+                            <td>
+                                <html:submit style="btn btn-primary"> Agregar </html:submit>
+                            </td>
+                        </html:form>
+                        </tr>
+                    </logic:iterate>
+                    </tbody>
+                </table>
+        <center>
+            <logic:empty name="equiposBomb">
+                <logic:empty name="equiposGen">
+                    <center>
+                        <label>No hay equipos para bomberos disponibles</label>
+                    </center>
+                </logic:empty>
+            </logic:empty>
+        </center>        
+    </div>
+    <div id="tabs-4">
+        <logic:present name="errorCantidad">
+            <center>
+                <label style="color:red">Error: Debe introducir una cantidad mayor a cero para agregar</label>
+            </center>
+        </logic:present>
+                <table class="table table-hover">
+                    <tbody>
+                        <tr>
+                            <th><center>Nombre de Equipo</center></th>
+                    <th><center>Imagen</center></th>
+                    <th><center>Frecuencia de uso</center></th>
+                    <th><center>Cantidad</center></th>
+                    <th><center>Opciones</center></th>
+                    </tr>
+                    <logic:iterate name="equiposObrero" id="eq">
+                        <tr>
+                            <td><bean:write name="eq" property="nombre_vista"/></td>
+                            <td><img width="70" src="assets/materiales/<bean:write name="eq" property="nombre_vista"/>.png" /></td>
+                                <html:form action="/AgregarEquipoASolicitud" onsubmit="return (this)">
+                                    <html:hidden name="eq" property="serial"/>
+                                    <html:hidden name="eq" property="tipo_talla"/>
+                                    <html:hidden name="solicitud" property="id"/>
+                                    <html:hidden name="solicitud" property="periodo"/>
+                                    <html:hidden name="autenticado" property="usuario"/>
+                                <td>
+                                    <html:select name="solicitud" property="frecuencia" styleClass="spana">
+                                <option>Diaria</option>
+                                <option>Semanal</option>
+                                <option>Mensual</option>
+                                <option>Trimestral</option>
+                                <option>Anual</option>
+                            </html:select>
+                            </td>
+                            <td>
+                                <html:text name="solicitud" property="cantidad" styleClass="span1" styleId="spinner" value="0">                
+                                </html:text></p>
+                            </td>
+                            <td>
+                                <html:submit style="btn btn-primary"> Agregar </html:submit>
+                            </td>
+                        </html:form>
+                        </tr>
+                    </logic:iterate>
+                    <logic:iterate name="equiposGen" id="eq">
+                        <tr>
+                            <td><bean:write name="eq" property="nombre_vista"/></td>
+                            <td><img width="70" src="assets/materiales/<bean:write name="eq" property="nombre_vista"/>.png" /></td>
+                                <html:form action="/AgregarEquipoASolicitud" onsubmit="return (this)">
+                                    <html:hidden name="eq" property="serial"/>
+                                    <html:hidden name="eq" property="tipo_talla"/>
+                                    <html:hidden name="solicitud" property="id"/>
+                                    <html:hidden name="solicitud" property="periodo"/>
+                                    <html:hidden name="autenticado" property="usuario"/>
+                                <td>
+                                    <html:select name="solicitud" property="frecuencia" styleClass="spana">
+                                <option>Diaria</option>
+                                <option>Semanal</option>
+                                <option>Mensual</option>
+                                <option>Trimestral</option>
+                                <option>Anual</option>
+                            </html:select>
+                            </td>
+                            <td>
+                                <html:text name="solicitud" property="cantidad" styleClass="span1" styleId="spinner" value="0">                
+                                </html:text></p>
+                            </td>
+                            <td>
+                                <html:submit style="btn btn-primary"> Agregar </html:submit>
+                            </td>
+                        </html:form>
+                        </tr>
+                    </logic:iterate>
+
+            </tbody>
+        </table>
+                    <center>
                 <logic:empty name="equiposObrero">
                     <logic:empty name="equiposGen">
                         <center>
@@ -385,17 +361,13 @@
                     </logic:empty>
                 </logic:empty>   
             </center>
-        </div> 
-        
-
-    </center>
-</div>
+    </div>
     <br><br>
     <center>
-    <html:form action="/SiguientePaso" onsubmit="return (this)">
-        <html:hidden name="solicitud" property="id"/>
-        <html:hidden name="solicitud" property="periodo"/>
-        <html:hidden name="autenticado" property="usuario"/>
-        <html:submit styleClass="btn btn-primary"> Siguiente </html:submit>
-    </html:form>
-</center>
+        <html:form action="/SiguientePaso" onsubmit="return (this)">
+            <html:hidden name="solicitud" property="id"/>
+            <html:hidden name="solicitud" property="periodo"/>
+            <html:hidden name="autenticado" property="usuario"/>
+            <html:submit styleClass="btn btn-primary"> Siguiente </html:submit>
+        </html:form>
+    </center>
