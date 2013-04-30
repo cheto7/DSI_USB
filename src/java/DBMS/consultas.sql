@@ -7,11 +7,6 @@ SELECT * FROM "PREPAS".usuario;
 --INSERT INTO "PREPAS".unidadAdscripcion (nombre) VALUES ('prueba');
 --DELETE FROM "PREPAS".unidadAdscripcion WHERE id = 4 ;             
 --SELECT * FROM "PREPAS".unidadadscripcion;
-<<<<<<< HEAD
-SELECT * FROM "PREPAS".usuario;
-=======
->>>>>>> branch 'master' of https://github.com/cheto7/DSI_USB.git
-
 
 
 /*SELECT serial,imagen,nombre_vista,funcionalidad FROM "PREPAS".equipo

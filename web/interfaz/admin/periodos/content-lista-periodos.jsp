@@ -130,7 +130,7 @@
                                            class="btn btn-success" 
                                            value="Reabrir" 
                                            onclick="ReAbrir(this.name)"/>
-                                </logic:equal>                                 
+                                </logic:equal>
                             </logic:equal>
                          </center>
                     </td>

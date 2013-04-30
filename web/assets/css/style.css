@@ -265,8 +265,8 @@ p {
 	margin-right: 10px;
 }
 
-#sidebar-first {
-	left: -600px;
+#sidebar-first1 {
+	left: -770px;
 	width: 160px;
 	height: auto;
 	display: inline;
@@ -275,6 +275,7 @@ p {
 	margin-left: 10px;
 	margin-right: 10px;
 }
+
 #sidebar-second {
 	width: 160px;
 	height: auto;
@@ -432,7 +433,7 @@ p {
   color: #ffffff;
   text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
   background-color: #FF3300;
-  *background-color: #FF6600;
+  background-color: #FF6600;
   background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#FF6600), to(#FF3300));
   background-image: -webkit-linear-gradient(top, #FF6600, #FF3300);
   background-image: -o-linear-gradient(top, #FF6600, #FF3300);

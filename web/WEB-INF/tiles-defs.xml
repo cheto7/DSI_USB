@@ -120,7 +120,6 @@
         <put name="script" value="/interfaz/genericos/pedido/script-pedido.jsp"></put>
         <put name="formulario" value="/interfaz/genericos/pedido/formulario-pedido.jsp"></put>
         <put name="navBar" value="/interfaz/genericos/barras_navegacion/navBarpedido.jsp"></put>
-        <put name="sidebar-second" value="/interfaz/genericos/plantilla_general/sidebar-second.jsp"></put>
         <put name="footer" value="/interfaz/genericos/plantilla_general/footer.jsp"></put> 
     </definition>
     
@@ -128,8 +127,7 @@
         <put name="script" value="/interfaz/genericos/pedido/script-pedido.jsp"></put>
         <put name="formulario" value="/interfaz/genericos/factura/formulario-factura.jsp"></put>
         <put name="navBar" value="/interfaz/genericos/barras_navegacion/navBarpedido.jsp"></put>
-        <put name="sidebar-second" value="/interfaz/genericos/plantilla_general/sidebar-second.jsp"></put>
-        <put name="footer" value="/interfaz/genericos/plantilla_general/footer.jsp"></put> 
+        <put name="footer" value="/interfaz/genericos/plantilla_general/footer.jsp"></put>
     </definition>
     
     <definition name="formulario-factura-agregar-talla" extends="formulario-factura-agregar-equipo">

@@ -3,9 +3,6 @@
     Created on : 22/10/2012, 03:36:59 PM
     Author     : cheo
 --%>
-<%@ taglib uri="http://struts.apache.org/tags-bean" prefix="bean" %>
-<%@ taglib uri="http://struts.apache.org/tags-html" prefix="html" %>
-<%@ taglib uri="http://struts.apache.org/tags-logic" prefix="logic" %>
 <%@ taglib uri="http://struts.apache.org/tags-tiles" prefix="tiles" %>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -22,14 +19,11 @@
             </header>
 
             <div id="main">
-                <div id="content">
-                    <tiles:insert attribute="formulario"/>
+                <div id="content1">
+                    <tiles:insert attribute="formulario"/>             
                 </div>
-                <div id="sidebar-first">
+                <div id="sidebar-first1">
                     <tiles:insert attribute="navBar"/>               
-                </div>
-                <div id="sidebar-second">
-                    <tiles:insert attribute="sidebar-second"/>
                 </div>
             </div>
 
