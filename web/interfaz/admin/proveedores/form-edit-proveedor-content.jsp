@@ -55,5 +55,7 @@
 
     <html:hidden name="proveedor" property="rifAnterior"/>
     <html:hidden name="autenticado" property="usuario" />
+    <center>
         <html:submit styleClass="btn btn-primary"> Editar </html:submit>
+    </center>
 </html:form>

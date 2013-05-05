@@ -481,6 +481,10 @@
             <forward name="success" path="/ListarPeriodos.do"></forward>
             <forward name="failure" path="/vistas/periodos/form-nuevoPeriodo.jsp"></forward>
         </action>
+        <action path="/CancelarPedido" type="Solicitudes.CancelarPedido" scope="request" parameter="method"
+                name="Periodo">
+            <forward name="success" path="/Ir_pag_usuario.do"></forward>
+        </action>
 
         
         

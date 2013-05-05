@@ -10,6 +10,14 @@
 <%@ taglib uri="http://struts.apache.org/tags-tiles" prefix="tiles" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
+<html>
+<head>
+  <style type="text/css">
+  td {
+      text-align: center;
+  } 
+  </style>
+</head>
 <div id="tabs">
     <ul>
         <li><a href="#tabs-1">Académico</a></li>
@@ -23,7 +31,7 @@
                 <label style="color:red">Error: Debe introducir una cantidad mayor a cero para agregar</label>
             </center>
         </logic:present>
-                <table class="table table-hover">
+                <table class="table table-hover"">
                     <tbody>
                         <tr>
                             <th><center>Nombre de Equipo</center></th>
@@ -56,7 +64,9 @@
                                 </html:text></p>
                             </td>
                             <td>
-                                <html:submit style="btn btn-primary"> Agregar </html:submit>
+                            <center>
+                                <html:submit styleClass="btn btn-primary"> Agregar </html:submit>
+                            </center>
                             </td>
                         </html:form>
                         </tr>
@@ -86,7 +96,7 @@
                                 </html:text></p>
                             </td>
                             <td>
-                                <html:submit style="btn btn-primary"> Agregar </html:submit>
+                                <html:submit styleClass="btn btn-primary"> Agregar </html:submit>
                             </td>
                         </html:form>
                         </tr>
@@ -143,7 +153,7 @@
                                 </html:text></p>
                             </td>
                             <td>
-                                <html:submit style="btn btn-primary"> Agregar </html:submit>
+                                <html:submit styleClass="btn btn-primary"> Agregar </html:submit>
                             </td>
                         </html:form>
                         </tr>
@@ -172,7 +182,7 @@
                                 </html:text></p>
                             </td>
                             <td>
-                                <html:submit style="btn btn-primary"> Agregar </html:submit>
+                                <html:submit styleClass="btn btn-primary"> Agregar </html:submit>
                             </td>
                         </html:form>
                         </tr>
@@ -230,7 +240,7 @@
                                 </html:text></p>
                             </td>
                             <td>
-                                <html:submit style="btn btn-primary"> Agregar </html:submit>
+                                <html:submit styleClass="btn btn-primary"> Agregar </html:submit>
                             </td>
                         </html:form>
                         </tr>
@@ -259,7 +269,7 @@
                                 </html:text></p>
                             </td>
                             <td>
-                                <html:submit style="btn btn-primary"> Agregar </html:submit>
+                                <html:submit styleClass="btn btn-primary"> Agregar </html:submit>
                             </td>
                         </html:form>
                         </tr>
@@ -315,7 +325,7 @@
                                 </html:text></p>
                             </td>
                             <td>
-                                <html:submit style="btn btn-primary"> Agregar </html:submit>
+                                <html:submit styleClass="btn btn-primary"> Agregar </html:submit>
                             </td>
                         </html:form>
                         </tr>
@@ -344,7 +354,7 @@
                                 </html:text></p>
                             </td>
                             <td>
-                                <html:submit style="btn btn-primary"> Agregar </html:submit>
+                                <html:submit styleClass="btn btn-primary"> Agregar </html:submit>
                             </td>
                         </html:form>
                         </tr>
@@ -368,6 +378,8 @@
             <html:hidden name="solicitud" property="id"/>
             <html:hidden name="solicitud" property="periodo"/>
             <html:hidden name="autenticado" property="usuario"/>
-            <html:submit styleClass="btn btn-primary"> Siguiente </html:submit>
+            <html:submit styleClass="btn btn-success"> Siguiente </html:submit>
         </html:form>
     </center>
+    
+</html>    

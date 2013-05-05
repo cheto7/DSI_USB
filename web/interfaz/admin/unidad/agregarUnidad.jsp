@@ -24,8 +24,7 @@
 
 <fieldset>
     <br>   
-    <legend>Registrar Unidad</legend> 
-    <h1>Nueva Unidad:</h1>
+    <legend>Registrar Unidad</legend>
     <html:form styleId="Form" method="POST" action="/registrarUnidadAdscripcion" onsubmit="return (this)">
         <label>Nombre Unidad:</label>
         <html:text name="Usuario" value="" property="nombre" styleClass="span2" style="width:342px"></html:text>
@@ -33,8 +32,7 @@
     </html:form>
 
 
-    <legend>Unidades Registradas</legend> 
-    <h1> Unidades Adscripción: </h1>
+    <legend>Unidades Registradas</legend>
     <logic:notPresent name="unidadAdscripcion">
         <label>
             <center> No hay unidades que mostrar.</center>
@@ -53,13 +51,7 @@
         <logic:notEmpty name="unidadAdscripcion">
             <table class="table table-hover">
                 <tbody>
-                    <tr>
-                        <th>Nombre</th>
-                        <th></th>
-                        <th></th>
-                        <th> </th>
-                        <th></th>
-                    </tr>
+
 
                     <logic:iterate name="unidadAdscripcion" id="unidadAdscripcion">
 

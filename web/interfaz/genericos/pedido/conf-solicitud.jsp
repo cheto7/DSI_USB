@@ -14,25 +14,27 @@
 
 <logic:empty name="solicitud">
     <center>
-        <label style="color:red">Usted no ha ingresado ningún equipo de protección a la solicitud.</label>
+        <label style="color:red">
+            <center>
+                Usted no ha ingresado ningún equipo de protección a la solicitud
+            </center>
+        </label>
     </center>    
 </logic:empty>
 <logic:notEmpty name="solicitud">
-    <h1>Pedido realizado por:</h1>
-    <h5><bean:write name="usuario" property="usuario"/></h5>
-    <label> Usted debe confirmar su pedido para continuar. </label>
+    <label><center> Usted debe confirmar su pedido para continuar.</center> </label>
     <%--<label> En caso que haya olvidado algo, puede volver a modificar su pedido. </label>--%>
 
-    <table class="table table-hover">
+    <table class="table table-hover" style="table-layout:fixed">
 
         <tbody>
             <tr>
-                <th>Equipo</th>
-                <th>Imagen</th>
-                <th><center>Frecuencia de uso (días)</center></th>
-    <th>Cantidad solicitada</th>
-    <th>Talla</th>
-    <th colspan="2"><center>Opciones</center></th>
+                <th width="30%">Equipo</th>
+                <th width="10%">Imagen</th>
+                <th width="14%"><center>Uso (días)</center></th>
+                <th width="13%">Cantidad</th>
+                <th width="13%">Talla</th>
+                <th colspan="2" width="20%"><center>Opciones</center></th>
 </tr>
 
 <%--<bean:write name="usuario" property="usuario"/>--%>
@@ -85,9 +87,11 @@
 <table align="center">
     <tr>
         <td>
-            <%--<html:form action="/Ir_pag_pedido" onsubmit="return (this)">
-                <html:submit styleClass="btn btn-primary"> Seguir Agregando </html:submit>
-            </html:form>   --%>
+           <html:form action = "/CancelarPedido" onsubmit="return (this)">
+            <html:hidden name="autenticado" property="usuario"/>
+            <html:hidden name="solicitud" property="id"/>
+            <html:submit styleClass="btn btn-danger"> Cancelar </html:submit>
+            </html:form>
         </td>
         <td>
             <html:form action="/CulminarSolicitud" onsubmit="return (this)">

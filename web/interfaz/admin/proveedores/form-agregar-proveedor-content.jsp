@@ -55,6 +55,7 @@
     <html:text name="Proveedor" property="telefono" styleClass="span5"></html:text><br>
 
     <html:hidden name="autenticado" property="usuario" />
-    
+    <center>
     <html:submit styleClass="btn btn-primary"> Agregar </html:submit>
+    </center>        
 </html:form>

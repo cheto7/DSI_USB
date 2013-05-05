@@ -154,7 +154,7 @@ CREATE TABLE "PREPAS".contiene (
     serial INT NOT NULL,
     cantidad INT,
     talla VARCHAR, 
-    frecuencia INT,
+    frecuencia VARCHAR,
 
     CONSTRAINT PK_contiene PRIMARY KEY (id,serial),
     CONSTRAINT FK_contiene_solicitud FOREIGN KEY (id) REFERENCES "PREPAS".solicitud (id),

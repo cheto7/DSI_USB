@@ -70,21 +70,19 @@
         <put name="navBarGeneral" value="/interfaz/genericos/barras_navegacion/navbar-registro.jsp"></put> 
     </definition>
     
-    <definition name="confirmar" extends="home">
-        <put name="noticias" value="/interfaz/genericos/pedido/conf-solicitud.jsp"></put>
-        <put name="navBarGeneral" value="/interfaz/genericos/barras_navegacion/navBarSeguirAgregando.jsp"></put>
-        <put name="sidebar" value=""></put>
+    <definition name="confirmar" extends="formulario-pedido">
+        <put name="formulario" value="/interfaz/genericos/pedido/conf-solicitud.jsp"></put>
+        <put name="navBar" value="/interfaz/genericos/barras_navegacion/navBarSeguirAgregando.jsp"></put>
     </definition>
     
-    <definition name="confirmar-factura" extends="home">
-        <put name="noticias" value="/interfaz/genericos/factura/conf-factura.jsp"></put>
-        <put name="navBarGeneral" value="/interfaz/genericos/barras_navegacion/navBarAgregar.jsp"></put>
-        <put name="sidebar" value=""></put>
+    <definition name="confirmar-factura" extends="formulario-pedido">
+        <put name="formulario" value="/interfaz/genericos/factura/conf-factura.jsp"></put>
+        <put name="navBar" value="/interfaz/genericos/barras_navegacion/navBarAgregar.jsp"></put>
     </definition>
     
-    <definition name="confirmar-eliminar" extends="home">
-        <put name="noticias" value="/interfaz/admin/lista_usuarios/eliminar/conf-eliminar.jsp"></put>
-        <put name="navBarGeneral" value="/interfaz/admin/barras_navegacion/navBarListar.jsp"></put>
+    <definition name="confirmar-eliminar" extends="formulario-pedido">
+        <put name="formulario" value="/interfaz/admin/lista_usuarios/eliminar/conf-eliminar.jsp"></put>
+        <put name="navBar" value="/interfaz/admin/barras_navegacion/navBarListar.jsp"></put>
     </definition>
     
     <definition name="interfaz-administrador" extends="home">
@@ -119,7 +117,7 @@
     <definition name="formulario-pedido" path="/interfaz/genericos/pedido/plantilla-pedido.jsp">
         <put name="script" value="/interfaz/genericos/pedido/script-pedido.jsp"></put>
         <put name="formulario" value="/interfaz/genericos/pedido/formulario-pedido.jsp"></put>
-        <put name="navBar" value="/interfaz/genericos/barras_navegacion/navBarpedido.jsp"></put>
+        <put name="navBar" value="/interfaz/genericos/barras_navegacion/navBarCancelarPedido.jsp"></put>
         <put name="footer" value="/interfaz/genericos/plantilla_general/footer.jsp"></put> 
     </definition>
     
@@ -134,16 +132,15 @@
         <put name="formulario" value="/interfaz/genericos/factura/formulario-talla.jsp"></put>
     </definition>
     
-     <definition name="formulario-factura" extends="home">
-        <put name="noticias" value="/interfaz/admin/factura/listar_factura/content-lista-factura.jsp"></put>
-        <put name="navBarGeneral" value="/interfaz/admin/barras_navegacion/navBarFactura.jsp"></put> 
+     <definition name="formulario-factura" extends="formulario-pedido">
+        <put name="formulario" value="/interfaz/admin/factura/listar_factura/content-lista-factura.jsp"></put>
+        <put name="navBar" value="/interfaz/admin/barras_navegacion/navBarFactura.jsp"></put> 
     </definition> 
     
-    <definition name="formulario-editar-usuario" path="/interfaz/genericos/editar_datos/plantilla-formulario-editar.jsp">
+    <definition name="formulario-editar-usuario" extends="formulario-pedido">
         <put name="script" value="/interfaz/genericos/editar_datos/script-form-edit.jsp"></put>
-        <put name="content" value="/interfaz/admin/lista_usuarios/editar/form-edit-content.jsp"></put>
+        <put name="formulario" value="/interfaz/admin/lista_usuarios/editar/form-edit-content.jsp"></put>
         <put name="navBar" value="/interfaz/genericos/barras_navegacion/navBarVolverDatos.jsp"></put>
-        <put name="sidebar-second" value="/interfaz/genericos/plantilla_general/sidebar-second.jsp"></put>
         <put name="footer" value="/interfaz/genericos/plantilla_general/footer.jsp"></put> 
     </definition> 
     
@@ -152,34 +149,28 @@
         <put name="navBar" value="/interfaz/genericos/barras_navegacion/navBarpedido.jsp"></put>
     </definition> 
     
-    <definition name="formulario-agregar-noticia" path="/interfaz/admin/noticias/plantilla-form-agregar-noticia.jsp">
+    <definition name="formulario-agregar-noticia" extends="formulario-pedido">
         <put name="formulario" value="/interfaz/admin/noticias/form-agregar-noticia-content.jsp"></put>
         <put name="navBar" value="/interfaz/admin/barras_navegacion/navBarListaNoticias.jsp"></put>
-        <put name="sidebar-second" value="/interfaz/genericos/plantilla_general/sidebar-second.jsp"></put>
-        <put name="footer" value="/interfaz/genericos/plantilla_general/footer.jsp"></put> 
     </definition>
     
-    <definition name="formulario-agregar-factura" path="/interfaz/admin/noticias/plantilla-form-agregar-noticia.jsp">
+    <definition name="formulario-agregar-factura" extends="formulario-pedido">
         <put name="formulario" value="/interfaz/admin/factura/form-agregar-factura-content.jsp"></put>
-        <put name="navBar" value="/interfaz/admin/barras_navegacion/navBarListaNoticias.jsp"></put>
-        <put name="sidebar-second" value="/interfaz/genericos/plantilla_general/sidebar-second.jsp"></put>
-        <put name="footer" value="/interfaz/genericos/plantilla_general/footer.jsp"></put> 
+        <put name="navBar" value="/interfaz/admin/barras_navegacion/navBarVolverListaFacturas.jsp"></put>
     </definition>
     
-    <definition name="formulario-agregar-equipos" path="/interfaz/admin/equipo/plantilla-form-agregar-equipo.jsp">
+    <definition name="formulario-agregar-equipos" extends="formulario-pedido">
         <put name="formulario" value="/interfaz/admin/equipo/form-agregar-equipo-content.jsp"></put>
         <put name="navBar" value="/interfaz/admin/barras_navegacion/navBarVolverListaEquipos.jsp"></put>
-        <put name="sidebar-second" value="/interfaz/genericos/plantilla_general/sidebar-second.jsp"></put>
-        <put name="footer" value="/interfaz/genericos/plantilla_general/footer.jsp"></put> 
     </definition>
 
     <definition name="noticia-no-agregada" extends="usuario">
         <put name="noticias" value="/interfaz/admin/noticia/noticia-agregada.jsp"></put>
     </definition>
     
-    <definition name="ver-pedido" extends="home">
-        <put name="noticias" value="/interfaz/genericos/pedido/ver-pedido.jsp"></put>
-        <put name="navBarGeneral" value="/interfaz/genericos/barras_navegacion/navBarpedido.jsp"></put>
+    <definition name="ver-pedido" extends="formulario-pedido">
+        <put name="formulario" value="/interfaz/genericos/pedido/ver-pedido.jsp"></put>
+        <put name="navBar" value="/interfaz/genericos/barras_navegacion/navBarpedido.jsp"></put>
     </definition>
     
     <definition name="confirmar-eliminar-solicitud" extends="home">
@@ -187,27 +178,24 @@
         <put name="navBarGeneral" value="/interfaz/genericos/barras_navegacion/navBarpedido.jsp"></put>
     </definition>
     
-    <definition name="lista-noticias" extends="home">
-        <put name="noticias" value="/interfaz/admin/noticias/listar_noticias/content-lista-noticias.jsp"></put>
-        <put name="navBarGeneral" value="/interfaz/admin/barras_navegacion/navBarNoticias.jsp"></put>
+    <definition name="lista-noticias" extends="formulario-pedido">
+        <put name="formulario" value="/interfaz/admin/noticias/listar_noticias/content-lista-noticias.jsp"></put>
+        <put name="navBar" value="/interfaz/admin/barras_navegacion/navBarNoticias.jsp"></put>
     </definition>
     
-    <definition name="lista-equipos" extends="home">
-        <put name="noticias" value="/interfaz/admin/equipo/listar_equipos/content-lista-equipos.jsp"></put>
-        <put name="navBarGeneral" value="/interfaz/admin/barras_navegacion/navBarListaEquipos.jsp"></put>
-        <put name="sidebar" value=""></put>
+    <definition name="lista-equipos" extends="formulario-pedido">
+        <put name="formulario" value="/interfaz/admin/equipo/listar_equipos/content-lista-equipos.jsp"></put>
+        <put name="navBar" value="/interfaz/admin/barras_navegacion/navBarListaEquipos.jsp"></put>
     </definition>
     
-    <definition name="consulta" extends="home">
-        <put name="noticias" value="/interfaz/admin/pedido/content-consulta.jsp"></put>
-        <put name="navBarGeneral" value="/interfaz/admin/barras_navegacion/navBarConsulta.jsp"></put>
-        <put name="sidebar" value=""></put>
+    <definition name="consulta" extends="formulario-pedido">
+        <put name="formulario" value="/interfaz/admin/pedido/content-consulta.jsp"></put>
+        <put name="navBar" value="/interfaz/admin/barras_navegacion/navBarConsulta.jsp"></put>
     </definition>
     
-    <definition name="form_listado" extends="home">
-        <put name="noticias" value="/interfaz/admin/pedido/listado_content.jsp"></put>
-        <put name="navBarGeneral" value="/interfaz/genericos/barras_navegacion/navBarpedido.jsp"></put>
-        <put name="sidebar" value=""></put>
+    <definition name="form_listado" extends="formulario-pedido">
+        <put name="formulario" value="/interfaz/admin/pedido/listado_content.jsp"></put>
+        <put name="navBar" value="/interfaz/genericos/barras_navegacion/navBarpedido.jsp"></put>
     </definition>
     
     <definition name="formulario-editar-noticia" extends="formulario-agregar-noticia">
@@ -215,7 +203,7 @@
         <put name="navBar" value="/interfaz/admin/barras_navegacion/navBarListaNoticias.jsp"></put>
     </definition>
     
-    <definition name="formulario-editar-equipo" extends="formulario-agregar-equipos">
+    <definition name="formulario-editar-equipo" extends="formulario-pedido">
         <put name="formulario" value="/interfaz/admin/equipo/listar_equipos/form-edit-equipo-content.jsp"></put>
         <put name="navBar" value="/interfaz/admin/barras_navegacion/navBarVolverListaEquipos.jsp"></put>
     </definition>
@@ -235,16 +223,14 @@
         <put name="navBarGeneral" value="/interfaz/genericos/barras_navegacion/navBarpedido.jsp"></put>
     </definition>
     
-    <definition name="formulario-agregar-proveedor" path="/interfaz/admin/proveedores/plantilla-form-agregar-proveedor.jsp">
+    <definition name="formulario-agregar-proveedor" extends="formulario-pedido">
         <put name="formulario" value="/interfaz/admin/proveedores/form-agregar-proveedor-content.jsp"></put>
         <put name="navBar" value="/interfaz/admin/barras_navegacion/navBarListaProveedores.jsp"></put>
-        <put name="sidebar-second" value="/interfaz/genericos/plantilla_general/sidebar-second.jsp"></put>
-        <put name="footer" value="/interfaz/genericos/plantilla_general/footer.jsp"></put> 
     </definition>
     
-    <definition name="lista-proveedores" extends="home">
-        <put name="noticias" value="/interfaz/admin/proveedores/content-lista-proveedores.jsp"></put> 
-        <put name="navBarGeneral" value="/interfaz/admin/barras_navegacion/navBarVolverNoticias.jsp"></put>
+    <definition name="lista-proveedores" extends="formulario-pedido">
+        <put name="formulario" value="/interfaz/admin/proveedores/content-lista-proveedores.jsp"></put> 
+        <put name="navBar" value="/interfaz/admin/barras_navegacion/navBarVolverNoticias.jsp"></put>
     </definition>
     
     <definition name="confirmar-eliminar-proveedor" extends="home">
@@ -252,9 +238,9 @@
         <put name="navBarGeneral" value="/interfaz/admin/barras_navegacion/navBarVerProveedor.jsp"></put>
     </definition>
     
-    <definition name="ver-proveedor" extends="home">
-        <put name="noticias" value="/interfaz/admin/proveedores/ver_proveedor.jsp"></put>
-        <put name="navBarGeneral" value="/interfaz/admin/barras_navegacion/navBarListaProveedores.jsp"></put>
+    <definition name="ver-proveedor" extends="formulario-pedido">
+        <put name="formulario" value="/interfaz/admin/proveedores/ver_proveedor.jsp"></put>
+        <put name="navBar" value="/interfaz/admin/barras_navegacion/navBarListaProveedores.jsp"></put>
     </definition>
     
     <definition name="formulario-editar-proveedor" extends="formulario-agregar-noticia">
@@ -265,12 +251,10 @@
         <put name="formulario" value="/interfaz/genericos/pedido/form-edit-equipoEnSol-content.jsp"></put>
         <put name="navBar" value="/interfaz/genericos/barras_navegacion/navBarVolverConfSol.jsp"></put>
     </definition>
-   <definition name="lista-todas-solicitudes" path="/interfaz/admin/solicitud/plantilla-lista-solicitudes-recibidas.jsp">
+   <definition name="lista-todas-solicitudes" extends="formulario-pedido">
        <put name="script" value="/interfaz/genericos/pedido/script-pedido.jsp"></put>
         <put name="formulario" value="/interfaz/admin/solicitud/lista-solicitudes-recibidas.jsp"></put>
         <put name="navBar" value="/interfaz/admin/barras_navegacion/navBarVolverListaPeriodos.jsp"></put>
-        <put name="sidebar-second" value="/interfaz/genericos/plantilla_general/sidebar-second.jsp"></put>
-        <put name="footer" value="/interfaz/genericos/plantilla_general/footer.jsp"></put> 
     </definition>
     
     <definition name="revision-pedido" extends="formulario-agregar-noticia">
@@ -282,47 +266,44 @@
         <put name="formulario" value="/vistas/pedido/form-content-equipoEnSolAdmin.jsp"></put>
         <put name="navBar" value="/interfaz/admin/barras_navegacion/navBarVolverRevisionSolicitud.jsp"></put>
     </definition>        
-    <definition name="agregarUnidad" extends="home">
-        <put name="noticias" value="/interfaz/admin/unidad/agregarUnidad.jsp"></put>
-        <put name="navBarGeneral" value="/interfaz/admin/barras_navegacion/navBarVolverListaUsuario.jsp"></put>
+    <definition name="agregarUnidad" extends="formulario-pedido">
+        <put name="formulario" value="/interfaz/admin/unidad/agregarUnidad.jsp"></put>
+        <put name="navBar" value="/interfaz/admin/barras_navegacion/navBarVolverListaUsuario.jsp"></put>
     </definition>    
-       <definition name="coleccion-usuarios" extends="home">
-        <put name="noticias" value="/interfaz/admin/lista_usuarios/content-lista-usuarios.jsp"></put>
-        <put name="navBarGeneral" value="/interfaz/genericos/barras_navegacion/navBarUnidad.jsp"></put>
+       <definition name="coleccion-usuarios" extends="formulario-pedido">
+        <put name="formulario" value="/interfaz/admin/lista_usuarios/content-lista-usuarios.jsp"></put>
+        <put name="navBar" value="/interfaz/genericos/barras_navegacion/navBarUnidad.jsp"></put>
     </definition>
-       <definition name="listar-solicitantes" extends="home">  
-       <put name="noticias" value="/interfaz/admin/entrega/listaSolicitantes.jsp"></put>
-        <put name="navBarGeneral" value="/interfaz/genericos/barras_navegacion/navBarpedido.jsp"></put>
+       <definition name="listar-solicitantes" extends="formulario-pedido">  
+       <put name="formulario" value="/interfaz/admin/entrega/listaSolicitantes.jsp"></put>
+        <put name="navBar" value="/interfaz/genericos/barras_navegacion/navBarpedido.jsp"></put>
     </definition>
     
-    <definition name="formulario-editar-usuario-admin" path="/interfaz/genericos/editar_datos/plantilla-formulario-editar.jsp">
+    <definition name="formulario-editar-usuario-admin" extends="formulario-pedido">
         <put name="script" value="/interfaz/genericos/editar_datos/script-form-edit.jsp"></put>
-        <put name="content" value="/interfaz/admin/lista_usuarios/editar/form-edit-content-admin.jsp"></put>
+        <put name="formulario" value="/interfaz/admin/lista_usuarios/editar/form-edit-content-admin.jsp"></put>
         <put name="navBar" value="/interfaz/admin/barras_navegacion/navBarVolverDatosUsuario.jsp"></put>
-        <put name="sidebar-second" value="/interfaz/genericos/plantilla_general/sidebar-second.jsp"></put>
-        <put name="footer" value="/interfaz/genericos/plantilla_general/footer.jsp"></put> 
     </definition>
     <definition name="mi-pedido" extends="formulario-agregar-noticia">
         <put name="formulario" value="/interfaz/genericos/pedido/mi-pedido.jsp"></put>
         <put name="navBar" value="/interfaz/genericos/barras_navegacion/navBarVolverMisSolicitudes.jsp"></put>
     </definition>
-    <definition name="lista-periodos" path="/interfaz/admin/periodos/plantilla-lista-periodos.jsp">
+    <definition name="lista-periodos" extends="formulario-pedido">
         <put name="formulario" value="/interfaz/admin/periodos/content-lista-periodos.jsp"></put>
         <put name="navBar" value="/interfaz/admin/barras_navegacion/navBarListaPeriodos.jsp"></put>
-        <put name="footer" value="/interfaz/genericos/plantilla_general/footer.jsp"></put> 
     </definition>
     <definition name="form-nuevo-periodo" extends="lista-periodos">
         <put name="formulario" value="/interfaz/admin/periodos/content-nuevo-periodo.jsp"></put>
         <put name="navBar" value="/interfaz/admin/barras_navegacion/navBarVolverListaPeriodos.jsp"></put>
     </definition>
     
-    <definition name="datos-usuario" extends="home">
-        <put name="noticias" value="/interfaz/genericos/editar_datos/ver_datos.jsp"></put>
-        <put name="navBarGeneral" value="/interfaz/genericos/barras_navegacion/navBarpedido.jsp"></put>
+    <definition name="datos-usuario" extends="formulario-pedido">
+        <put name="formulario" value="/interfaz/genericos/editar_datos/ver_datos.jsp"></put>
+        <put name="navBar" value="/interfaz/genericos/barras_navegacion/navBarpedido.jsp"></put>
     </definition>
-    <definition name="datos-usuario-admin" extends="home">
-        <put name="noticias" value="/interfaz/admin/lista_usuarios/ver_datos_admin.jsp"></put>
-        <put name="navBarGeneral" value="/interfaz/admin/barras_navegacion/navBarVolverListaUsuario.jsp"></put>
+    <definition name="datos-usuario-admin" extends="formulario-pedido">
+        <put name="formulario" value="/interfaz/admin/lista_usuarios/ver_datos_admin.jsp"></put>
+        <put name="navBar" value="/interfaz/admin/barras_navegacion/navBarVolverListaUsuario.jsp"></put>
     </definition>    
    
     

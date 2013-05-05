@@ -12,7 +12,7 @@
 <script type="text/javascript" src="assets/js/jquery-te-1.0.5.min.js" charset="utf-8"></script>
 <link type="text/css" rel="stylesheet" href="assets/css/jquery-te-Style.css" charset="utf-8" />
 
-<legend>Editar un Equipo</legend>
+<legend>Editar equipo</legend>
 
 <logic:present name="equipoNulo">
     <logic:notEmpty name="equipoNulo">
@@ -84,5 +84,7 @@
     <br>
     <html:hidden name="equipo" property="serial"/>
     <html:hidden name="equipo" property="imagen"/>
+    <center>
     <html:submit styleClass="btn btn-primary"> Editar </html:submit>
+        </center>
 </html:form>

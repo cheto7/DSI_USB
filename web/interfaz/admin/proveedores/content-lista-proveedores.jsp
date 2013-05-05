@@ -58,8 +58,8 @@
                         <table class="table table-hover">
                             <tbody>
                                 <tr>
-                                    <th><center>Nombre</center></th>
-                                    <th><center>Rif</center></th>
+                                    <th><center>Nombre/Razón Social</center></th>
+                                    <th><center>RIF</center></th>
                                     <th><center>Opciones</center></th>
                                 </tr>
 

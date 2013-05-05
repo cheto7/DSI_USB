@@ -1317,7 +1317,7 @@ public class DBMS {
             sqlquery = "INSERT INTO \"PREPAS\".contiene (id, serial,cantidad,talla,frecuencia)  VALUES "
                     + "('" + s.getId() + "' , '" + e.getSerial() + "' , '" + Integer.parseInt(cantidad) + "' , '"
                     + tallaAsociada(e.getTipo_talla(), s.getNombre_usuario()) + "' , ' "
-                    + transformaFrecuencia(frecuencia) + "')";
+                    + frecuencia + "')";
             Statement stmt = conexion.createStatement();
             System.out.println(sqlquery);
             Integer i = stmt.executeUpdate(sqlquery);
@@ -1427,7 +1427,7 @@ public class DBMS {
             String sqlquery;
             sqlquery = "UPDATE \"PREPAS\".contiene SET "
                     + "cantidad = '" + s.getCantidad() + "' , "
-                    + "frecuencia = '" + transformaFrecuencia(s.getFrecuencia()) + "' "
+                    + "frecuencia = '" + s.getFrecuencia() + "' "
                     + "WHERE id = '" + s.getId() + "' AND "
                     + "serial = '" + s.getSerialEquipo() + "'";
             Statement stmt = conexion.createStatement();
@@ -2234,6 +2234,24 @@ public class DBMS {
             return false;
         }
     }
+
+    public void CancelarSolicitud(Solicitud s) {
+        try {
+            String sqlquery = "DELETE FROM \"PREPAS\".contiene WHERE "
+                    + "id = '" + s.getId() + "'";
+
+            Statement stmt = conexion.createStatement();
+            System.out.println(sqlquery);
+            Integer i = stmt.executeUpdate(sqlquery);
+            
+            sqlquery = "DELETE FROM \"PREPAS\".solicitud WHERE "
+                    + "id = '" + s.getId() + "'";
+            System.out.println(sqlquery);
+            i = stmt.executeUpdate(sqlquery);            
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+    }        
 }
 //Existe en .tiene (id,serial) existe
 //obtener de .tiene

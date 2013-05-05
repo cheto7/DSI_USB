@@ -244,8 +244,8 @@ p {
 }
 
 #content1 {
-	left: 180px;
-	width: 720px;
+	left: -30px;
+	width: 750px;
 	height: auto;
 	display: inline;
 	float: left;
@@ -254,8 +254,9 @@ p {
 	margin-right: 10px;
 }
 
+
 #sidebar-first {
-	left: -770px;
+	left: -600px;
 	width: 160px;
 	height: auto;
 	display: inline;
@@ -266,8 +267,8 @@ p {
 }
 
 #sidebar-first1 {
-	left: -770px;
-	width: 160px;
+        left: -40px;
+	width: 170px;
 	height: auto;
 	display: inline;
 	float: left;
@@ -275,6 +276,8 @@ p {
 	margin-left: 10px;
 	margin-right: 10px;
 }
+
+
 
 #sidebar-second {
 	width: 160px;

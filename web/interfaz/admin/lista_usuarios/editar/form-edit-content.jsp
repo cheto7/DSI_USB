@@ -13,35 +13,58 @@
 
 
 <legend>Datos Personales</legend>
-<h1 style="display: inline">Nombre de usuario:</h1> 
-<bean:write name="Usuario" property="usuario"/><br>
-<h1 style="display: inline"><br>Nombres y Apellidos:</h1> 
-<bean:write name="Usuario" property="nombre"/> <bean:write name="Usuario" property="apellido"/><br><br>
-<h1 style="display: inline">Cedula:</h1> 
-<bean:write name="Usuario" property="ci"/><br><br>
-<h1 style="display: inline">Fecha de Ingreso a la USB:</h1> 
-<bean:write name="Usuario" property="fecha"/><br><br>
+<table width="800">
+    <tr>
+        <td>
+            <h1 style="display: inline">Nombre de usuario:</h1>
+            <bean:write name="Usuario" property="usuario"/><br>
+        </td>
+        <td>
+            <h1 style="display: inline"><br>Nombres y Apellidos:</h1> 
+            <bean:write name="Usuario" property="nombre"/> <bean:write name="Usuario" property="apellido"/><br><br>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <h1 style="display: inline">Cedula:</h1> 
+            <bean:write name="Usuario" property="ci"/><br><br>
+        </td>
+        <td>
+            <h1 style="display: inline">Fecha de Ingreso a la USB:</h1> 
+            <bean:write name="Usuario" property="fecha"/><br><br>
+        </td>
+    </tr>
+</table>
 
 <html:form action = "/Editar" styleId="Form" onsubmit = "return (this)">
     <html:hidden name="Usuario" property="usuario"/>
     <html:hidden name="Usuario" property="administrador"/>
     <html:hidden name="autenticado" property="usuario"/>
+    <table width="90%">
+    <tr>
+        <td>
+        <label>Contraseña: </label>
+            <html:password name="Usuario" property="password" styleId="password"></html:password>
+        </td>
+        <td>
 
-    <label><br>Contraseña: </label>
-        <html:password name="Usuario" property="password" styleId="password"></html:password>
-    <br>
-
-    <label>Confirmar Contraseña:</label>
-    <input id="confirm_password" type="password" class="text" name="confirm_password" placeholder="Confirmar Contraseña" title="Ingrese su contraseña"/>
-    <br>
-
-    <label>Correo electrónico alternativo:</label>
-    <html:text name="Usuario" property="email"></html:text><br>      
-    <label>Teléfono: </label>
-    <html:text name="Usuario" property="telefono"></html:text>
-    <br>  
-
-        <label>Unidad Adscripción:</label>
+        <label>Confirmar Contraseña:</label>
+        <input id="confirm_password" type="password" class="text" name="confirm_password" placeholder="Confirmar Contraseña" title="Ingrese su contraseña"/>
+        </td>
+    </tr>
+    <tr>
+        <td>
+        <label>Correo electrónico alternativo:</label>
+        <html:text name="Usuario" property="email"></html:text>
+        </td>
+        <td>
+        <label>Teléfono:</label>
+        <html:text name="Usuario" property="telefono"></html:text>
+        </td>
+    </tr>
+    <tr>
+    <td>
+    <label>Unidad Adscripción:</label>
     <logic:present name="select">
         <logic:empty name="select">
             <html:select name="Usuario" property="unidad_adscripcion" styleClass="span1" style="width:250px">
@@ -58,14 +81,21 @@
         </logic:notEmpty>
 
     </logic:present>
-    <br>   
-    <label>Cargo </label>
+    </td>
+    <td> 
+    <label>Cargo:</label>
     <html:text name="Usuario" property="cargo"></html:text>
-    <br>  
-    <br/>
-
-    <legend>Talla de equipos:</legend>
+    </td>
+    </tr>
+    </table>
+    <legend>Tallas personales:</legend>
+    <table width="90%">
+    
+    <tr>
+    
+    <td>   
     <h1 style="display: inline">Talla Mascara:</h1>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     <html:select name="Usuario" property="talla_mascara" style="width: 55px">
         <option>
             <bean:write name="Usuario" property="talla_mascara"></bean:write>
@@ -75,8 +105,10 @@
         <option>L</option>
         <option>XL</option>
     </html:select>
-    <br>
+    </td>
+    <td>
     <h1 style="display: inline">Talla de Camisa:</h1>
+    &nbsp;
     <html:select name="Usuario" property="talla_camisa" style="width: 55px">
         <option>
             <bean:write name="Usuario" property="talla_camisa"></bean:write>
@@ -86,7 +118,10 @@
         <option>L</option>
         <option>XL</option>
     </html:select>
-    <br>
+    </td>
+    </tr>
+    <tr>
+    <td>
     <h1 style="display: inline">Talla de Pantalón:</h1>
     <html:select name="Usuario" property="talla_pantalon" style="width: 55px">
         <option>
@@ -103,7 +138,8 @@
         <option>44</option>
         <option>48</option>
     </html:select>
-    <br>
+    </td>
+    <td>
     <h1 style="display: inline">Talla de Guantes:</h1>
     <html:select name="Usuario" property="talla_guantes" style="width: 55px">
         <option>
@@ -114,8 +150,12 @@
         <option>L</option>
         <option>XL</option>
     </html:select>
-    <br>
+    </td>
+    </tr>
+    <tr>
+    <td>
     <h1 style="display: inline">Talla de Zapato:</h1>
+    &nbsp;&nbsp;
     <html:select name="Usuario" property="talla_zapato" style="width: 55px">
         <option>
             <bean:write name="Usuario" property="talla_zapato"></bean:write>
@@ -138,6 +178,12 @@
         <option>44.5</option>
         <option>45</option>
     </html:select>
+        </td>
+    </tr>
+    </table>
+    <table width="90%">
+    <tr>
+        <td>
     <legend>Área laboral:</legend>
     <html:select name="Usuario" property="area_laboral" styleClass="span1" style="width: 150px">
         <option>
@@ -147,10 +193,10 @@
         <option>Académica</option>
         <option>Bombero</option>
         <option>Obrero</option> 
-    </html:select> 
-
-    <br>
-    <br>
+    </html:select>
+        </td>
+    </tr>
+    </table>
     <center>
         <html:submit styleClass="btn btn-primary">Modificar </html:submit>
     </center>
