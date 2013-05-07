@@ -5,7 +5,7 @@
 
 (function( $, undefined ) {
 
-var uuid = 0,
+var uuid = 0, 
 	runiqueId = /^ui-id-\d+$/;
 
 // prevent duplicate loading
@@ -11077,7 +11077,7 @@ $.widget( "ui.menu", {
 		menus.children( ":not(.ui-menu-item)" ).each(function() {
 			var item = $( this );
 			// hyphen, em dash, en dash
-			if ( !/[^\-—–\s]/.test( item.text() ) ) {
+			if ( !/[^\-ï¿½ï¿½\s]/.test( item.text() ) ) {
 				item.addClass( "ui-widget-content ui-menu-divider" );
 			}
 		});

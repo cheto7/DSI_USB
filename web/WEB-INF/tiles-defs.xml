@@ -106,12 +106,10 @@
         <put name="sidebar" value=""></put>
     </definition>
     
-    <definition name="registro" path="/interfaz/genericos/registro/plantilla-registro.jsp">
+    <definition name="registro" extends="formulario-pedido">
         <put name="script" value="/interfaz/genericos/registro/registro-script.jsp"></put>
-        <put name="registro-content" value="/interfaz/genericos/registro/registro-content.jsp"></put>
-        <put name="navbar-registro" value="/interfaz/genericos/barras_navegacion/navbar-registro.jsp"></put> 
-        <put name="sidebar" value="/interfaz/genericos/plantilla_general/sidebar-second.jsp"></put>
-        <put name="footer" value="/interfaz/genericos/plantilla_general/footer.jsp"></put> 
+        <put name="formulario" value="/interfaz/genericos/registro/registro-content.jsp"></put>
+        <put name="navBar" value="/interfaz/genericos/barras_navegacion/navbar-registro.jsp"></put>
     </definition>
     
     <definition name="formulario-pedido" path="/interfaz/genericos/pedido/plantilla-pedido.jsp">

@@ -1,4 +1,9 @@
 <%-- 
+    Document   : navBarAdmin
+    Created on : 07/05/2013, 03:41:42 PM
+    Author     : ivan
+--%>
+<%-- 
     Document   : navBarusuario
     Created on : Nov 4, 2012, 3:04:59 AM
     Author     : sibs
@@ -22,48 +27,7 @@
         });
     });
 </script>
-
-<div id="datos_persona" style="margin-bottom:20px;">
-    <p>
-        <bean:write name="autenticado" property="nombre"></bean:write> 
-        <bean:write name="autenticado" property="apellido"></bean:write>
-    </p>
-</div>
-
 <ul id="navbar">
-    <%--<li>
-        <html:form action = "/FormularioEditarAdmin" onsubmit="return (this)">
-            <html:hidden name="autenticado" property="usuario"/>
-            <html:submit style="padding:10px 20px 40px 20px"> Editar Información </html:submit>
-        </html:form> 
-    </li>--%>
-    <li>
-        <html:form action = "/VerInforPersonal" onsubmit="return (this)">
-            <html:hidden name="autenticado" property="usuario"/>
-            <html:submit style="padding:10px 20px 40px 20px"> Datos Personales </html:submit>
-        </html:form>
-    </li>    
-
-    <li>
-        <html:form action="/Ir_pag_pedido" onsubmit="return (this)">
-            <html:hidden name="autenticado" property="usuario"/>
-            <html:hidden name="autenticado" property="password"/>
-            <html:submit style="padding:10px 20px 40px 20px"> Realizar Solicitud </html:submit>
-        </html:form>
-    </li>
-
-    <li>
-        <html:form action="/ListarPedido" onsubmit="return (this)"> 
-            <html:submit style="padding:10px 20px 40px 20px">Solicitudes Anteriores</html:submit>
-        </html:form> 
-    </li>
-
-    <li>
-        <html:form action="/CerrarSesion" onsubmit="return (this)"> 
-            <html:submit style="padding:10px 20px 40px 20px">Cerrar Sesión</html:submit>
-        </html:form> 
-    </li>
-
     <div id="accordion">
         <h3>Administración</h3>
         <div>
@@ -131,4 +95,3 @@
 
 
 </ul>
-

@@ -11,8 +11,12 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
-<a>
-    <html:form action = "/VolverPagInicio" onsubmit="return (this)">
-        <html:submit style="padding:10px 20px 40px 20px"> Inicio </html:submit>
-    </html:form> 
-</a>
+<ul id="navbar">
+    <a>
+        <li>
+            <html:form action = "/VolverPagInicio" onsubmit="return (this)">
+                <html:submit style="padding:10px 20px 40px 20px"> Inicio </html:submit>
+            </html:form> 
+        </li>
+    </a>
+</ul>

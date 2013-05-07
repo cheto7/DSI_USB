@@ -23,16 +23,13 @@
 
             <div id="main">
                 <div id="content">
-                    <tiles:insert attribute="registro-content"/>
+                    <tiles:insert attribute="formulario"/>
 
 
                     <ul id="navbar">                       
-                        <tiles:insert attribute="navbar-registro"/>
+                        <tiles:insert attribute="navBar"/>
                     </ul>
 
-                </div>
-                <div id="sidebar-second">
-                    <tiles:insert attribute="sidebar"/>
                 </div>
 
                 <div id="footer">
