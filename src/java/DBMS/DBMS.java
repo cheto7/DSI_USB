@@ -1689,6 +1689,24 @@ public class DBMS {
         }
         return false;
     }
+    
+    public Boolean modificarEquipoFactura(Facturado f) {
+        try {
+            String sqlquery = "UPDATE \"PREPAS\".facturado "
+                    + "SET  cantidad = " + f.getCantidad()
+                    + "     WHERE numero_factura = " + f.getNumero_factura() + " AND "
+                    + "serial = " + f.getSerial() + " AND "
+                    + "talla = '" + f.getTalla() + "'";
+
+            Statement stmt = conexion.createStatement();
+            System.out.println(sqlquery);
+            Integer i = stmt.executeUpdate(sqlquery);
+            return i > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
 
     
     public String_Cheto obtenerProveedor(Factura f) {

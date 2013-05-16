@@ -28,7 +28,6 @@ public class AgregarEquipoAFactura extends Action{
             HttpServletRequest request, HttpServletResponse response)
             throws Exception {
         
-        Equipo equipo = new Equipo();
         Facturado f = (Facturado) form;
         /*
         String serial = request.getParameter("serial");

@@ -249,6 +249,10 @@
         <put name="formulario" value="/interfaz/genericos/pedido/form-edit-equipoEnSol-content.jsp"></put>
         <put name="navBar" value="/interfaz/genericos/barras_navegacion/navBarVolverConfSol.jsp"></put>
     </definition>
+     <definition name="formulario-editar-equipo-en-factura" extends="formulario-agregar-noticia">
+        <put name="formulario" value="/interfaz/genericos/factura/form-edit-equipoEnFac-content.jsp"></put>
+        <put name="navBar" value="/interfaz/genericos/barras_navegacion/navBarVolverConfFact.jsp"></put>
+    </definition>
    <definition name="lista-todas-solicitudes" extends="formulario-pedido">
        <put name="script" value="/interfaz/genericos/pedido/script-pedido.jsp"></put>
         <put name="formulario" value="/interfaz/admin/solicitud/lista-solicitudes-recibidas.jsp"></put>
