@@ -398,9 +398,9 @@
                 name="Usuario">
             <forward name="success" path="/vistas/pedido/confirmar_solicitud.jsp"></forward>
         </action>
-        <action path="/EliminarEquipoEnFactura" type="Solicitudes.EliminarEquipoEnSolicitud" scope="request" parameter="method"
-                name="Usuario">
-            <forward name="success" path="/vistas/pedido/confirmar_solicitud.jsp"></forward>
+        <action path="/EliminarEquipoEnFactura" type="Facturas.EliminarEquipoEnFactura" scope="request" parameter="method"
+                name="Facturado">
+            <forward name="success" path="/FormularioEditarFactura.do"></forward>
         </action>
         <action path="/ActualizarEquipoEnSolicitud" type="Solicitudes.ActualizarEquipoEnSolicitud" scope="request" parameter="method"
                 name="Usuario">
