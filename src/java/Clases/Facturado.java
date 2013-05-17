@@ -15,8 +15,10 @@ public class Facturado extends ActionForm{
     private int numero_factura;
     private int serial; //Equipo
     private int cantidad;
+    private String cantidadString;
     private String talla;
     private String tipo_talla;
+    private String nombre_vista;
 
     
     /**
@@ -87,6 +89,34 @@ public class Facturado extends ActionForm{
      */
     public void setTipo_talla(String tipo_talla) {
         this.tipo_talla = tipo_talla;
+    }
+
+    /**
+     * @return the nombre_vista
+     */
+    public String getNombre_vista() {
+        return nombre_vista;
+    }
+
+    /**
+     * @param nombre_vista the nombre_vista to set
+     */
+    public void setNombre_vista(String nombre_vista) {
+        this.nombre_vista = nombre_vista;
+    }
+
+    /**
+     * @return the cantidadString
+     */
+    public String getCantidadString() {
+        return cantidadString;
+    }
+
+    /**
+     * @param cantidadString the cantidadString to set
+     */
+    public void setCantidadString(String cantidadString) {
+        this.cantidadString = cantidadString;
     }
     
     

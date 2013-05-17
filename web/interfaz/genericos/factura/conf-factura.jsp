@@ -53,17 +53,18 @@
                 </center>
             </td>
             <td>
-                <html:form action="/EditarEquipoEnSolicitud" onsubmit="return (this)" style="display: inline">
+                <html:form action="/EditarEquipoEnFactura" onsubmit="return (this)" style="display: inline">
                         <html:hidden name="equipo" property="cantidad"/>
                         <html:hidden name="equipo" property="serial"/>
                         <html:hidden name="equipo" property="nombre_vista"/> 
                         <html:hidden name="equipo" property="talla"/>
+                        <html:hidden name="equipo" property="tipo_talla"/>
                         <html:hidden name="factura" property="numero_factura"/>
                         <html:submit styleClass="btn btn-primary"> Editar </html:submit>
                 </html:form>
             </td>
             <td>
-                    <html:form action="/EliminarEquipoEnSolicitud" onsubmit="return (this)">
+                    <html:form action="/EliminarEquipoEnFactura" onsubmit="return (this)">
                         <html:hidden name="equipo" property="cantidad"/>
                         <html:hidden name="equipo" property="serial"/>
                         <html:hidden name="equipo" property="nombre_vista"/> 

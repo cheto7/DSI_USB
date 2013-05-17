@@ -55,7 +55,7 @@ public class PonerTalla extends Action {
             select.add(new String_Cheto("L"));
             select.add(new String_Cheto("XL"));
             
-        }else if(request.getParameter("tipo_talla").equalsIgnoreCase(            "pantalon")){
+        }else if(request.getParameter("tipo_talla").equalsIgnoreCase("pantalon")){
             select.add(new String_Cheto("28"));
             select.add(new String_Cheto("30"));
             select.add(new String_Cheto("32"));
