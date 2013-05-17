@@ -48,49 +48,81 @@
         </center>
     </logic:notEmpty>
 </logic:present>
+<logic:present name="errorFormatoEquipo">
+    <logic:notEmpty name="errorFormatoEquipo">
+        <center>
+            <label style="color:red">Debe introducir un imagen válida</label>
+        </center>
+    </logic:notEmpty>
+</logic:present>
 <html:form enctype="multipart/form-data" action = "/AgregarEquipo" acceptCharset="iso-8859-1" onsubmit = "return (this)">
-
-    <label>Nombre:</label>
-    <html:text name="Equipo" property="nombre_vista" styleClass="span5"></html:text><br>  
-    <label>Tipo:</label>
-    <html:text name="Equipo" property="tipo" styleClass="span5" ></html:text><br>
-    <label>Imagen:</label>
-    <html:file name="Equipo" property="file" styleClass="span5" ></html:file><br>
-    <label>Funcionalidad:</label>
-    <html:textarea name="Equipo" property="funcionalidad" rows="3" styleClass="span5" ></html:textarea><br>
-    <label>Cantidad en existencia:</label>
-    <html:text name="Equipo" property="cantidad" styleClass="span5" ></html:text><br>    
-    <label>Norma técnica asociada:</label>
-    <html:text name="Equipo" property="norma" styleClass="span5" ></html:text><br>
-    <label>Vida útil (Meses):</label>
-    <html:text name="Equipo" property="vida_util" styleClass="span5" ></html:text><br>
-    <table>
-            <tr>
-                <td>
+    <table width="100%">
+        <tr>
+            <td>
+                <label>Nombre:</label>
+                <html:text name="Equipo" property="nombre_vista" styleClass="span4"></html:text>
+            </td>
+            <td>
                 <label>Sector universitario:</label>
                 <html:select name="Equipo" property="sector">
-                    <option> </option>
-                    <option value="academico">Académico</option>
-                    <option value="administrativo">Administrativo</option>
-                    <option value="bombero">Bombero</option>
-                    <option value="obrero">Obrero</option>
-                    <option value="generico">Genérico</option>
-                </html:select>
-                </td>
-                <td>
-                <label>Tipo de talla:</label>
-                <html:select name="Equipo" property="tipo_talla">
-                    <option> </option>
-                    <option value="camisa">Camisa</option>
-                    <option value="guantes">Guantes</option>
-                    <option value="mascara">Máscara</option>
-                    <option value="pantalon">Pantalón</option>
-                    <option value="zapato">Zapato</option>
-                    <option value="no aplica">No Aplica</option>
-                </html:select><br>
-                </td>
-            </tr>
-    </table>
-    
-    <center><html:submit styleClass="btn btn-primary"> Agregar </html:submit></center>
+            <option> </option>
+            <option value="academico">Académico</option>
+            <option value="administrativo">Administrativo</option>
+            <option value="bombero">Bombero</option>
+            <option value="obrero">Obrero</option>
+            <option value="generico">Genérico</option>
+        </html:select>                
+    </td>
+</tr>
+<tr>
+    <td>
+        <label>Tipo:</label>
+        <html:text name="Equipo" property="tipo" styleClass="span4" ></html:text>
+    </td>
+    <td>
+        <label>Tipo de talla:</label>
+        <html:select name="Equipo" property="tipo_talla">
+    <option> </option>
+    <option value="camisa">Camisa</option>
+    <option value="guantes">Guantes</option>
+    <option value="mascara">Máscara</option>
+    <option value="pantalon">Pantalón</option>
+    <option value="zapato">Zapato</option>
+    <option value="no aplica">No Aplica</option>
+</html:select>
+</td>
+</tr>
+<tr>
+    <td>
+        <label>Funcionalidad:</label>
+        <html:textarea name="Equipo" property="funcionalidad" rows="3" styleClass="span4" ></html:textarea>                
+    </td>
+    <td>
+        <label>Imagen:</label>
+        <html:file name="Equipo" property="file" styleClass="span4" ></html:file>
+    </td>            
+</tr>
+<tr>
+    <td>
+        <label>Norma técnica asociada:</label>
+        <html:text name="Equipo" property="norma" styleClass="span4" ></html:text>
+    </td>
+    <td></td>
+</tr>
+<tr>
+    <td>
+        <label>Cantidad en existencia:</label>
+        <html:text name="Equipo" property="cantidad" styleClass="span4" ></html:text>
+    </td>
+    <td></td>
+</tr>
+<tr>
+    <td><label>Vida útil (Meses):</label>
+        <html:text name="Equipo" property="vida_util" styleClass="span4" ></html:text>
+    </td>
+    <td></td>
+</tr>        
+
+</table>
+<center><html:submit styleClass="btn btn-primary"> Agregar </html:submit></center>
 </html:form>

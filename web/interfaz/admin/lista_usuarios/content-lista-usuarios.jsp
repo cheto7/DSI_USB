@@ -8,10 +8,10 @@
 <%@ taglib uri="http://struts.apache.org/tags-html" prefix="html" %>
 <%@ taglib uri="http://struts.apache.org/tags-logic" prefix="logic" %>
 <%@ taglib uri="http://struts.apache.org/tags-tiles" prefix="tiles" %>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page contentType="text/html" pageEncoding="ISO-8859-1"%>
 
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>DirecciÃ³n de Seguridad Integral</title>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+<title>Dirección de Seguridad Integral</title>
 <script type="text/javascript" src="assets/js/jquery-1.8.2.js"></script>
 <script type="text/javascript" src="assets/js/jquery-ui.js"></script>
 <script type="text/javascript" src="assets/bootstrap/js/bootstrap.js"></script>

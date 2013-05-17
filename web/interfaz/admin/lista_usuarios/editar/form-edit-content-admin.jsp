@@ -9,14 +9,13 @@
 <%@ taglib uri="http://struts.apache.org/tags-logic" prefix="logic" %>
 <%@ taglib uri="http://struts.apache.org/tags-tiles" prefix="tiles" %>
 
-
 <legend>Datos del usuario</legend>
 
 <h1 style="display: inline">Usuario:</h1> 
 <bean:write name="Usuario" property="usuario"/><br>
 
 
-<html:form action = "/EditarAdmin" styleId="Form" onsubmit = "return (this)">
+<html:form action = "/EditarAdmin" styleId="Form" onsubmit = "return (this)" >
     <html:hidden name="Usuario" property="usuario"/>
     <%--<html:hidden name="Usuario" property="administrador"/>--%>
     <html:hidden name="Usuario" property="habilitado"/>
