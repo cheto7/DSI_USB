@@ -1833,9 +1833,9 @@ public Boolean validarFactura(Factura f) {
         try {
             
             String sqlquery;
-            sqlquery = "SELECT * FROM \"PREPAS\".facturado F "
-                    + "WHERE F.numero_factura = '" + f.getNumero_factura() 
-                    +"' AND F.validado = 'FALSO'";
+            sqlquery = "SELECT * FROM \"PREPAS\".facturado "
+                    + "WHERE numero_factura = '" + f.getNumero_factura() 
+                    +"' AND validado = 'FALSO'";
 
             Statement stmt = conexion.createStatement();
             System.out.println(sqlquery);
@@ -1844,12 +1844,12 @@ public Boolean validarFactura(Factura f) {
             while (rs.next()) {
                 Equipo e = new Equipo();
                 Facturado fact = new Facturado();
-                e.setSerial(rs.getInt("F.serial"));
-                e.setTalla(rs.getString("F.talla"));
-                e.setCantidad(rs.getInt("F.cantidad"));
-                fact.setNumero_factura(rs.getInt("F.numero_factura"));
-                fact.setSerial(rs.getInt("F.serial"));
-                fact.setTalla(rs.getString("F.talla"));
+                e.setSerial(rs.getInt("serial"));
+                e.setTalla(rs.getString("talla"));
+                e.setCantidad(rs.getInt("cantidad"));
+                fact.setNumero_factura(rs.getInt("numero_factura"));
+                fact.setSerial(rs.getInt("serial"));
+                fact.setTalla(rs.getString("talla"));
                 boolean aux = this.agregarAEquipoTalla(e);
                 validar = validar && aux;
                 if(aux) this.validarEquipoFactura(fact);
