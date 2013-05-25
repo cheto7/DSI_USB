@@ -92,7 +92,7 @@ CREATE TABLE "PREPAS".equipoTalla (
   serial SERIAL,
   talla VARCHAR,
   cantidad INT default 0,
-  CONSTRAINT PK_equipo PRIMARY KEY (serial,talla),
+  CONSTRAINT PK_equipoTalla PRIMARY KEY (serial,talla),
   CONSTRAINT FK_equipoTalla_equipo FOREIGN KEY (serial) REFERENCES "PREPAS".equipo (serial)
 ) WITH (
 OIDS = FALSE
