@@ -19,6 +19,7 @@ public class Facturado extends ActionForm{
     private String talla;
     private String tipo_talla;
     private String nombre_vista;
+    private String validado;
 
     
     /**
@@ -117,6 +118,20 @@ public class Facturado extends ActionForm{
      */
     public void setCantidadString(String cantidadString) {
         this.cantidadString = cantidadString;
+    }
+
+    /**
+     * @return the validado
+     */
+    public String getValidado() {
+        return validado;
+    }
+
+    /**
+     * @param validado the validado to set
+     */
+    public void setValidado(String validado) {
+        this.validado = validado;
     }
     
     

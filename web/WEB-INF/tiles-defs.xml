@@ -253,6 +253,10 @@
         <put name="formulario" value="/interfaz/genericos/factura/form-edit-equipoEnFac-content.jsp"></put>
         <put name="navBar" value="/interfaz/genericos/barras_navegacion/navBarVolverConfFact.jsp"></put>
     </definition>
+     <definition name="formulario-validar-factura" extends="formulario-agregar-noticia">
+        <put name="formulario" value="/interfaz/genericos/factura/conf-validar.jsp"></put>
+        <put name="navBar" value="/interfaz/genericos/barras_navegacion/navBarVolverConfFact2.jsp"></put>
+    </definition>
    <definition name="lista-todas-solicitudes" extends="formulario-pedido">
        <put name="script" value="/interfaz/genericos/pedido/script-pedido.jsp"></put>
         <put name="formulario" value="/interfaz/admin/solicitud/lista-solicitudes-recibidas.jsp"></put>

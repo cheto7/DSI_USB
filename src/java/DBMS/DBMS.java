@@ -1670,11 +1670,11 @@ public class DBMS {
             Boolean existe = existeFacturado(f);
             if (!existe) {
                 String sqlquery;
-                sqlquery = "INSERT INTO \"PREPAS\".facturado (numero_factura,serial,talla,cantidad,costo_unidad) "
+                sqlquery = "INSERT INTO \"PREPAS\".facturado (numero_factura,serial,talla,cantidad,costo_unidad,validado) "
                         + "VALUES ('" + f.getNumero_factura() + "','"
                         +f.getSerial() +"','"
                         +f.getTalla() +"','"
-                        +f.getCantidad() +"','0')";
+                        +f.getCantidad() +"','0','FALSO')";
                 
                 System.out.println(sqlquery);
 
@@ -1725,7 +1725,139 @@ public class DBMS {
         }
         return false;
     }
+    
+    public Boolean validarEquipoFactura(Facturado f) {
+        try {
+            String sqlquery = "UPDATE \"PREPAS\".facturado "
+                    + "SET  validado = " + "'VERDAD'"
+                    + "     WHERE numero_factura = " + f.getNumero_factura() + " AND "
+                    + "serial = " + f.getSerial() + " AND "
+                    + "talla = '" + f.getTalla() + "'";
 
+            Statement stmt = conexion.createStatement();
+            System.out.println(sqlquery);
+            Integer i = stmt.executeUpdate(sqlquery);
+            return i > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    public Boolean ponerValidadaFactura(Factura f) {
+        try {
+            String sqlquery = "UPDATE \"PREPAS\".factura "
+                    + "SET  validado = " + "'VERDAD'"
+                    + "     WHERE numero_factura = " + f.getNumero_factura();
+
+            Statement stmt = conexion.createStatement();
+            System.out.println(sqlquery);
+            Integer i = stmt.executeUpdate(sqlquery);
+            return i > 0;
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return false;
+    }
+    
+    
+public Boolean validarFactura(Factura f) {
+        try {
+            
+            String sqlquery;
+            sqlquery = "SELECT * FROM \"PREPAS\".facturado F "
+                    + "WHERE F.numero_factura = '" + f.getNumero_factura() 
+                    +"' AND F.validado = 'FALSO'";
+
+            Statement stmt = conexion.createStatement();
+            System.out.println(sqlquery);
+            ResultSet rs = stmt.executeQuery(sqlquery);
+            boolean validar = true;
+            while (rs.next()) {
+                Equipo e = new Equipo();
+                Facturado fact = new Facturado();
+                e.setSerial(rs.getInt("F.serial"));
+                e.setTalla(rs.getString("F.talla"));
+                e.setCantidad(rs.getInt("F.cantidad"));
+                fact.setNumero_factura(rs.getInt("F.numero_factura"));
+                fact.setSerial(rs.getInt("F.serial"));
+                fact.setTalla(rs.getString("F.talla"));
+                boolean aux = this.agregarAEquipoTalla(e);
+                validar = validar && aux;
+                if(aux) this.validarEquipoFactura(fact);
+            }
+            if(validar){
+                return this.ponerValidadaFactura(f);
+            }else
+                return false;
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return false;
+    }
+
+public int existeEquipoTalla(Equipo e) {
+        try {
+            String sqlquery;
+            sqlquery = "SELECT E.cantidad FROM \"PREPAS\".equipoTalla E "
+                    + "WHERE E.serial = " + e.getSerial()
+                    +" AND E.talla = '" + e.getTalla()
+                    +"'";
+
+            Statement stmt = conexion.createStatement();
+            System.out.println(sqlquery);
+            ResultSet rs = stmt.executeQuery(sqlquery);
+
+            while (rs.next()) {
+                return rs.getInt("E.cantidad");
+            }
+            return -1;
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return -1;
+    }
+
+public Boolean modificarEquipoTalla(Equipo e,int cant) {
+        try {
+            String sqlquery = "UPDATE \"PREPAS\".equipoTalla "
+                    + "SET  cantidad = " + (e.getCantidad() + cant)
+                    + "     WHERE serial = " + e.getSerial() + " AND "
+                    + "talla = '" + e.getTalla() + "'";
+
+            Statement stmt = conexion.createStatement();
+            System.out.println(sqlquery);
+            Integer i = stmt.executeUpdate(sqlquery);
+            return i > 0;
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return false;
+    }
+
+public boolean agregarAEquipoTalla(Equipo e){
+        int cant = this.existeEquipoTalla(e);
+        if(cant >= 0){
+            return modificarEquipoTalla(e,cant);
+        }
+        try {
+                String sqlquery;
+                sqlquery = "INSERT INTO \"PREPAS\".equipoTalla (serial,talla,cantidad) "
+                        + "VALUES (" + e.getSerial() + ",'"
+                        +e.getTalla()+"',"
+                        +e.getCantidad()+")";
+                
+                System.out.println(sqlquery);
+
+                Statement stmt = conexion.createStatement();
+                System.out.println(sqlquery);
+                int i = stmt.executeUpdate(sqlquery);
+                return i > 0;
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return false;
+}
     
     public String_Cheto obtenerProveedor(Factura f) {
         String_Cheto proveedor = new String_Cheto("");
