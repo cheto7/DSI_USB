@@ -6,11 +6,12 @@
 var req;
 //llama al servlet ContarCaracteres
 function Habilitar(usuario){
+    alert('Habilitando usuario. Recibirá un mensaje de confirmación en breves segundos');
     var url = "HabilitarUsuario?usuario=" + usuario;
     iniciarPeticion();
     req.onreadystatechange = function() {
-        callbackHabilitar(usuario)
-        };
+        callbackHabilitar(usuario);
+    };
     req.open("POST", url, true);
     req.send(null);
 }
@@ -29,18 +30,19 @@ function callbackHabilitar(usuario) {
             if (document.getElementById("BotonHabilitar")!=null){
                 document.getElementById("BotonHabilitar").onclick = function(){
                     Deshabilitar(usuario)
-                    };
+                };
                 document.getElementById("BotonHabilitar").className = "btn btn-warning";
                 document.getElementById("BotonHabilitar").setAttribute("value", "Deshabilitar");
             }
             if (document.getElementById("BotonDeshabilitar")!=null){
                 document.getElementById("BotonDeshabilitar").onclick = function(){
                     Deshabilitar(usuario)
-                    };
+                };
                 document.getElementById("BotonDeshabilitar").className = "btn btn-warning";            
                 document.getElementById("BotonDeshabilitar").setAttribute("value", "Deshabilitar");
             }
             document.getElementById("MensajeHabilitacion").innerHTML = "<center><label style=\"color:blue\">Usuario Habilitado satisfactoriamente</label></center>";
+            alert('Correo enviado satisfactoriamente');
         }
     }
 }
@@ -50,7 +52,7 @@ function Deshabilitar(usuario){
     iniciarPeticion();
     req.onreadystatechange = function() {
         callbackDeshabilitar(usuario)
-        };
+    };
     req.open("POST", url, true);
     req.send(null);
 }
@@ -61,14 +63,14 @@ function callbackDeshabilitar(usuario) {
             if (document.getElementById("BotonHabilitar")!=null){
                 document.getElementById("BotonHabilitar").onclick = function(){
                     Habilitar(usuario)
-                    };
+                };
                 document.getElementById("BotonHabilitar").className = "btn btn-success";
                 document.getElementById("BotonHabilitar").setAttribute("value", "Habilitar");
             }
             if (document.getElementById("BotonDeshabilitar")!=null){
                 document.getElementById("BotonDeshabilitar").onclick = function(){
                     Habilitar(usuario)
-                    };
+                };
                 document.getElementById("BotonDeshabilitar").className = "btn btn-success";            
                 document.getElementById("BotonDeshabilitar").setAttribute("value", "Habilitar");
             }
@@ -167,7 +169,7 @@ function Cerrar(periodo){
     iniciarPeticion();
     req.onreadystatechange = function() {
         callbackCerrarPeriodo(periodo)
-        };
+    };
     req.open("POST", url, true);
     req.send(null);
 }
@@ -178,7 +180,7 @@ function callbackCerrarPeriodo(periodo) {
             document.getElementById(periodo).className = "btn btn-success";
             document.getElementById(periodo).onclick = function(){
                 ReAbrir(periodo)
-                };  
+            };  
             document.getElementById(periodo).setAttribute("value", "Reabrir");
             document.getElementById("MensajeCerrado").innerHTML = "<center><label style=\"color:blue\">El período ha sido cerrado satisfactoriamente</label></center>";
             document.getElementById("Estado"+periodo).innerHTML = "Cerrado";
@@ -192,7 +194,7 @@ function ReAbrir(periodo){
     iniciarPeticion();
     req.onreadystatechange = function() {
         callbackReAbrirPeriodo(periodo)
-        };
+    };
     req.open("POST", url, true);
     req.send(null);
 }
@@ -203,7 +205,7 @@ function callbackReAbrirPeriodo(periodo) {
             document.getElementById(periodo).className = "btn btn-warning";
             document.getElementById(periodo).onclick = function(){
                 Cerrar(periodo)
-                };   
+            };   
             document.getElementById(periodo).setAttribute("value", "Cerrar");
             document.getElementById("MensajeCerrado").innerHTML = "<center><label style=\"color:blue\">El período ha sido reabierto para recibir nuevas solicitudes</label></center>";
             document.getElementById("Estado"+periodo).innerHTML = "Abierto";

@@ -1,5 +1,6 @@
 package Registro;
 
+import Clases.Mail;
 import Clases.Noticia;
 import Clases.Usuario;
 import Clases.unidadAdscripcion;
@@ -53,6 +54,22 @@ public class Verificar extends DispatchAction {
 
             return mapping.findForward(FAILURE);
         }
+        /*
+         * Verifica que el nombre de usuario no este en la base de datos.
+         */
+        else if (DBMS.getInstance().existeCedula(u)) {
+            u.setMensaje("La cédula de identidad ya ha sido registrada.");
+
+            return mapping.findForward(FAILURE);
+        }
+        /*
+         * Verifica que el nombre de usuario no este en la base de datos.
+         */
+        else if (DBMS.getInstance().existeCorreo(u)) {
+            u.setMensaje("El correo electrónico ya ha sido registrado.");
+
+            return mapping.findForward(FAILURE);
+        }        
 
         /*
          * Verificaciones de password.
@@ -110,10 +127,11 @@ public class Verificar extends DispatchAction {
         if (u.getEmail().equals("")) {
         } else {
             if (!u.getEmail().contains("@")) {
+                u.setMensaje("No es un email válido. ");
                 return mapping.findForward(FAILURE);
             }
             if (!u.getEmail().contains(".")) {
-                u.setMensaje("No es un e-mail válido. ");
+                u.setMensaje("No es un email válido. ");
                 return mapping.findForward(FAILURE);
             }
 
@@ -149,6 +167,8 @@ public class Verificar extends DispatchAction {
             u.setMensaje("Usuario registrado exitósamente. ");
             request.setAttribute("mensajeRegistrado", u);
 
+            /*Mail email = new Mail();   
+            email.sendMailPresolicitud(u.getEmail());*/
             return mapping.findForward(SUCCESS);
         } else {
             u.setMensaje("Campo incorrecto");

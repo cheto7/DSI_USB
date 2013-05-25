@@ -64,11 +64,11 @@
         $("#email").attr('placeholder', 'Correo Electrónico');
         $("#email").attr('title', 'Ingrese su correo electrónico'); 
     
-        $("#nombre").attr('placeholder', 'Nombre');
-        $("#nombre").attr('title', 'Ingrese su primer nombre'); 
+        $("#nombre").attr('placeholder', 'Nombres');
+        $("#nombre").attr('title', 'Ingrese sus nombres'); 
     
-        $("#apellido").attr('placeholder', 'Apellido');
-        $("#apellido").attr('title', 'Ingrese su primer apellido');
+        $("#apellido").attr('placeholder', 'Apellidos');
+        $("#apellido").attr('title', 'Ingrese sus apellidos');
         
         $("#cedula").attr('placeholder', 'Cedula');
         $("#cedula").attr('title', 'Ingrese su cedula de identidad');
@@ -122,11 +122,11 @@
             messages: {
                 password: {
                     required: "Por favor introduzca una contraseña",
-                    minlength: "La contraseña debe tener mínimo 5 caracteres"
+                    minlength: "Contraseña mínima de 5 caracteres"
                 },
                 confirm_password: {
                     required: "Por favor introduzca una contraseña",
-                    minlength: "La contraseña debe tener mínimo 5 caracteres",
+                    minlength: "Contraseña mínima de 5 caracteres",
                     equalTo: "Las contraseñas no coinciden"
                 }
 

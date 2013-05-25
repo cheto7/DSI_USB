@@ -19,8 +19,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author ivan
  */
-@WebServlet(name = "HabilitarUsuario", urlPatterns = {"/HabilitarUsuario"})
-public class HabilitarUsuario extends HttpServlet {
+@WebServlet(name = "EnviarCorreo", urlPatterns = {"/EnviarCorreo"})
+public class EnviarCorreo extends HttpServlet {
 
     /**
      * Processes requests for both HTTP
@@ -39,9 +39,7 @@ public class HabilitarUsuario extends HttpServlet {
         String usuario = request.getParameter("usuario");
         Usuario u = new Usuario();
         u.setUsuario(usuario);
-        DBMS.getInstance().habilitar(u);
-        //Se envia el correo electrónico. Proceso tarda mucho.
-        u = DBMS.getInstance().atributosUsuario(u);
+        DBMS.getInstance().atributosUsuario(u);
         Mail email = new Mail();   
         email.sendMailHabilitado(u.getEmail());
     }

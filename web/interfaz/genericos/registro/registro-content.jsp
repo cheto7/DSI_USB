@@ -19,7 +19,7 @@
     <center><label style="color: red"><bean:write name="Usuario" property="mensaje" /></label></center>
 </logic:present>
 
-<html:form styleId="Form" method="POST" action="/Verificar?method=save" onsubmit="return (this)">
+    <html:form styleId="Form" method="POST" action="/Verificar?method=save" onsubmit="return (this)" acceptCharset="ISO-8859-1">
     <fieldset>
         <legend>Registro</legend>
         <table width="100%">
@@ -115,7 +115,7 @@
                 </td>
             </tr>
         </table>
-        <legend style="color:red">Tallas personales:</legend>
+        <legend>Tallas personales:</legend>
         <table width="100%">
             <tr>
                 <td>      
@@ -193,7 +193,7 @@
 
         </table>
 
-        <legend style="color:red">Sector universitario:</legend>
+        <legend>Sector universitario:</legend>
         <table width="80%">
             <tr>
                 <td>

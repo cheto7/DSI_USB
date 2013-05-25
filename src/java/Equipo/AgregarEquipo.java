@@ -51,8 +51,16 @@ public class AgregarEquipo extends org.apache.struts.action.Action {
         if (e.getTipo_talla() == "") {
             request.setAttribute("errorTallaEquipo", "error");
             return mapping.findForward(FAILURE);
-        }         
-        
+        }
+        String str = e.getNombre_vista();
+        if (str.substring(str.length()-4,str.length())!=".png" || 
+            str.substring(str.length()-4,str.length())!=".jpg" ||
+            str.substring(str.length()-4,str.length())!=".gif"
+           ){
+            request.setAttribute("errorFormatoEquipo", "error");
+            return mapping.findForward(FAILURE);        
+        }
+
         String rutaApp = this.getServlet().getServletContext().getRealPath("/");
              
         

@@ -11,7 +11,7 @@
 <%@ taglib uri="http://struts.apache.org/tags-logic" prefix="logic" %>
 <%@ taglib uri="http://struts.apache.org/tags-tiles" prefix="tiles" %>
 
-<legend>Editar información usuario</legend>
+<legend>Editar información de usuario</legend>
 <legend>Datos Personales</legend> 
 
 <h1 style="display: inline">Usuario: </h1>

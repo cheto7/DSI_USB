@@ -118,18 +118,19 @@ public class DBMS {
     /*
      * Para el Login se consulta el usuario con la base de datos y si existe,
      * entra al sitio.
+     * Se encripta la contrasena!
      */
     public Boolean consultarUsuario(Usuario u) {
-        String sqlquery = "SELECT * FROM \"PREPAS\".usuario"
-                + " WHERE usuario ='" + u.getUsuario() + "' " + " AND "
-                + "password ='" + u.getPassword() + "'";
-
+        String sqlquery = "SELECT password = crypt('"+u.getPassword()+"',password)"
+                + "AS contrasena FROM \"PREPAS\".usuario"
+                + " WHERE usuario ='" + u.getUsuario() + "'";
+        
         System.out.println(sqlquery);
         try {
             Statement stmt = conexion.createStatement();
             ResultSet rs = stmt.executeQuery(sqlquery);
-            Boolean b = rs.next();
-            return b;
+            rs.next();
+            return rs.getBoolean("contrasena");
         } catch (SQLException ex) {
             Logger.getLogger(DBMS.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -156,6 +157,45 @@ public class DBMS {
         }
         return false;
     }
+    
+    /*
+     * Consulta si al momento de registrarse la cedula ya existe
+     */
+    public Boolean existeCedula(Usuario u) {
+
+        String sqlquery = "SELECT * FROM \"PREPAS\".usuario"
+                + " WHERE ci ='" + u.getCi() + "'";
+
+        System.out.println(sqlquery);
+        try {
+            Statement stmt = conexion.createStatement();
+            ResultSet rs = stmt.executeQuery(sqlquery);
+            Boolean b = rs.next();
+            return b;
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return false;
+    }
+    /*
+     * Consulta si al momento de registrarse la cedula ya existe
+     */
+    public Boolean existeCorreo(Usuario u) {
+
+        String sqlquery = "SELECT * FROM \"PREPAS\".usuario"
+                + " WHERE email ='" + u.getEmail() + "'";
+
+        System.out.println(sqlquery);
+        try {
+            Statement stmt = conexion.createStatement();
+            ResultSet rs = stmt.executeQuery(sqlquery);
+            Boolean b = rs.next();
+            return b;
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return false;
+    }      
 
     public Boolean agregarEquipo(Equipo e) {
         try {
@@ -375,8 +415,8 @@ public class DBMS {
         try {
             String sqlquery;
             sqlquery = "INSERT INTO \"PREPAS\".usuario VALUES "
-                    + "('" + u.getUsuario() + "' , '" + u.getPassword()
-                    + "' , '" + u.getEmail() + "' , '" + u.getNombre()
+                    + "('" + u.getUsuario() + "' , crypt('" + u.getPassword() + "', gen_salt('bf'))"
+                    + " , '" + u.getEmail() + "' , '" + u.getNombre()
                     + "' , '" + u.getApellido() + "' , '" + u.getCi() + "', '" + u.getFecha()
                     + "' , '" + u.getTelefono() + "' , '" + u.getUnidad_adscripcion()
                     + "' , '" + u.getSexo() + "' , '" + u.getTalla_mascara()
@@ -734,7 +774,8 @@ public class DBMS {
     public Boolean modificarUsuario(Usuario u) {
         try {
             String sqlquery = "UPDATE \"PREPAS\".usuario SET "
-                    + "password = '" + u.getPassword() + "' , "
+                    //+ "password = '" + u.getPassword() + "' , "
+                    + "password = crypt('" + u.getPassword() +"', gen_salt('bf')), "
                     + "cargo = '" + u.getCargo() + "' , "
                     + "telefono = '" + u.getTelefono() + "' , "
                     + "administrador = '" + u.getAdministrador() + "' , "
@@ -756,9 +797,36 @@ public class DBMS {
             ex.printStackTrace();
         }
         return false;
-
-
     }
+    
+    /*
+     * Modifica un usuario existente en la base de datos.
+     */
+    public Boolean modificarUsuarioSinPassword(Usuario u) {
+        try {
+            String sqlquery = "UPDATE \"PREPAS\".usuario SET "
+                    + "cargo = '" + u.getCargo() + "' , "
+                    + "telefono = '" + u.getTelefono() + "' , "
+                    + "administrador = '" + u.getAdministrador() + "' , "
+                    + "email = '" + u.getEmail() + "' , "
+                    + "unidad_adscripcion = '" + u.getUnidad_adscripcion() + "' , "
+                    + "talla_mascara = '" + u.getTalla_mascara() + "' , "
+                    + "talla_camisa = '" + u.getTalla_camisa() + "' , "
+                    + "talla_pantalon = '" + u.getTalla_pantalon() + "' , "
+                    + "talla_guantes = '" + u.getTalla_guantes() + "' , "
+                    + "talla_zapato = '" + u.getTalla_zapato() + "'"
+                    + "WHERE usuario = '" + u.getUsuario() + "'";
+
+
+            Statement stmt = conexion.createStatement();
+            System.out.println(sqlquery);
+            Integer i = stmt.executeUpdate(sqlquery);
+            return i > 0;
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return false;
+    }    
 
     public ArrayList<Solicitud> obtenerSolicitudes(Usuario u) {
         ArrayList<Solicitud> solicitudes = new ArrayList<Solicitud>(0);
@@ -2203,7 +2271,8 @@ public boolean agregarAEquipoTalla(Equipo e){
     public Boolean modificarUsuarioAdmin(Usuario u) {
         try {
             String sqlquery = "UPDATE \"PREPAS\".usuario SET "
-                    + "password = '" + u.getPassword() + "' , "
+                    //+ "password = '" + u.getPassword() + "' , "
+                    + "password = 'crypt('" + u.getPassword() +"', gen_salt('bf')) "
                     + "nombre = '" + u.getNombre() + "' , "
                     + "apellido = '" + u.getApellido() + "' , "
                     + "fecha = '" + u.getFecha() + "' , "
@@ -2419,8 +2488,42 @@ public boolean agregarAEquipoTalla(Equipo e){
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
-    }        
+    }
+    
+  /*public ArrayList<Solicitud> consolidadoTipoEPP(Periodo p) {
+        ArrayList<Solicitud> solicitudes = new ArrayList<Solicitud>(0);
+        try {
+            String sqlquery= "SELECT E.nombre_vista AS nombre_vista"
+                    + "              U.unidad_adscripcion AS unidad_adscripcion, "
+                    + "              C.talla AS talla, "
+                    + "              sum(C.cantidad) AS cantidad "
+                    + "              "
+                    + " FROM \"PREPAS\".solicitud S NATURAL JOIN "
+                    + "      \"PREPAS\".periodo P NATURAL JOIN "
+                    + "      \"PREPAS\".contiene C NATURAL JOIN "
+                    + "      \"PREPAS\".equipo E NATURAL JOIN "
+                    + "      \"PREPAS\".usuario U"
+                    + " WHERE P.fecha_inicio='"+p.getFecha_inicio()+"' AND"
+                    + "       S.modificada = 'true' AND "
+                    + " GROUP BY E.nombre_vista, U.unidad_adscripcion";
+
+            Statement stmt = conexion.createStatement();
+            System.out.println(sqlquery);
+            ResultSet rs = stmt.executeQuery(sqlquery);
+
+            while (rs.next()) {
+                Noticia n = new Noticia();
+                n.setUsuario(rs.getString("usuario"));
+                n.setTitulo(rs.getString("titulo"));
+                n.setContenido(rs.getString("contenido"));
+                n.setFechaNoticia(rs.getString("fechaNoticia"));
+                solicitudes.add(n);
+            }
+            return solicitudes;
+        } catch (SQLException ex) {
+            System.out.println("EXCEPCION");
+            ex.printStackTrace();
+        }
+        return solicitudes;
+    }*/
 }
-//Existe en .tiene (id,serial) existe
-//obtener de .tiene
-        //obtener serial .equipo
