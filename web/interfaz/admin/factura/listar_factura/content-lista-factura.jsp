@@ -82,7 +82,7 @@
 
                     <td>
                     <center>
-                        <html:form action="/validarFactura" onsubmit="return (this)">
+                        <html:form action="/ValidarFactura" onsubmit="return (this)">
                             <html:hidden name="factura" property="numero_factura"/>
                             <html:hidden name="factura" property="proveedor"/>
                             <html:submit styleClass="btn btn-danger"> Validar </html:submit>

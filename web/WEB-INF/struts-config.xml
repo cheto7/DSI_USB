@@ -363,9 +363,14 @@
             <forward name="failure" path="/IrAgregarFactura.do"></forward>
         </action>
         
-        <action path="/validarFactura" type="Facturas.validarFactura" scope="request"
+        <action path="/ValidarFactura" type="Facturas.ValidarFactura" scope="request"
                 name="Factura">
-            <forward name="success" path="/vistas/factura/interfaz_factura.jsp"></forward>
+            <forward name="success" path="/vistas/factura/interfaz-form-validar.jsp"></forward>
+        </action>
+        
+        <action path="/IrValidarFactura" type="Facturas.IrValidarFactura" scope="request"
+                name="Factura">
+            <forward name="success" path="/ListarFacturas.do"></forward>
         </action>
         
         <action path="/AgregarEquipoASolicitud" type="Solicitudes.AgregarEquipoASolicitud" scope="request" 

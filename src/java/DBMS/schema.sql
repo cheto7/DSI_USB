@@ -88,6 +88,16 @@ CREATE TABLE "PREPAS".equipo (
 OIDS = FALSE
 );
 
+CREATE TABLE "PREPAS".equipoTalla (
+  serial SERIAL,
+  talla VARCHAR,
+  cantidad INT default 0,
+  CONSTRAINT PK_equipoTalla PRIMARY KEY (serial,talla),
+  CONSTRAINT FK_equipoTalla_equipo FOREIGN KEY (serial) REFERENCES "PREPAS".equipo (serial)
+) WITH (
+OIDS = FALSE
+);
+
 CREATE TABLE "PREPAS".proveedor (
     RIF VARCHAR NOT NULL,
     nombre VARCHAR UNIQUE,
@@ -184,6 +194,7 @@ CREATE TABLE "PREPAS".facturado (
     cantidad INT NOT NULL,
     costo_unidad NUMERIC DEFAULT 0,
     talla VARCHAR,
+    validado VARCHAR, -- FALSO si aun se esta modificando, VERDAD si ya esta comprometido. 
 
     CONSTRAINT PK_facturado PRIMARY KEY (numero_factura,serial,talla),
     CONSTRAINT FK_facturado_factura FOREIGN KEY (numero_factura) REFERENCES "PREPAS".factura (numero_factura),
