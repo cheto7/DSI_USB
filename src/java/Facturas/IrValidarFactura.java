@@ -27,7 +27,7 @@ public class IrValidarFactura extends Action{
             throws Exception {
         
         Factura f = (Factura) form;
-        
+        System.out.println("factura es: "+f.getNumero_factura());
         DBMS.getInstance().validarFactura(f);
         return mapping.findForward(SUCCESS);
     }

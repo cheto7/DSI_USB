@@ -1833,9 +1833,9 @@ public class DBMS {
         try {
 
             String sqlquery;
-            sqlquery = "SELECT * FROM \"PREPAS\".facturado F "
-                    + "WHERE F.numero_factura = '" + f.getNumero_factura()
-                    + "' AND F.validado = 'FALSO'";
+            sqlquery = "SELECT * FROM \"PREPAS\".facturado "
+                    + "WHERE numero_factura = '" + f.getNumero_factura() 
+                    +"' AND validado = 'FALSO'";
 
             Statement stmt = conexion.createStatement();
             System.out.println(sqlquery);
@@ -1844,12 +1844,12 @@ public class DBMS {
             while (rs.next()) {
                 Equipo e = new Equipo();
                 Facturado fact = new Facturado();
-                e.setSerial(rs.getInt("F.serial"));
-                e.setTalla(rs.getString("F.talla"));
-                e.setCantidad(rs.getInt("F.cantidad"));
-                fact.setNumero_factura(rs.getInt("F.numero_factura"));
-                fact.setSerial(rs.getInt("F.serial"));
-                fact.setTalla(rs.getString("F.talla"));
+                e.setSerial(rs.getInt("serial"));
+                e.setTalla(rs.getString("talla"));
+                e.setCantidad(rs.getInt("cantidad"));
+                fact.setNumero_factura(rs.getInt("numero_factura"));
+                fact.setSerial(rs.getInt("serial"));
+                fact.setTalla(rs.getString("talla"));
                 boolean aux = this.agregarAEquipoTalla(e);
                 validar = validar && aux;
                 if (aux) {
@@ -1867,7 +1867,27 @@ public class DBMS {
         return false;
     }
 
-    public int existeEquipoTalla(Equipo e) {
+public int equipoTallaCantidad(String t, int s) {
+        try {
+            String sqlquery;
+            sqlquery = "SELECT cantidad FROM \"PREPAS\".equipoTalla "
+                    + "WHERE serial = " + s
+                    +" AND talla = '" + t +"' ";
+
+            Statement stmt = conexion.createStatement();
+            System.out.println(sqlquery);
+            ResultSet rs = stmt.executeQuery(sqlquery);
+
+            if (rs.next()) {
+                return rs.getInt("cantidad");
+            }
+            return -1;
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return -1;
+    }
+public int existeEquipoTalla(Equipo e) {
         try {
             String sqlquery;
             sqlquery = "SELECT E.cantidad FROM \"PREPAS\".equipoTalla E "
@@ -2207,17 +2227,25 @@ public class DBMS {
         return 0;
     }
 
-    public int obtenerCantidadExistencia(int s) {
+    public int obtenerCantidadExistencia(String id, int s) {
         try {
-            String sqlquery = "SELECT cantidad FROM  \"PREPAS\".equipo "
-                    + "WHERE serial = " + s + " ";
+            String sqlquery = "SELECT talla FROM  \"PREPAS\".contiene "
+                    + "WHERE serial = "+s+" AND id ='"+id+"' ";
 
             Statement stmt = conexion.createStatement();
             System.out.println(sqlquery);
             ResultSet rs = stmt.executeQuery(sqlquery);
-
+            
             if (rs.next()) {
-                return rs.getInt("cantidad");
+                String talla = rs.getString("talla");
+                System.out.println("___Talla: "+talla+"____");
+                Equipo e = new Equipo();
+                e.setTalla(talla);
+                e.setSerial(s);
+                int cantidad = equipoTallaCantidad(talla,s);
+                System.out.println("___Existen "+cantidad+"____");
+                return cantidad;
+                
             }
 
         } catch (SQLException ex) {
@@ -2246,21 +2274,35 @@ public class DBMS {
     }
 
     public Boolean nuevaCantidad(int s, int id, int ec, int tc) {
-        try {
-            String sqlquery = "UPDATE \"PREPAS\".equipo "
-                    + "SET  cantidad = " + ec + " "
-                    + "     WHERE serial = '" + s + "' ";
-
+        try {                       
+            String sqlquery = "SELECT talla FROM  \"PREPAS\".contiene "
+                    + "WHERE serial = "+s+" AND id ="+id+" ";
+            
             Statement stmt = conexion.createStatement();
+            System.out.println("________________________________");
             System.out.println(sqlquery);
+            ResultSet rs = stmt.executeQuery(sqlquery);
+            
+            String t = "";
+            
+            if (rs.next()) {
+                t = rs.getString("talla");
+            }
+                                    
+            sqlquery = "UPDATE \"PREPAS\".equipoTalla "
+                    + "SET  cantidad = " + ec
+                    + "     WHERE serial = " + s + " AND "
+                    + "talla = '" + t + "'";
+            
             Integer i = stmt.executeUpdate(sqlquery);
+            System.out.println(sqlquery);
 
-            String query = "UPDATE \"PREPAS\".tiene "
+            sqlquery = "UPDATE \"PREPAS\".tiene "
                     + "SET  cantidad = " + tc + " "
                     + "     WHERE serial = " + s + " AND  id = " + id + " ";
-
-            System.out.println(query);
-            Integer j = stmt.executeUpdate(query);
+            
+            System.out.println(sqlquery);
+            Integer j = stmt.executeUpdate(sqlquery);
 
             return ((i > 0) && (j > 0));
         } catch (SQLException e) {
