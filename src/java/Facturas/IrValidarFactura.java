@@ -26,8 +26,6 @@ public class IrValidarFactura extends Action{
             HttpServletRequest request, HttpServletResponse response)
             throws Exception {
         
-        System.out.println("HOLAAAAAAAAAAAAAAAA");
-        
         Factura f = (Factura) form;
         System.out.println("factura es: "+f.getNumero_factura());
         DBMS.getInstance().validarFactura(f);

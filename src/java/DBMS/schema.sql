@@ -83,6 +83,8 @@ CREATE TABLE "PREPAS".equipo (
   sector    VARCHAR,
   norma     VARCHAR,
   tipo_talla VARCHAR,
+  puntuacion DOUBLE default 0.0,
+  usuarios_puntuando INT default 0,
   CONSTRAINT PK_equipo PRIMARY KEY (serial)
 ) WITH (
 OIDS = FALSE
@@ -94,6 +96,17 @@ CREATE TABLE "PREPAS".equipoTalla (
   cantidad INT default 0,
   CONSTRAINT PK_equipoTalla PRIMARY KEY (serial,talla),
   CONSTRAINT FK_equipoTalla_equipo FOREIGN KEY (serial) REFERENCES "PREPAS".equipo (serial)
+) WITH (
+OIDS = FALSE
+);
+
+CREATE TABLE "PREPAS".puntuacion (
+  serial SERIAL,
+  usuario VARCHAR,
+  puntuacion INT default 0,
+  CONSTRAINT PK_puntuacion PRIMARY KEY (serial,usuario),
+  CONSTRAINT FK_puntuacion_equipo FOREIGN KEY (serial) REFERENCES "PREPAS".equipo (serial),
+  CONSTRAINT FK_puntuacion_usuario FOREIGN KEY (usuario) REFERENCES "PREPAS".usuario (usuario)
 ) WITH (
 OIDS = FALSE
 );
