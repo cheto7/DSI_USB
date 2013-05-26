@@ -363,6 +363,11 @@
             <forward name="failure" path="/IrAgregarFactura.do"></forward>
         </action>
         
+        <action path="/EvaluarEquipos" type="Solicitudes.EvaluarEquipos" scope="request"
+                name="Usuario">
+            <forward name="success" path="/vistas/pedido/interfaz_evaluar_equipos.jsp"></forward>
+        </action>
+        
         <action path="/ValidarFactura" type="Facturas.ValidarFactura" scope="request"
                 name="Factura">
             <forward name="success" path="/vistas/factura/interfaz-form-validar.jsp"></forward>

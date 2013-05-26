@@ -27,6 +27,12 @@
         </html:form> 
     </li>
     <li>
+        <html:form action = "/EvaluarEquipos" onsubmit="return (this)">
+            <html:hidden name="autenticado" property="usuario"/>
+            <html:submit style="padding:10px 20px 40px 20px"> Evaluar equipos </html:submit>
+        </html:form> 
+    </li>
+    <li>
         <html:form action="/CerrarSesion" onsubmit="return (this)"> 
             <html:submit style="padding:10px 20px 40px 20px">Cerrar Sesión</html:submit>
         </html:form> 
