@@ -90,7 +90,7 @@ public class PonerTalla extends Action {
             select.add(new String_Cheto("44.5"));
             select.add(new String_Cheto("45"));
         }else {
-            select.add(new String_Cheto("no aplica"));
+            select.add(new String_Cheto("No aplica"));
         }
         System.out.println("Parameter: "+request.getParameter("tipo_talla"));
         System.out.println("Facturado: "+f.getTipo_talla());
