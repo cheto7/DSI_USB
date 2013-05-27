@@ -23,6 +23,8 @@ public class Equipo extends ValidatorForm {
     private String sector;
     private String tipo_talla;
     private String talla;
+    private String puntuacion;
+    private int usuarios_puntuando;
 
     public String getTipo_talla() {
         return tipo_talla;
@@ -174,5 +176,33 @@ public class Equipo extends ValidatorForm {
      */
     public void setTalla(String talla) {
         this.talla = talla;
+    }
+
+    /**
+     * @return the puntuacion
+     */
+    public String getPuntuacion() {
+        return puntuacion;
+    }
+
+    /**
+     * @param puntuacion the puntuacion to set
+     */
+    public void setPuntuacion(String puntuacion) {
+        this.puntuacion = puntuacion;
+    }
+
+    /**
+     * @return the usuarios_puntuando
+     */
+    public int getUsuarios_puntuando() {
+        return usuarios_puntuando;
+    }
+
+    /**
+     * @param usuarios_puntuando the usuarios_puntuando to set
+     */
+    public void setUsuarios_puntuando(int usuarios_puntuando) {
+        this.usuarios_puntuando = usuarios_puntuando;
     }
 }

@@ -50,38 +50,23 @@
                         </td>
 
                         <td>
-                            <p><img src="<bean:write name="factura" property="proveedor"></bean:write>" width="55" height="55"> </p>
+                            <img src="<bean:write name="factura" property="proveedor"></bean:write>" width="55" height="55">
+                        </td>
+                        
+                        <td>
+                                <p> <bean:write name="equipo" property="puntuacion"></bean:write></p>
                         </td>
 
                         <td>
                     <center>
-                        <html:form action = "/FormularioEditarFactura" onsubmit = "return (this)">
-                            <html:hidden name="factura" property="numero_factura"/>
-                            <html:hidden name="factura" property="proveedor"/>
-                            <html:submit styleClass="btn btn-success"> Editar </html:submit>
+                        <html:form action = "/CambiarPuntuacion" onsubmit = "return (this)">
+                            <html:hidden name="equipo" property="serial"/>
+                            <html:hidden name="Usuario" property="usuario"/>
+                            <html:submit styleClass="btn btn-success"> Evaluar </html:submit>
                         </html:form> 
                     </center>
                     </td>
-                    
-                        <td>
-                    <center>
-                        <html:form action = "/EliminarFactura" onsubmit = "return (this)">
-                            <html:hidden name="factura" property="numero_factura"/>
-                            <html:hidden name="factura" property="proveedor"/>
-                            <html:submit styleClass="btn btn-danger"> Eliminar </html:submit>
-                        </html:form> 
-                    </center>
-                    </td>
-
-                    <td>
-                    <center>
-                        <html:form action="/ValidarFactura" onsubmit="return (this)">
-                            <html:hidden name="factura" property="numero_factura"/>
-                            <html:hidden name="factura" property="proveedor"/>
-                            <html:submit styleClass="btn btn-danger"> Validar </html:submit>
-                        </html:form>
-                    </center>
-                    </td>
+                  
                     </tr>
 
                 </logic:iterate>

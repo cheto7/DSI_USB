@@ -46,7 +46,7 @@ public class DBMS {
         }
         return false;
     }
-
+    
     public ArrayList< ArrayList< String_Cheto>> consultarSolicitudes(ListadoGeneral lg) {
         ArrayList< ArrayList< String_Cheto>> res = new ArrayList< ArrayList<String_Cheto>>(0);
         String q = "";
@@ -1151,6 +1151,49 @@ public class DBMS {
         return false;
     }
 
+    public ArrayList<Equipo> obtenerEquiposPuntuacionUsuario(Usuario u) {
+        ArrayList<Equipo> equipos = new ArrayList<Equipo>(0);
+        try {
+            String sqlquery = "SELECT serial,imagen,nombre_vista,P.puntuacion as puntuacion,tipo_talla "
+                    + "FROM \"PREPAS\".tiene T, \"PREPAS\".usuario U, \"PREPAS\".equipo E left join \"PREPAS\".puntuacion P on E.serial = P.serial "
+                    + "WHERE E.serial = T.serial AND U.usuario = T.usuario AND U.usuario = P.usuario"
+                    + "U.usuario = '" + u.getUsuario() + "'";
+
+
+            Statement stmt = conexion.createStatement();
+            System.out.println(sqlquery);
+            ResultSet rs = stmt.executeQuery(sqlquery);
+
+            while (rs.next()) {
+                Equipo e = new Equipo();
+                e.setSerial(rs.getInt("serial"));
+                e.setImagen(rs.getString("imagen"));
+                e.setNombre_vista(rs.getString("nombre_vista"));
+                int aux = rs.getInt("puntuacion");
+                if(aux == 0){
+                    e.setPuntuacion("Muy malo");
+                }else if(aux == 1){
+                    e.setPuntuacion("Malo");
+                }else if(aux == 2){
+                    e.setPuntuacion("Normal");
+                }else if(aux == 3){
+                    e.setPuntuacion("Bueno");
+                }else if(aux == 4){
+                    e.setPuntuacion("Muy bueno");
+                }else if(aux == 5){
+                    e.setPuntuacion("Excelente");
+                }
+                e.setTipo_talla(rs.getString("tipo_talla"));
+                equipos.add(e);
+            }
+            return equipos;
+        } catch (SQLException ex) {
+            System.out.println("EXCEPCION");
+            ex.printStackTrace();
+        }
+        return equipos;
+    }
+    
     public ArrayList<Equipo> obtenerEquiposSolicitudAcademico(Usuario u) {
         ArrayList<Equipo> equipos = new ArrayList<Equipo>(0);
         try {
