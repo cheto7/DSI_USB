@@ -2227,7 +2227,7 @@ public boolean agregarAEquipoTalla(Equipo e){
         try {
             String sqlquery = "SELECT talla FROM  \"PREPAS\".contiene "
                     + "WHERE serial = "+s+" AND id ='"+id+"' ";
-
+ 
             Statement stmt = conexion.createStatement();
             System.out.println(sqlquery);
             ResultSet rs = stmt.executeQuery(sqlquery);
