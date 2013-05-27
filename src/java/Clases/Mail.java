@@ -68,6 +68,43 @@ public class Mail {
         }
     }
     
+    public int sendMailGenerico(String to, String mensaje, String asunto) {
+        Properties props = new Properties();
+
+        props.put("mail.smtp.auth", "true");
+        props.put("mail.smtp.starttls.enable", "true");
+        props.put("mail.smtp.host", smtpServ);       
+        props.put("mail.smtp.port", "587");
+        
+        Session session = Session.getInstance(props, new javax.mail.Authenticator() {
+			protected PasswordAuthentication getPasswordAuthentication() {
+				return new PasswordAuthentication(from, password);
+			}
+		  });
+        MimeMessage message = new MimeMessage(session);
+
+        try {
+            BodyPart texto = new MimeBodyPart();
+            texto.setText(mensaje);
+            MimeMultipart multiParte = new MimeMultipart();
+            multiParte.addBodyPart(texto);
+            
+            message.setFrom(new InternetAddress(from));
+            message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
+            message.setSubject(asunto);
+            message.setContent(multiParte);
+
+            Transport t = session.getTransport("smtp");
+            t.connect(from, password);
+            t.sendMessage(message, message.getAllRecipients());
+            t.close();
+            return 0;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return -1;
+        }
+    }
+    
     public int sendMailPresolicitud(String to) {
         Properties props = new Properties();
 

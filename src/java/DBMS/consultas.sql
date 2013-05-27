@@ -3,13 +3,9 @@
 -- SELECT * FROM "PREPAS".proveedor;
 --SELECT * FROM "PREPAS".contiene;  
 --
+SELECT * FROM "PREPAS".usuario;
 
-
-
-SELECT * FROM "PREPAS".equipoTalla;
-SELECT * FROM "PREPAS".tiene;
-
-INSERT INTO "PREPAS".tiene (id,usuario,serial,cantidad,fecha_entrega) VALUES (2,'cheto@usb.ve',1,0,'2013-05-26');
+DELETE FROM "PREPAS".usuario;
 
 
 
