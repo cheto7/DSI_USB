@@ -21,6 +21,7 @@
         <form-bean name="Periodo" type="Clases.Periodo"/>
         <form-bean name="Editar" type="Clases.Editar"/>
         <form-bean name="Email" type="Clases.Email"/>
+        <form-bean name="Puntuacion" type="Clases.Puntuacion"/>
         
     </form-beans>
     <global-exceptions>
