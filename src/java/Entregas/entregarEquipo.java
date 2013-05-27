@@ -58,7 +58,7 @@ public class entregarEquipo extends org.apache.struts.action.Action {
         int cantidad_entregada = Integer.parseInt(c);
 
         int cantidadTiene = DBMS.getInstance().obtenerCantidadTiene(serial, id);
-        int cantidadExistencia = DBMS.getInstance().obtenerCantidadExistencia(serial);
+        int cantidadExistencia = DBMS.getInstance().obtenerCantidadExistencia(idSolicitud, serial);
         
         if (cantidadTiene == 0){
             Boolean agregado = false;
@@ -70,20 +70,22 @@ public class entregarEquipo extends org.apache.struts.action.Action {
         int nuevaCantidadE = cantidadExistencia - cantidad_entregada;
 
         //VERIFICAR QUE cantidad_entrega > 0
+        if (nuevaCantidadT > 0) {
 
-        if (nuevaCantidadE >= 0) {
-            Boolean resta = DBMS.getInstance().nuevaCantidad(serial, id, nuevaCantidadE, nuevaCantidadT);
-            if (resta) {
-                u.setMensaje("Entrega Procesada. ");
-                request.setAttribute("mensajeUsuarioEditado", u);
+            if (nuevaCantidadE >= 0) {
+                Boolean resta = DBMS.getInstance().nuevaCantidad(serial, id, nuevaCantidadE, nuevaCantidadT);
+                if (resta) {
+                    u.setMensaje("Entrega Procesada. ");
+                    request.setAttribute("mensajeUsuarioEditado", u);
+                } else {
+                    u.setMensaje("Algo ha ocurrido y no se pudo Procesar la Entrega. ");
+                    request.setAttribute("mensajeUsuarioNoEditado", u);
+                }
+
             } else {
-                u.setMensaje("Algo ha ocurrido y no se pudo Procesar la Entrega. ");
+                u.setMensaje("No Existen suficientes equipos. Quedan: "+cantidadExistencia);
                 request.setAttribute("mensajeUsuarioNoEditado", u);
             }
-
-        } else {
-            u.setMensaje("No Existen suficientes equipos. Quedan: "+cantidadExistencia);
-            request.setAttribute("mensajeUsuarioNoEditado", u);
         }
 
         Entregas entregar = new Entregas();

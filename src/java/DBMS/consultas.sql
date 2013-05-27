@@ -4,6 +4,11 @@
 --SELECT * FROM "PREPAS".contiene;
 --
 SELECT * FROM "PREPAS".usuario;
+
+DELETE FROM "PREPAS".usuario;
+
+
+
 --INSERT INTO "PREPAS".unidadAdscripcion (nombre) VALUES ('prueba');
 --DELETE FROM "PREPAS".unidadAdscripcion WHERE id = 4 ;             
 --SELECT * FROM "PREPAS".unidadadscripcion;
