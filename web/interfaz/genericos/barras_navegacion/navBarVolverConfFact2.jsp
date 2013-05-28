@@ -1,8 +1,9 @@
 <%-- 
-    Document   : navBarpedido
-    Created on : Nov 4, 2012, 2:44:49 AM
-    Author     : sibs
+    Document   : navBarVolverConfFact2
+    Created on : May 16, 2013, 9:24:39 PM
+    Author     : cheto
 --%>
+
 <%@ taglib uri="http://struts.apache.org/tags-bean" prefix="bean" %>
 <%@ taglib uri="http://struts.apache.org/tags-html" prefix="html" %>
 <%@ taglib uri="http://struts.apache.org/tags-logic" prefix="logic" %>
@@ -21,20 +22,9 @@
     </p> 
     
     <li>
-        <html:form action = "/Ir_pag_usuario" onsubmit="return (this)">
-            <html:hidden name="autenticado" property="usuario"/>
+       <html:form action="/FormularioEditarFactura" onsubmit="return (this)">
+            <html:hidden name="factura" property="numero_factura"/>
             <html:submit style="padding:10px 20px 40px 20px"> Volver </html:submit>
-        </html:form> 
-    </li>
-    <li>
-        <html:form action = "/EvaluarEquipos" onsubmit="return (this)">
-            <html:hidden name="autenticado" property="usuario"/>
-            <html:submit style="padding:10px 20px 40px 20px"> Evaluar equipos </html:submit>
-        </html:form> 
-    </li>
-    <li>
-        <html:form action="/CerrarSesion" onsubmit="return (this)"> 
-            <html:submit style="padding:10px 20px 40px 20px">Cerrar Sesión</html:submit>
-        </html:form> 
+        </html:form>  
     </li>
 </ul>

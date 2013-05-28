@@ -19,6 +19,9 @@
         <form-bean name="Facturado" type="Clases.Facturado"/>
         <form-bean name="Factura" type="Clases.Factura"/>
         <form-bean name="Periodo" type="Clases.Periodo"/>
+        <form-bean name="Editar" type="Clases.Editar"/>
+        <form-bean name="Email" type="Clases.Email"/>
+        <form-bean name="Puntuacion" type="Clases.Puntuacion"/>
         
     </form-beans>
     <global-exceptions>
@@ -43,6 +46,19 @@
                 name="Usuario">
             <forward name="success" path="/vistas/registro/interfaz_registro.jsp"></forward>
         </action>
+        
+        <action path="/Contrasena" type="Editar.PedirContrasena" scope="request"
+                name="Usuario">
+            <forward name="success" path="/vistas/genericos/interfaz_contrasena.jsp"></forward>
+        </action>
+        
+        
+        <action path="/Recuperar" type="Editar.Recuperar" scope="request"
+                name="Email">
+            <forward name="success" path="/vistas/genericos/interfaz_contrasena.jsp"></forward>
+        </action>
+        
+        
                 
         <action path="/Verificar" type="Registro.Verificar" scope="request"
                 parameter="method" name="Usuario">
@@ -156,7 +172,7 @@
         <action path="/Deshabilitar" type="Editar.Deshabilitar" scope="request"
                 name="Usuario">
             <forward name="success" path="/vistas/lista_usuarios/formulario_OtorgarPermiso.jsp"></forward>
-            <forward name="failure" path="/vistas/error/welcomeStruts.jsp"></forward>
+            <forward name="failure" path="/vistas/error/welcomeStruts.jsp"></forward>1
         </action>
         
         <action path="/Ir_pag_usuario" type="Volver.Volver" scope="request"
@@ -342,6 +358,12 @@
             <forward name="failure" path="/Ir_pag_pedido_factura.do"></forward>
         </action>
         
+        <action path="/CambiarPuntuacion" type="Solicitudes.CambiarPuntuacion" scope="request" 
+                name="Puntuacion">
+            <forward name="success" path="/vistas/factura/interfaz_factura_agregar_talla.jsp"></forward>
+            <forward name="failure" path="/Ir_pag_pedido_factura.do"></forward>
+        </action>
+        
         <action path="/AgregarEquipoAFactura" type="Facturas.AgregarEquipoAFactura" scope="request" 
                 name="Facturado">
             <forward name="success" path="/Ir_pag_pedido_factura.do"></forward>
@@ -363,9 +385,19 @@
             <forward name="failure" path="/IrAgregarFactura.do"></forward>
         </action>
         
-        <action path="/validarFactura" type="Facturas.validarFactura" scope="request"
+        <action path="/EvaluarEquipos" type="Solicitudes.EvaluarEquipos" scope="request"
+                name="Usuario">
+            <forward name="success" path="/vistas/pedido/interfaz_evaluar_equipos.jsp"></forward>
+        </action>
+        
+        <action path="/ValidarFactura" type="Facturas.ValidarFactura" scope="request"
                 name="Factura">
-            <forward name="success" path="/vistas/factura/interfaz_factura.jsp"></forward>
+            <forward name="success" path="/vistas/factura/interfaz-form-validar.jsp"></forward>
+        </action>
+        
+        <action path="/IrValidarFactura" type="Facturas.IrValidarFactura" scope="request"
+                name="Factura">
+            <forward name="success" path="/ListarFacturas.do"></forward>
         </action>
         
         <action path="/AgregarEquipoASolicitud" type="Solicitudes.AgregarEquipoASolicitud" scope="request" 
@@ -498,7 +530,6 @@
                 name="Periodo">
             <forward name="success" path="/Ir_pag_usuario.do"></forward>
         </action>
-
         
         
                 

@@ -19,6 +19,10 @@
         <put name="noticias" value="/interfaz/admin/lista_usuarios/lista_OtorgarPermiso.jsp"></put>
         <put name="navBarGeneral" value="/interfaz/admin/barras_navegacion/navBarVolverListaUsuario.jsp"></put>
     </definition>
+    
+    <definition name="pedir_contrasena" extends="registro">
+        <put name="formulario" value="/interfaz/genericos/plantilla_general/pedir_contrasena.jsp"></put>
+    </definition>
 
     <!--<definition name="lista" extends="/interfaz/admin/lista_usuarios/plantilla-lista-usuarios.jsp">
         <put name="formulario" value="/interfaz/admin/lista_usuarios/content-lista-usuarios.jsp"></put>
@@ -135,6 +139,11 @@
         <put name="navBar" value="/interfaz/admin/barras_navegacion/navBarFactura.jsp"></put> 
     </definition> 
     
+    <definition name="formulario-evaluar-equipos" extends="formulario-pedido">
+        <put name="formulario" value="/interfaz/admin/factura/listar_factura/content-lista-factura.jsp"></put>
+        <put name="navBar" value="/interfaz/admin/barras_navegacion/navBarFactura.jsp"></put> 
+    </definition> 
+    
     <definition name="formulario-editar-usuario" extends="formulario-pedido">
         <put name="script" value="/interfaz/genericos/editar_datos/script-form-edit.jsp"></put>
         <put name="formulario" value="/interfaz/admin/lista_usuarios/editar/form-edit-content.jsp"></put>
@@ -170,6 +179,7 @@
         <put name="formulario" value="/interfaz/genericos/pedido/ver-pedido.jsp"></put>
         <put name="navBar" value="/interfaz/genericos/barras_navegacion/navBarpedido.jsp"></put>
     </definition>
+    
     
     <definition name="confirmar-eliminar-solicitud" extends="home">
         <put name="noticias" value="/interfaz/genericos/pedido/conf-eliminar-pedido.jsp"></put>
@@ -252,6 +262,10 @@
      <definition name="formulario-editar-equipo-en-factura" extends="formulario-agregar-noticia">
         <put name="formulario" value="/interfaz/genericos/factura/form-edit-equipoEnFac-content.jsp"></put>
         <put name="navBar" value="/interfaz/genericos/barras_navegacion/navBarVolverConfFact.jsp"></put>
+    </definition>
+     <definition name="formulario-validar-factura" extends="formulario-agregar-noticia">
+        <put name="formulario" value="/interfaz/genericos/factura/conf-validar.jsp"></put>
+        <put name="navBar" value="/interfaz/genericos/barras_navegacion/navBarVolverConfFact2.jsp"></put>
     </definition>
    <definition name="lista-todas-solicitudes" extends="formulario-pedido">
        <put name="script" value="/interfaz/genericos/pedido/script-pedido.jsp"></put>

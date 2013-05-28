@@ -34,9 +34,9 @@
                 <div id="sidebar-first">
                     <tiles:insert attribute="navBarGeneral"/>
                 </div>
-                    <div id="sidebar-second">
-                        <tiles:insert attribute="sidebar"/>
-                    </div>
+                <div id="sidebar-second">
+                    <tiles:insert attribute="sidebar"/>
+                </div>
             </div>
             <div id="footer">
                 <tiles:insert attribute="footer"/>
@@ -54,19 +54,25 @@
                             <label class="control-label" for="inputEmail">USB-ID</label>
                             <div class="controls">
                                 <html:text name="Usuario" property="usuario"></html:text><br>
-                                </div>
                             </div>
-                            <div class="control-group">
-                                <label class="control-label" for="inputPassword">Contraseña</label>
-                                <div class="controls">
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label" for="inputPassword">Contraseña</label>
+                            <div class="controls">
                                 <html:password name="Usuario" property="password"></html:password>
-                                </div>
                             </div>
-                            <div class="control-group">
+                        </div>
+                        <div class="control-group">
 
                             <html:submit> Iniciar Sesión </html:submit>
 
-                            </div>
+
+                        </div>
+                    </html:form>
+                    <html:form action="/Contrasena" onsubmit="return (this)">
+                        <div class="control-group">
+                            <html:submit> Olvidar Contrasena </html:submit>
+                        </div>
                     </html:form>
                 </div>
             </center>

@@ -22,10 +22,10 @@
     </p> 
     
     <li>
-        <html:form action = "/CancelarPedido" onsubmit="return (this)">
+        <html:form action = "/Ir_pag_usuario" onsubmit="return (this)">
             <html:hidden name="autenticado" property="usuario"/>
             <html:hidden name="solicitud" property="id"/>
-            <html:submit style="padding:10px 20px 40px 20px"> Cancelar </html:submit>
+            <html:submit style="padding:10px 20px 40px 20px"> Volver </html:submit>
         </html:form> 
     </li>
 </ul>
