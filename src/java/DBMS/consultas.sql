@@ -5,7 +5,7 @@
 --
 SELECT * FROM "PREPAS".usuario;
 
-DELETE FROM "PREPAS".usuario;
+--DELETE FROM "PREPAS".usuario;
 
 
 

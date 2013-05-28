@@ -1,22 +1,22 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package Editar;
 
-import Clases.unidadAdscripcion;
-import DBMS.DBMS;
-import java.util.ArrayList;
+import Clases.Usuario;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
+import DBMS.*;
 
 /**
  *
- * @author karen
+ * @author Karen
  */
+
+/*Accion que busca los atributos del usuario, los envia a la vista de
+ * modificacion y coloca cada atributo en el rubro correspondiente del
+ * form. */
 public class PedirContrasena extends org.apache.struts.action.Action {
 
     private static final String SUCCESS = "success";
@@ -31,13 +31,13 @@ public class PedirContrasena extends org.apache.struts.action.Action {
      * @throws java.lang.Exception
      * @return
      */
+    
     @Override
-    public ActionForward execute(ActionMapping mapping, ActionForm form,
+     public ActionForward execute(ActionMapping mapping, ActionForm form,
             HttpServletRequest request, HttpServletResponse response)
             throws Exception {
-
-
         
-        return mapping.findForward(SUCCESS);
+
+            return mapping.findForward(SUCCESS);
     }
 }
