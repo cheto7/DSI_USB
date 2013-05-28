@@ -21,6 +21,7 @@
         <form-bean name="Periodo" type="Clases.Periodo"/>
         <form-bean name="Editar" type="Clases.Editar"/>
         <form-bean name="Email" type="Clases.Email"/>
+        <form-bean name="Puntuacion" type="Clases.Puntuacion"/>
         
     </form-beans>
     <global-exceptions>
@@ -353,6 +354,12 @@
         
         <action path="/PonerTalla" type="Facturas.PonerTalla" scope="request" 
                 name="Facturado">
+            <forward name="success" path="/vistas/factura/interfaz_factura_agregar_talla.jsp"></forward>
+            <forward name="failure" path="/Ir_pag_pedido_factura.do"></forward>
+        </action>
+        
+        <action path="/CambiarPuntuacion" type="Solicitudes.CambiarPuntuacion" scope="request" 
+                name="Puntuacion">
             <forward name="success" path="/vistas/factura/interfaz_factura_agregar_talla.jsp"></forward>
             <forward name="failure" path="/Ir_pag_pedido_factura.do"></forward>
         </action>
