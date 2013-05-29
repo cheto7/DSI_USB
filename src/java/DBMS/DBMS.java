@@ -1931,8 +1931,8 @@ public class DBMS {
 
             String sqlquery;
             sqlquery = "SELECT * FROM \"PREPAS\".facturado "
-                    + "WHERE numero_factura = '" + f.getNumero_factura() 
-                    +"' AND validado = 'FALSO'";
+                    + "WHERE numero_factura = '" + f.getNumero_factura()
+                    + "' AND validado = 'FALSO'";
 
             Statement stmt = conexion.createStatement();
             System.out.println(sqlquery);
@@ -1964,12 +1964,12 @@ public class DBMS {
         return false;
     }
 
-public int equipoTallaCantidad(String t, int s) {
+    public int equipoTallaCantidad(String t, int s) {
         try {
             String sqlquery;
             sqlquery = "SELECT cantidad FROM \"PREPAS\".equipoTalla "
                     + "WHERE serial = " + s
-                    +" AND talla = '" + t +"' ";
+                    + " AND talla = '" + t + "' ";
 
             Statement stmt = conexion.createStatement();
             System.out.println(sqlquery);
@@ -1984,7 +1984,8 @@ public int equipoTallaCantidad(String t, int s) {
         }
         return -1;
     }
-public int existeEquipoTalla(Equipo e) {
+
+    public int existeEquipoTalla(Equipo e) {
         try {
             String sqlquery;
             sqlquery = "SELECT E.cantidad FROM \"PREPAS\".equipoTalla E "
@@ -2328,21 +2329,21 @@ public int existeEquipoTalla(Equipo e) {
         try {
             String sqlquery = "SELECT talla FROM  \"PREPAS\".contiene "
                     + "WHERE serial = "+s+" AND id ='"+id+"' ";
-
+ 
             Statement stmt = conexion.createStatement();
             System.out.println(sqlquery);
             ResultSet rs = stmt.executeQuery(sqlquery);
-            
+
             if (rs.next()) {
                 String talla = rs.getString("talla");
-                System.out.println("___Talla: "+talla+"____");
+                System.out.println("___Talla: " + talla + "____");
                 Equipo e = new Equipo();
                 e.setTalla(talla);
                 e.setSerial(s);
-                int cantidad = equipoTallaCantidad(talla,s);
-                System.out.println("___Existen "+cantidad+"____");
+                int cantidad = equipoTallaCantidad(talla, s);
+                System.out.println("___Existen " + cantidad + "____");
                 return cantidad;
-                
+
             }
 
         } catch (SQLException ex) {
@@ -2371,33 +2372,33 @@ public int existeEquipoTalla(Equipo e) {
     }
 
     public Boolean nuevaCantidad(int s, int id, int ec, int tc) {
-        try {                       
+        try {
             String sqlquery = "SELECT talla FROM  \"PREPAS\".contiene "
-                    + "WHERE serial = "+s+" AND id ="+id+" ";
-            
+                    + "WHERE serial = " + s + " AND id =" + id + " ";
+
             Statement stmt = conexion.createStatement();
             System.out.println("________________________________");
             System.out.println(sqlquery);
             ResultSet rs = stmt.executeQuery(sqlquery);
-            
+
             String t = "";
-            
+
             if (rs.next()) {
                 t = rs.getString("talla");
             }
-                                    
+
             sqlquery = "UPDATE \"PREPAS\".equipoTalla "
                     + "SET  cantidad = " + ec
                     + "     WHERE serial = " + s + " AND "
                     + "talla = '" + t + "'";
-            
+
             Integer i = stmt.executeUpdate(sqlquery);
             System.out.println(sqlquery);
 
             sqlquery = "UPDATE \"PREPAS\".tiene "
                     + "SET  cantidad = " + tc + " "
                     + "     WHERE serial = " + s + " AND  id = " + id + " ";
-            
+
             System.out.println(sqlquery);
             Integer j = stmt.executeUpdate(sqlquery);
 
@@ -2669,8 +2670,6 @@ public int existeEquipoTalla(Equipo e) {
      }
      return solicitudes;
      }*/
-    
-    
     public Boolean existeEmail(Email em) {
 
         String sqlquery = "SELECT * FROM \"PREPAS\".usuario"
@@ -2687,5 +2686,24 @@ public int existeEquipoTalla(Equipo e) {
         }
         return false;
     }
-        
+
+    public Boolean modificarContrasena(Usuario u) {
+        try {
+            String sqlquery = "UPDATE \"PREPAS\".usuario SET "
+                    //+ "password = '" + u.getPassword() + "' , "
+                    + "password = crypt('" + u.getPassword() + "', gen_salt('bf')) "
+                    + " WHERE email = '" + u.getEmail() + "' OR usuario = '" + u.getEmail() + "'";
+
+
+            Statement stmt = conexion.createStatement();
+            System.out.println(sqlquery);
+             System.out.println(u.getPassword()+"<<<<<<<<");
+            Integer i = stmt.executeUpdate(sqlquery);
+            return i > 0;
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return false;
+    }
+
 }
