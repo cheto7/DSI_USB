@@ -1776,6 +1776,28 @@ public class DBMS {
         }
         return false;
     }
+    
+    public Boolean existePuntuacion(Puntuacion p) {
+        try {
+            String sqlquery;
+            sqlquery = "SELECT * FROM \"PREPAS\".puntuacion P "
+                    + "WHERE P.serial = " + p.getSerial()
+                    + " AND P.usuario = '" + p.getUsuario()
+                    + "' ";
+
+            Statement stmt = conexion.createStatement();
+            System.out.println(sqlquery);
+            ResultSet rs = stmt.executeQuery(sqlquery);
+
+            while (rs.next()) {
+                return true;
+            }
+            return false;
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return false;
+    }
 
     public Boolean agregarAFacturado(Facturado f) {
         try {
@@ -1796,6 +1818,38 @@ public class DBMS {
                 return i > 0;
             }
             return false;
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return false;
+    }
+    public Boolean agregarPuntuacion(Puntuacion p) {
+        try {
+            Boolean existe = existePuntuacion(p);
+            if (!existe) {
+                String sqlquery;
+                sqlquery = "INSERT INTO \"PREPAS\".puntuacion (serial,usuario,puntuacion) "
+                        + "VALUES (" + p.getSerial() + ",'"
+                        + p.getUsuario()+ "',"
+                        + p.getPuntuacion()+ ")";
+
+                System.out.println(sqlquery);
+
+                Statement stmt = conexion.createStatement();
+                System.out.println(sqlquery);
+                Integer i = stmt.executeUpdate(sqlquery);
+                return i > 0;
+            }else{
+                String sqlquery = "UPDATE \"PREPAS\".puntuacion "
+                        + "SET  puntuacion = " + p.getPuntuacion()
+                        + "     WHERE serial = " + p.getSerial() + " AND "
+                        + "usuario = '" + p.getUsuario() + "'";
+
+                Statement stmt = conexion.createStatement();
+                System.out.println(sqlquery);
+                Integer i = stmt.executeUpdate(sqlquery);
+                return i > 0;
+            }
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
