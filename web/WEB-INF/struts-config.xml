@@ -425,6 +425,12 @@
                 name="Facturado">
             <forward name="success" path="/vistas/factura/interfaz-form-edit-equipoEnFactura.jsp"></forward>
         </action>
+        
+        <action path="/AgregarEquipoAFactura" type="Facturas.AgregarEquipoAFactura" scope="request" parameter="method"
+                name="Facturado">
+            <forward name="success" path="/Ir_pag_pedido_factura.do"></forward>
+        </action>
+        
         <action path="/EliminarEquipoEnSolicitud" type="Solicitudes.EliminarEquipoEnSolicitud" scope="request" parameter="method"
                 name="Usuario">
             <forward name="success" path="/vistas/pedido/confirmar_solicitud.jsp"></forward>
