@@ -83,7 +83,7 @@ CREATE TABLE "PREPAS".equipo (
   sector    VARCHAR,
   norma     VARCHAR,
   tipo_talla VARCHAR,
-  puntuacion DOUBLE default 0.0,
+  puntuacion FLOAT4 default 0.0,
   usuarios_puntuando INT default 0,
   CONSTRAINT PK_equipo PRIMARY KEY (serial)
 ) WITH (
