@@ -1156,7 +1156,7 @@ public class DBMS {
         ArrayList<Equipo> equipos = new ArrayList<Equipo>(0);
         try {
             
-            String sqlquery = "SELECT E.serial as serial,E.imagen as imagen,E.nombre_vista as nombre_vista,AUX.puntuacion + 1 as puntuacion,E.tipo_talla as tipo_talla\n" +
+            String sqlquery = "SELECT DISTINCT E.serial as serial,E.imagen as imagen,E.nombre_vista as nombre_vista,AUX.puntuacion + 1 as puntuacion,E.tipo_talla as tipo_talla\n" +
                                 "FROM \"PREPAS\".equipo E left join (SELECT P.serial as serial, U.usuario as usuario, P.puntuacion as puntuacion \n" +
                                                                         "FROM \"PREPAS\".tiene T, (\"PREPAS\".usuario U left join \"PREPAS\".puntuacion P on U.usuario = P.usuario)\n" +
                                                                         "WHERE T.usuario = U.usuario AND U.usuario = '"+ u.getUsuario() +"') AS AUX on E.serial = AUX.serial\n";
@@ -1781,26 +1781,30 @@ public class DBMS {
         return false;
     }
     
-    public Boolean existePuntuacion(Puntuacion p) {
+    public Puntuacion existePuntuacion(Puntuacion p) {
         try {
             String sqlquery;
-            sqlquery = "SELECT * FROM \"PREPAS\".puntuacion P "
-                    + "WHERE P.serial = " + p.getSerial()
-                    + " AND P.usuario = '" + p.getUsuario()
+            sqlquery = "SELECT serial, usuario, puntuacion FROM \"PREPAS\".puntuacion "
+                    + "WHERE serial = " + p.getSerial()
+                    + " AND usuario = '" + p.getUsuario()
                     + "' ";
 
             Statement stmt = conexion.createStatement();
             System.out.println(sqlquery);
             ResultSet rs = stmt.executeQuery(sqlquery);
-
+            Puntuacion p1 = null;
             while (rs.next()) {
-                return true;
+                p1 = new Puntuacion();
+                p1.setSerial(rs.getInt("serial"));
+                p1.setUsuario(rs.getString("usuario"));
+                p1.setPuntuacion(rs.getInt("puntuacion"));
+                return p1;
             }
-            return false;
+            return null;
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
-        return false;
+        return null;
     }
 
     public Boolean agregarAFacturado(Facturado f) {
@@ -1827,32 +1831,82 @@ public class DBMS {
         }
         return false;
     }
+    
+    public Equipo obtenerEquipoPuntuacion(Puntuacion p){
+        try {
+            String sqlquery;
+            sqlquery = "SELECT serial, puntuacion, usuarios_puntuando FROM \"PREPAS\".equipo "
+                    + "WHERE serial = " + p.getSerial()
+                    + " ";
+
+            Statement stmt = conexion.createStatement();
+            System.out.println(sqlquery);
+            ResultSet rs = stmt.executeQuery(sqlquery);
+            Equipo e = new Equipo();
+            while (rs.next()) {
+                e.setSerial(rs.getInt("serial"));
+                e.setUsuarios_puntuando(rs.getInt("usuarios_puntuando"));
+                e.setPuntuacion(rs.getFloat("puntuacion") + "");
+            }
+            return e;
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return null;
+    }
+    
     public Boolean agregarPuntuacion(Puntuacion p) {
         try {
-            Boolean existe = existePuntuacion(p);
+            Puntuacion p1 = existePuntuacion(p);
+            Equipo e = this.obtenerEquipoPuntuacion(p);
+            Boolean existe = false;
+            if(p1 != null){
+                existe = true;
+            }
             if (!existe) {
+                float np = ((Float.parseFloat(e.getPuntuacion()) * e.getUsuarios_puntuando()) + p.getPuntuacion())/(e.getUsuarios_puntuando() + 1);
                 String sqlquery;
                 sqlquery = "INSERT INTO \"PREPAS\".puntuacion (serial,usuario,puntuacion) "
                         + "VALUES (" + p.getSerial() + ",'"
                         + p.getUsuario()+ "',"
-                        + p.getPuntuacion()+ ")";
+                        + p.getPuntuacion()+ ");"
+                        + "";
+                String sqlquery2 = "UPDATE \"PREPAS\".equipo SET "
+                        + "usuarios_puntuando = "+ (e.getUsuarios_puntuando() + 1) +", "
+                        + "puntuacion = " + Float.toString(np) + " "
+                        + "WHERE serial = " + e.getSerial() + "";
 
-                System.out.println(sqlquery);
 
                 Statement stmt = conexion.createStatement();
                 System.out.println(sqlquery);
                 Integer i = stmt.executeUpdate(sqlquery);
-                return i > 0;
+                //return i > 0;
+                //if(i > 0){
+                    System.out.println(sqlquery2);
+                    i = stmt.executeUpdate(sqlquery2);
+                    return i > 0;
+                //}
             }else{
+                float np = (((Float.parseFloat(e.getPuntuacion()) * e.getUsuarios_puntuando()) - p1.getPuntuacion()) + p.getPuntuacion())/(e.getUsuarios_puntuando());
+                 
                 String sqlquery = "UPDATE \"PREPAS\".puntuacion "
                         + "SET  puntuacion = " + p.getPuntuacion()
                         + "     WHERE serial = " + p.getSerial() + " AND "
                         + "usuario = '" + p.getUsuario() + "'";
 
+                String sqlquery2 = "UPDATE \"PREPAS\".equipo SET "
+                        + "usuarios_puntuando = "+ e.getUsuarios_puntuando() +", "
+                        + "puntuacion = " + Float.toString(np) + " "
+                        + "WHERE serial = " + e.getSerial() + "";
+
                 Statement stmt = conexion.createStatement();
                 System.out.println(sqlquery);
                 Integer i = stmt.executeUpdate(sqlquery);
-                return i > 0;
+                //if(i > 0){
+                    System.out.println(sqlquery2);
+                    i = stmt.executeUpdate(sqlquery2);
+                    return i > 0;
+                //}
             }
         } catch (SQLException ex) {
             ex.printStackTrace();

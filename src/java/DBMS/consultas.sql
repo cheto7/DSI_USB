@@ -3,7 +3,15 @@
 -- SELECT * FROM "PREPAS".proveedor;
 --SELECT * FROM "PREPAS".contiene;  
 --
-SELECT * FROM "PREPAS".equipo;
+--SELECT * FROM "PREPAS".usuario;
+--SELECT E.serial as serial,E.imagen as imagen,E.nombre_vista as nombre_vista,P.puntuacion as puntuacion,E.tipo_talla as tipo_talla 
+--FROM "PREPAS".tiene T, "PREPAS".usuario U, ("PREPAS".equipo E left join "PREPAS".puntuacion P on E.serial = P.serial) 
+--WHERE E.serial = T.serial AND U.usuario = T.usuario AND (U.usuario = P.usuario OR P.usuario = null) AND U.usuario = 'cheto@usb.ve'
+
+SELECT E.serial as serial,E.imagen as imagen,E.nombre_vista as nombre_vista,AUX.puntuacion + 1 as puntuacion,E.tipo_talla as tipo_talla
+FROM "PREPAS".equipo E left join (SELECT P.serial as serial, U.usuario as usuario, P.puntuacion as puntuacion 
+FROM "PREPAS".tiene T, ("PREPAS".usuario U left join "PREPAS".puntuacion P on U.usuario = P.usuario)
+WHERE T.usuario = U.usuario AND U.usuario = '') AS AUX on E.serial = AUX.serial
 
 --DELETE FROM "PREPAS".usuario;
 

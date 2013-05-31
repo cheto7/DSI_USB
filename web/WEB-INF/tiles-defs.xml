@@ -146,7 +146,7 @@
     
     <definition name="formulario-evaluar-equipos" extends="formulario-pedido">
         <put name="formulario" value="/interfaz/admin/pedido/content-lista-evaluar-equipo.jsp"></put>
-        <put name="navBar" value="/interfaz/admin/barras_navegacion/navBarFactura.jsp"></put> 
+        <put name="navBar" value="/interfaz/admin/barras_navegacion/navBarEvaluarEquipos.jsp"></put> 
     </definition> 
     
     <definition name="formulario-editar-usuario" extends="formulario-pedido">
