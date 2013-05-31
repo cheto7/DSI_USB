@@ -3,7 +3,7 @@
 -- SELECT * FROM "PREPAS".proveedor;
 --SELECT * FROM "PREPAS".contiene;  
 --
-SELECT * FROM "PREPAS".usuario;
+SELECT * FROM "PREPAS".equipo;
 
 --DELETE FROM "PREPAS".usuario;
 
