@@ -134,13 +134,18 @@
         <put name="formulario" value="/interfaz/genericos/factura/formulario-talla.jsp"></put>
     </definition>
     
+    <definition name="formulario-solicitud-agregar-puntuacion" extends="formulario-factura-agregar-equipo">
+        <put name="formulario" value="/interfaz/genericos/pedido/formulario-puntuacion.jsp"></put>
+        <put name="navBar" value="/interfaz/genericos/barras_navegacion/navBarpedido.jsp"></put>
+    </definition>
+    
      <definition name="formulario-factura" extends="formulario-pedido">
         <put name="formulario" value="/interfaz/admin/factura/listar_factura/content-lista-factura.jsp"></put>
         <put name="navBar" value="/interfaz/admin/barras_navegacion/navBarFactura.jsp"></put> 
     </definition> 
     
     <definition name="formulario-evaluar-equipos" extends="formulario-pedido">
-        <put name="formulario" value="/interfaz/admin/factura/listar_factura/content-lista-factura.jsp"></put>
+        <put name="formulario" value="/interfaz/admin/pedido/content-lista-evaluar-equipo.jsp"></put>
         <put name="navBar" value="/interfaz/admin/barras_navegacion/navBarFactura.jsp"></put> 
     </definition> 
     

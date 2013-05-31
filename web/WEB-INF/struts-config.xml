@@ -360,13 +360,12 @@
         
         <action path="/CambiarPuntuacion" type="Solicitudes.CambiarPuntuacion" scope="request" 
                 name="Puntuacion">
-            <forward name="success" path="/vistas/factura/interfaz_factura_agregar_talla.jsp"></forward>
-            <forward name="failure" path="/Ir_pag_pedido_factura.do"></forward>
+            <forward name="success" path="/vistas/pedido/interfaz_solicitud_agregar_puntuacion.jsp"></forward>
         </action>
         
-        <action path="/AgregarEquipoAFactura" type="Facturas.AgregarEquipoAFactura" scope="request" 
-                name="Facturado">
-            <forward name="success" path="/Ir_pag_pedido_factura.do"></forward>
+        <action path="/EvaluarEquipo" type="Solicitudes.EvaluarEquipo" scope="request" 
+                name="Puntuacion">
+            <forward name="success" path="/EvaluarEquipos.do"></forward>
         </action>
         
         <action path="/EliminarFactura" type="Facturas.EliminarFactura" scope="request"
@@ -426,6 +425,12 @@
                 name="Facturado">
             <forward name="success" path="/vistas/factura/interfaz-form-edit-equipoEnFactura.jsp"></forward>
         </action>
+        
+        <action path="/AgregarEquipoAFactura" type="Facturas.AgregarEquipoAFactura" scope="request" parameter="method"
+                name="Facturado">
+            <forward name="success" path="/Ir_pag_pedido_factura.do"></forward>
+        </action>
+        
         <action path="/EliminarEquipoEnSolicitud" type="Solicitudes.EliminarEquipoEnSolicitud" scope="request" parameter="method"
                 name="Usuario">
             <forward name="success" path="/vistas/pedido/confirmar_solicitud.jsp"></forward>

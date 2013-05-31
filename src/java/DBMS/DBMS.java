@@ -1155,10 +1155,11 @@ public class DBMS {
     public ArrayList<Equipo> obtenerEquiposPuntuacionUsuario(Usuario u) {
         ArrayList<Equipo> equipos = new ArrayList<Equipo>(0);
         try {
-            String sqlquery = "SELECT serial,imagen,nombre_vista,P.puntuacion as puntuacion,tipo_talla "
-                    + "FROM \"PREPAS\".tiene T, \"PREPAS\".usuario U, \"PREPAS\".equipo E left join \"PREPAS\".puntuacion P on E.serial = P.serial "
-                    + "WHERE E.serial = T.serial AND U.usuario = T.usuario AND U.usuario = P.usuario"
-                    + "U.usuario = '" + u.getUsuario() + "'";
+            
+            String sqlquery = "SELECT E.serial as serial,E.imagen as imagen,E.nombre_vista as nombre_vista,AUX.puntuacion + 1 as puntuacion,E.tipo_talla as tipo_talla\n" +
+                                "FROM \"PREPAS\".equipo E left join (SELECT P.serial as serial, U.usuario as usuario, P.puntuacion as puntuacion \n" +
+                                                                        "FROM \"PREPAS\".tiene T, (\"PREPAS\".usuario U left join \"PREPAS\".puntuacion P on U.usuario = P.usuario)\n" +
+                                                                        "WHERE T.usuario = U.usuario AND U.usuario = '"+ u.getUsuario() +"') AS AUX on E.serial = AUX.serial\n";
 
 
             Statement stmt = conexion.createStatement();
@@ -1171,17 +1172,20 @@ public class DBMS {
                 e.setImagen(rs.getString("imagen"));
                 e.setNombre_vista(rs.getString("nombre_vista"));
                 int aux = rs.getInt("puntuacion");
+                // A las puntuaciones se le suma 1 para que el nulo quede como 0 y se pueda reconocer los que no tienen puntuacion.
                 if(aux == 0){
-                    e.setPuntuacion("Muy malo");
+                    e.setPuntuacion("Nulo");
                 }else if(aux == 1){
-                    e.setPuntuacion("Malo");
+                    e.setPuntuacion("Muy malo");
                 }else if(aux == 2){
-                    e.setPuntuacion("Normal");
+                    e.setPuntuacion("Malo");
                 }else if(aux == 3){
-                    e.setPuntuacion("Bueno");
+                    e.setPuntuacion("Normal");
                 }else if(aux == 4){
-                    e.setPuntuacion("Muy bueno");
+                    e.setPuntuacion("Bueno");
                 }else if(aux == 5){
+                    e.setPuntuacion("Muy bueno");
+                }else if(aux == 6){
                     e.setPuntuacion("Excelente");
                 }
                 e.setTipo_talla(rs.getString("tipo_talla"));
@@ -1776,6 +1780,28 @@ public class DBMS {
         }
         return false;
     }
+    
+    public Boolean existePuntuacion(Puntuacion p) {
+        try {
+            String sqlquery;
+            sqlquery = "SELECT * FROM \"PREPAS\".puntuacion P "
+                    + "WHERE P.serial = " + p.getSerial()
+                    + " AND P.usuario = '" + p.getUsuario()
+                    + "' ";
+
+            Statement stmt = conexion.createStatement();
+            System.out.println(sqlquery);
+            ResultSet rs = stmt.executeQuery(sqlquery);
+
+            while (rs.next()) {
+                return true;
+            }
+            return false;
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return false;
+    }
 
     public Boolean agregarAFacturado(Facturado f) {
         try {
@@ -1796,6 +1822,38 @@ public class DBMS {
                 return i > 0;
             }
             return false;
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return false;
+    }
+    public Boolean agregarPuntuacion(Puntuacion p) {
+        try {
+            Boolean existe = existePuntuacion(p);
+            if (!existe) {
+                String sqlquery;
+                sqlquery = "INSERT INTO \"PREPAS\".puntuacion (serial,usuario,puntuacion) "
+                        + "VALUES (" + p.getSerial() + ",'"
+                        + p.getUsuario()+ "',"
+                        + p.getPuntuacion()+ ")";
+
+                System.out.println(sqlquery);
+
+                Statement stmt = conexion.createStatement();
+                System.out.println(sqlquery);
+                Integer i = stmt.executeUpdate(sqlquery);
+                return i > 0;
+            }else{
+                String sqlquery = "UPDATE \"PREPAS\".puntuacion "
+                        + "SET  puntuacion = " + p.getPuntuacion()
+                        + "     WHERE serial = " + p.getSerial() + " AND "
+                        + "usuario = '" + p.getUsuario() + "'";
+
+                Statement stmt = conexion.createStatement();
+                System.out.println(sqlquery);
+                Integer i = stmt.executeUpdate(sqlquery);
+                return i > 0;
+            }
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
