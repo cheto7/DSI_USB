@@ -290,6 +290,10 @@
         <put name="formulario" value="/interfaz/admin/lista_usuarios/content-lista-usuarios.jsp"></put>
         <put name="navBar" value="/interfaz/genericos/barras_navegacion/navBarUnidad.jsp"></put>
     </definition>
+       <definition name="coleccion-usuariosHabilitados" extends="formulario-pedido">
+        <put name="formulario" value="/interfaz/admin/lista_usuarios/content-lista-usuariosHabilitados.jsp"></put>
+        <put name="navBar" value="/interfaz/genericos/barras_navegacion/navBarUnidad.jsp"></put>
+    </definition>
        <definition name="listar-solicitantes" extends="formulario-pedido">  
        <put name="formulario" value="/interfaz/admin/entrega/listaSolicitantes.jsp"></put>
         <put name="navBar" value="/interfaz/genericos/barras_navegacion/navBarpedido.jsp"></put>
