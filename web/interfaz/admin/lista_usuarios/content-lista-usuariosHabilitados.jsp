@@ -122,23 +122,7 @@
                                 <td>
                                     <html:form action = "/realizar_solicitudOtros" onsubmit = "return (this)">
                                         <html:hidden name="usuario" property="usuario"/>
-                                        <html:hidden name="usuario" property="nombre"/>
-                                        <html:hidden name="usuario" property="email"/>
-                                        <html:hidden name="usuario" property="password"/>
-                                        <html:hidden name="usuario" property="fecha"/>
-                                        <html:hidden name="usuario" property="sexo"/>
-                                        <html:hidden name="usuario" property="talla_mascara"/>
-                                        <html:hidden name="usuario" property="talla_camisa"/>
-                                        <html:hidden name="usuario" property="talla_pantalon"/>
-                                        <html:hidden name="usuario" property="talla_guantes"/>
-                                        <html:hidden name="usuario" property="talla_zapato"/>
-                                        <html:hidden name="usuario" property="habilitado"/>
-                                        <html:hidden name="usuario" property="apellido"/>
-                                        <html:hidden name="usuario" property="telefono"/>
-                                        <html:hidden name="usuario" property="unidad_adscripcion"/>
-                                        <html:hidden name="usuario" property="administrador"/>
-                                        <html:hidden name="usuario" property="area_laboral"/>                                      
-                                        <html:hidden name="autenticado" property="usuario"/>
+
                                         <html:submit styleClass="btn btn-success"> Realizar Solicitud </html:submit>
                                     </html:form> 
                                 </td>

@@ -543,7 +543,7 @@
         
         
                 
-        <action path="/realizar_solicitudOtros" type="Solicitudes.ListarEquiposSolicitud" scope="request"
+        <action path="/realizar_solicitudOtros" type="Solicitudes.realizar_SolicitudOtros" scope="request"
                 name="Usuario">
             <forward name="success" path="/vistas/pedido/interfaz_pedido.jsp"></forward>
             <forward name="failure" path="/Ir_pag_usuario.do"></forward>

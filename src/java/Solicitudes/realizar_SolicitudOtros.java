@@ -41,9 +41,10 @@ public class realizar_SolicitudOtros extends org.apache.struts.action.Action {
             HttpServletRequest request, HttpServletResponse response)
             throws Exception {
         
-        String autenticado = (String) request.getAttribute("usuario");
+        String autenticado = (String) request.getParameter("usuario");
         Usuario u = new Usuario();
         u.setUsuario(autenticado);
+        System.out.println("_________"+u.getUsuario()+"_________");
         u = DBMS.getInstance().atributosUsuario(u);
 
         /* Aqui se debe preguntar por el TIPO DE USUARIO para saber que
