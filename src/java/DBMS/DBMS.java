@@ -1661,6 +1661,29 @@ public class DBMS {
         return null;
 
     }
+    
+    public ArrayList<Mensaje> listarMensajes() {
+        try {
+            String sqlquery = "SELECT id, mensaje "
+                    + "FROM \"PREPAS\".mensaje ";
+
+            Statement stmt = conexion.createStatement();
+            System.out.println(sqlquery);
+            ResultSet rs = stmt.executeQuery(sqlquery);
+            ArrayList<Mensaje> ar = new ArrayList<Mensaje>();
+            while (rs.next()) {
+                Mensaje m = new Mensaje();
+                m.setId(rs.getString("id"));
+                m.setMensaje(rs.getString("mensaje"));
+                ar.add(m);
+            }
+            return ar;
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return null;
+
+    }
 
     public boolean agregarFactura(Factura f) {
         Date dNow = new Date();

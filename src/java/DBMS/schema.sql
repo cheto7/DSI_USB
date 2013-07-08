@@ -252,3 +252,12 @@ CREATE TABLE "PREPAS".tiene (
 ) WITH (
 OIDS = FALSE
 );
+
+CREATE TABLE "PREPAS".mensaje (
+    id VARCHAR NOT NULL,
+    mensaje VARCHAR NOT NULL, 
+
+    CONSTRAINT PK_mensaje PRIMARY KEY (id)
+) WITH (
+OIDS = FALSE
+);

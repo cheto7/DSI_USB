@@ -18,6 +18,7 @@
         <form-bean name="ListadoGeneral" type="Clases.ListadoGeneral"/>
         <form-bean name="Facturado" type="Clases.Facturado"/>
         <form-bean name="Factura" type="Clases.Factura"/>
+        <form-bean name="Mensaje" type="Clases.Mensaje"/>
         <form-bean name="Periodo" type="Clases.Periodo"/>
         <form-bean name="Editar" type="Clases.Editar"/>
         <form-bean name="Email" type="Clases.Email"/>
@@ -340,6 +341,10 @@
             <forward name="success" path="/vistas/factura/interfaz_factura.jsp"></forward>
         </action>
         
+        <action path="/CambiarMensaje" type="Usuarios.CambiarMensaje" scope="request"
+                name="Mensaje">
+            <forward name="success" path="/vistas/interfaz_cambiar_mensaje.jsp"></forward>
+        </action>
         
         
         <action path="/FormularioEditarFactura" type="Facturas.FormularioEditarFactura" scope="request"

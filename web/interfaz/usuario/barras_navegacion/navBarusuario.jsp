@@ -126,7 +126,12 @@
                 <html:form action="/ListarPeriodos" onsubmit="return (this)">
                     <html:submit style="padding:0px 10px 30px 0px">Períodos</html:submit>
                 </html:form>
-            </li>    
+            </li> 
+            <li>
+                <html:form action="/CambiarMensaje" onsubmit="return (this)">
+                    <html:submit style="padding:0px 10px 30px 0px">Mensajes</html:submit>
+                </html:form>
+            </li> 
         </div>
 
 

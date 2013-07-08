@@ -142,6 +142,11 @@
      <definition name="formulario-factura" extends="formulario-pedido">
         <put name="formulario" value="/interfaz/admin/factura/listar_factura/content-lista-factura.jsp"></put>
         <put name="navBar" value="/interfaz/admin/barras_navegacion/navBarFactura.jsp"></put> 
+    </definition>
+    
+     <definition name="formulario-cambiar-mensaje" extends="formulario-pedido">
+        <put name="formulario" value="/interfaz/admin/content-cambiar-mensaje.jsp"></put>
+        <put name="navBar" value="/interfaz/admin/barras_navegacion/navBarFactura.jsp"></put> 
     </definition> 
     
     <definition name="formulario-evaluar-equipos" extends="formulario-pedido">
