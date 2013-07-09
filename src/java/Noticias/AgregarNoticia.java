@@ -33,6 +33,11 @@ public class AgregarNoticia extends org.apache.struts.action.Action {
             request.setAttribute("noticiaNula",u);
             return mapping.findForward(FAILURE);
         }
+        java.util.Date date = new java.util.Date(); 
+        java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("dd-MM-yyyy");
+        String fecha = sdf.format(date);
+        
+        n.setFechaNoticia(fecha);
         
         Boolean agregada = DBMS.getInstance().agregarNoticia(n);
         if (agregada) {

@@ -4,8 +4,8 @@
 --SELECT * FROM "PREPAS".contiene;  
 --
 SELECT * FROM "PREPAS".usuario;
-
-DELETE FROM "PREPAS".usuario;
+--SELECT * FROM "PREPAS".noticia;
+--DELETE FROM "PREPAS".usuario;
 
 
 

@@ -13,7 +13,7 @@
 <script>
     $(function() {
    
-        $("#fecha").attr('placeholder', 'AAAA-MM-DD');
+        $("#fecha").attr('placeholder', 'DD-MM-AAAA');
         $("#fecha").attr('title', 'Ingrese fecha fin del período');
     });
     
@@ -30,7 +30,7 @@
             dayNamesShort: ['Dom','Lun','Mar','Mié','Juv','Vie','Sáb'],
             dayNamesMin: ['Do','Lu','Ma','Mi','Ju','Vi','Sá'],
             weekHeader: 'Sm',
-            dateFormat: 'yy-mm-dd',
+            dateFormat: 'dd-mm-yy',
             firstDay: 1,
             isRTL: false,
             showMonthAfterYear: false,

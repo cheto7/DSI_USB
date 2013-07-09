@@ -10,18 +10,27 @@
 <%@ taglib uri="http://struts.apache.org/tags-tiles" prefix="tiles" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
-<!-- FORMULARIO DE REGISTRO -->
-<div id="tabs">
-    <ul>
-        <li><a href="#tabs-1">Académico</a></li>
-        <li><a href="#tabs-2">Administrativo</a></li>
-        <li><a href="#tabs-3">Bombero</a></li>
-        <li><a href="#tabs-4">Obrero</a></li>
-        <li><a href="#tabs-5">Genéricos</a></li>
-    </ul>
-
-    <%--<html:form method="POST" action="/Pedido?method=save" onsubmit="return (this)">
-        <html:hidden name="autenticado" property="usuario"/>--%>
+<!-- FORMULARIO DE LA FACTURA -->
+<html>
+    <head>
+        <style type="text/css">
+            td {
+                text-align: center;
+            } 
+        </style>
+    </head>
+    <logic:present name="agregadoEquipo">
+        <center>
+            <label style="color:red">Equipo no pudo ser agregado.</label>
+        </center>
+    </logic:present>    
+    <div id="tabs">
+        <ul>
+            <li><a href="#tabs-1">Académico</a></li>
+            <li><a href="#tabs-2">Administrativo</a></li>
+            <li><a href="#tabs-3">Bombero</a></li>
+            <li><a href="#tabs-4">Obrero</a></li>
+        </ul>
 
         <div id="tabs-1">
             <logic:present name="errorCantidad">
@@ -29,48 +38,53 @@
                     <label style="color:red">Error: Debe introducir una cantidad mayor a cero para agregar</label>
                 </center>
             </logic:present>
-            
-            <logic:present name="agregadoEquipo">
-                <center>
-                    <label style="color:red">Equipo no pudo ser agregado.</label>
-                </center>
-            </logic:present>
-            <div class="selector">
+            <table class="table table-hover">
+                <tbody>
+                    <tr>
+                        <th><center>Nombre de Equipo</center></th>
+                <th><center>Imagen</center></th>
+                <th><center>Cantidad</center></th>
+                <th><center>Opciones</center></th>
+                </tr>
                 <logic:iterate name="equiposAcad" id="eq">
-                <div class="casilla">
-                    <label class="checkbox inline">
-                        <%--<html:checkbox value="true" name="Pedido" property="cascoSeguridad"/>--%>
-                        <bean:write name="eq" property="nombre_vista"/>
-                    </label>
-                    <center>
-                        <div class="casillaimg">
-                            <img width="80" src="assets/materiales/<bean:write name="eq" property="nombre_vista"/>.png" />
-                        </div>
-                    </center>
-                    <!--- TODO ESTO ES LO QUE HAY QUE COPIAR EN CADA CUADRO CON LA RESPECTIVA PROPIEDAD --->
-                    <div>
-                        <html:form action="/PonerTalla" onsubmit="return (this)">
-                            <html:hidden name="facturado" property="numero_factura"/>
-                            <html:hidden name="eq" property="serial"/>
-                            <html:hidden name="eq" property="tipo_talla"/>
-                            <p style="float:left; display: inline">Cantidad:
-                            <html:text name="facturado" property="cantidad" styleClass="span1" styleId="spinner" value="0">                
-                            </html:text></p>
-                            <html:submit style="btn btn-primary"> Agregar </html:submit>
-                        </html:form>
-                    </div>
-                    <!--- HASTA AQUI --->
-                </div>
-                </logic:iterate>
+                    <tr>
+                        <td><bean:write name="eq" property="nombre_vista"/></td>
+                        <td><img width="80" src="assets/materiales/<bean:write name="eq" property="nombre_vista"/>.png" /></td>
+                            <html:form action="/PonerTalla" onsubmit="return (this)">
+                                <html:hidden name="facturado" property="numero_factura"/>
+                                <html:hidden name="eq" property="serial"/>
+                                <html:hidden name="eq" property="tipo_talla"/>
+                            <td><html:text name="facturado" property="cantidad" styleClass="span1" styleId="spinner" value="0"/></td>
 
-            </div>
+                            <td><html:submit style="btn btn-primary"> Agregar </html:submit></td>
+                        </html:form>
+                    </tr>
+                </logic:iterate>
+                <logic:iterate name="equiposGen" id="eq">
+                    <tr>
+                        <td><bean:write name="eq" property="nombre_vista"/></td>
+                        <td><img width="80" src="assets/materiales/<bean:write name="eq" property="nombre_vista"/>.png" /></td>
+                            <html:form action="/PonerTalla" onsubmit="return (this)">
+                                <html:hidden name="facturado" property="numero_factura"/>
+                                <html:hidden name="eq" property="serial"/>
+                                <html:hidden name="eq" property="tipo_talla"/>
+                            <td><html:text name="facturado" property="cantidad" styleClass="span1" styleId="spinner" value="0"/></td>
+
+                            <td><html:submit style="btn btn-primary"> Agregar </html:submit></td>
+                        </html:form>
+                    </tr>
+                </logic:iterate>
+                </tbody> 
+            </table>
             <center>
                 <logic:empty name="equiposAcad">
-                    <center>
-                    <label>No hay equipos para profesores disponibles</label>
-                </center>
+                    <logic:empty name="equiposGen">
+                        <center>
+                            <label>No hay equipos para personal académico disponibles</label>
+                        </center>
+                    </logic:empty>
                 </logic:empty>
-            </center>
+            </center>          
         </div>
         <div id="tabs-2">
             <logic:present name="errorCantidad">
@@ -78,94 +92,108 @@
                     <label style="color:red">Error: Debe introducir una cantidad mayor a cero para agregar</label>
                 </center>
             </logic:present>
-            
-            <logic:present name="agregadoEquipo">
-                <center>
-                    <label style="color:red">Equipo no pudo ser agregado.</label>
-                </center>
-            </logic:present>
-            <div class="selector">
+            <table class="table table-hover">
+                <tbody>
+                    <tr>
+                        <th><center>Nombre de Equipo</center></th>
+                <th><center>Imagen</center></th>
+                <th><center>Cantidad</center></th>
+                <th><center>Opciones</center></th>
+                </tr>
                 <logic:iterate name="equiposAdmin" id="eq">
-                <div class="casilla">
-                    <label class="checkbox inline">
-                        <%--<html:checkbox value="true" name="Pedido" property="cascoSeguridad"/>--%>
-                        <bean:write name="eq" property="nombre_vista"/>
-                    </label>
-                    <center>
-                        <div class="casillaimg">
-                            <img src="assets/materiales/<bean:write name="eq" property="nombre_vista"/>.png" />
-                        </div>
-                    </center>
-                    <!--- TODO ESTO ES LO QUE HAY QUE COPIAR EN CADA CUADRO CON LA RESPECTIVA PROPIEDAD --->
-                    <div>
-                        <html:form action="/PonerTalla" onsubmit="return (this)">
-                            <html:hidden name="facturado" property="numero_factura"/>
-                            <html:hidden name="eq" property="serial"/>
-                            <html:hidden name="eq" property="tipo_talla"/>
-                            <p style="float:left; display: inline">Cantidad:
-                            <html:text name="facturado" property="cantidad" styleClass="span1" styleId="spinner" value="0">                
-                            </html:text></p>
-                            <html:submit style="btn btn-primary"> Agregar </html:submit>
-                        </html:form>                    </div>
-                    <!--- HASTA AQUI --->
-                </div>
-                </logic:iterate>
+                    <tr>
+                        <td><bean:write name="eq" property="nombre_vista"/></td>
+                        <td><img width="80" src="assets/materiales/<bean:write name="eq" property="nombre_vista"/>.png" /></td>
+                            <html:form action="/PonerTalla" onsubmit="return (this)">
+                                <html:hidden name="facturado" property="numero_factura"/>
+                                <html:hidden name="eq" property="serial"/>
+                                <html:hidden name="eq" property="tipo_talla"/>
+                            <td><html:text name="facturado" property="cantidad" styleClass="span1" styleId="spinner" value="0"/></td>
 
-            </div>
-            <center>  
+                            <td><html:submit styleClass="btn btn-primary"> Agregar </html:submit></td>
+                        </html:form>
+                    </tr>
+                </logic:iterate>
+                <logic:iterate name="equiposGen" id="eq">
+                    <tr>
+                        <td><bean:write name="eq" property="nombre_vista"/></td>
+                        <td><img width="80" src="assets/materiales/<bean:write name="eq" property="nombre_vista"/>.png" /></td>
+                            <html:form action="/PonerTalla" onsubmit="return (this)">
+                                <html:hidden name="facturado" property="numero_factura"/>
+                                <html:hidden name="eq" property="serial"/>
+                                <html:hidden name="eq" property="tipo_talla"/>
+                            <td><html:text name="facturado" property="cantidad" styleClass="span1" styleId="spinner" value="0"/></td>
+
+                            <td><html:submit styleClass="btn btn-primary"> Agregar </html:submit></td>
+                        </html:form>
+                    </tr>
+                </logic:iterate>
+                </tbody> 
+            </table>
+            <center>
                 <logic:empty name="equiposAdmin">
-                    <center>
-                    <label>No hay equipos para personal administrativo disponibles</label>
-                </center>
-                </logic:empty>                  
-            </center>
-        </div>
+                    <logic:empty name="equiposGen">
+                        <center>
+                            <label>No hay equipos para personal administrativo disponibles</label>
+                        </center>
+                    </logic:empty>
+                </logic:empty>
+            </center>        
+        </div>    
         <div id="tabs-3">
             <logic:present name="errorCantidad">
                 <center>
                     <label style="color:red">Error: Debe introducir una cantidad mayor a cero para agregar</label>
                 </center>
             </logic:present>
-            
-            <logic:present name="agregadoEquipo">
-                <center>
-                    <label style="color:red">Equipo no pudo ser agregado.</label>
-                </center>
-            </logic:present>
-            <div class="selector">
+            <table class="table table-hover">
+                <tbody>
+                    <tr>
+                        <th><center>Nombre de Equipo</center></th>
+                <th><center>Imagen</center></th>
+                <th><center>Cantidad</center></th>
+                <th><center>Opciones</center></th>
+                </tr>
                 <logic:iterate name="equiposBomb" id="eq">
-                <div class="casilla">
-                    <label class="checkbox inline">
-                        <%--<html:checkbox value="true" name="Pedido" property="cascoSeguridad"/>--%>
-                        <bean:write name="eq" property="nombre_vista"/>
-                    </label>
-                    <center>
-                        <div class="casillaimg">
-                            <img src="assets/materiales/<bean:write name="eq" property="nombre_vista"/>.png" />
-                        </div>
-                    </center>
-                    <!--- TODO ESTO ES LO QUE HAY QUE COPIAR EN CADA CUADRO CON LA RESPECTIVA PROPIEDAD --->
-                    <div>
-                        <html:form action="/PonerTalla" onsubmit="return (this)">
-                            <html:hidden name="facturado" property="numero_factura"/>
-                            <html:hidden name="eq" property="serial"/>
-                            <html:hidden name="eq" property="tipo_talla"/>
-                            <p style="float:left; display: inline">Cantidad:
-                            <html:text name="facturado" property="cantidad" styleClass="span1" styleId="spinner" value="0">                
-                            </html:text></p>
-                            <html:submit style="btn btn-primary"> Agregar </html:submit>
-                        </html:form>                    </div>
-                    <!--- HASTA AQUI --->
-                </div>
+                    <tr>
+                        <td><bean:write name="eq" property="nombre_vista"/></td>
+                        <td><img width="80" src="assets/materiales/<bean:write name="eq" property="nombre_vista"/>.png" /></td>
+                            <html:form action="/PonerTalla" onsubmit="return (this)">
+                                <html:hidden name="facturado" property="numero_factura"/>
+                                <html:hidden name="eq" property="serial"/>
+                                <html:hidden name="eq" property="tipo_talla"/>
+                            <td><html:text name="facturado" property="cantidad" styleClass="span1" styleId="spinner" value="0"/></td>
+
+                            <td><html:submit styleClass="btn btn-primary"> Agregar </html:submit></td>
+                        </html:form>
+                    </tr>
                 </logic:iterate>
-            </div>
+                <logic:iterate name="equiposGen" id="eq">
+                    <tr>
+                        <td><bean:write name="eq" property="nombre_vista"/></td>
+                        <td><img width="80" src="assets/materiales/<bean:write name="eq" property="nombre_vista"/>.png" /></td>
+                            <html:form action="/PonerTalla" onsubmit="return (this)">
+                                <html:hidden name="facturado" property="numero_factura"/>
+                                <html:hidden name="eq" property="serial"/>
+                                <html:hidden name="eq" property="tipo_talla"/>
+                            <td><html:text name="facturado" property="cantidad" styleClass="span1" styleId="spinner" value="0"/></td>
+
+                            <td><html:submit styleClass="btn btn-primary"> Agregar </html:submit></td>
+                        </html:form>
+                    </tr>
+                </logic:iterate>
+                </tbody> 
+            </table>
             <center>
-               <logic:empty name="equiposBomb">
-                    <center>
-                    <label>No hay equipos para bomberos disponibles</label>
-                </center>
+                <logic:empty name="equiposBomb">
+                    <logic:empty name="equiposGen">
+                        <center>
+                            <label>No hay equipos para bomberos disponibles</label>
+                        </center>
+                    </logic:empty>
                 </logic:empty>
             </center>
+
         </div>
         <div id="tabs-4">
             <logic:present name="errorCantidad">
@@ -173,106 +201,60 @@
                     <label style="color:red">Error: Debe introducir una cantidad mayor a cero para agregar</label>
                 </center>
             </logic:present>
-            
-            <logic:present name="agregadoEquipo">
-                <center>
-                    <label style="color:red">Equipo no pudo ser agregado.</label>
-                </center>
-            </logic:present>
-            <div class="selector">
-                <logic:present name="equiposObrero">
+            <table class="table table-hover">
+                <tbody>
+                    <tr>
+                        <th><center>Nombre de Equipo</center></th>
+                <th><center>Imagen</center></th>
+                <th><center>Cantidad</center></th>
+                <th><center>Opciones</center></th>
+                </tr>
                 <logic:iterate name="equiposObrero" id="eq">
-                <div class="casilla">
-                    <label class="checkbox inline">
-                        <%--<html:checkbox value="true" name="Pedido" property="cascoSeguridad"/>--%>
-                        <bean:write name="eq" property="nombre_vista"/>
-                    </label>
-                    <center>
-                        <div class="casillaimg">
-                            <img src="assets/materiales/<bean:write name="eq" property="nombre_vista"/>.png" />
-                        </div>
-                    </center>
-                    <!--- TODO ESTO ES LO QUE HAY QUE COPIAR EN CADA CUADRO CON LA RESPECTIVA PROPIEDAD --->
-                    <div>
-                        <html:form action="/PonerTalla" onsubmit="return (this)">
-                            <html:hidden name="facturado" property="numero_factura"/>
-                            <html:hidden name="eq" property="serial"/>
-                            <html:hidden name="eq" property="tipo_talla"/>
-                            <p style="float:left; display: inline">Cantidad:
-                            <html:text name="facturado" property="cantidad" styleClass="span1" styleId="spinner" value="0">                
-                            </html:text></p>
-                            <html:submit style="btn btn-primary"> Agregar </html:submit>
-                        </html:form>                    </div>
-                    <!--- HASTA AQUI --->
-                </div>
+                    <tr>
+                        <td><bean:write name="eq" property="nombre_vista"/></td>
+                        <td><img width="80" src="assets/materiales/<bean:write name="eq" property="nombre_vista"/>.png" /></td>
+                            <html:form action="/PonerTalla" onsubmit="return (this)">
+                                <html:hidden name="facturado" property="numero_factura"/>
+                                <html:hidden name="eq" property="serial"/>
+                                <html:hidden name="eq" property="tipo_talla"/>
+                            <td><html:text name="facturado" property="cantidad" styleClass="span1" styleId="spinner" value="0"/></td>
+
+                            <td><html:submit styleClass="btn btn-primary"> Agregar </html:submit></td>
+                        </html:form>
+                    </tr>
                 </logic:iterate>
-                </logic:present>
-            </div>
+                <logic:iterate name="equiposGen" id="eq">
+                    <tr>
+                        <td><bean:write name="eq" property="nombre_vista"/></td>
+                        <td><img width="80" src="assets/materiales/<bean:write name="eq" property="nombre_vista"/>.png" /></td>
+                            <html:form action="/PonerTalla" onsubmit="return (this)">
+                                <html:hidden name="facturado" property="numero_factura"/>
+                                <html:hidden name="eq" property="serial"/>
+                                <html:hidden name="eq" property="tipo_talla"/>
+                            <td><html:text name="facturado" property="cantidad" styleClass="span1" styleId="spinner" value="0"/></td>
+
+                            <td><html:submit styleClass="btn btn-primary"> Agregar </html:submit></td>
+                        </html:form>
+                    </tr>
+                </logic:iterate>
+                </tbody> 
+            </table>
             <center>
                 <logic:empty name="equiposObrero">
-                    <center>
-                    <label>No hay equipos para obreros disponibles</label>
-                </center>
-                </logic:empty>   
-            </center>
-        </div> 
-        <div id="tabs-5">
-            <logic:present name="errorCantidad">
-                <center>
-                    <label style="color:red">Error: Debe introducir una cantidad mayor a cero para agregar</label>
-                </center>
-            </logic:present>
-            
-            <logic:present name="agregadoEquipo">
-                <center>
-                    <label style="color:red">Equipo no pudo ser agregado.</label>
-                </center>
-            </logic:present>
-            <div class="selector">
-                <logic:iterate name="equiposGen" id="eq">
-                <div class="casilla">
-                    <label class="checkbox inline">
-                        <%--<html:checkbox value="true" name="Pedido" property="cascoSeguridad"/>--%>
-                        <bean:write name="eq" property="nombre_vista"/>
-                    </label>
-                    <center>
-                        <div class="casillaimg">
-                            <img src="assets/materiales/<bean:write name="eq" property="nombre_vista"/>.png" />
-                        </div>
-                    </center>
-                    <!--- TODO ESTO ES LO QUE HAY QUE COPIAR EN CADA CUADRO CON LA RESPECTIVA PROPIEDAD --->
-                    <div>
-                        <html:form action="/PonerTalla" onsubmit="return (this)">
-                            <html:hidden name="facturado" property="numero_factura"/>
-                            <html:hidden name="eq" property="serial"/>
-                            <html:hidden name="eq" property="tipo_talla"/>
-                            <p style="float:left; display: inline">Cantidad:
-                            <html:text name="facturado" property="cantidad" styleClass="span1" styleId="spinner" value="0">                
-                            </html:text></p>
-                            <html:submit style="btn btn-primary"> Agregar </html:submit>
-                        </html:form>                    </div>
-                    <!--- HASTA AQUI --->
-                </div>
-                </logic:iterate>
-            </div>
-            <center>
-                <logic:empty name="equiposGen">
-                    <center>
-                    <label>No hay equipos genéricos disponibles</label>
-                </center>
-                </logic:empty> 
-            </center>
-        </div>
-
-    </center>
-</div>
+                    <logic:empty name="equiposGen">
+                        <center>
+                            <label>No hay equipos para personal obrero disponibles</label>
+                        </center>
+                    </logic:empty>
+                </logic:empty>
+            </center>       
+        </div>        
+    </div>
     <br><br>
     <center>
-    <html:form action="/FormularioEditarFactura" onsubmit="return (this)">
-        <html:hidden name="facturado" property="numero_factura"/>
-        <html:submit styleClass="btn btn-primary"> Siguiente </html:submit>
-    </html:form>
-</center>        
-
-<div style="display:none;" class="nav_up" id="nav_up"></div>
-<div style="display:none;" class="nav_down" id="nav_down"></div>
+        <html:form action="/FormularioEditarFactura" onsubmit="return (this)">
+            <html:hidden name="facturado" property="numero_factura"/>
+            <html:submit styleClass="btn btn-primary"> Siguiente </html:submit>
+        </html:form>
+    </center>
+</html>

@@ -1,11 +1,9 @@
 DROP SCHEMA "PREPAS" CASCADE;
 
- CREATE SCHEMA "PREPAS"
-  AUTHORIZATION postgres;
+ CREATE SCHEMA "PREPAS" AUTHORIZATION dsisistema;
+ --CREATE EXTENSION PGCRYPTO;
 
- CREATE EXTENSION PGCRYPTO;
-
- GRANT ALL ON SCHEMA "PREPAS" TO postgres;
+ GRANT ALL ON SCHEMA "PREPAS" TO dsisistema;
 
 CREATE TABLE "PREPAS".usuario (
   usuario VARCHAR NOT NULL,
@@ -63,7 +61,7 @@ OIDS = FALSE
 
 CREATE TABLE "PREPAS".individuo (
     usuario VARCHAR NOT NULL,
-    
+
     CONSTRAINT PK_individuo PRIMARY KEY (usuario),
   CONSTRAINT FK_individuo_usuario FOREIGN KEY (usuario) REFERENCES "PREPAS".usuario (usuario)
 ) WITH (
@@ -83,7 +81,7 @@ CREATE TABLE "PREPAS".equipo (
   sector    VARCHAR,
   norma     VARCHAR,
   tipo_talla VARCHAR,
-  puntuacion DOUBLE default 0.0,
+  puntuacion FLOAT4 default 0.0,
   usuarios_puntuando INT default 0,
   CONSTRAINT PK_equipo PRIMARY KEY (serial)
 ) WITH (
@@ -150,8 +148,8 @@ OIDS = FALSE
 
 CREATE TABLE "PREPAS".periodo (
   id                    SERIAL,
-  fecha_inicio          DATE NOT NULL,
-  fecha_fin             DATE,
+  fecha_inicio          VARCHAR NOT NULL,
+  fecha_fin             VARCHAR,
   cantidad_recibida     INT DEFAULT '0',
   cantidad_procesada    INT DEFAULT '0',
   habilitado            VARCHAR DEFAULT 'true',

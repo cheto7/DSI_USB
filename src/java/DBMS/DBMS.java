@@ -9,7 +9,9 @@ import Clases.*;
 import java.sql.*;
 import java.util.ArrayList;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -37,9 +39,9 @@ public class DBMS {
         try {
             Class.forName("org.postgresql.Driver");
             conexion = DriverManager.getConnection(
-                    "jdbc:postgresql://localhost/DSI_USB",
-                    "postgres",
-                    "postgres");
+                    "jdbc:postgresql://localhost/dsi_usb",
+                    "dsisistema",
+                    "dsisistema");
             return true;
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -220,13 +222,23 @@ public class DBMS {
         }
         return false;
     }
+    
+    private String fechaActual(){
+        Calendar c = new GregorianCalendar(); 
+        String dia, mes, annio;
+	dia = Integer.toString(c.get(Calendar.DATE));
+	mes = Integer.toString(c.get(Calendar.MONTH));
+	annio = Integer.toString(c.get(Calendar.YEAR));
+        return dia+"-"+mes+"-"+annio;
+    }
 
     public Boolean agregarNoticia(Noticia n) {
         try {
             String sqlquery;
+          
             sqlquery = "INSERT INTO \"PREPAS\".noticia VALUES "
                     + "('" + n.getUsuario() + "' , '" + n.getTitulo()
-                    + "' , '" + n.getContenido() + "' , (SELECT CURRENT_DATE))";
+                    + "' , '" + n.getContenido() + "' , '"+ n.getFechaNoticia()+"')";
 
             Statement stmt = conexion.createStatement();
             System.out.println(sqlquery);
@@ -2464,7 +2476,7 @@ public int existeEquipoTalla(Equipo e) {
             Integer i = stmt.executeUpdate(sqlquery);
 
             sqlquery = "INSERT INTO \"PREPAS\".periodo (fecha_inicio,fecha_fin) VALUES "
-                    + "((SELECT CURRENT_DATE) , '" + p.getFecha_fin() + "')";
+                    + "('"+p.getFecha_inicio()+"', '" + p.getFecha_fin() + "')";
 
             stmt = conexion.createStatement();
             i = stmt.executeUpdate(sqlquery);

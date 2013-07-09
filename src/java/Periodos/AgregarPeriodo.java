@@ -40,30 +40,51 @@ public class AgregarPeriodo extends org.apache.struts.action.Action {
             throws Exception {
 
         Noticia n = new Noticia();
-        String titulo,contenido,fechaNoticia;
         java.util.Date date = new java.util.Date(); 
-        java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd");
+        java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("dd-MM-yyyy");
         String fecha = sdf.format(date);
         
-        Date today = new Date();
+        
         Periodo p = (Periodo) form;
+        p.setFecha_inicio(fecha);
+        
         if (p.getFecha_fin().equalsIgnoreCase("")){
             request.setAttribute("fechaNula", "error");
             return mapping.findForward(FAILURE);    
         }
-
-        if(fecha.compareTo(p.getFecha_fin())>0 ||fecha.compareTo(p.getFecha_fin())==0){
+        
+        String [] inicio = p.getFecha_inicio().split("-");
+        String [] fin = p.getFecha_fin().split("-");
+        System.out.println("esta es la fechaa actual "+p.getFecha_inicio()+"----fecha ingresada "+p.getFecha_fin());
+        System.out.println("ano ini "+inicio[2]);
+        System.out.println("ano fin "+fin[2]);
+        
+        
+        if (Integer.parseInt(inicio[2])>Integer.parseInt(fin[2])){
+            request.setAttribute("fechaErronea", "error");
+            return mapping.findForward(FAILURE);
+        }
+        if (Integer.parseInt(inicio[1])>Integer.parseInt(fin[1])){
+            request.setAttribute("fechaErronea", "error");
+            return mapping.findForward(FAILURE);
+        }
+        if (Integer.parseInt(inicio[0])>Integer.parseInt(fin[0])){
             request.setAttribute("fechaErronea", "error");
             return mapping.findForward(FAILURE);
         }
         
+        /*if(fecha.compareTo(p.getFecha_fin())>0 ||fecha.compareTo(p.getFecha_fin())==0){
+            request.setAttribute("fechaErronea", "error");
+            return mapping.findForward(FAILURE);
+        }*/
+        
         if(DBMS.getInstance().agregarPeriodo(p)==true){
 
             n.setTitulo("Abierto proceso de solicitudes");
-            n.setContenido("Del "+fecha+" al "+p.getFecha_fin()+" el sistema "
+            n.setContenido("Del "+p.getFecha_inicio()+" al "+p.getFecha_fin()+" el sistema "
                     + "estará disponible para realizar solicitudes de equipos "
                     + "de protección personal.");
-            n.setFechaNoticia(fecha);
+            n.setFechaNoticia(p.getFecha_inicio());
             n.setUsuario("DSI");
             DBMS.getInstance().agregarNoticia(n);
             request.setAttribute("periodoAbierto", "mensaje");
