@@ -13,6 +13,10 @@
 
 
 <fieldset>
+    <logic:present name="error">
+        
+        <label><bean:write name="error" property="value"/></label>
+    </logic:present>
     <legend>Lista de Mensajes</legend> 
     
     <logic:notPresent name="mensajes">
@@ -50,7 +54,7 @@
 
                         <td>
                     <center>
-                        <html:form action = "/FormularioEditarFactura" onsubmit = "return (this)">
+                        <html:form action = "/FormularioVerMensaje" onsubmit = "return (this)">
                             <html:hidden name="mensaje" property="id"/>
                             <html:hidden name="mensaje" property="mensaje"/>
                             <html:submit styleClass="btn btn-success"> Ver </html:submit>
@@ -61,7 +65,7 @@
                         
                         <td>
                     <center>
-                        <html:form action = "/FormularioEditarFactura" onsubmit = "return (this)">
+                        <html:form action = "/FormularioEditarMensaje" onsubmit = "return (this)">
                             <html:hidden name="mensaje" property="id"/>
                             <html:submit styleClass="btn btn-success"> Editar </html:submit>
                         </html:form> 
