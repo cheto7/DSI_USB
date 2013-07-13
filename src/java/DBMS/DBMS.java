@@ -1167,10 +1167,11 @@ public class DBMS {
     public ArrayList<Equipo> obtenerEquiposPuntuacionUsuario(Usuario u) {
         ArrayList<Equipo> equipos = new ArrayList<Equipo>(0);
         try {
-            String sqlquery = "SELECT serial,imagen,nombre_vista,P.puntuacion as puntuacion,tipo_talla "
-                    + "FROM \"PREPAS\".tiene T, \"PREPAS\".usuario U, \"PREPAS\".equipo E left join \"PREPAS\".puntuacion P on E.serial = P.serial "
-                    + "WHERE E.serial = T.serial AND U.usuario = T.usuario AND U.usuario = P.usuario"
-                    + "U.usuario = '" + u.getUsuario() + "'";
+            
+            String sqlquery = "SELECT DISTINCT E.serial as serial,E.imagen as imagen,E.nombre_vista as nombre_vista,AUX.puntuacion + 1 as puntuacion,E.tipo_talla as tipo_talla\n" +
+                                "FROM \"PREPAS\".equipo E left join (SELECT P.serial as serial, U.usuario as usuario, P.puntuacion as puntuacion \n" +
+                                                                        "FROM \"PREPAS\".tiene T, (\"PREPAS\".usuario U left join \"PREPAS\".puntuacion P on U.usuario = P.usuario)\n" +
+                                                                        "WHERE T.usuario = U.usuario AND U.usuario = '"+ u.getUsuario() +"') AS AUX on E.serial = AUX.serial\n";
 
 
             Statement stmt = conexion.createStatement();
@@ -1183,17 +1184,20 @@ public class DBMS {
                 e.setImagen(rs.getString("imagen"));
                 e.setNombre_vista(rs.getString("nombre_vista"));
                 int aux = rs.getInt("puntuacion");
+                // A las puntuaciones se le suma 1 para que el nulo quede como 0 y se pueda reconocer los que no tienen puntuacion.
                 if(aux == 0){
-                    e.setPuntuacion("Muy malo");
+                    e.setPuntuacion("Nulo");
                 }else if(aux == 1){
-                    e.setPuntuacion("Malo");
+                    e.setPuntuacion("Muy malo");
                 }else if(aux == 2){
-                    e.setPuntuacion("Normal");
+                    e.setPuntuacion("Malo");
                 }else if(aux == 3){
-                    e.setPuntuacion("Bueno");
+                    e.setPuntuacion("Normal");
                 }else if(aux == 4){
-                    e.setPuntuacion("Muy bueno");
+                    e.setPuntuacion("Bueno");
                 }else if(aux == 5){
+                    e.setPuntuacion("Muy bueno");
+                }else if(aux == 6){
                     e.setPuntuacion("Excelente");
                 }
                 e.setTipo_talla(rs.getString("tipo_talla"));
@@ -1669,6 +1673,29 @@ public class DBMS {
         return null;
 
     }
+    
+    public ArrayList<Mensaje> listarMensajes() {
+        try {
+            String sqlquery = "SELECT id, mensaje "
+                    + "FROM \"PREPAS\".mensaje ";
+
+            Statement stmt = conexion.createStatement();
+            System.out.println(sqlquery);
+            ResultSet rs = stmt.executeQuery(sqlquery);
+            ArrayList<Mensaje> ar = new ArrayList<Mensaje>();
+            while (rs.next()) {
+                Mensaje m = new Mensaje();
+                m.setId(rs.getString("id"));
+                m.setMensaje(rs.getString("mensaje"));
+                ar.add(m);
+            }
+            return ar;
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return null;
+
+    }
 
     public boolean agregarFactura(Factura f) {
         Date dNow = new Date();
@@ -1788,6 +1815,32 @@ public class DBMS {
         }
         return false;
     }
+    
+    public Puntuacion existePuntuacion(Puntuacion p) {
+        try {
+            String sqlquery;
+            sqlquery = "SELECT serial, usuario, puntuacion FROM \"PREPAS\".puntuacion "
+                    + "WHERE serial = " + p.getSerial()
+                    + " AND usuario = '" + p.getUsuario()
+                    + "' ";
+
+            Statement stmt = conexion.createStatement();
+            System.out.println(sqlquery);
+            ResultSet rs = stmt.executeQuery(sqlquery);
+            Puntuacion p1 = null;
+            while (rs.next()) {
+                p1 = new Puntuacion();
+                p1.setSerial(rs.getInt("serial"));
+                p1.setUsuario(rs.getString("usuario"));
+                p1.setPuntuacion(rs.getInt("puntuacion"));
+                return p1;
+            }
+            return null;
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return null;
+    }
 
     public Boolean agregarAFacturado(Facturado f) {
         try {
@@ -1808,6 +1861,88 @@ public class DBMS {
                 return i > 0;
             }
             return false;
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return false;
+    }
+    
+    public Equipo obtenerEquipoPuntuacion(Puntuacion p){
+        try {
+            String sqlquery;
+            sqlquery = "SELECT serial, puntuacion, usuarios_puntuando FROM \"PREPAS\".equipo "
+                    + "WHERE serial = " + p.getSerial()
+                    + " ";
+
+            Statement stmt = conexion.createStatement();
+            System.out.println(sqlquery);
+            ResultSet rs = stmt.executeQuery(sqlquery);
+            Equipo e = new Equipo();
+            while (rs.next()) {
+                e.setSerial(rs.getInt("serial"));
+                e.setUsuarios_puntuando(rs.getInt("usuarios_puntuando"));
+                e.setPuntuacion(rs.getFloat("puntuacion") + "");
+            }
+            return e;
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return null;
+    }
+    
+    public Boolean agregarPuntuacion(Puntuacion p) {
+        try {
+            Puntuacion p1 = existePuntuacion(p);
+            Equipo e = this.obtenerEquipoPuntuacion(p);
+            Boolean existe = false;
+            if(p1 != null){
+                existe = true;
+            }
+            if (!existe) {
+                float np = ((Float.parseFloat(e.getPuntuacion()) * e.getUsuarios_puntuando()) + p.getPuntuacion())/(e.getUsuarios_puntuando() + 1);
+                String sqlquery;
+                sqlquery = "INSERT INTO \"PREPAS\".puntuacion (serial,usuario,puntuacion) "
+                        + "VALUES (" + p.getSerial() + ",'"
+                        + p.getUsuario()+ "',"
+                        + p.getPuntuacion()+ ");"
+                        + "";
+                String sqlquery2 = "UPDATE \"PREPAS\".equipo SET "
+                        + "usuarios_puntuando = "+ (e.getUsuarios_puntuando() + 1) +", "
+                        + "puntuacion = " + Float.toString(np) + " "
+                        + "WHERE serial = " + e.getSerial() + "";
+
+
+                Statement stmt = conexion.createStatement();
+                System.out.println(sqlquery);
+                Integer i = stmt.executeUpdate(sqlquery);
+                //return i > 0;
+                //if(i > 0){
+                    System.out.println(sqlquery2);
+                    i = stmt.executeUpdate(sqlquery2);
+                    return i > 0;
+                //}
+            }else{
+                float np = (((Float.parseFloat(e.getPuntuacion()) * e.getUsuarios_puntuando()) - p1.getPuntuacion()) + p.getPuntuacion())/(e.getUsuarios_puntuando());
+                 
+                String sqlquery = "UPDATE \"PREPAS\".puntuacion "
+                        + "SET  puntuacion = " + p.getPuntuacion()
+                        + "     WHERE serial = " + p.getSerial() + " AND "
+                        + "usuario = '" + p.getUsuario() + "'";
+
+                String sqlquery2 = "UPDATE \"PREPAS\".equipo SET "
+                        + "usuarios_puntuando = "+ e.getUsuarios_puntuando() +", "
+                        + "puntuacion = " + Float.toString(np) + " "
+                        + "WHERE serial = " + e.getSerial() + "";
+
+                Statement stmt = conexion.createStatement();
+                System.out.println(sqlquery);
+                Integer i = stmt.executeUpdate(sqlquery);
+                //if(i > 0){
+                    System.out.println(sqlquery2);
+                    i = stmt.executeUpdate(sqlquery2);
+                    return i > 0;
+                //}
+            }
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
@@ -1889,8 +2024,8 @@ public class DBMS {
 
             String sqlquery;
             sqlquery = "SELECT * FROM \"PREPAS\".facturado "
-                    + "WHERE numero_factura = '" + f.getNumero_factura() 
-                    +"' AND validado = 'FALSO'";
+                    + "WHERE numero_factura = '" + f.getNumero_factura()
+                    + "' AND validado = 'FALSO'";
 
             Statement stmt = conexion.createStatement();
             System.out.println(sqlquery);
@@ -1922,12 +2057,12 @@ public class DBMS {
         return false;
     }
 
-public int equipoTallaCantidad(String t, int s) {
+    public int equipoTallaCantidad(String t, int s) {
         try {
             String sqlquery;
             sqlquery = "SELECT cantidad FROM \"PREPAS\".equipoTalla "
                     + "WHERE serial = " + s
-                    +" AND talla = '" + t +"' ";
+                    + " AND talla = '" + t + "' ";
 
             Statement stmt = conexion.createStatement();
             System.out.println(sqlquery);
@@ -1942,7 +2077,8 @@ public int equipoTallaCantidad(String t, int s) {
         }
         return -1;
     }
-public int existeEquipoTalla(Equipo e) {
+
+    public int existeEquipoTalla(Equipo e) {
         try {
             String sqlquery;
             sqlquery = "SELECT E.cantidad FROM \"PREPAS\".equipoTalla E "
@@ -2290,17 +2426,17 @@ public int existeEquipoTalla(Equipo e) {
             Statement stmt = conexion.createStatement();
             System.out.println(sqlquery);
             ResultSet rs = stmt.executeQuery(sqlquery);
-            
+
             if (rs.next()) {
                 String talla = rs.getString("talla");
-                System.out.println("___Talla: "+talla+"____");
+                System.out.println("___Talla: " + talla + "____");
                 Equipo e = new Equipo();
                 e.setTalla(talla);
                 e.setSerial(s);
-                int cantidad = equipoTallaCantidad(talla,s);
-                System.out.println("___Existen "+cantidad+"____");
+                int cantidad = equipoTallaCantidad(talla, s);
+                System.out.println("___Existen " + cantidad + "____");
                 return cantidad;
-                
+
             }
 
         } catch (SQLException ex) {
@@ -2329,33 +2465,33 @@ public int existeEquipoTalla(Equipo e) {
     }
 
     public Boolean nuevaCantidad(int s, int id, int ec, int tc) {
-        try {                       
+        try {
             String sqlquery = "SELECT talla FROM  \"PREPAS\".contiene "
-                    + "WHERE serial = "+s+" AND id ="+id+" ";
-            
+                    + "WHERE serial = " + s + " AND id =" + id + " ";
+
             Statement stmt = conexion.createStatement();
             System.out.println("________________________________");
             System.out.println(sqlquery);
             ResultSet rs = stmt.executeQuery(sqlquery);
-            
+
             String t = "";
-            
+
             if (rs.next()) {
                 t = rs.getString("talla");
             }
-                                    
+
             sqlquery = "UPDATE \"PREPAS\".equipoTalla "
                     + "SET  cantidad = " + ec
                     + "     WHERE serial = " + s + " AND "
                     + "talla = '" + t + "'";
-            
+
             Integer i = stmt.executeUpdate(sqlquery);
             System.out.println(sqlquery);
 
             sqlquery = "UPDATE \"PREPAS\".tiene "
                     + "SET  cantidad = " + tc + " "
                     + "     WHERE serial = " + s + " AND  id = " + id + " ";
-            
+
             System.out.println(sqlquery);
             Integer j = stmt.executeUpdate(sqlquery);
 
@@ -2627,8 +2763,6 @@ public int existeEquipoTalla(Equipo e) {
      }
      return solicitudes;
      }*/
-    
-    
     public Boolean existeEmail(Email em) {
 
         String sqlquery = "SELECT * FROM \"PREPAS\".usuario"
@@ -2645,5 +2779,24 @@ public int existeEquipoTalla(Equipo e) {
         }
         return false;
     }
-        
+
+    public Boolean modificarContrasena(Usuario u) {
+        try {
+            String sqlquery = "UPDATE \"PREPAS\".usuario SET "
+                    //+ "password = '" + u.getPassword() + "' , "
+                    + "password = crypt('" + u.getPassword() + "', gen_salt('bf')) "
+                    + " WHERE email = '" + u.getEmail() + "' OR usuario = '" + u.getEmail() + "'";
+
+
+            Statement stmt = conexion.createStatement();
+            System.out.println(sqlquery);
+             System.out.println(u.getPassword()+"<<<<<<<<");
+            Integer i = stmt.executeUpdate(sqlquery);
+            return i > 0;
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return false;
+    }
+
 }

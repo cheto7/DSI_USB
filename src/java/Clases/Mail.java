@@ -67,7 +67,43 @@ public class Mail {
             return -1;
         }
     }
-    
+    public int sendMailClave(Usuario clave) {
+        Properties props = new Properties();
+
+        props.put("mail.smtp.auth", "true");
+        props.put("mail.smtp.starttls.enable", "true");
+        props.put("mail.smtp.host", smtpServ);       
+        props.put("mail.smtp.port", "587");
+        
+        Session session = Session.getInstance(props, new javax.mail.Authenticator() {
+			protected PasswordAuthentication getPasswordAuthentication() {
+				return new PasswordAuthentication(from, password);
+			}
+		  });
+        MimeMessage message = new MimeMessage(session);
+
+        try {
+            BodyPart texto = new MimeBodyPart();
+            texto.setText("Se ha recibido una solicitud de cambio de contraseña, su nueva contraseña"
+                    + "es: "+clave.getPassword() );
+            MimeMultipart multiParte = new MimeMultipart();
+            multiParte.addBodyPart(texto);
+            
+            message.setFrom(new InternetAddress(from));
+            message.addRecipient(Message.RecipientType.TO, new InternetAddress(clave.getEmail()));
+            message.setSubject("Solicitud de ingreso");
+            message.setContent(multiParte);
+
+            Transport t = session.getTransport("smtp");
+            t.connect(from, password);
+            t.sendMessage(message, message.getAllRecipients());
+            t.close();
+            return 0;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return -1;
+        }
+    }
     public int sendMailGenerico(String to, String mensaje, String asunto) {
         Properties props = new Properties();
 

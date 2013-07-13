@@ -50,7 +50,7 @@
                         </td>
 
                         <td>
-                            <img src="<bean:write name="factura" property="proveedor"></bean:write>" width="55" height="55">
+                            <img src="assets/materiales/<bean:write name="equipo" property="nombre_vista"></bean:write>.png" width="55" height="55">
                         </td>
                         
                         <td>
