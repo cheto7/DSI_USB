@@ -811,6 +811,48 @@ public class DBMS {
         }
         return false;
     }
+    
+    public Mensaje modificarMensaje(Mensaje m) {
+        Mensaje me = null;
+        try {
+            String sqlquery = "UPDATE \"PREPAS\".mensaje SET "
+                    + "mensaje = '" + m.getMensaje() + "' "
+                    + "WHERE id = '" + m.getId() + "'";
+
+
+            Statement stmt = conexion.createStatement();
+            System.out.println(sqlquery);
+            Integer i = stmt.executeUpdate(sqlquery);
+            me = this.obtenerMensaje(m);
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return me;
+    }
+    
+    public Mensaje obtenerMensaje(Mensaje m) {
+        Mensaje me = null;
+        try {
+            String sqlquery;
+            sqlquery = "SELECT * FROM \"PREPAS\".mensaje"
+                    + " WHERE id = '" + m.getId() + "'";
+
+            Statement stmt = conexion.createStatement();
+            System.out.println(sqlquery);
+            ResultSet rs = stmt.executeQuery(sqlquery);
+
+            if (rs.next()) {
+                me = new Mensaje();
+                me.setId(rs.getString("id"));
+                me.setMensaje(rs.getString("mensaje"));
+            }
+            return me;
+        } catch (SQLException ex) {
+            System.out.println("EXCEPCION");
+            ex.printStackTrace();
+        }
+        return me;
+    }
 
     /*
      * Modifica un usuario existente en la base de datos.

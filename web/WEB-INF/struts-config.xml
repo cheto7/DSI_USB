@@ -352,6 +352,23 @@
             <forward name="success" path="/vistas/factura/confirmar_factura.jsp"></forward>
         </action>
         
+        <action path="/FormularioEditarMensaje" type="Usuarios.FormularioEditarMensaje" scope="request"
+                name="Mensaje">
+            <forward name="success" path="/vistas/confirmar_mensaje.jsp"></forward>
+        </action>
+        
+        <action path="/FormularioVerMensaje" type="Usuarios.FormularioVerMensaje" scope="request"
+                name="Mensaje">
+            <forward name="success" path="/vistas/ver_mensaje.jsp"></forward>
+        </action>
+        
+        <action path="/ModificarMensaje" type="Usuarios.ModificarMensaje" scope="request"
+                name="Mensaje">
+            <forward name="success" path="/FormularioVerMensaje.do"></forward>
+        </action>
+        
+        
+        
         <action path="/Ir_pag_pedido_factura" type="Facturas.ListarEquiposFactura" scope="request"
                 name="Facturado">
             <forward name="success" path="/vistas/factura/interfaz_factura_agregar_equipo.jsp"></forward>
