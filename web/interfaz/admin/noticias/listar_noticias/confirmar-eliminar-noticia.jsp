@@ -13,8 +13,8 @@
 <fieldset>
     <center>
         <br><br><br>
-        <label>Desea eliminar la noticia
-            '<bean:write name="noticia" property="titulo"></bean:write>'
+        <label>¿Desea eliminar la noticia
+            '<bean:write name="noticia" property="titulo"/>'
             ?
         </label>
         <br>

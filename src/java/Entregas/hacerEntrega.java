@@ -5,6 +5,8 @@
 package Entregas;
 
 import Clases.Entregas;
+import Clases.Periodo;
+import Clases.Solicitud;
 import Clases.Usuario;
 import DBMS.DBMS;
 import java.sql.ResultSet;
@@ -47,27 +49,24 @@ public class hacerEntrega extends org.apache.struts.action.Action {
         Usuario autenticado = new Usuario();
         autenticado.setUsuario(loggueado);
 
-        String idSolicitud = request.getParameter("idSolicitud");
+//        Solicitud s = new Solicitud();
+//        s.setNombre_vista(request.getParameter("nombre_vista"));//cedula
+//        s.setTalla("talla"); // unidad de adscripcion
+//        s.setNombre_usuario("nombre_usuario"); //nombre dle usuario
+        
+        String idSolicitud = request.getParameter("id");
+        Periodo p = new Periodo();
+        p.setFecha_inicio(request.getParameter("fecha_inicio"));
+        p.setFecha_fin(request.getParameter("fecha_fin"));
+        System.out.println("FechaINI: "+p.getFecha_inicio());
+        System.out.println("FechaFIN: "+p.getFecha_fin());
         int id = Integer.parseInt(idSolicitud);
-        String usuario = request.getParameter("usuario");
-        String fecha = request.getParameter("fecha_solicitud");
+        String fecha = request.getParameter("fecha_solicitud"); 
 
-        Entregas entregar = new Entregas();
-        entregar.setUsuario(usuario);
-        entregar.setFecha_solicitud(fecha);
-        entregar.setIdSolicitud(idSolicitud);
-
-        ArrayList<Entregas> listaSolicitudes = new ArrayList<Entregas>(0);
-        listaSolicitudes.add(entregar);
-        ArrayList<Entregas> resto = DBMS.getInstance().consultarRestoSolicitudes(usuario, fecha);
-        listaSolicitudes.addAll(resto);
-        request.setAttribute("listaSolicitudes", listaSolicitudes);
-        request.setAttribute("entregar", "Activado");
-  
-
-        ArrayList<Entregas> solicitudes = DBMS.getInstance().obtenerSolicitud(id,fecha);        
+        ArrayList<Entregas> solicitudes = DBMS.getInstance().obtenerSolicitud(id);
         request.setAttribute("solicitud", solicitudes);
-
+        request.setAttribute("periodos", p);
+        //request.setAttribute("usuario", s);
 
         return mapping.findForward(SUCCESS);
     }

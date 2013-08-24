@@ -31,14 +31,14 @@
         <br>
 
         <logic:notEmpty name="equipos">
-            <table class="table table-hover">
+            <table class="table table-hover" width="100%">
                 <tbody>
                     <tr>
-                        <th><center>Equipo</center></th>
-                <th><center>Imagen</center></th>
-                <th><center>Puntuacion</center></th>
-                <th><center>Evaluar</center></th>
-                </tr>
+                        <th width="60%"><center>Equipo</center></th>
+                        <th><center>Imagen</center></th>
+                        <th><center>Puntuación</center></th>
+                        <th><center>Opción</center></th>
+                    </tr>
 
                 <logic:iterate name="equipos" id="equipo">
 

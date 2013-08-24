@@ -207,10 +207,9 @@ public class DBMS {
                     + "cantidad,funcionalidad,tiempo_vida,"
                     + "sector,norma,tipo_talla)  VALUES "
                     + "('" + e.getTipo() + "' , '" + e.getImagen()
-                    + "' , '" + e.getNombre_vista() + "' , '"
-                    + e.getCantidad() + "' , '"
+                    + "' , '" + e.getNombre_vista() + "' , '0', '"
                     + e.getFuncionalidad()
-                    + "' , '" + e.getVida_util() + "' , '" + e.getSector()
+                    + "' , '" + e.getVida_util()+" "+e.getTalla() + "' , '" + e.getSector()
                     + "' , '" + e.getNorma() + "' , '" + e.getTipo_talla() + "')";
 
             Statement stmt = conexion.createStatement();
@@ -1690,7 +1689,7 @@ public class DBMS {
         }
     }
 
-    public ArrayList<Factura> listarFacturas() {
+    public ArrayList<Factura> listarFacturasNoValidadas() {
         try {
             String sqlquery = "SELECT fecha, numero_factura, nombre_proveedor "
                     + "FROM \"PREPAS\".factura "
@@ -1715,6 +1714,32 @@ public class DBMS {
         return null;
 
     }
+    
+    public ArrayList<Factura> listarFacturasValidadas() {
+        try {
+            String sqlquery = "SELECT fecha, numero_factura, nombre_proveedor "
+                    + "FROM \"PREPAS\".factura "
+                    + "WHERE validado = \'VERDAD\'";
+
+            Statement stmt = conexion.createStatement();
+            System.out.println(sqlquery);
+            ResultSet rs = stmt.executeQuery(sqlquery);
+            ArrayList<Factura> ar = new ArrayList<Factura>();
+            while (rs.next()) {
+                Factura f = new Factura();
+                f.setFecha(rs.getDate("fecha"));
+                f.setNumero_factura(rs.getInt("numero_factura"));
+                f.setProveedor(rs.getString("nombre_proveedor"));
+                f.setValidado("VERDAD");
+                ar.add(f);
+            }
+            return ar;
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return null;
+
+    }    
     
     public ArrayList<Mensaje> listarMensajes() {
         try {
@@ -1742,12 +1767,13 @@ public class DBMS {
     public boolean agregarFactura(Factura f) {
         Date dNow = new Date();
         SimpleDateFormat ft =
-                new SimpleDateFormat("dd MM yyyy");
+                new SimpleDateFormat("dd-MM-yyyy");
         try {
+            System.out.println("FECHA DE FACTURAA ==== "+ft.format(dNow).toString());
             String sqlquery;
             sqlquery = "INSERT INTO \"PREPAS\".factura (nombre_proveedor, validado, fecha)  VALUES "
                     + "('" + f.getProveedor() + "' , 'FALSO' , "
-                    + "to_date('" + ft.format(dNow).toString() + "','DD MM YYYY') )";
+                    + "to_date('" + ft.format(dNow).toString() + "','DD-MM-YYYY') )";
             Statement stmt = conexion.createStatement();
             System.out.println(sqlquery);
             stmt.executeUpdate(sqlquery);
@@ -1760,12 +1786,21 @@ public class DBMS {
 
     public Boolean eliminarFactura(int numero_factura) {
         try {
-            String sqlquery = "DELETE FROM \"PREPAS\".factura WHERE "
-                    + "numero_factura = '" + numero_factura + "' ";
+            String sqlquery = "DELETE FROM \"PREPAS\".facturado WHERE "
+                    + "numero_factura = '" + numero_factura + "' "
+                    + "AND validado = \'FALSO\'";
 
             Statement stmt = conexion.createStatement();
             System.out.println(sqlquery);
-            Integer i = stmt.executeUpdate(sqlquery);
+            stmt.executeUpdate(sqlquery);
+            
+            sqlquery = "DELETE FROM \"PREPAS\".factura WHERE "
+                    + "numero_factura = '" + numero_factura + "' "
+                    + "AND validado = \'FALSO\'";
+
+            stmt = conexion.createStatement();
+            System.out.println(sqlquery);
+            Integer i = stmt.executeUpdate(sqlquery);            
 
             return i > 0;
         } catch (SQLException ex) {
@@ -2073,6 +2108,7 @@ public class DBMS {
             System.out.println(sqlquery);
             ResultSet rs = stmt.executeQuery(sqlquery);
             boolean validar = true;
+            boolean hayEquipo = false;
             while (rs.next()) {
                 Equipo e = new Equipo();
                 Facturado fact = new Facturado();
@@ -2082,14 +2118,15 @@ public class DBMS {
                 fact.setNumero_factura(rs.getInt("numero_factura"));
                 fact.setSerial(rs.getInt("serial"));
                 fact.setTalla(rs.getString("talla"));
-                boolean aux = this.agregarAEquipoTalla(e);
+                boolean aux = agregarAEquipoTalla(e);
                 validar = validar && aux;
+                hayEquipo = true;
                 if (aux) {
-                    this.validarEquipoFactura(fact);
+                    validarEquipoFactura(fact);
                 }
             }
-            if (validar) {
-                return this.ponerValidadaFactura(f);
+            if (validar && hayEquipo) {
+                return ponerValidadaFactura(f);
             } else {
                 return false;
             }
@@ -2123,9 +2160,9 @@ public class DBMS {
     public int existeEquipoTalla(Equipo e) {
         try {
             String sqlquery;
-            sqlquery = "SELECT E.cantidad FROM \"PREPAS\".equipoTalla E "
-                    + "WHERE E.serial = " + e.getSerial()
-                    + " AND E.talla = '" + e.getTalla()
+            sqlquery = "SELECT cantidad FROM \"PREPAS\".equipoTalla "
+                    + "WHERE serial = " + e.getSerial()
+                    + " AND talla = '" + e.getTalla()
                     + "'";
 
             Statement stmt = conexion.createStatement();
@@ -2133,7 +2170,7 @@ public class DBMS {
             ResultSet rs = stmt.executeQuery(sqlquery);
 
             while (rs.next()) {
-                return rs.getInt("E.cantidad");
+                return rs.getInt("cantidad");
             }
             return -1;
         } catch (SQLException ex) {
@@ -2160,7 +2197,7 @@ public class DBMS {
     }
 
     public boolean agregarAEquipoTalla(Equipo e) {
-        int cant = this.existeEquipoTalla(e);
+        int cant = existeEquipoTalla(e);
         if (cant >= 0) {
             return modificarEquipoTalla(e, cant);
         }
@@ -2393,7 +2430,7 @@ public class DBMS {
         return solicitudes;
     }
 
-    public ArrayList<Entregas> obtenerSolicitud(int s, String f) {
+    public ArrayList<Entregas> obtenerSolicitud(int s) {
         ArrayList<Entregas> solicitudes = new ArrayList<Entregas>(0);
         try {
 
@@ -2401,7 +2438,7 @@ public class DBMS {
                     + " S.id,S.fecha_solicitud,S.modificada,C.serial,C.cantidad,C.talla,C.frecuencia, "
                     + " E.nombre_vista,E.sector "
                     + "FROM \"PREPAS\".usuario U,\"PREPAS\".solicitud S,\"PREPAS\".contiene C, \"PREPAS\".equipo E "
-                    + "WHERE U.usuario = S.usuario AND S.id = '" + s + "' AND S.fecha_solicitud= '" + f + "' AND S.id = C.id AND C.serial = E.serial";
+                    + "WHERE U.usuario = S.usuario AND S.id = '" + s + "' AND S.id = C.id AND C.serial = E.serial";
 
             Statement stmt = conexion.createStatement();
             System.out.println(sqlquery);
@@ -2416,6 +2453,7 @@ public class DBMS {
                 nueva.setUsuario(rs.getString("usuario"));
                 nueva.setCantidad_solicitada(rs.getInt("cantidad"));
                 nueva.setFecha_solicitud(rs.getString("fecha_solicitud"));
+                nueva.setTalla(rs.getString("talla"));
 
                 int idS = Integer.parseInt(nueva.getIdSolicitud());
                 int serial = Integer.parseInt(nueva.getSerialEquipo());
@@ -2840,5 +2878,130 @@ public class DBMS {
         }
         return false;
     }
+    
+    public Boolean agregarTalla (Equipo e){
+        try {
+            String sqlquery = "INSERT INTO \"PREPAS\".equipoTalla (serial,talla,cantidad)"
+                    + " VALUES ("+e.getSerial()+",'"+e.getTalla()+"',"+e.getCantidad()+")";
+
+            Statement stmt = conexion.createStatement();
+            System.out.println(sqlquery);
+
+            Integer i = stmt.executeUpdate(sqlquery);
+            return i > 0;
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return false;
+    }
+    
+    public Boolean cambiarTalla (Equipo e){
+        try {
+            String sqlquery = "UPDATE \"PREPAS\".equipoTalla SET "
+                    + "cantidad = "+e.getCantidad()+" "
+                    + "WHERE serial = "+e.getSerial()+" AND talla = '"+e.getTalla()+"'";
+
+            Statement stmt = conexion.createStatement();
+            System.out.println(sqlquery);
+
+            Integer i = stmt.executeUpdate(sqlquery);
+            return i > 0;
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return false;
+    }    
+    
+    public ArrayList<Equipo> obtenerTallasEquipo(Equipo e) {
+        ArrayList<Equipo> equipos = new ArrayList<Equipo>(0);
+        try {
+            String sqlquery = "SELECT * FROM \"PREPAS\".equipoTalla "
+                    + "WHERE serial = '"+e.getSerial()+"' ORDER BY talla";
+
+            Statement stmt = conexion.createStatement();
+            System.out.println(sqlquery);
+            ResultSet rs = stmt.executeQuery(sqlquery);
+
+            while (rs.next()) {
+                Equipo eq = new Equipo();
+                eq.setSerial(rs.getInt("serial"));
+                eq.setTalla(rs.getString("talla"));
+                eq.setCantidad(rs.getInt("cantidad"));
+                equipos.add(eq);
+            }
+            return equipos;
+        } catch (SQLException ex) {
+            System.out.println("EXCEPCION");
+            ex.printStackTrace();
+        }
+        return equipos;
+    }
+    public Boolean eliminarTalla (Equipo e){
+        try {
+            String sqlquery = "DELETE FROM \"PREPAS\".equipoTalla WHERE "
+                    + "serial = '" + e.getSerial() + "' "
+                    + "AND talla = '" + e.getTalla() + "' ";            
+
+            Statement stmt = conexion.createStatement();
+            System.out.println(sqlquery);
+
+            Integer i = stmt.executeUpdate(sqlquery);
+            return i > 0;
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return false;
+    }
+    
+    public ArrayList<Solicitud> solicitudesDePeriodo(Periodo p) {
+        ArrayList<Solicitud> solicitudes = new ArrayList<Solicitud>(0);
+        try {
+            String sqlquery = "SELECT S.id,U.nombre,U.apellido,U.ci,U.unidad_adscripcion,S.fecha_solicitud "
+                    + "FROM  \"PREPAS\".periodo P, \"PREPAS\".solicitud S, \"PREPAS\".usuario U "
+                    + "WHERE P.fecha_inicio='" + p.getFecha_inicio() + "' AND P.fecha_fin='"+p.getFecha_fin()+"' AND "
+                    + "S.modificada= 'true' AND S.usuario=U.usuario "
+                    + "ORDER BY U.ci DESC";
+            Statement stmt = conexion.createStatement();
+            System.out.println(sqlquery);
+            ResultSet rs = stmt.executeQuery(sqlquery);
+            while (rs.next()) {
+                System.out.println("ENTRAAA CICLO MODIFICADA");
+                Solicitud s = new Solicitud();
+                s.setId(Integer.parseInt(rs.getString("id")));
+                s.setNombre_usuario(rs.getString("nombre") + " " + rs.getString("apellido"));
+                s.setFecha_solicitud(rs.getString("fecha_solicitud"));
+                s.setNombre_vista(rs.getString("ci")); // Usado para colocar la cédula del usuario
+                s.setTalla(rs.getString("unidad_adscripcion")); // Usado para pasar la unidad de adscripcion
+                solicitudes.add(s);
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return solicitudes;
+    }
+    
+    public Usuario obtenerUsuarioDeSolicitud(Solicitud s) {
+        try {
+            String sqlquery = "SELECT usuario FROM  \"PREPAS\".solicitud "
+                    + "WHERE id = '" + s.getId() + "'";
+
+            Statement stmt = conexion.createStatement();
+            System.out.println(sqlquery);
+            ResultSet rs = stmt.executeQuery(sqlquery);
+
+            if (rs.next()) {
+                Usuario u = new Usuario();
+                 u.setUsuario(rs.getString("usuario"));
+                 u = atributosUsuario(u);
+                 return u;
+            } else {
+                return null;
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }    
 
 }

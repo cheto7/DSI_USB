@@ -83,6 +83,10 @@
         <put name="formulario" value="/interfaz/genericos/factura/conf-factura.jsp"></put>
         <put name="navBar" value="/interfaz/genericos/barras_navegacion/navBarAgregar.jsp"></put>
     </definition>
+    <definition name="ver-factura" extends="formulario-pedido">
+        <put name="formulario" value="/interfaz/genericos/factura/ver-factura.jsp"></put>
+        <put name="navBar" value="/interfaz/genericos/barras_navegacion/navBarVerFactura.jsp"></put>
+    </definition>    
     
     <definition name="confirmar-mensaje" extends="formulario-pedido">
         <put name="formulario" value="/interfaz/genericos/conf-mensaje.jsp"></put>
@@ -136,7 +140,7 @@
     <definition name="formulario-factura-agregar-equipo" path="/interfaz/genericos/pedido/plantilla-pedido.jsp">
         <put name="script" value="/interfaz/genericos/pedido/script-pedido.jsp"></put>
         <put name="formulario" value="/interfaz/genericos/factura/formulario-factura.jsp"></put>
-        <put name="navBar" value="/interfaz/genericos/barras_navegacion/navBarpedido.jsp"></put>
+        <put name="navBar" value="/interfaz/admin/barras_navegacion/navBarVolverListaFacturas.jsp"></put>
         <put name="footer" value="/interfaz/genericos/plantilla_general/footer.jsp"></put>
     </definition>
     
@@ -316,7 +320,7 @@
     </definition>
        <definition name="listar-solicitantes" extends="formulario-pedido">  
        <put name="formulario" value="/interfaz/admin/entrega/listaSolicitantes.jsp"></put>
-        <put name="navBar" value="/interfaz/genericos/barras_navegacion/navBarpedido.jsp"></put>
+        <put name="navBar" value="/interfaz/admin/barras_navegacion/navBarPeriodoEntrega.jsp"></put>
     </definition>
     
     <definition name="formulario-editar-usuario-admin" extends="formulario-pedido">
@@ -344,9 +348,35 @@
     <definition name="datos-usuario-admin" extends="formulario-pedido">
         <put name="formulario" value="/interfaz/admin/lista_usuarios/ver_datos_admin.jsp"></put>
         <put name="navBar" value="/interfaz/admin/barras_navegacion/navBarVolverListaUsuario.jsp"></put>
-    </definition>    
-   
+    </definition>
     
+    <definition name="ver-datos-equipo" extends="formulario-pedido">
+        <put name="formulario" value="/interfaz/admin/equipo/ver-equipo-content.jsp"></put>
+        <put name="navBar" value="/interfaz/admin/barras_navegacion/navBarDatosEquipo.jsp"></put>
+    </definition>        
+   
+    <definition name="gestionar-talla-equipo" extends="formulario-pedido">
+        <put name="formulario" value="/interfaz/admin/equipo/gestionar-talla-content.jsp"></put>
+        <put name="navBar" value="/interfaz/admin/barras_navegacion/navBarAgregarTalla.jsp"></put>
+    </definition>
+    <definition name="cambiar-talla-equipo" extends="formulario-pedido">
+        <put name="formulario" value="/interfaz/admin/equipo/cambiar-talla-content.jsp"></put>
+        <put name="navBar" value="/interfaz/admin/barras_navegacion/navBarAgregarTalla.jsp"></put>
+    </definition>
+    <definition name="confirmar-eliminar-talla" extends="formulario-pedido">
+        <put name="formulario" value="/interfaz/admin/equipo/confirmar-eliminar-talla-cont.jsp"></put>
+        <put name="navBar" value="/interfaz/admin/barras_navegacion/navBarAgregarTalla.jsp"></put>
+    </definition>
+    <definition name="seleccionar-periodo-entrega" extends="formulario-pedido">
+        <put name="formulario" value="/interfaz/admin/entrega/seleccionarPeriodo.jsp"></put>
+        <put name="navBar" value="/interfaz/admin/barras_navegacion/navBarCambiarMensaje.jsp"></put>
+    </definition>
+    <definition name="ver-solicitud-entrega" extends="formulario-pedido">
+        <put name="formulario" value="/interfaz/admin/entrega/solicitudUsuario.jsp"></put>
+        <put name="navBar" value="/interfaz/admin/barras_navegacion/navBarListaSolPeriodoEntrega.jsp"></put>
+    </definition>    
+
+
     <!--    <definition name="" extends="home">
         <put name="" value=""></put>
     </definition> -->

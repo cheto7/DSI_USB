@@ -5,9 +5,6 @@
 package Entregas;
 
 import Clases.Usuario;
-import Clases.Entregas;
-import Clases.Periodo;
-import Clases.Solicitud;
 import DBMS.DBMS;
 import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
@@ -19,13 +16,11 @@ import org.apache.struts.action.ActionMapping;
 
 /**
  *
- * @author Azpcar
+ * @author ivan
  */
-public class listarSolicitantes extends org.apache.struts.action.Action {
+public class periodoEntrega extends org.apache.struts.action.Action {
 
-    /*
-     * forward name="success" path=""
-     */
+    /* forward name="success" path="" */
     private static final String SUCCESS = "success";
 
     /**
@@ -42,30 +37,13 @@ public class listarSolicitantes extends org.apache.struts.action.Action {
     public ActionForward execute(ActionMapping mapping, ActionForm form,
             HttpServletRequest request, HttpServletResponse response)
             throws Exception {
-
-        String fecha_inicio, fecha_fin;
-        Periodo p = new Periodo();
+        
         HttpSession session = request.getSession();
         String loggueado = (String) session.getAttribute("usuarioAutenticado");
+        ArrayList periodos = DBMS.getInstance().obtenerPeriodos();
+        request.setAttribute("periodos", periodos);
         Usuario autenticado = new Usuario();
-        autenticado.setUsuario(loggueado);
-
-        if (request.getParameter("fecha_fin")==null) {
-            fecha_inicio = request.getParameter("fecha_inicio").split(" al ")[0];
-            fecha_fin = request.getParameter("fecha_inicio").split(" al ")[1];
-            p.setFecha_inicio(fecha_inicio.substring(4));
-            p.setFecha_fin(fecha_fin);
-        } else {
-            fecha_inicio = request.getParameter("fecha_inicio");
-            fecha_fin = request.getParameter("fecha_fin");
-            p.setFecha_inicio(fecha_inicio);
-            p.setFecha_fin(fecha_fin);
-        }
-
-        ArrayList<Solicitud> solicitudes = DBMS.getInstance().solicitudesDePeriodo(p);
-        request.setAttribute("listaSolicitudes", solicitudes);
-        request.setAttribute("periodos", p);
-
+        autenticado.setUsuario(loggueado);        
         return mapping.findForward(SUCCESS);
     }
 }

@@ -19,6 +19,15 @@ public class Entregas extends ActionForm {
     private int cantidad_entregada;
     private String fecha_solicitud;
     private String fecha_entrega;
+    private String talla;
+
+    public String getTalla() {
+        return talla;
+    }
+
+    public void setTalla(String talla) {
+        this.talla = talla;
+    }
 
     public int getCantidad_entregada() {
         return cantidad_entregada;

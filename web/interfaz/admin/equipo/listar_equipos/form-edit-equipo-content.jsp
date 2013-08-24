@@ -38,11 +38,6 @@
         <bean:write name="equipo" property="tipo"/>
     </html:text>
     <br>
-    <label>Cantidad en existencia:</label>
-    <html:text name="Equipo" property="cantidad" styleClass="span5">
-        <bean:write name="equipo" property="cantidad"/>
-    </html:text>
-    <br>
     <label>Norma técnica asociada:</label>
     <html:text name="Equipo" property="norma" styleClass="span5" >
         <bean:write name="equipo" property="norma"/>
@@ -54,29 +49,45 @@
     </html:text>
     <br>
     <label>Funcionalidad:</label>
-    <html:textarea  name="Equipo" property="funcionalidad" rows="3" styleClass="span5">
+    <html:textarea  name="Equipo" property="funcionalidad" rows="3" styleClass="span4">
         <bean:write name="equipo" property="funcionalidad"/>
     </html:textarea>
     <br>
-    <label>Sector universitario asociado:</label>  
-    <html:select name="Equipo" property="sector"> 
-        <option><bean:write name="equipo" property="sector"/></option>
-        <option value="academico">Académico</option>
-        <option value="administrarivo">Administrativo</option>
-        <option value="bombero">Bombero</option>
-        <option value="obrero">Obrero</option>
-        <option value="generico">Genérico</option>
-    </html:select><br>
-    <label>Tipo de talla asociada:</label>
-    <html:select name="Equipo" property="tipo_talla">
-        <option><bean:write name="equipo" property="tipo_talla"/></option>
-        <option value="camisa">Camisa</option>
-        <option value="guantes">Guantes</option>
-        <option value="mascara">Máscara</option>
-        <option value="pantalon">Pantalón</option>
-        <option value="zapato">Zapato</option>
-        <option value="no aplica">No Aplica</option>
-    </html:select><br>     
+    <table>
+        <tbody>
+            <tr>
+                <th width="33%">
+                    <label>Cantidad en existencia:</label>
+                    <html:text name="Equipo" property="cantidad" styleClass="span2">
+                        <bean:write name="equipo" property="cantidad"/>
+                    </html:text>                    
+                </th>
+                <th width="33%">
+                    <label>Sector universitario asociado:</label>  
+                    <html:select name="Equipo" property="sector" styleClass="span2"> 
+                        <option><bean:write name="equipo" property="sector"/></option>
+                        <option value="academico">Académico</option>
+                        <option value="administrarivo">Administrativo</option>
+                        <option value="bombero">Bombero</option>
+                        <option value="obrero">Obrero</option>
+                        <option value="generico">Genérico</option>
+                    </html:select>                    
+                </th>
+                <th width="33%">
+                    <label>Tipo de talla asociada:</label>
+                    <html:select name="Equipo" property="tipo_talla" styleClass="span2">
+                        <option><bean:write name="equipo" property="tipo_talla"/></option>
+                        <option value="camisa">Camisa</option>
+                        <option value="guantes">Guantes</option>
+                        <option value="mascara">Máscara</option>
+                        <option value="pantalon">Pantalón</option>
+                        <option value="zapato">Zapato</option>
+                        <option value="no aplica">No Aplica</option>
+                    </html:select>                    
+                </th>
+            </tr>
+        </tbody>
+    </table> 
     
     <script>
         $('textarea').jqte();

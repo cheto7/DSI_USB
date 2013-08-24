@@ -29,13 +29,15 @@
 
 <fieldset>
 
-    <legend>Lista de Entregas</legend> 
-
-    <h1> Usuarios con Solicitudes: </h1>
+    <legend>Solicitudes revisadas del período:
+        <bean:write name="periodos" property="fecha_inicio"/>
+        al
+        <bean:write name="periodos" property="fecha_fin"/>
+    </legend>
 
     <logic:notPresent name="listaSolicitudes">
         <label>
-            <center> No hay Solicitudes de Usuarios.</center>
+            <center> No hay solicitudes de usuarios revisadas por la DSI para este período.</center>
         </label>
     </logic:notPresent>
 
@@ -43,7 +45,7 @@
 
         <logic:empty name="listaSolicitudes">
             <label>
-                <center> No hay Solicitudes de Usuarios.</center>
+                <center> No hay solicitudes de usuarios revisadas por la DSI para este período.</center>
             </label>
         </logic:empty>
 
@@ -53,8 +55,9 @@
             <table class="table table-hover">
                 <tbody>
                     <tr>
+                        <th>Cédula</th>
                         <th>Usuario</th>
-                        <th></th>
+                        <th>Unidad Adscripción</th>
                         <th>Fecha Solicitud</th>
                         <th> </th>
                         <th></th>
@@ -64,35 +67,45 @@
                         <tr>
                             <td >
                                 <h1>
-                                    <p> <bean:write name="listaSolicitudes" property="usuario"></bean:write></p>
+                                    <%--nombre_vista es usado para escribir la cedula del usuario--%>
+                                    <p> <bean:write name="listaSolicitudes" property="nombre_vista"></bean:write></p>
                                 </h1>
                             </td>
 
                             <td>
-
+                                <h1>
+                                    <p> <bean:write name="listaSolicitudes" property="nombre_usuario"></bean:write></p>
+                                </h1>
                             </td>
 
                             <td >
+                                <h1>
+                                    <%--Talla es usado para escribir la unidad de adscripcion--%>
+                                    <p> <bean:write name="listaSolicitudes" property="talla"></bean:write></p>
+                                </h1>
+                            </td>
+
+                            <td>
                                 <h1>
                                     <p> <bean:write name="listaSolicitudes" property="fecha_solicitud"></bean:write></p>
                                 </h1>
                             </td>
 
                             <td>
-
-                            </td>
-
-                            <td>
                                 <html:form method="POST" action="/hacerEntrega" onsubmit="return (this)">
-                                    <html:hidden name="listaSolicitudes" property="usuario"/>                                    
+                                    
+                                    <html:hidden name="listaSolicitudes" property="nombre_usuario"/>                                    
                                     <html:hidden name="listaSolicitudes" property="fecha_solicitud"/>                                    
-                                    <html:hidden name="listaSolicitudes" property="idSolicitud"/>                                    
+                                    <html:hidden name="listaSolicitudes" property="id"/>
+                                    <html:hidden name="listaSolicitudes" property="nombre_vista"/>
+                                    <html:hidden name="periodos" property="fecha_fin"/>
+                                    <html:hidden name="periodos" property="fecha_inicio"/>
                                     <html:submit styleClass="btn btn-primary"> Solicitud </html:submit>
-                                </html:form>                                                                   
+                                </html:form>
                             </td>
                         </tr>
 
-                        <%
+                       <%-- <%
                             if (request.getAttribute("entregar") != null) {
                                 if (request.getAttribute("entregar").equals("Activado")) {
                         %>
@@ -130,9 +143,9 @@
                             </td>
                             <td>                               
                                     <html:hidden name="listaSolicitudes" property="fecha_solicitud"/>
-                                    <html:hidden name="solicitud" property="idSolicitud"/>                                    
+                                    <html:hidden name="solicitud" property="id"/>                                    
                                     <html:hidden name="solicitud" property="cantidad_entregada"/>                                    
-                                    <html:hidden name="solicitud" property="usuario"/>
+                                    <html:hidden name="solicitud" property="nombre_usuario"/>
                                     <html:hidden name="solicitud" property="serialEquipo"/>
                                     <html:submit styleClass="btn btn-success"> Entregar</html:submit>
                                 </html:form>
@@ -153,7 +166,7 @@
                                 request.setAttribute("entregar", "Desactivado");
                             }
                         }
-                    %>          
+                    %>--%>     
 
                 </logic:iterate>
                 </tbody>

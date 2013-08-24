@@ -60,7 +60,7 @@
         <tr>
             <td>
                 <label>Nombre:</label>
-                <html:text name="Equipo" property="nombre_vista" styleClass="span4"></html:text>
+                <html:textarea name="Equipo" property="nombre_vista" styleClass="span4"></html:textarea>
             </td>
             <td>
                 <label>Sector universitario:</label>
@@ -109,16 +109,23 @@
     </td>
     <td></td>
 </tr>
-<tr>
+<%--<tr>
     <td>
         <label>Cantidad en existencia:</label>
         <html:text name="Equipo" property="cantidad" styleClass="span4" ></html:text>
     </td>
     <td></td>
-</tr>
+</tr>--%>
 <tr>
-    <td><label>Vida útil (Meses):</label>
-        <html:text name="Equipo" property="vida_util" styleClass="span4" ></html:text>
+    <td style="display: inline"><label>Vida útil:</label>
+        <html:text name="Equipo" property="vida_util" styleClass="span2" value="0"></html:text>
+        <html:select name="Equipo" property="talla" styleClass="span2">
+            <option></option>
+            <option>Días</option>
+            <option>Semanas</option>
+            <option>Meses</option>
+            <option>Años</option>
+        </html:select>  
     </td>
     <td></td>
 </tr>        

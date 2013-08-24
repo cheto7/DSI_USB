@@ -1,7 +1,7 @@
 DROP SCHEMA "PREPAS" CASCADE;
 
  CREATE SCHEMA "PREPAS" AUTHORIZATION dsisistema;
- --CREATE EXTENSION PGCRYPTO;
+ CREATE EXTENSION PGCRYPTO;
 
  GRANT ALL ON SCHEMA "PREPAS" TO dsisistema;
 
@@ -77,7 +77,7 @@ CREATE TABLE "PREPAS".equipo (
   evaluacion NUMERIC default 0,
   funcionalidad VARCHAR,
   habilitado VARCHAR DEFAULT 'true',
-  tiempo_vida INT default 0,
+  tiempo_vida VARCHAR,
   sector    VARCHAR,
   norma     VARCHAR,
   tipo_talla VARCHAR,

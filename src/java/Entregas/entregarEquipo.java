@@ -5,6 +5,8 @@
 package Entregas;
 
 import Clases.Entregas;
+import Clases.Periodo;
+import Clases.Solicitud;
 import Clases.Usuario;
 import DBMS.DBMS;
 import java.util.ArrayList;
@@ -45,64 +47,90 @@ public class entregarEquipo extends org.apache.struts.action.Action {
         String loggueado = (String) session.getAttribute("usuarioAutenticado");
         Usuario autenticado = new Usuario();
         autenticado.setUsuario(loggueado);
-
         Usuario u = new Usuario();
+        Solicitud sol = new Solicitud();
+        
+        sol.setNombre_vista(request.getParameter("nombre_vista"));//cedula
+        sol.setTalla("talla"); // unidad de adscripcion
+        sol.setNombre_usuario("nombre_usuario"); //nombre dle usuario
+        
+        String s = request.getParameter("serialEquipo");
+        String usuario = request.getParameter("usuario");        
         String fecha = request.getParameter("fecha_solicitud");
         String idSolicitud = request.getParameter("idSolicitud");
-        String s = request.getParameter("serialEquipo");
-        String usuario = request.getParameter("usuario");
         String c = request.getParameter("cantidad_entregada");
-
+        Periodo p = new Periodo();
+        p.setFecha_inicio(request.getParameter("fecha_inicio"));
+        p.setFecha_fin(request.getParameter("fecha_fin"));
+        request.setAttribute("periodos", p);
         int id = Integer.parseInt(idSolicitud);
         int serial = Integer.parseInt(s);
+        
+        //Chequeo del formulario
+        // solo debe tener números
+        if (c.matches("[1-9][0-9]*")==false){
+            ArrayList<Entregas> solicitudes = DBMS.getInstance().obtenerSolicitud(id);
+            request.setAttribute("id", idSolicitud);
+            request.setAttribute("fecha_solicitud", fecha);
+            request.setAttribute("errorFormulario", "error");
+            request.setAttribute("solicitud", solicitudes);
+            return mapping.findForward(SUCCESS);            
+        }
+        
         int cantidad_entregada = Integer.parseInt(c);
+               
 
+        System.out.println("fecha: " +fecha + "\n" +
+                           "idSolicitud: "+ idSolicitud+"\n"+
+                           "SerialEquipo: "+ s + "\n"+
+                           "usuario: " + usuario +"\n"+
+                           "CantidadEntregada: "+ c +"\n");
+
+        
         int cantidadTiene = DBMS.getInstance().obtenerCantidadTiene(serial, id);
         int cantidadExistencia = DBMS.getInstance().obtenerCantidadExistencia(idSolicitud, serial);
         
-        if (cantidadTiene == 0){
-            Boolean agregado = false;
-            agregado = DBMS.getInstance().agregarTiene(id, usuario, serial);
+        System.out.println("CantidadTiene en base de datos: "+cantidadTiene + "\n" +
+                            "CantidadExistencia del equipo: "+ cantidadExistencia);
+        
+        if (cantidadExistencia == -1){
+            ArrayList<Entregas> solicitudes = DBMS.getInstance().obtenerSolicitud(id);
+            request.setAttribute("id", idSolicitud);
+            request.setAttribute("fecha_solicitud", fecha);
+            request.setAttribute("noHayEquipo", "error");
+            request.setAttribute("solicitud", solicitudes);
+            return mapping.findForward(SUCCESS);
         }
-            
+
+        if (cantidadTiene == 0){
+            DBMS.getInstance().agregarTiene(id, usuario, serial);
+        }
 
         int nuevaCantidadT = cantidadTiene + cantidad_entregada;
         int nuevaCantidadE = cantidadExistencia - cantidad_entregada;
 
-        //VERIFICAR QUE cantidad_entrega > 0
-        if (nuevaCantidadT > 0) {
-
-            if (nuevaCantidadE >= 0) {
-                Boolean resta = DBMS.getInstance().nuevaCantidad(serial, id, nuevaCantidadE, nuevaCantidadT);
-                if (resta) {
-                    u.setMensaje("Entrega Procesada. ");
-                    request.setAttribute("mensajeUsuarioEditado", u);
-                } else {
-                    u.setMensaje("Algo ha ocurrido y no se pudo Procesar la Entrega. ");
-                    request.setAttribute("mensajeUsuarioNoEditado", u);
-                }
-
+        if (nuevaCantidadE >= 0) {
+            Boolean resta = DBMS.getInstance().nuevaCantidad(serial, id, nuevaCantidadE, nuevaCantidadT);
+            if (resta) {
+                u.setMensaje("Entrega Procesada. ");
+                request.setAttribute("mensajeUsuarioEditado", u);
             } else {
-                u.setMensaje("No Existen suficientes equipos. Quedan: "+cantidadExistencia);
+                u.setMensaje("Algo ha ocurrido y no se pudo procesar la entrega. ");
                 request.setAttribute("mensajeUsuarioNoEditado", u);
             }
+
+        } else {
+            u.setMensaje("No Existen suficientes equipos. Quedan: " + cantidadExistencia);
+            request.setAttribute("mensajeUsuarioNoEditado", u);
         }
 
-        Entregas entregar = new Entregas();
-        entregar.setUsuario(usuario);
-        entregar.setFecha_solicitud(fecha);
-        entregar.setIdSolicitud(idSolicitud);
-
-        ArrayList<Entregas> listaSolicitudes = new ArrayList<Entregas>(0);
-        listaSolicitudes.add(entregar);
-        ArrayList<Entregas> resto = DBMS.getInstance().consultarRestoSolicitudes(usuario, fecha);
-        listaSolicitudes.addAll(resto);
-        request.setAttribute("listaSolicitudes", listaSolicitudes);
-
-        ArrayList<Entregas> solicitudes = DBMS.getInstance().obtenerSolicitud(id, fecha);
+        request.setAttribute("id", idSolicitud);
+        request.setAttribute("fecha_solicitud", fecha);
+        
+        ArrayList<Entregas> solicitudes = DBMS.getInstance().obtenerSolicitud(id);        
         request.setAttribute("solicitud", solicitudes);
-
-
+        request.setAttribute("Solicitud", sol);
+        
         return mapping.findForward(SUCCESS);
     }
 }

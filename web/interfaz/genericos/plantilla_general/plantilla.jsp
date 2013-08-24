@@ -64,14 +64,14 @@
                         </div>
                         <div class="control-group">
 
-                            <html:submit> Iniciar Sesión </html:submit>
+                        <html:submit styleClass="btn btn-primary"> Iniciar Sesión </html:submit>
 
 
                         </div>
                     </html:form>
                     <html:form action="/Contrasena" onsubmit="return (this)">
                         <div class="control-group">
-                            <html:submit> Olvidar Contrasena </html:submit>
+                            <html:submit styleClass="btn btn-primary"> ¿Olvidó su Contraseña? </html:submit>
                         </div>
                     </html:form>
                 </div>

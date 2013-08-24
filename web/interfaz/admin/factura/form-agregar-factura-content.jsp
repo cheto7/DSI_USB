@@ -13,7 +13,7 @@
 <link type="text/css" rel="stylesheet" href="assets/css/jquery-te-Style.css" charset="utf-8" />
 
 <legend>Agregar factura</legend>
-
+<center>
 <logic:present name="mensajeFactura">
     <logic:notEmpty name="mensajeFactura">
         <center>
@@ -24,9 +24,10 @@
 
 <html:form action = "/AgregarFactura" acceptCharset="iso-8859-1" onsubmit = "return (this)">
 
-    <label>Proveedor:</label>
-    <html:select name="Factura" property="proveedor">
+    <h1 style="display:inline">Proveedor:</h1>
+    <html:select name="Factura" property="proveedor" styleClass="span5">
         <html:optionsCollection name="proveedores" value="nombre" label="nombre"/>
     </html:select>
     <html:submit styleClass="btn btn-primary"> Agregar </html:submit>
 </html:form>
+</center>

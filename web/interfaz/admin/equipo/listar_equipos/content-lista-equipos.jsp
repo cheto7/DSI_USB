@@ -46,7 +46,7 @@
                     <tr>
                 <th width="40%"><center>Nombre</center></th>
                 <th width="15%"><center>Imagen</center></th>
-                <th width="15%"><center>En existencia</center></th>
+                <!--<th width="15%"><center>En existencia</center></th>-->
                 <th colspan="2" width="30%"><center>Opciones</center></th>
                 </tr>
 
@@ -63,15 +63,29 @@
                             <p> <img width="50" src="assets/materiales/<bean:write name="equipo" property="nombre_vista"/>.png" /></p>
                         </td>
                         
-                        <td>
+                        <!--<td>
                     <center>
                             <p> <bean:write name="equipo" property="cantidad"></bean:write> </p>
                             </center>
-                        </td>
+                        </td>-->
 
                         <td>
                     <center>
-                        <html:form action = "/FormularioEditarEquipo" onsubmit = "return (this)">
+                        <html:form action = "/VerDatosEquipo" onsubmit = "return (this)">
+                            <html:hidden name="equipo" property="serial"/>
+                            <html:hidden name="equipo" property="imagen"/>
+                            <html:hidden name="equipo" property="tipo"/>
+                            <html:hidden name="equipo" property="nombre_vista"/>
+                            <html:hidden name="equipo" property="cantidad"/>
+                            <html:hidden name="equipo" property="evaluacion"/>
+                            <html:hidden name="equipo" property="funcionalidad"/>
+                            <html:hidden name="equipo" property="sector"/>
+                            <html:hidden name="equipo" property="vida_util"/>
+                            <html:hidden name="equipo" property="tipo_talla"/>
+                            <html:hidden name="equipo" property="norma"/>
+                            <html:submit styleClass="btn btn-primary"> Ver </html:submit>
+                        </html:form>
+                    <%--<html:form action = "/FormularioEditarEquipo" onsubmit = "return (this)">
                             <html:hidden name="equipo" property="serial"/>
                             <html:hidden name="equipo" property="imagen"/>
                             <html:hidden name="equipo" property="tipo"/>
@@ -84,7 +98,7 @@
                             <html:hidden name="equipo" property="tipo_talla"/>
                             <html:hidden name="equipo" property="norma"/>
                             <html:submit styleClass="btn btn-success"> Editar </html:submit>
-                        </html:form> 
+                        </html:form> --%>
                     </center>
                     </td>
 

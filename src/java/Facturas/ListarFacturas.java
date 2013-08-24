@@ -25,11 +25,16 @@ public class ListarFacturas extends org.apache.struts.action.Action {
     public ActionForward execute(ActionMapping mapping, ActionForm form,
             HttpServletRequest request, HttpServletResponse response)
             throws Exception {
-        ArrayList<Factura> facturas = DBMS.getInstance().listarFacturas();
-        if(facturas.isEmpty()) 
+        ArrayList<Factura> facturasNoValidadas = DBMS.getInstance().listarFacturasNoValidadas();
+        ArrayList<Factura> facturasValidadas = DBMS.getInstance().listarFacturasValidadas();
+        if(facturasNoValidadas.isEmpty()){
             request.setAttribute("mensaje","No hay facturas no validadas");
-        
-        request.setAttribute("facturas", facturas);
+        }
+        if(facturasValidadas.isEmpty()){
+            request.setAttribute("mensaje","No hay facturas validadas");
+        }        
+        request.setAttribute("facturasNoValidadas", facturasNoValidadas);
+        request.setAttribute("facturasValidadas", facturasValidadas);
         
         return mapping.findForward(SUCCESS);
     }

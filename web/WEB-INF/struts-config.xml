@@ -250,7 +250,7 @@
         
         <action path="/EditarEquipo" type="Equipo.Editar" scope="request"
                 name="Equipo">
-            <forward name="success" path="/ListarEquipo.do"></forward>  
+            <forward name="success" path="/VerDatosEquipo.do"></forward>  
         </action>
         
         <action path="/ConfirmarEliminarNoticia" type="Noticias.ConfirmarEliminar" scope="request"
@@ -350,6 +350,10 @@
         <action path="/FormularioEditarFactura" type="Facturas.FormularioEditarFactura" scope="request"
                 name="Factura">
             <forward name="success" path="/vistas/factura/confirmar_factura.jsp"></forward>
+        </action>
+        <action path="/VerFactura" type="Facturas.FormularioEditarFactura" scope="request"
+                name="Factura">
+            <forward name="success" path="/vistas/factura/ver_factura.jsp"></forward>
         </action>
         
         <action path="/FormularioEditarMensaje" type="Usuarios.FormularioEditarMensaje" scope="request"
@@ -510,15 +514,6 @@
         <action path="/registrarUnidadAdscripcion" type="Unidad.registrarUnidadAdscripcion" name="Usuario" scope="request">
             <forward name="success" path="/vistas/unidad/formulario_agregarUnidad.jsp"/>
         </action>
-        <action path="/listarSolicitantes" type="Entregas.listarSolicitantes" scope="request" name="Entregas">
-            <forward name="success" path="/vistas/entrega/listar_Solicitantes.jsp"/>
-        </action>
-        <action  path="/hacerEntrega" type="Entregas.hacerEntrega" scope="request" name="Entregas">
-            <forward name="success" path="/vistas/entrega/listar_Solicitantes.jsp"/>
-        </action>
-        <action name="Entregas" path="/entregarEquipo" scope="request" type="Entregas.entregarEquipo">
-            <forward name="success" path="/vistas/entrega/listar_Solicitantes.jsp"/>
-        </action>
         <action path="/VerInforPersonal" type="Editar.VerInforPersonal" scope="request" parameter="method"
                 name="Usuario">
             <forward name="success" path="/vistas/lista_usuarios/datos-usuario.jsp"></forward>
@@ -570,7 +565,56 @@
             <forward name="success" path="/vistas/pedido/interfaz_pedido.jsp"></forward>
             <forward name="failure" path="/Ir_pag_usuario.do"></forward>
         </action>
-                                
+                  
+        <action path="/VerDatosEquipo" type="Equipo.VerDatosEquipo" scope="request"
+                name="Equipo">
+            <forward name="success" path="/vistas/equipo/VerEquipo.jsp"></forward>
+            <forward name="failure" path="/Ir_pag_usuario.do"></forward>
+        </action>
+        
+        <action path="/GestionarTallas" type="Equipo.GestionarTallas" scope="request"
+                name="Equipo">
+            <forward name="success" path="/vistas/equipo/gestionarTalla.jsp"></forward>
+            <forward name="failure" path="/VerDatosEquipo.do"></forward>
+        </action>
+        <action path="/GuardarTalla" type="Equipo.GuardarTalla" scope="request"
+                name="Equipo">        
+            <forward name="success" path="/vistas/equipo/VerEquipo.jsp"></forward>
+            <forward name="failure" path="/GestionarTallas.do"></forward>
+        </action>
+        <action path="/CambiarTalla" type="Equipo.GestionarTallas" scope="request"
+                name="Equipo">
+            <forward name="success" path="/vistas/equipo/cambiarTalla.jsp"></forward>
+        </action>
+        <action path="/CambiarTallaEquipo" type="Equipo.CambiarTalla" scope="request"
+                name="Equipo">
+            <forward name="success" path="/VerDatosEquipo.do"></forward>
+        </action>
+        <action path="/EliminarTalla" type="Equipo.EliminarTalla" scope="request"
+                name="Equipo">
+            <forward name="success" path="/vistas/equipo/confirmar-eliminar-talla.jsp"/>
+        </action>
+        <action path="/EliminarTallaEquipo" type="Equipo.EliminarTallaEquipo" scope="request"
+                name="Equipo">
+            <forward name="success" path="/VerDatosEquipo.do"/>
+            <forward name="failure" path="/vistas/equipo/confirmar-eliminar-talla.jsp"/>
+        </action>
+        <action path="/periodoEntrega" type="Entregas.periodoEntrega" scope="request" name="Periodo">
+            <forward name="success" path="/vistas/entrega/seleccionarPeriodo.jsp"/>
+        </action>
+        <action path="/listarSolicitantes" type="Entregas.listarSolicitantes" scope="request" name="Entregas">
+            <forward name="success" path="/vistas/entrega/listar_Solicitantes.jsp"/>
+        </action>
+        <action  path="/hacerEntrega" type="Entregas.hacerEntrega" scope="request" name="Entregas">
+            <forward name="success" path="/vistas/entrega/solicitud.jsp"/>
+        </action>
+        <action path="/entregarEquipo" type="Entregas.entregarEquipo" scope="request" name="Entregas">
+            <forward name="success" path="/vistas/entrega/solicitud.jsp"/>
+        </action>
+        <action path="/DownloadEntregaPDF" type="Reportes.DownloadEntregaPDF" scope="request" name="Entregas">
+            <forward name="success" path="/vistas/error/welcomeStruts.jsp"></forward>
+        </action>
+
     </action-mappings>
     
     <controller processorClass="org.apache.struts.tiles.TilesRequestProcessor"/>

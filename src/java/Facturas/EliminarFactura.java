@@ -35,6 +35,7 @@ public class EliminarFactura extends Action{
             request.setAttribute("no_eliminado", "no_eliminado");
         }
         
+        request.setAttribute("eliminado", "eliminado");
         return mapping.findForward(SUCCESS);
         
         

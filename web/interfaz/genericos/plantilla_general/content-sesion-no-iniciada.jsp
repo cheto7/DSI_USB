@@ -13,7 +13,7 @@
     <center>
         <h1>Para entrar al sitio debe iniciar sesión</h1>
         <html:form action="/VolverPagInicio" onsubmit="return (this)">
-            <html:submit styleClass="btn btn-info">
+            <html:submit styleClass="btn btn-primary">
                 Ir a página principal
             </html:submit>
         </html:form>

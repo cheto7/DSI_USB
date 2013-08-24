@@ -84,9 +84,11 @@ public class DownloadPDF extends org.apache.struts.action.Action {
 
             document.open();
 
-            
+            String rutaApp = this.getServlet().getServletContext().getRealPath("/");
+            String path = rutaApp + "assets/tope.png";
 
-            Image image1 = Image.getInstance(System.getProperty("user.home")+"/NetBeansProjects/DSI_USB/web/assets/tope.png");
+            //Image image1 = Image.getInstance(System.getProperty("user.home")+"/NetBeansProjects/DSI_USB/web/assets/tope.png");
+            Image image1 = Image.getInstance(path);
             document.add(image1);
             com.itextpdf.text.Font fuente = new com.itextpdf.text.Font(com.itextpdf.text.Font.getFamily("ARIAL"), 12, com.itextpdf.text.Font.BOLD);
             String encabezado = "Comprobante de solicitud de equipos de protección\n";
