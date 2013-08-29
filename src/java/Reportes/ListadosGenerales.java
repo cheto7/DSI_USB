@@ -7,7 +7,6 @@ package Reportes;
  *
  * @author cheo
  */
-import Clases.Noticia;
 import Clases.Usuario;
 import DBMS.DBMS;
 import java.util.ArrayList;
@@ -44,6 +43,9 @@ public class ListadosGenerales extends org.apache.struts.action.Action {
         autenticado.setUsuario(loggueado);
         autenticado = DBMS.getInstance().atributosUsuario(autenticado);
         request.setAttribute("autenticado", autenticado);
+        
+        ArrayList periodos = DBMS.getInstance().obtenerPeriodos();
+        request.setAttribute("periodos", periodos);
 
         return mapping.findForward(SUCCESS);
     }

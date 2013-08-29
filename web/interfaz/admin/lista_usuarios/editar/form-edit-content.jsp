@@ -191,10 +191,10 @@
         <option>
             <bean:write name="Usuario" property="area_laboral"></bean:write>
             </option>
-            <option>Administrativa</option>
-            <option>Académica</option>
-            <option>Bombero</option>
-            <option>Obrero</option> 
+            <option value="Administrativa">Administrativa</option>
+            <option value="Academica">Académica</option>
+            <option value="Bombero">Bombero</option>
+            <option value="Obrero">Obrero</option> 
     </html:select>
 </td>
 <td>

@@ -1,6 +1,6 @@
 <%-- 
-    Document   : datos-usuario
-    Created on : 06/03/2013, 02:10:29 PM
+    Document   : seleccionarPeriodoReporte
+    Created on : 27/08/2013, 02:10:48 PM
     Author     : ivan
 --%>
 
@@ -17,7 +17,8 @@
 <%
     } else {
 %>
-<tiles:insert definition="datos-usuario"/>
+<tiles:insert definition="periodo-listados-generales"/>
 <%
     }
 %>
+

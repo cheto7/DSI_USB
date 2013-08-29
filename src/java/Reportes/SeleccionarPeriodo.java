@@ -1,10 +1,11 @@
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package Reportes;
 
-package Editar;
-
-import Clases.Noticia;
+import Clases.Periodo;
 import Clases.Usuario;
-import DBMS.DBMS;
-import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -14,12 +15,11 @@ import org.apache.struts.action.ActionMapping;
 
 /**
  *
- * @author cheo
+ * @author ivan
  */
+public class SeleccionarPeriodo extends org.apache.struts.action.Action {
 
-/*Accion que lleva a la pagina de modificacion de usuario.*/
-public class EditarUsuarioListar extends org.apache.struts.action.Action {
-
+    /* forward name="success" path="" */
     private static final String SUCCESS = "success";
 
     /**
@@ -36,21 +36,21 @@ public class EditarUsuarioListar extends org.apache.struts.action.Action {
     public ActionForward execute(ActionMapping mapping, ActionForm form,
             HttpServletRequest request, HttpServletResponse response)
             throws Exception {
-               
-        Usuario u = (Usuario) form;
-        Boolean modificado = DBMS.getInstance().modificarUsuario(u);
-        
-        if (modificado) {
-            u.setMensaje("Los datos del usuario ");
-            request.setAttribute("mensajeUsuarioEditado", u);
-        } else {
-            u.setMensaje("Algo ha ocurrido y no se pudo modificar los datos. ");
-            request.setAttribute("mensajeUsuarioNoEditado", u);
-        }
 
-        u = DBMS.getInstance().atributosUsuario(u);
-        request.setAttribute("Usuario", u);
-        request.setCharacterEncoding("UTF-8");
+        String fecha_inicio, fecha_fin;
+        Periodo p = new Periodo();
+        HttpSession session = request.getSession();
+        String loggueado = (String) session.getAttribute("usuarioAutenticado");
+        Usuario autenticado = new Usuario();
+        autenticado.setUsuario(loggueado);
+
+        fecha_inicio = request.getParameter("fecha_inicio").split(" al ")[0];
+        fecha_fin = request.getParameter("fecha_inicio").split(" al ")[1];
+        p.setFecha_inicio(fecha_inicio.substring(4));
+        p.setFecha_fin(fecha_fin);
+
+        request.setAttribute("periodo", p);
+
         return mapping.findForward(SUCCESS);
     }
 }

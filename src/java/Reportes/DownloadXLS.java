@@ -4,45 +4,19 @@
  */
 package Reportes;
 
+import Clases.Equipo;
+import Clases.Periodo;
 import Clases.Usuario;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
-import com.lowagie.text.pdf.*;
-import com.lowagie.text.*;
-import java.io.*;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
-import com.itextpdf.text.Document;
-import com.itextpdf.text.DocumentException;
-import com.itextpdf.text.Element;
-import com.itextpdf.text.Paragraph;
-import com.itextpdf.text.pdf.PdfWriter;
-import com.itextpdf.text.pdf.PdfPTable;
-import com.itextpdf.text.pdf.PdfPCell;
-
-import java.io.FileOutputStream;
-import java.io.FileNotFoundException;
 
 import DBMS.DBMS;
-import com.itextpdf.text.Font;
-import com.itextpdf.text.Rectangle;
-import java.io.File;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 
-import java.util.List;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.Iterator;
-import java.util.TimeZone;
 import javax.servlet.ServletOutputStream;
-import javax.servlet.http.HttpSession;
 import org.apache.poi.hssf.usermodel.HSSFCell;
 import org.apache.poi.hssf.usermodel.HSSFCellStyle;
 import org.apache.poi.hssf.usermodel.HSSFFont;
@@ -61,13 +35,18 @@ public class DownloadXLS extends org.apache.struts.action.Action {
     public ActionForward execute(ActionMapping mapping, ActionForm form,
             HttpServletRequest request, HttpServletResponse response)
             throws Exception {
-        HttpSession session = request.getSession();
+
         response.setContentType("application/octet-stream");
 
         ExcelCreator excelCreator = new ExcelCreator();
 
         HSSFWorkbook workbook = excelCreator.createWorkbook(new ArrayList());
-        response.setHeader("Content-Disposition", "attachment; filename=Listados Generales.xls");
+        
+        Periodo p = new Periodo();
+        p.setFecha_inicio(request.getParameter("fecha_inicio"));
+        p.setFecha_fin(request.getParameter("fecha_fin"));
+        
+        response.setHeader("Content-Disposition", "attachment; filename=MaterialCantidad"+p.getFecha_fin()+".xls");
 
 
         HSSFCellStyle headerCellStyle = workbook.createCellStyle();
@@ -102,6 +81,11 @@ public class DownloadXLS extends org.apache.struts.action.Action {
         cell = row.createCell(cero);
         cell.setCellStyle(headerCellStyle);
         cell.setCellValue("Fecha: " + fecha);
+        
+        row = sheet.createRow(contador++);
+        cell = row.createCell(cero);
+        cell.setCellStyle(headerCellStyle);
+        cell.setCellValue("Listados clasificados por Material durante el período");        
 
         contador++;
         row = sheet.createRow(contador++);
@@ -115,19 +99,21 @@ public class DownloadXLS extends org.apache.struts.action.Action {
         cell.setCellStyle(headerCellStyle);
         cell.setCellValue("Cantidad");
 
-        String usuario = (String) session.getAttribute("usuarioAutenticado");
-        //ArrayList pedidos = DBMS.getInstance().obtenerPedidoCompleto(usuario);
-        // esto lo cambie solo porque la funcion obtenerPedidoCompleto fue borrada
-        // y debe ser realizada nuevamente
-        ArrayList pedidos = null;
+        //String usuario = (String) session.getAttribute("usuarioAutenticado");
+        ArrayList <Equipo> pedidos = DBMS.getInstance().obtenerMaterialCantidad(p);
 
-        HSSFCell celltemp;
-        for (short i = 0; i < pedidos.size(); i = (short) (i + 3)) {
+        HSSFCell celltemp,celltemp1, celltemp2;
+        
+        for (short i = 0; i < pedidos.size(); i++) {
             row = sheet.createRow(contador++);
-            for (short j = 0; j < 3; j++) {
-                celltemp = row.createCell(j);
-                celltemp.setCellValue((String) pedidos.get(i + j));
-            }
+            celltemp = row.createCell((short)0);
+            celltemp.setCellValue(pedidos.get(i).getNombre_vista());
+            
+            celltemp1 = row.createCell((short)1);
+            celltemp1.setCellValue(pedidos.get(i).getTalla());
+            
+            celltemp2 = row.createCell((short)2);
+            celltemp2.setCellValue(pedidos.get(i).getCantidad());
         }
 
         ServletOutputStream out = response.getOutputStream();

@@ -389,8 +389,8 @@ public class DBMS {
             Statement stmt = conexion.createStatement();
             System.out.println(sqlquery);
             ResultSet rs = stmt.executeQuery(sqlquery);
-
-            Boolean b = rs.next();
+                       
+            rs.next();
             u.setUsuario(rs.getString("usuario"));
             u.setPassword(rs.getString("password"));
             u.setTelefono(rs.getString("telefono"));
@@ -411,6 +411,7 @@ public class DBMS {
             u.setCi(rs.getString("ci"));
             u.setCargo(rs.getString("cargo"));
 
+            System.out.println("AREA LABORAAAL= "+u.getArea_laboral());
             return u;
 
         } catch (SQLException ex) {
@@ -797,6 +798,7 @@ public class DBMS {
                     + "talla_camisa = '" + u.getTalla_camisa() + "' , "
                     + "talla_pantalon = '" + u.getTalla_pantalon() + "' , "
                     + "talla_guantes = '" + u.getTalla_guantes() + "' , "
+                    + "area_laboral = '" + u.getArea_laboral() + "' , "
                     + "talla_zapato = '" + u.getTalla_zapato() + "'"
                     + "WHERE usuario = '" + u.getUsuario() + "'";
 
@@ -3002,6 +3004,115 @@ public class DBMS {
             e.printStackTrace();
         }
         return null;
-    }    
+    }
 
+    public ArrayList<Equipo> obtenerMaterialCantidad(Periodo p) {
+        ArrayList<Equipo> equipos = new ArrayList<Equipo>(0);
+        try {
+            String sqlquery= "SELECT E.nombre_vista, C.talla, SUM(C.cantidad) AS cantidad "
+                    + "FROM \"PREPAS\".periodo P, \"PREPAS\".solicitud S, \"PREPAS\".contiene C, \"PREPAS\".equipo E "
+                    + "WHERE P.fecha_inicio='"+p.getFecha_inicio()+"' AND "
+                    + "      P.fecha_fin = '"+p.getFecha_fin()+"' AND "
+                    + "      P.id = S.id_periodo AND "
+                    + "      C.id = S.id AND "
+                    + "      C.serial = E.serial "
+                    + "GROUP BY E.nombre_vista, C.talla, C.cantidad "
+                    + "ORDER BY E.nombre_vista";
+          
+            
+            Statement stmt = conexion.createStatement();
+            System.out.println(sqlquery);
+            ResultSet rs = stmt.executeQuery(sqlquery);
+
+            while (rs.next()) {
+                Equipo e = new Equipo();
+                e.setNombre_vista(rs.getString("nombre_vista"));
+                e.setTalla(rs.getString("talla"));
+                e.setCantidad(rs.getInt("cantidad"));
+                equipos.add(e);
+            }
+            return equipos;
+        } catch (SQLException ex) {
+            System.out.println("EXCEPCION");
+            ex.printStackTrace();
+        }
+        return equipos;
+    }
+    
+     public ArrayList<Usuario> obtenerUsuarioCantidad(Periodo p) {
+        ArrayList<Usuario> usuarios = new ArrayList<Usuario>(0);
+        try {
+            String sqlquery= "SELECT U.ci, U.nombre, U.apellido, U.unidad_adscripcion, U.area_laboral, U.sexo, "
+                    + "       E.nombre_vista, C.talla, C.cantidad "
+                    + "FROM \"PREPAS\".periodo P, \"PREPAS\".solicitud S, \"PREPAS\".contiene C, \"PREPAS\".equipo E, \"PREPAS\".usuario U "
+                    + "WHERE P.fecha_inicio='"+p.getFecha_inicio()+"' AND "
+                    + "      P.fecha_fin = '"+p.getFecha_fin()+"' AND "
+                    + "      P.id = S.id_periodo AND "
+                    + "      C.id = S.id AND "
+                    + "      C.serial = E.serial AND "
+                    + "      S.usuario = U.usuario "
+                    + "ORDER BY U.area_laboral,U.unidad_adscripcion,U.ci";
+          
+            
+            Statement stmt = conexion.createStatement();
+            System.out.println(sqlquery);
+            ResultSet rs = stmt.executeQuery(sqlquery);
+
+            while (rs.next()) {
+                Usuario u = new Usuario();
+                u.setCi(rs.getString("ci"));
+                u.setNombre(rs.getString("nombre"));
+                u.setApellido(rs.getString("apellido"));
+                u.setUnidad_adscripcion(rs.getString("unidad_adscripcion"));
+                u.setArea_laboral(rs.getString("area_laboral"));
+                u.setSexo(rs.getString("sexo"));
+                u.setTalla_camisa(rs.getString("nombre_vista")); //talla camisa usado para pasar nombre de equipo
+                u.setTalla_guantes(rs.getString("talla"));//talla guantes usado para pasar talla de equipo
+                u.setTalla_mascara(rs.getString("cantidad")); //talla mascara usado para pasar cantidad de equipo
+                usuarios.add(u);
+            }
+            return usuarios;
+        } catch (SQLException ex) {
+            System.out.println("EXCEPCION");
+            ex.printStackTrace();
+        }
+        return usuarios;
+    }
+     
+    public ArrayList<Equipo> obtenerEquipoUnidad(Periodo p) {
+        ArrayList<Equipo> equipos = new ArrayList<Equipo>(0);
+        try {
+            String sqlquery= "SELECT U.unidad_adscripcion, E.nombre_vista, C.talla, SUM(C.cantidad) AS cantidad "
+                    + "FROM \"PREPAS\".periodo P, \"PREPAS\".solicitud S, \"PREPAS\".contiene C, \"PREPAS\".equipo E, \"PREPAS\".usuario U "
+                    + "WHERE P.fecha_inicio='"+p.getFecha_inicio()+"' AND "
+                    + "      P.fecha_fin = '"+p.getFecha_fin()+"' AND "
+                    + "      P.id = S.id_periodo AND "
+                    + "      C.id = S.id AND "
+                    + "      C.serial = E.serial AND "
+                    + "      S.usuario = U.usuario "
+                    + "GROUP BY E.nombre_vista,C.talla, U.unidad_adscripcion "
+                    + "ORDER BY E.nombre_vista";
+          
+            
+            Statement stmt = conexion.createStatement();
+            System.out.println(sqlquery);
+            ResultSet rs = stmt.executeQuery(sqlquery);
+
+            while (rs.next()) {
+                Equipo e = new Equipo();
+                e.setNombre_vista(rs.getString("nombre_vista"));
+                e.setTalla(rs.getString("talla"));
+                e.setCantidad(rs.getInt("cantidad"));
+                e.setFuncionalidad(rs.getString("unidad_adscripcion"));
+                equipos.add(e);
+            }
+            return equipos;
+        } catch (SQLException ex) {
+            System.out.println("EXCEPCION");
+            ex.printStackTrace();
+        }
+        return equipos;
+    }     
+     
+    
 }

@@ -283,15 +283,28 @@
             <forward name="success" path="/vistas/error/welcomeStruts.jsp"></forward>
         </action>
         
-        <action path="/DownloadXLS" type="Reportes.DownloadXLS" >
+        <action path="/DownloadXLS" type="Reportes.DownloadXLS" name="Periodo">
             <forward name="success" path="/vistas/error/welcomeStruts.jsp"></forward>
         </action>
         
+        <action path="/DownloadXLSUP" type="Reportes.DownloadXLSUP" name="Periodo">
+            <forward name="success" path="/vistas/error/welcomeStruts.jsp"></forward>
+        </action>
+        
+        <action path="/DownloadXLSMU" type="Reportes.DownloadXLSMU" name="Periodo">
+            <forward name="success" path="/vistas/error/welcomeStruts.jsp"></forward>
+        </action>
+                        
         <action path="/ListadosGenerales" type="Reportes.ListadosGenerales" scope="request"
+                name="Periodo">
+            <forward name="success" path="/vistas/reportes/seleccionarPeriodoReporte.jsp"></forward>
+        </action>
+
+        <action path="/SeleccionarPeriodoReporte" type="Reportes.SeleccionarPeriodo" scope="request"
                 name="Noticia">
             <forward name="success" path="/vistas/listados_generales.jsp"></forward>
         </action>
-        
+                
         <action path="/AgregarProveedor" type="Proveedores.AgregarProveedor" scope="request"
                 name="Proveedor">
             <forward name="failure" path="/vistas/proveedores/agregarProveedor.jsp"></forward>
@@ -614,6 +627,8 @@
         <action path="/DownloadEntregaPDF" type="Reportes.DownloadEntregaPDF" scope="request" name="Entregas">
             <forward name="success" path="/vistas/error/welcomeStruts.jsp"></forward>
         </action>
+        
+        
 
     </action-mappings>
     
