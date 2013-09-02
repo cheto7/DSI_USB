@@ -54,11 +54,11 @@
     </definition>
     
     <definition name="mortal-usuario-habilitado" extends="interfaz-administrador">
-        <put name="navBarGeneral" value="/interfaz/usuario/barras_navegacion/navBarUsuarioHabilitado.jsp"></put>
+        <put name="navBar" value="/interfaz/usuario/barras_navegacion/navBarUsuarioHabilitado.jsp"></put>
     </definition>
     
     <definition name="mortal-usuario-no-habilitado" extends="interfaz-administrador">
-        <put name="navBarGeneral" value="/interfaz/usuario/barras_navegacion/navBarUsuarioNoHabilitado.jsp"></put>
+        <put name="navBar" value="/interfaz/usuario/barras_navegacion/navBarUsuarioNoHabilitado.jsp"></put>
     </definition>
 
     <definition name="usuario-no-eliminado" extends="usuario">
@@ -103,19 +103,19 @@
         <put name="navBar" value="/interfaz/admin/barras_navegacion/navBarListar.jsp"></put>
     </definition>
     
-    <definition name="interfaz-administrador" extends="home">
-        <put name="noticias" value="/interfaz/genericos/plantilla_general/noticias.jsp"></put>
-        <put name="navBarGeneral" value="/interfaz/usuario/barras_navegacion/navBarusuario.jsp"></put>
+    <definition name="interfaz-administrador" extends="formulario-pedido">
+        <put name="formulario" value="/interfaz/genericos/plantilla_general/noticias.jsp"></put>
+        <put name="navBar" value="/interfaz/usuario/barras_navegacion/navBarusuario.jsp"></put>
     </definition>
     
-    <definition name="interfaz-supervisor" extends="home">
-        <put name="noticias" value="/interfaz/genericos/plantilla_general/noticias.jsp"></put>
-        <put name="navBarGeneral" value="/interfaz/usuario/barras_navegacion/navBarSupervisor.jsp"></put>
+    <definition name="interfaz-supervisor" extends="formulario-pedido">
+        <put name="formulario" value="/interfaz/genericos/plantilla_general/noticias.jsp"></put>
+        <put name="navBar" value="/interfaz/usuario/barras_navegacion/navBarSupervisor.jsp"></put>
     </definition>    
 
-    <definition name="interfaz-inspector" extends="home">
-        <put name="noticias" value="/interfaz/genericos/plantilla_general/noticias.jsp"></put>
-        <put name="navBarGeneral" value="/interfaz/usuario/barras_navegacion/navBarInspector.jsp"></put>
+    <definition name="interfaz-inspector" extends="formulario-pedido">
+        <put name="formulario" value="/interfaz/genericos/plantilla_general/noticias.jsp"></put>
+        <put name="navBar" value="/interfaz/usuario/barras_navegacion/navBarInspector.jsp"></put>
     </definition>    
     
     <definition name="interfaz-sesion-no-iniciada" extends="home">
