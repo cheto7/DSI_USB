@@ -39,7 +39,7 @@
     
     <logic:present name="eliminado">
         <center>
-            <label style="color:blue"> Se eliminó safisfactoriamente la factura.</label>
+            <label style="color:blue"> Se eliminó satisfactoriamente la factura.</label>
         </center>
     </logic:present>    
     <div id="tabs">

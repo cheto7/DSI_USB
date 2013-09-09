@@ -45,6 +45,42 @@ public class Verificar extends DispatchAction {
 
         ArrayList<unidadAdscripcion> select = DBMS.getInstance().obtenerUnidadesAdscripcion();
         request.setAttribute("select", select);
+        
+        /*
+         * Verificacion de campos obligatorios vacios
+         */
+        if (u.getUsuario().equals("")) {
+            u.setMensaje("El 'USB-ID' no puede ser vacío.");
+            return mapping.findForward(FAILURE);
+        }
+        if (u.getNombre().equals("")) {
+            u.setMensaje("Debe introducir su nombre.");
+            return mapping.findForward(FAILURE);
+        }
+        if (u.getApellido().equals("")) {
+            u.setMensaje("Debe introducir sus apellidos.");
+            return mapping.findForward(FAILURE);
+        }        
+        if (u.getPassword().equals("")) {
+            u.setMensaje("Debe introducir su contraseña.");
+            return mapping.findForward(FAILURE);
+        }
+        if (u.getCi().equals("")) {
+            u.setMensaje("Debe introducir su cédula de identidad.");
+            return mapping.findForward(FAILURE);
+        }
+        if (u.getUnidad_adscripcion().isEmpty()) {
+            u.setMensaje("Debe introducir su unidad de adscrición.");
+            return mapping.findForward(FAILURE);
+        }
+        if (u.getArea_laboral().equals("")) {
+            u.setMensaje("Debe seleccionar su área laboral.");
+            return mapping.findForward(FAILURE);
+        }
+        if (u.getFecha().equals("")) {
+            u.setMensaje("Debe introducir su fecha de ingreso a la USB.");
+            return mapping.findForward(FAILURE);
+        }
 
         /*
          * Verifica que el nombre de usuario no este en la base de datos.
@@ -94,18 +130,6 @@ public class Verificar extends DispatchAction {
         }
 
         /*
-         * Verificaciones de password, USB-ID, Nombre, Apellido, CI y Sector
-         * Universitario(area_laboral) no pueden ser vacias.
-         */
-        if (u.getUsuario().equals("") || u.getPassword().equals("")
-                || u.getApellido().equals("") || u.getCi().equals("") || u.getUnidad_adscripcion().isEmpty()
-                || u.getArea_laboral().equals("") || u.getNombre().equals("")) {
-            u.setMensaje("Campo de 'USB-ID', 'Contraseña', 'Nombre', "
-                    + "'Apellido', 'CI' o 'Sector Universitario' no pueden ser vacíos. ");
-            return mapping.findForward(FAILURE);
-        }
-
-        /*
          * Verificaciones de sexo.
          */
         if (u.getSexo() == null) {
@@ -137,29 +161,22 @@ public class Verificar extends DispatchAction {
 
         }
 
-
-
         /*
-         * Verificacion con respecto al nombre y el apellido.
+         * Verificacion con respecto al nombre y el apellido y cedula
          */
-        if (u.getNombre().contains(";") || u.getNombre().contains("<")
-                || u.getNombre().contains(">") || u.getNombre().contains("'")
-                || u.getNombre().contains("&") || u.getNombre().contains("$")
-                || u.getApellido().contains(";") || u.getApellido().contains("<")
-                || u.getApellido().contains(">") || u.getApellido().contains("'")
-                || u.getApellido().contains("&") || u.getApellido().contains("$")) {
-            u.setMensaje("Nombre o apellido invalido, contiene alguno de estos caracteres ';' , "
-                    + "'<' , '>', '&' , '$' , '''");
+        if (!u.getNombre().matches("[a-zA-Z]+")) {
+            u.setMensaje("Nombre inválido. Debe usar solo letras");
             return mapping.findForward(FAILURE);
         }
+        if (!u.getApellido().matches("[a-zA-Z]+")) {
+            u.setMensaje("Apellido inválido. Debe usar solo letras");
+            return mapping.findForward(FAILURE);
+        }
+        if (!u.getCi().matches("[0-9]+")) {
+            u.setMensaje("Cédula inválido. Debe usar solo números");
+            return mapping.findForward(FAILURE);
+        }        
 
-        /*
-         * if
-         * (!u.getFecha().matches("([012][0-9]|3[01])/(0[1-9]|1[012])/(0[1-9]|[12][0-9]|3[01])$"))
-         * { u.setMensaje("Fecha invalida. Formato dd/mm/yy"); return
-         * mapping.findForward(FAILURE);
-     }
-         */
         Boolean agregado = DBMS.getInstance().agregarUsuario(u);
         if (agregado) {
             ArrayList<Noticia> noticias = DBMS.getInstance().obtenerNoticias();

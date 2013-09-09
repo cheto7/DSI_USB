@@ -235,10 +235,10 @@ public class DBMS {
         try {
             String sqlquery;
           
-            sqlquery = "INSERT INTO \"PREPAS\".noticia VALUES "
+            sqlquery = "INSERT INTO \"PREPAS\".noticia (usuario,titulo,contenido,fechaNoticia) VALUES "
                     + "('" + n.getUsuario() + "' , '" + n.getTitulo()
-                    + "' , '" + n.getContenido() + "' , '"+ n.getFechaNoticia()+"')";
-
+                    + "' , '" + n.getContenido() + "' , '"+ n.getFechaNoticia()+"')";                               
+            
             Statement stmt = conexion.createStatement();
             System.out.println(sqlquery);
             Integer i = stmt.executeUpdate(sqlquery);
@@ -253,7 +253,7 @@ public class DBMS {
         ArrayList<Noticia> noticias = new ArrayList<Noticia>(0);
         try {
             String sqlquery;
-            sqlquery = "SELECT * FROM \"PREPAS\".noticia";
+            sqlquery = "SELECT * FROM \"PREPAS\".noticia ORDER BY id DESC";
 
             Statement stmt = conexion.createStatement();
             System.out.println(sqlquery);
@@ -330,9 +330,8 @@ public class DBMS {
                     + "nombre_vista = '" + e.getNombre_vista() + "' , "
                     + "tipo = '" + e.getTipo() + "' , "
                     + "imagen = '" + e.getImagen() + "' , "
-                    + "cantidad = '" + e.getCantidad() + "' , "
                     + "sector = '" + e.getSector() + "' , "
-                    + "tiempo_vida = '" + e.getVida_util() + "' , "
+                    + "tiempo_vida = '" + e.getVida_util() +" "+e.getTalla()+ "' , "
                     + "norma = '" + e.getNorma() + "' , "
                     + "tipo_talla = '" + e.getTipo_talla() + "' , "
                     + "funcionalidad = '" + e.getFuncionalidad() + "'"
@@ -767,7 +766,7 @@ public class DBMS {
     public Boolean removerPrivilegios(Usuario u) {
         try {
             String sqlquery = "UPDATE \"PREPAS\".usuario SET "
-                    + "administrador = '' "
+                    + "administrador = 'usuario' "
                     + " WHERE usuario = '" + u.getUsuario() + "'";
 
             Statement stmt = conexion.createStatement();
@@ -2252,7 +2251,7 @@ public class DBMS {
         ArrayList<unidadAdscripcion> unidades = new ArrayList<unidadAdscripcion>(0);
         try {
             String sqlquery;
-            sqlquery = "SELECT * FROM \"PREPAS\".unidadAdscripcion";
+            sqlquery = "SELECT * FROM \"PREPAS\".unidadAdscripcion ORDER BY nombre";
 
             Statement stmt = conexion.createStatement();
             System.out.println(sqlquery);
@@ -2296,7 +2295,7 @@ public class DBMS {
         ArrayList<unidadAdscripcion> unidades = new ArrayList<unidadAdscripcion>(0);
         try {
             String sqlquery;
-            sqlquery = "SELECT * FROM \"PREPAS\".unidadAdscripcion";
+            sqlquery = "SELECT * FROM \"PREPAS\".unidadAdscripcion ORDER BY nombre";
 
             Statement stmt = conexion.createStatement();
             System.out.println(sqlquery);
@@ -2322,6 +2321,9 @@ public class DBMS {
 
     public Boolean editarUnidad(unidadAdscripcion u) {
         try {
+            if (u.getNombre().equals("")){
+                return false;
+            }
             String sqlquery = "UPDATE \"PREPAS\".unidadAdscripcion "
                     + "SET  nombre = '" + u.getNombre() + "' "
                     + "     WHERE id = " + u.getId() + " ";
@@ -2591,7 +2593,6 @@ public class DBMS {
         try {
             String sqlquery = "UPDATE \"PREPAS\".usuario SET "
                     //+ "password = '" + u.getPassword() + "' , "
-                    + "password = 'crypt('" + u.getPassword() + "', gen_salt('bf')) "
                     + "nombre = '" + u.getNombre() + "' , "
                     + "apellido = '" + u.getApellido() + "' , "
                     + "fecha = '" + u.getFecha() + "' , "
@@ -2605,7 +2606,7 @@ public class DBMS {
                     + "talla_guantes = '" + u.getTalla_guantes() + "' , "
                     + "talla_zapato = '" + u.getTalla_zapato() + "' , "
                     + "unidad_adscripcion = '" + u.getUnidad_adscripcion() + "' , "
-                    + "area_laboral = '" + u.getArea_laboral() + "'"
+                    + "area_laboral = '" + u.getArea_laboral() + "' "
                     + "WHERE usuario = '" + u.getUsuario() + "'";
             Statement stmt = conexion.createStatement();
             System.out.println(sqlquery);

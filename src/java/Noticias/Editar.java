@@ -20,14 +20,22 @@ import org.apache.struts.action.ActionMapping;
 public class Editar extends org.apache.struts.action.Action {
 
     private static final String SUCCESS = "success";
+    private static final String FAILURE = "failure";
     
     @Override
     public ActionForward execute(ActionMapping mapping, ActionForm form,
             HttpServletRequest request, HttpServletResponse response)
             throws Exception {
 
+        
         Noticia n = (Noticia) form;
+        if (n.getTitulo().equals("") || n.getContenido().equals("<br>")){
+            request.setAttribute("noticia",n);
+            request.setAttribute("NoticiaNoEditada","error");
+            return mapping.findForward(FAILURE);
+        }
         DBMS.getInstance().editarNoticia(n);
+
         Usuario not = new Usuario();
         not.setMensaje("La noticia ");
         request.setAttribute("mensajeNoticiaEditada",not);

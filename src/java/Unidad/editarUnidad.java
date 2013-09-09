@@ -39,7 +39,7 @@ public class editarUnidad extends org.apache.struts.action.Action {
     public ActionForward execute(ActionMapping mapping, ActionForm form,
             HttpServletRequest request, HttpServletResponse response)
             throws Exception {
-      unidadAdscripcion editar = new unidadAdscripcion();
+        unidadAdscripcion editar = new unidadAdscripcion();
 
         editar.setId(request.getParameter("id"));
         editar.setNombre(request.getParameter("nombre"));
@@ -53,14 +53,14 @@ public class editarUnidad extends org.apache.struts.action.Action {
         listaUnidades.addAll(resto);
 
         request.setAttribute("unidadAdscripcion", listaUnidades);
-        
+
         if (modificado) {
             Usuario u = new Usuario();
             u.setMensaje("La Unidad ha sido Modificada. ");
             request.setAttribute("mensajeUsuarioEditado", u);
         } else {
             Usuario u = new Usuario();
-            u.setMensaje("Algo ha ocurrido y no se pudo Modificar la Unidad. ");
+            u.setMensaje("Debe llenar el nombre de la unidad. ");
             request.setAttribute("mensajeUsuarioNoEditado", u);
         }
 

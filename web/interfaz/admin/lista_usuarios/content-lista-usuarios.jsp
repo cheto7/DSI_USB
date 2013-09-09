@@ -112,7 +112,7 @@
                             <tr>
                                 <td >
                                     <h1>
-                                        <p> <bean:write name="usuario" property="usuario"></bean:write></p>
+                                        <p> <bean:write name="usuario" property="usuario"></bean:write>
                                     </h1>
                                 </td>
 
@@ -124,6 +124,7 @@
                                 <td>
                                     <html:form action = "/VerDatosDeUsuario" onsubmit = "return (this)">
                                         <html:hidden name="usuario" property="usuario"/>
+                                        <html:hidden name="usuario" property="ci"/>
                                         <html:hidden name="usuario" property="nombre"/>
                                         <html:hidden name="usuario" property="email"/>
                                         <html:hidden name="usuario" property="password"/>
@@ -218,6 +219,7 @@
                                 <td>
                                     <html:form action = "/VerDatosDeUsuario" onsubmit = "return (this)">
                                         <html:hidden name="usuario" property="usuario"/>
+                                        <html:hidden name="usuario" property="ci"/>
                                         <html:hidden name="usuario" property="nombre"/>
                                         <html:hidden name="usuario" property="email"/>
                                         <html:hidden name="usuario" property="password"/>

@@ -15,22 +15,29 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     </head>
     <body>
-        <legend>Seleccionar período de solicitudes</legend>
-        
-        <center>
-        Seleccione el período de la solicitud:
-    <html:form action="/listarSolicitantes" onsubmit="return (this)">
-        <html:select name="Periodo" property="fecha_inicio" styleClass="span3">
-            <logic:iterate name="periodos" id="periodos">
-                <option>Del <bean:write name="periodos" property="fecha_inicio"/> al 
-                        <bean:write name="periodos" property="fecha_fin"/>
-                </option>
-            </logic:iterate>
-        </html:select>
-        <html:submit styleClass="btn btn-primary">Buscar</html:submit>
-    </html:form>
-        </center>
-        
-        
-    </body>
+    <legend>Seleccionar período de solicitudes</legend>
+
+    <center>
+        <logic:present name="periodos">
+            <logic:notEmpty name="periodos">
+            Seleccione el período de la solicitud:
+            <html:form action="/listarSolicitantes" onsubmit="return (this)">
+                <html:select name="Periodo" property="fecha_inicio" styleClass="span3">
+                    <logic:iterate name="periodos" id="periodos">
+                        <option>Del <bean:write name="periodos" property="fecha_inicio"/> al 
+                            <bean:write name="periodos" property="fecha_fin"/>
+                        </option>
+                    </logic:iterate>
+                </html:select>
+                <html:submit styleClass="btn btn-primary">Buscar</html:submit>
+            </html:form>
+                </logic:notEmpty>
+            <logic:empty name="periodos">
+                <label style="color:red">No hay periodos de solicitudes registrados en el sistema</label>
+            </logic:empty>
+        </logic:present>
+    </center>
+
+
+</body>
 </html>

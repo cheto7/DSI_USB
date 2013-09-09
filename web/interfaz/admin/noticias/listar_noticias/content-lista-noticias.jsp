@@ -41,24 +41,26 @@
         <br>
 
         <logic:notEmpty name="noticias">
-            <table class="table table-hover">
+            <table class="table table-hover" width="100%">
                 <tbody>
                     <tr>
-                        <th><center>Titulo</center></th>
-                <th><center>Contenido</center></th>
-                <th><center>Modificador</center></th>
-                <th><center>Eliminar</center></th>
-                </tr>
-
+                        <th width="10%"><center>Título</center></th>
+                        <th width="12%"><center>Fecha</center></th>
+                        <th width="40%"><center>Contenido</center></th>
+                        <th colspan="2"><center>Opciones</center></th>
+                    </tr>
                 <logic:iterate name="noticias" id="noticia">
 
                     <tr>
-                        <td >
+                        <td>
                             <h1>
                                 <p> <bean:write name="noticia" property="titulo"></bean:write></p>
+                                
                             </h1>
                         </td>
-
+                        <td>
+                            <bean:write name="noticia" property="fechaNoticia"/>
+                        </td>
                         <td>
                             <p> <bean:write name="noticia" property="contenido"></bean:write> </p>
                         </td>

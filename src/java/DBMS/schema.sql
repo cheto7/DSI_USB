@@ -138,6 +138,7 @@ OIDS = FALSE
 );
 
 CREATE TABLE "PREPAS".noticia (
+  id SERIAL NOT NULL,
   usuario VARCHAR NOT NULL,
   titulo VARCHAR NOT NULL,
   contenido VARCHAR NOT NULL,

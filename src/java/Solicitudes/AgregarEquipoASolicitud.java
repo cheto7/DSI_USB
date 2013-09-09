@@ -21,7 +21,6 @@ public class AgregarEquipoASolicitud extends org.apache.struts.action.Action {
 
     /* forward name="success" path="" */
     private static final String SUCCESS = "success";
-    private static final String FAILURE = "failure";
 
     /**
      * This is the action called from the Struts framework.
@@ -50,7 +49,7 @@ public class AgregarEquipoASolicitud extends org.apache.struts.action.Action {
         String usuario = request.getParameter("usuario");
         System.out.println("usuariooooooooooooooo: "+usuario);
         
-        if ("0".equals(cantidad)){ // Intenta pedir Cero unidades de algun EPP
+        if (!cantidad.matches("[1-9][0-9]*")){ // Intenta pedir Cero unidades de algun EPP u otra cosa
             request.setAttribute("errorCantidad", "error");
             return mapping.findForward(SUCCESS);
         }

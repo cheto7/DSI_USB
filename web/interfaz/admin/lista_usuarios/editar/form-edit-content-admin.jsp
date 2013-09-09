@@ -8,15 +8,59 @@
 <%@ taglib uri="http://struts.apache.org/tags-html" prefix="html" %>
 <%@ taglib uri="http://struts.apache.org/tags-logic" prefix="logic" %>
 <%@ taglib uri="http://struts.apache.org/tags-tiles" prefix="tiles" %>
+<script>
+    $(function() {
+   
+        $("#fecha").attr('placeholder', 'DD-MM-AAAA');
+        $("#fecha").attr('title', 'Ingrese fecha de ingreso a la USB');
+    });
+    
+</script>
+<script>
+    $(function($){
+        $.datepicker.regional['es'] = {
+            closeText: 'Cerrar',
+            prevText: 'Anterior',
+            nextText: 'Siguiente',
+            monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+            monthNamesShort: ['Ene','Feb','Mar','Abr', 'May','Jun','Jul','Ago','Sep', 'Oct','Nov','Dic'],
+            dayNames: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
+            dayNamesShort: ['Dom','Lun','Mar','Mié','Juv','Vie','Sáb'],
+            dayNamesMin: ['Do','Lu','Ma','Mi','Ju','Vi','Sá'],
+            weekHeader: 'Sm',
+            dateFormat: 'dd-mm-yy',
+            firstDay: 1,
+            isRTL: false,
+            showMonthAfterYear: false,
+            yearRange: '-50:+0',
+            yearSuffix: ''
+        };
+        $.datepicker.setDefaults($.datepicker.regional['es']);
+    });      
+      
+    $(document).ready(function(){
+        $("#fecha").datepicker({
+            changeMonth: true,
+            changeYear: true
+        });
+
+    });
+</script>
 
 <legend>Datos del usuario</legend>
 
+<logic:present name="Usuario" property="mensaje">
+    <center><label style="color: red"><bean:write name="Usuario" property="mensaje" /></label></center>
+</logic:present>
+
 <h1 style="display: inline">Usuario:</h1> 
 <bean:write name="Usuario" property="usuario"/><br>
-
+<h1 style="display: inline">Cédula:</h1> 
+<bean:write name="Usuario" property="ci"/><br>
 
 <html:form action = "/EditarAdmin" styleId="Form" onsubmit = "return (this)" >
     <html:hidden name="Usuario" property="usuario"/>
+    <html:hidden name="Usuario" property="ci"/>
     <%--<html:hidden name="Usuario" property="administrador"/>--%>
     <html:hidden name="Usuario" property="habilitado"/>
     <html:hidden name="autenticado" property="usuario"/>
@@ -35,8 +79,8 @@
         </tr>
         <tr>
             <td>
-                <h1 style="display: inline">Fecha de nacimiento: </h1>
-                <html:text name="Usuario" property="fecha"></html:text>
+                <h1 style="display: inline">Fecha de ingreso: </h1>
+                <html:text styleId="fecha" name="Usuario" property="fecha" styleClass="span2" readonly="true"></html:text>
             </td>
             <td>
                 <h1 style="display: inline">Teléfono: </h1>
@@ -50,27 +94,29 @@
             </td>
         </tr>
         <tr>
-            <td>
-                <h1 style="display: inline">Unidad adscripción: </h1>
+            <td colspan="2">
+                <h1 style="display: inline">Unidad de adscripción: </h1>
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 &nbsp;&nbsp;
                 <%--<html:textarea name="Usuario" property="unidad_adscripcion" rows="5" styleId="dir" styleClass="span5"></html:textarea><br>    --%>
                 <logic:present name="select">
                     <logic:notEmpty name="select">
                         <html:select name="Usuario" property="unidad_adscripcion" styleClass="span1" style="width:250px">
-                    <option value="<bean:write name="Usuario" property="unidad_adscripcion"/>">
-                        <bean:write name="Usuario" property="unidad_adscripcion"/>
-                    </option>
-                    <logic:iterate name="select" id="unidadAdscripcion">
-                        <option value="<bean:write name="unidadAdscripcion" property="nombre"/>">
-                            <bean:write name="unidadAdscripcion" property="nombre"></bean:write>
+                            <option value="<bean:write name="Usuario" property="unidad_adscripcion"/>">
+                                <bean:write name="Usuario" property="unidad_adscripcion"/>
                             </option>
-                    </logic:iterate>
-
-                </html:select>
-            </logic:notEmpty>
-        </logic:present>              
-    </td>
+                            <logic:iterate name="select" id="unidadAdscripcion">
+                                <option value="<bean:write name="unidadAdscripcion" property="nombre"/>">
+                                    <bean:write name="unidadAdscripcion" property="nombre"></bean:write>
+                                </option>
+                            </logic:iterate>
+                        </html:select>
+                    </logic:notEmpty>
+                    <logic:empty name="select">
+                        No hay unidades de adscripción registradas
+                    </logic:empty>
+                </logic:present>
+            </td>
 </tr>
 <tr>
     <td>
@@ -213,10 +259,10 @@
     <option>
         <bean:write name="Usuario" property="administrador"></bean:write>
     </option>
-    <option>Usuario</option>
-    <option>Supervisor</option>
-    <option>Inspector</option>
-    <option>Administrador</option> 
+    <option value="usuario">Usuario</option>
+    <option value="supervisor">Supervisor</option>
+    <option value="inspector">Inspector</option>
+    <option value="administrador">Administrador</option> 
 </html:select>
     </td>
 </tr>

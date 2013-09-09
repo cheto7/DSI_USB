@@ -43,10 +43,19 @@
         <bean:write name="equipo" property="norma"/>
     </html:text>
     <br>    
-    <label>Vida útil (Meses):</label>
+    <label>Vida útil</label>
     <html:text name="Equipo" property="vida_util" styleClass="span5">
         <bean:write name="equipo" property="vida_util"/>
     </html:text>
+    <html:select name="Equipo" property="talla" styleClass="span2">
+        <option></option>
+        <option>Días</option>
+        <option>Semanas</option>
+        <option>Meses</option>
+        <option>Años</option>
+    </html:select>
+
+
     <br>
     <label>Funcionalidad:</label>
     <html:textarea  name="Equipo" property="funcionalidad" rows="3" styleClass="span4">
@@ -56,46 +65,46 @@
     <table>
         <tbody>
             <tr>
-                <th width="33%">
+                <!--<th width="33%">
                     <label>Cantidad en existencia:</label>
-                    <html:text name="Equipo" property="cantidad" styleClass="span2">
-                        <bean:write name="equipo" property="cantidad"/>
-                    </html:text>                    
-                </th>
+                <html:text name="Equipo" property="cantidad" styleClass="span2">
+                    <bean:write name="equipo" property="cantidad"/>
+                </html:text>                    
+            </th>-->
                 <th width="33%">
                     <label>Sector universitario asociado:</label>  
                     <html:select name="Equipo" property="sector" styleClass="span2"> 
-                        <option><bean:write name="equipo" property="sector"/></option>
-                        <option value="academico">Académico</option>
-                        <option value="administrarivo">Administrativo</option>
-                        <option value="bombero">Bombero</option>
-                        <option value="obrero">Obrero</option>
-                        <option value="generico">Genérico</option>
-                    </html:select>                    
-                </th>
-                <th width="33%">
-                    <label>Tipo de talla asociada:</label>
-                    <html:select name="Equipo" property="tipo_talla" styleClass="span2">
-                        <option><bean:write name="equipo" property="tipo_talla"/></option>
-                        <option value="camisa">Camisa</option>
-                        <option value="guantes">Guantes</option>
-                        <option value="mascara">Máscara</option>
-                        <option value="pantalon">Pantalón</option>
-                        <option value="zapato">Zapato</option>
-                        <option value="no aplica">No Aplica</option>
-                    </html:select>                    
-                </th>
-            </tr>
-        </tbody>
-    </table> 
-    
-    <script>
-        $('textarea').jqte();
-    </script>
-    <br>
-    <html:hidden name="equipo" property="serial"/>
-    <html:hidden name="equipo" property="imagen"/>
-    <center>
+            <option><bean:write name="equipo" property="sector"/></option>
+            <option value="academico">Académico</option>
+            <option value="administrarivo">Administrativo</option>
+            <option value="bombero">Bombero</option>
+            <option value="obrero">Obrero</option>
+            <option value="generico">Genérico</option>
+        </html:select>                    
+    </th>
+    <th width="33%">
+        <label>Tipo de talla asociada:</label>
+        <html:select name="Equipo" property="tipo_talla" styleClass="span2">
+        <option><bean:write name="equipo" property="tipo_talla"/></option>
+        <option value="camisa">Camisa</option>
+        <option value="guantes">Guantes</option>
+        <option value="mascara">Máscara</option>
+        <option value="pantalon">Pantalón</option>
+        <option value="zapato">Zapato</option>
+        <option value="no aplica">No Aplica</option>
+    </html:select>                    
+</th>
+</tr>
+</tbody>
+</table> 
+
+<script>
+    $('textarea').jqte();
+</script>
+<br>
+<html:hidden name="equipo" property="serial"/>
+<html:hidden name="equipo" property="imagen"/>
+<center>
     <html:submit styleClass="btn btn-primary"> Editar </html:submit>
-        </center>
+    </center>
 </html:form>

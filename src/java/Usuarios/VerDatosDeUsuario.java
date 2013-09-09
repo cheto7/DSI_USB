@@ -5,7 +5,6 @@
 package Usuarios;
 
 import Clases.Usuario;
-import Clases.unidadAdscripcion;
 import DBMS.DBMS;
 import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
@@ -40,6 +39,7 @@ public class VerDatosDeUsuario extends org.apache.struts.action.Action {
         
         Usuario u = new Usuario();
         u.setUsuario(request.getParameter("usuario"));
+        u.setCi(request.getParameter("ci"));
         u.setPassword(request.getParameter("password"));
         u.setTelefono(request.getParameter("telefono"));
         u.setNombre(request.getParameter("nombre"));

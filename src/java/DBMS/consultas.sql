@@ -4,6 +4,7 @@
 --SELECT * FROM "PREPAS".contiene;  
 
 SELECT * FROM "PREPAS".usuario;
+SELECT * FROM "PREPAS".unidadAdscripcion;
 --SELECT E.serial as serial,E.imagen as imagen,E.nombre_vista as nombre_vista,P.puntuacion as puntuacion,E.tipo_talla as tipo_talla 
 --FROM "PREPAS".tiene T, "PREPAS".usuario U, ("PREPAS".equipo E left join "PREPAS".puntuacion P on E.serial = P.serial) 
 --WHERE E.serial = T.serial AND U.usuario = T.usuario AND (U.usuario = P.usuario OR P.usuario = null) AND U.usuario = 'cheto@usb.ve'
@@ -65,3 +66,5 @@ FROM "PREPAS".periodo P, "PREPAS".solicitud S, "PREPAS".contiene C, "PREPAS".equ
 WHERE P.fecha_inicio='31-07-2013' AND P.fecha_fin = '31-11-2018' AND P.id = S.id_periodo AND C.id = S.id AND C.serial = E.serial
 GROUP BY E.nombre_vista, C.talla
 ORDER BY E.nombre_vista;*/
+SELECT * FROM "PREPAS".periodo;
+SELECT * FROM "PREPAS".noticia;

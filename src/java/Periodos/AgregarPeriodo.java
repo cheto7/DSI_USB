@@ -58,17 +58,24 @@ public class AgregarPeriodo extends org.apache.struts.action.Action {
         System.out.println("esta es la fechaa actual "+p.getFecha_inicio()+"----fecha ingresada "+p.getFecha_fin());
         System.out.println("ano ini "+inicio[2]);
         System.out.println("ano fin "+fin[2]);
+        System.out.println("mes ini "+inicio[1]);
+        System.out.println("mes fin "+fin[1]);
+        System.out.println("dia ini "+inicio[0]);
+        System.out.println("dia fin "+fin[0]);        
         
         
         if (Integer.parseInt(inicio[2])>Integer.parseInt(fin[2])){
             request.setAttribute("fechaErronea", "error");
             return mapping.findForward(FAILURE);
         }
-        if (Integer.parseInt(inicio[1])>Integer.parseInt(fin[1])){
+        if ((Integer.parseInt(inicio[1])>Integer.parseInt(fin[1])) && 
+                Integer.parseInt(inicio[2])>=Integer.parseInt(fin[2])){
             request.setAttribute("fechaErronea", "error");
             return mapping.findForward(FAILURE);
         }
-        if (Integer.parseInt(inicio[0])>Integer.parseInt(fin[0])){
+        if ((Integer.parseInt(inicio[0])>Integer.parseInt(fin[0])) && 
+                Integer.parseInt(inicio[2])>=Integer.parseInt(fin[2]) &&
+                Integer.parseInt(inicio[1])>=Integer.parseInt(fin[1])){
             request.setAttribute("fechaErronea", "error");
             return mapping.findForward(FAILURE);
         }

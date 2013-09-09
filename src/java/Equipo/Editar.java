@@ -32,5 +32,4 @@ public class Editar extends Action {
         
         return mapping.findForward(SUCCESS);
     }
-    
 }

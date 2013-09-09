@@ -47,7 +47,13 @@
                     </tr>
                     <tr>
                         <td>
-                            <h1 style="display: inline">Fecha de nacimiento:</h1>
+                            <h1 style="display: inline">Cédula:</h1>
+                            <bean:write name="Usuario" property="ci"></bean:write> 
+                        </td>
+                    </tr>                        
+                    <tr>
+                        <td>
+                            <h1 style="display: inline">Fecha de ingreso:</h1>
                             <bean:write name="Usuario" property="fecha"></bean:write>
                         </td>
                     </tr>
@@ -129,6 +135,7 @@
                                        acceptCharset="ISO-8859-1">
                             <html:hidden name="Usuario" property="usuario"/>
                             <html:hidden name="Usuario" property="nombre"/>
+                            <html:hidden name="Usuario" property="ci"/>
                             <html:hidden name="Usuario" property="email"/>
                             <html:hidden name="Usuario" property="password"/>
                             <html:hidden name="Usuario" property="fecha"/>

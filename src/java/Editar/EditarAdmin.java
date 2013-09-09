@@ -5,7 +5,9 @@
 package Editar;
 
 import Clases.Usuario;
+import Clases.unidadAdscripcion;
 import DBMS.DBMS;
+import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.apache.struts.action.ActionForm;
@@ -20,6 +22,7 @@ public class EditarAdmin extends org.apache.struts.action.Action {
 
     /* forward name="success" path="" */
     private static final String SUCCESS = "success";
+    private static final String FAILURE = "failure";
 
     /**
      * This is the action called from the Struts framework.
@@ -55,6 +58,34 @@ public class EditarAdmin extends org.apache.struts.action.Action {
         u.setAdministrador(request.getParameter("administrador"));
         u.setArea_laboral(request.getParameter("area_laboral"));
         u.setUnidad_adscripcion(request.getParameter("unidad_adscripcion"));
+  
+        ArrayList<unidadAdscripcion> select = DBMS.getInstance().obtenerUnidadesAdscripcion();
+        request.setAttribute("select", select);     
+        request.setAttribute("Usuario", u);
+        /*
+         * Verificacion de campos obligatorios vacios
+         */
+        if (u.getNombre().equals("")) {
+            u.setMensaje("Debe introducir su nombre.");
+            return mapping.findForward(FAILURE);
+        }
+        if (u.getApellido().equals("")) {
+            u.setMensaje("Debe introducir sus apellidos.");
+            return mapping.findForward(FAILURE);
+        }    
+        if (u.getFecha().equals("")) {
+            u.setMensaje("Debe introducir su fecha de ingreso a la USB.");
+            return mapping.findForward(FAILURE);
+        }
+        if (u.getUnidad_adscripcion().equals("")) {
+            u.setMensaje("Debe introducir su unidad de adscrición.");
+            return mapping.findForward(FAILURE);
+        }
+        if (u.getArea_laboral().equals("")) {
+            u.setMensaje("Debe seleccionar su área laboral.");
+            return mapping.findForward(FAILURE);
+        }
+      
 
         DBMS.getInstance().modificarUsuarioAdmin(u);
         request.setAttribute("Usuario", u);

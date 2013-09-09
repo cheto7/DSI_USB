@@ -23,6 +23,7 @@
     <li>
         <html:form action = "/VerDatosDeUsuario" onsubmit = "return (this)">
             <html:hidden name="Usuario" property="usuario"/>
+            <html:hidden name="Usuario" property="ci"/>
             <html:hidden name="Usuario" property="nombre"/>
             <html:hidden name="Usuario" property="email"/>
             <html:hidden name="Usuario" property="password"/>

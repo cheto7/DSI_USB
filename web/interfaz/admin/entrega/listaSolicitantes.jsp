@@ -37,16 +37,18 @@
 
     <logic:notPresent name="listaSolicitudes">
         <label>
-            <center> No hay solicitudes de usuarios revisadas por la DSI para este período.</center>
+            <center> 
+                <label style="color:red">No hay solicitudes de usuarios revisadas por la DSI para este período.</label>
+            </center>
         </label>
     </logic:notPresent>
 
     <logic:present name="listaSolicitudes">
 
         <logic:empty name="listaSolicitudes">
-            <label>
-                <center> No hay solicitudes de usuarios revisadas por la DSI para este período.</center>
-            </label>
+            <center> 
+                <label style="color:red">No hay solicitudes de usuarios revisadas por la DSI para este período.</label>
+            </center>
         </logic:empty>
 
         <br>
@@ -69,31 +71,31 @@
                                 <h1>
                                     <%--nombre_vista es usado para escribir la cedula del usuario--%>
                                     <p> <bean:write name="listaSolicitudes" property="nombre_vista"></bean:write></p>
-                                </h1>
-                            </td>
+                                    </h1>
+                                </td>
 
-                            <td>
-                                <h1>
-                                    <p> <bean:write name="listaSolicitudes" property="nombre_usuario"></bean:write></p>
-                                </h1>
-                            </td>
+                                <td>
+                                    <h1>
+                                        <p> <bean:write name="listaSolicitudes" property="nombre_usuario"></bean:write></p>
+                                    </h1>
+                                </td>
 
-                            <td >
-                                <h1>
+                                <td >
+                                    <h1>
                                     <%--Talla es usado para escribir la unidad de adscripcion--%>
                                     <p> <bean:write name="listaSolicitudes" property="talla"></bean:write></p>
-                                </h1>
-                            </td>
+                                    </h1>
+                                </td>
 
-                            <td>
-                                <h1>
-                                    <p> <bean:write name="listaSolicitudes" property="fecha_solicitud"></bean:write></p>
-                                </h1>
-                            </td>
+                                <td>
+                                    <h1>
+                                        <p> <bean:write name="listaSolicitudes" property="fecha_solicitud"></bean:write></p>
+                                    </h1>
+                                </td>
 
-                            <td>
+                                <td>
                                 <html:form method="POST" action="/hacerEntrega" onsubmit="return (this)">
-                                    
+
                                     <html:hidden name="listaSolicitudes" property="nombre_usuario"/>                                    
                                     <html:hidden name="listaSolicitudes" property="fecha_solicitud"/>                                    
                                     <html:hidden name="listaSolicitudes" property="id"/>
@@ -105,18 +107,18 @@
                             </td>
                         </tr>
 
-                       <%-- <%
-                            if (request.getAttribute("entregar") != null) {
-                                if (request.getAttribute("entregar").equals("Activado")) {
-                        %>
-                        <tr>
-                            <th>Equipo</th>
-                            <th>Imagen</th>
-                            <th><center>Cantidad solicitada</center></th>
-                    <th>Tiene</th>
-                    <th><center>Entregar</center></th>
-                    <th colspan="2"></th>
-                    </tr>
+                        <%-- <%
+                             if (request.getAttribute("entregar") != null) {
+                                 if (request.getAttribute("entregar").equals("Activado")) {
+                         %>
+                         <tr>
+                             <th>Equipo</th>
+                             <th>Imagen</th>
+                             <th><center>Cantidad solicitada</center></th>
+                     <th>Tiene</th>
+                     <th><center>Entregar</center></th>
+                     <th colspan="2"></th>
+                     </tr>
 
                     <logic:notEmpty name="solicitud">
                         <logic:iterate name="solicitud" id="solicitud">
@@ -168,7 +170,7 @@
                         }
                     %>--%>     
 
-                </logic:iterate>
+                    </logic:iterate>
                 </tbody>
             </table>
         </logic:notEmpty>

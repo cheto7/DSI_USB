@@ -245,7 +245,8 @@
         
         <action path="/EditarNoticia" type="Noticias.Editar" scope="request"
                 name="Noticia">
-            <forward name="success" path="/ListarNoticia.do"></forward>  
+            <forward name="success" path="/ListarNoticia.do"></forward>
+            <forward name="failure" path="/vistas/noticias/lista_noticias/formulario_editar_noticia.jsp"></forward>
         </action>
         
         <action path="/EditarEquipo" type="Equipo.Editar" scope="request"
@@ -542,9 +543,10 @@
         <action path="/EditarAdmin" type="Editar.EditarAdmin" scope="request" 
                 name= "Usuario">
             <forward name="success" path="/VerDatosDeUsuario.do"></forward>
+            <forward name="failure" path="/vistas/lista_usuarios/formulario_editar_usuario_admin.jsp"></forward>
         </action>
         <action path="/VerSolicitud" type="Solicitudes.VerSolicitudRecibida" scope="request" parameter="method"
-                name="Solicitud">
+                name="Solicitud">C
             <forward name="success" path="/vistas/pedido/miPedido.jsp"></forward>
         </action>
         <action path="/ListarPeriodos" type="Periodos.Listar" scope="request" parameter="method"

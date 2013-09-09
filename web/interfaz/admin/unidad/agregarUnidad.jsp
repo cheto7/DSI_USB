@@ -4,7 +4,16 @@
 <%@ taglib uri="http://struts.apache.org/tags-tiles" prefix="tiles" %>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%> 
+<script>
+    $(function() {
+        $("#editUnidad").attr('placeholder', 'Nombre unidad de adscripción');
+    });
+    
+</script>
 
+<fieldset>
+    <legend>Registrar Unidad</legend>
+    
 <logic:present name="mensajeUsuarioEditado">
     <logic:notEmpty name="mensajeUsuarioEditado">
         <center>
@@ -21,13 +30,9 @@
         </center>
     </logic:notEmpty>
 </logic:present>
-
-<fieldset>
-    <br>   
-    <legend>Registrar Unidad</legend>
     <html:form styleId="Form" method="POST" action="/registrarUnidadAdscripcion" onsubmit="return (this)">
-        <label>Nombre Unidad:</label>
-        <html:text name="Usuario" value="" property="nombre" styleClass="span2" style="width:342px"></html:text>
+        <!--<label>Nombre Unidad:</label>-->
+        <html:text name="Usuario" value="" property="nombre" styleClass="span6" styleId="editUnidad"></html:text>
         <html:submit styleClass="btn btn-primary"> Registrar </html:submit>
     </html:form>
 
@@ -63,7 +68,12 @@
                             <html:form action = "/editarUnidad" onsubmit = "return (this)">
                                 <td>          
                                     <h1>
-                                        <p><html:text name="unidadAdscripcion" property="nombre"></html:text></p>
+                                        <p><html:text name="unidadAdscripcion" 
+                                                   property="nombre" 
+                                                   styleId="editUnidad"
+                                                   styleClass="span5">
+                                                
+                                            </html:text></p>
                                         <html:hidden name="unidadAdscripcion" property="id"/>
                                     </h1>
                                 </td>

@@ -40,6 +40,7 @@ public class FormularioEditarUsuarioAdmin extends org.apache.struts.action.Actio
 
         Usuario u = new Usuario();
         u.setUsuario(request.getParameter("usuario"));
+        u.setCi(request.getParameter("ci"));
         u.setNombre(request.getParameter("nombre"));
         u.setEmail(request.getParameter("email"));
         u.setPassword(request.getParameter("password"));
@@ -61,7 +62,7 @@ public class FormularioEditarUsuarioAdmin extends org.apache.struts.action.Actio
         request.setAttribute("autenticado", request.getParameter("autenticado"));
         u.setUnidad_adscripcion(request.getParameter("unidad_adscripcion"));
         ArrayList<unidadAdscripcion> select = DBMS.getInstance().obtenerUnidadesAdscripcion();
-        request.setAttribute("select", select); 
+        request.setAttribute("select", select);
         return mapping.findForward(SUCCESS); 
     }
 }

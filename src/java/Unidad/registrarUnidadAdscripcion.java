@@ -45,7 +45,7 @@ public class registrarUnidadAdscripcion extends org.apache.struts.action.Action 
         Boolean noExiste = false;
 
         if (nombreUnidad.getNombre().equals("")) { //HACER CHEQUEO DE ESPACIOS EN BLANCO            
-            nombreUnidad.setMensaje("El Campo esta Vacio. ");
+            nombreUnidad.setMensaje("El Campo está Vacío. ");
             request.setAttribute("mensajeUsuarioNoEditado", nombreUnidad);
             ArrayList<unidadAdscripcion> unidadAdscripcion = DBMS.getInstance().obtenerUnidadesAdscripcion();
             request.setAttribute("unidadAdscripcion", unidadAdscripcion);
@@ -62,9 +62,9 @@ public class registrarUnidadAdscripcion extends org.apache.struts.action.Action 
                 noExiste = DBMS.getInstance().noExisteUnidad(nombreUnidad.getNombre());
                 if (noExiste) {
                     u.setMensaje("Algo ha ocurrido y no se pudo Registrar la Unidad. ");                    
-                }   else
+                }   else{
                         u.setMensaje("Unidad Ya Registrada. ");
-                
+                }
                 request.setAttribute("mensajeUsuarioNoEditado", u);
             }
         ArrayList<unidadAdscripcion> unidadAdscripcion = DBMS.getInstance().obtenerUnidadesAdscripcion();

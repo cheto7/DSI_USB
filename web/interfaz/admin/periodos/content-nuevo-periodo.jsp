@@ -74,7 +74,7 @@
 
         <html:form action = "/AgregarPeriodo" onsubmit = "return (this)">
             <center><label style="display: inline">Fecha de cierre:</label>
-                <html:text styleId="fecha" title="AAAA-YY-DD" name="Periodo" property="fecha_fin" styleClass="span2"></html:text><br>
+                <html:text styleId="fecha" name="Periodo" property="fecha_fin" styleClass="span2" readonly="true"></html:text><br>
 
             </center>
             

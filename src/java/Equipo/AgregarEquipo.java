@@ -36,7 +36,7 @@ public class AgregarEquipo extends org.apache.struts.action.Action {
             HttpServletRequest request, HttpServletResponse response)
             throws Exception {
         Equipo e = (Equipo) form;
-        if (    "".equals(e.getNombre_vista())) {
+        if ("".equals(e.getNombre_vista())) {
             request.setAttribute("errorNombreEquipo", "error");
             return mapping.findForward(FAILURE);
         }
