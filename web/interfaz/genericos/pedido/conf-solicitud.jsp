@@ -22,7 +22,7 @@
     </center>    
 </logic:empty>
 <logic:notEmpty name="solicitud">
-    <label><center> Usted debe confirmar su pedido para continuar.</center> </label>
+    <label style="color:blue"><center> Usted debe confirmar su pedido para continuar.</center> </label>
     <%--<label> En caso que haya olvidado algo, puede volver a modificar su pedido. </label>--%>
 
     <table class="table table-hover" style="table-layout:fixed">
@@ -31,7 +31,7 @@
             <tr>
                 <th width="30%">Equipo</th>
                 <th width="10%">Imagen</th>
-                <th width="14%"><center>Uso (días)</center></th>
+                <th width="14%"><center>Uso</center></th>
                 <th width="13%">Cantidad</th>
                 <th width="13%">Talla</th>
                 <th colspan="2" width="20%"><center>Opciones</center></th>

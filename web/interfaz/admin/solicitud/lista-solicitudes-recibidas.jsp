@@ -12,27 +12,28 @@
 <html>
     <fieldset>
         <legend>Lista de Solicitudes recibidas</legend>
-        <table width="80%">
-            <tr>
-                <td>
-                    <h1 style="display: inline">Fecha inicio de: </h1><bean:write name="periodo" property="fecha_inicio"></bean:write><br>
-                </td>
-                <td>
-                    <h1 style="display: inline">Fecha fin: </h1> <bean:write name="periodo" property="fecha_fin"></bean:write><br>
-                </td>
-                <%--<h1 style="display: inline">Solicitudes recibidas: </h1><bean:write name="periodo" property="cantidadRecibida"></bean:write><br>
-                <h1 style="display: inline">Solicitudes procesadas: </h1><bean:write name="periodo" property="cantidadProcesada"></bean:write><br>--%>
-                <td>
-                    <h1 style="display: inline">Estado: </h1><logic:equal name="periodo" property="habilitado" value="true">
-                        Abierto
-                    </logic:equal>
-                    <logic:equal name="periodo" property="habilitado" value="false">
-                        Cerrado
-                    </logic:equal>
-                </td>
-            </tr>
-
-        </table>
+        <center>
+            <table width="80%">
+                <tr>
+                    <td>
+                        <h1 style="display: inline">Fecha de inicio: </h1><bean:write name="periodo" property="fecha_inicio"></bean:write><br>
+                    </td>
+                    <td>
+                        <h1 style="display: inline">Fecha de fin: </h1> <bean:write name="periodo" property="fecha_fin"></bean:write><br>
+                    </td>
+                    <%--<h1 style="display: inline">Solicitudes recibidas: </h1><bean:write name="periodo" property="cantidadRecibida"></bean:write><br>
+                    <h1 style="display: inline">Solicitudes procesadas: </h1><bean:write name="periodo" property="cantidadProcesada"></bean:write><br>--%>
+                    <td>
+                        <h1 style="display: inline">Estado: </h1><logic:equal name="periodo" property="habilitado" value="true">
+                            Abierto
+                        </logic:equal>
+                        <logic:equal name="periodo" property="habilitado" value="false">
+                            Cerrado
+                        </logic:equal>
+                    </td>
+                </tr>
+            </table>
+        </center>
 
     </fieldset>
     <div id="tabs">

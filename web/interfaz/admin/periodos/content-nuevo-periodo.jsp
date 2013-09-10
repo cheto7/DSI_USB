@@ -68,7 +68,7 @@
         </logic:present>
         <logic:present name="fechaInvalida">
             <center>
-                <label style="color:red">Error: Fecha inválida</label>
+                <label style="color:red">Error: Ya ha sido abierto un periodo el día de hoy.</label>
             </center>
         </logic:present>           
 

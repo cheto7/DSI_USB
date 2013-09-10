@@ -40,29 +40,26 @@ public class AgregarEquipo extends org.apache.struts.action.Action {
             request.setAttribute("errorNombreEquipo", "error");
             return mapping.findForward(FAILURE);
         }
-        if (e.getTipo() == "") {
+        if (e.getTipo().equals("")) {
             request.setAttribute("errorTipoEquipo", "error");
             return mapping.findForward(FAILURE);
         }
-        if (e.getFuncionalidad() == "") {
+        if (e.getFuncionalidad().equals("")) {
             request.setAttribute("errorFuncionalidadEquipo", "error");
             return mapping.findForward(FAILURE);
         }
-        if (e.getTipo_talla() == "") {
+        if (e.getTipo_talla().equals("")) {
             request.setAttribute("errorTallaEquipo", "error");
             return mapping.findForward(FAILURE);
         }
-        /*
-        String str = e.getNombre_vista();
-        if (str.substring(str.length()-4,str.length())!=".png" || 
-            str.substring(str.length()-4,str.length())!=".jpg" ||
-            str.substring(str.length()-4,str.length())!=".gif"
-           ){
+        
+        System.out.println("NombreFile: "+ e.getFile().toString());
+
+        
+        if (!e.getFile().toString().matches(".+\\.(png|jpg|gif|PNG|JPG|GIF)")){
             request.setAttribute("errorFormatoEquipo", "error");
-            return mapping.findForward(FAILURE);        
+            return mapping.findForward(FAILURE);
         }
-        * 
-        */
 
         String rutaApp = this.getServlet().getServletContext().getRealPath("/");
              

@@ -1,10 +1,10 @@
 --SELECT * FROM "PREPAS".solicitud;
---SELECT * FROM "PREPAS".equipo;
+SELECT * FROM "PREPAS".equipo;
 -- SELECT * FROM "PREPAS".proveedor;
 --SELECT * FROM "PREPAS".contiene;  
 
-SELECT * FROM "PREPAS".usuario;
-SELECT * FROM "PREPAS".unidadAdscripcion;
+--SELECT * FROM "PREPAS".usuario;
+--SELECT * FROM "PREPAS".unidadAdscripcion;
 --SELECT E.serial as serial,E.imagen as imagen,E.nombre_vista as nombre_vista,P.puntuacion as puntuacion,E.tipo_talla as tipo_talla 
 --FROM "PREPAS".tiene T, "PREPAS".usuario U, ("PREPAS".equipo E left join "PREPAS".puntuacion P on E.serial = P.serial) 
 --WHERE E.serial = T.serial AND U.usuario = T.usuario AND (U.usuario = P.usuario OR P.usuario = null) AND U.usuario = 'cheto@usb.ve'

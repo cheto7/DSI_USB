@@ -61,7 +61,7 @@ public class hacerEntrega extends org.apache.struts.action.Action {
         System.out.println("FechaINI: "+p.getFecha_inicio());
         System.out.println("FechaFIN: "+p.getFecha_fin());
         int id = Integer.parseInt(idSolicitud);
-        String fecha = request.getParameter("fecha_solicitud"); 
+//        String fecha = request.getParameter("fecha_solicitud"); 
 
         ArrayList<Entregas> solicitudes = DBMS.getInstance().obtenerSolicitud(id);
         request.setAttribute("solicitud", solicitudes);

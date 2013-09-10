@@ -12,20 +12,24 @@
 <!DOCTYPE html>
 
 <legend>Solicitud de usuario</legend>
-
+<label style="color:blue">
+    <center>
+        <p id="Parrafo">Una vez registrada la entrega de equipos no se podrá dehacer.</p>
+    </center>                    
+</label>
 <logic:present name="noHayEquipo">
-        <center>
-            <label style="color:red">
-                <p id="Parrafo">No hay cantidad disponible para este equipo.</p>
-            </label>
-        </center>
+    <center>
+        <label style="color:red">
+            <p id="Parrafo">No hay cantidad disponible para este equipo.</p>
+        </label>
+    </center>
 </logic:present>
 <logic:present name="errorFormulario">
-        <center>
-            <label style="color:red">
-                <p id="Parrafo">Debe introducir una cantidad mayor a cero.</p>
-            </label>
-        </center>
+    <center>
+        <label style="color:red">
+            <p id="Parrafo">Debe introducir una cantidad mayor a cero.</p>
+        </label>
+    </center>
 </logic:present>
 <logic:present name="mensajeUsuarioEditado">
     <logic:notEmpty name="mensajeUsuarioEditado">
@@ -43,16 +47,17 @@
 </logic:present>
 
 
-<table class="table table-hover">
+<table class="table table-hover" width="100%">
     <tbody>
         <tr>
-            <th>Equipo</th>
-            <th>Imagen</th>
-            <th><center>Cantidad solicitada</center></th>
-<th>Entregada</th>
-<th><center>Entregar</center></th>
-<th colspan="2"></th>
-</tr>
+            <th width="35%">Equipo</th>
+            <th width="15%">Imagen</th>
+            <th>Talla</th>
+            <th><center>Solicitada</center></th>
+            <th>Entregada</th>
+            <th><center>Entregar</center></th>
+            <th colspan="2"></th>
+        </tr>
 
 <logic:notEmpty name="solicitud">
     <logic:iterate name="solicitud" id="solicitud">
@@ -61,10 +66,13 @@
                 <td> <bean:write name="solicitud" property="equipo" /> </td>
                 <td><img width="70px" src="assets/materiales/<bean:write name="solicitud" property="equipo"/>.png" /></td>
                 <td>
-            <center> 
-                <bean:write name="solicitud" property="cantidad_solicitada" />
-            </center>
-        </td>
+                    <bean:write name="solicitud" property="talla"/>
+                </td>
+                <td>
+                    <center> 
+                        <bean:write name="solicitud" property="cantidad_solicitada" />
+                    </center>
+                </td>
         <td>
         <center>
             <bean:write name="solicitud" property="cantidad_entregada" />

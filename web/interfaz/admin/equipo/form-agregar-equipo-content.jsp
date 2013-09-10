@@ -51,7 +51,7 @@
 <logic:present name="errorFormatoEquipo">
     <logic:notEmpty name="errorFormatoEquipo">
         <center>
-            <label style="color:red">Debe introducir un imagen válida</label>
+            <label style="color:red">Debe introducir un imagen válida (jpg,png,gif)</label>
         </center>
     </logic:notEmpty>
 </logic:present>

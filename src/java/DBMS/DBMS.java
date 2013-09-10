@@ -2665,7 +2665,7 @@ public class DBMS {
             String sqlquery = "SELECT * FROM \"PREPAS\".periodo ORDER BY id DESC";
             Statement stmt = conexion.createStatement();
             System.out.println(sqlquery);
-            ResultSet rs = stmt.executeQuery(sqlquery);
+            ResultSet rs = stmt.executeQuery(sqlquery);;
             while (rs.next()) {
                 Periodo p = new Periodo();
                 p.setId(rs.getInt("id"));
@@ -2686,26 +2686,49 @@ public class DBMS {
 
     public Boolean agregarPeriodo(Periodo p) {
         try {
-            String sqlquery;
+            
+            if (!existePeriodo(p)){
+                String sqlquery;
 
-            sqlquery = "UPDATE \"PREPAS\".periodo SET"
-                    + " ultimo = 'false'"
-                    + " WHERE ultimo = 'true' ";
-            Statement stmt = conexion.createStatement();
-            Integer i = stmt.executeUpdate(sqlquery);
+                sqlquery = "UPDATE \"PREPAS\".periodo SET"
+                        + " ultimo = 'false'"
+                        + " WHERE ultimo = 'true' ";
+                Statement stmt = conexion.createStatement();
+                Integer i = stmt.executeUpdate(sqlquery);
 
-            sqlquery = "INSERT INTO \"PREPAS\".periodo (fecha_inicio,fecha_fin) VALUES "
-                    + "('"+p.getFecha_inicio()+"', '" + p.getFecha_fin() + "')";
+                sqlquery = "INSERT INTO \"PREPAS\".periodo (fecha_inicio,fecha_fin) VALUES "
+                        + "('"+p.getFecha_inicio()+"', '" + p.getFecha_fin() + "')";
 
-            stmt = conexion.createStatement();
-            i = stmt.executeUpdate(sqlquery);
-            System.out.println(sqlquery);
-            return i > 0;
+                stmt = conexion.createStatement();
+                i = stmt.executeUpdate(sqlquery);
+                System.out.println(sqlquery);
+                return i > 0;
+            }
+            else{
+                return false;
+            }
         } catch (SQLException ex) {
             ex.printStackTrace();
             return false;
         }
     }
+    
+    public Boolean existePeriodo(Periodo p) {
+
+        String sqlquery = "SELECT * FROM \"PREPAS\".periodo"
+                + " WHERE fecha_inicio ='" + p.getFecha_inicio() + "'";
+
+        System.out.println(sqlquery);
+        try {
+            Statement stmt = conexion.createStatement();
+            ResultSet rs = stmt.executeQuery(sqlquery);
+            Boolean b = rs.next();
+            return b;
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return false;
+    }    
 
     public Boolean cerrarPeriodo(Periodo p) {
         try {
