@@ -22,6 +22,35 @@
     </logic:notEmpty>
 </logic:present>
 
+<logic:present name="errorNombreEquipo">
+    <logic:notEmpty name="errorNombreEquipo">
+        <center>
+            <label style="color:red">Debe introducir el nombre del equipo</label>
+        </center>
+    </logic:notEmpty>
+</logic:present>
+<logic:present name="errorTipoEquipo">
+    <logic:notEmpty name="errorTipoEquipo">
+        <center>
+            <label style="color:red">Debe introducir el tipo del equipo</label>
+        </center>
+    </logic:notEmpty>
+</logic:present>
+<logic:present name="errorFuncionalidadEquipo">
+    <logic:notEmpty name="errorFuncionalidadEquipo">
+        <center>
+            <label style="color:red">Debe introducir la funcionalidad del equipo</label>
+        </center>
+    </logic:notEmpty>
+</logic:present>
+<logic:present name="errorVidaUtil">
+    <logic:notEmpty name="errorVidaUtil">
+        <center>
+            <label style="color:red">Debe introducir la vida útil del equipo</label>
+        </center>
+    </logic:notEmpty>
+</logic:present>
+
 <font color="red">
 <html:errors/>
 </font>

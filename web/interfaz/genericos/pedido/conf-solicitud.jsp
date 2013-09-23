@@ -65,7 +65,8 @@
         <html:hidden name="solicitud" property="cantidad"/>
         <html:hidden name="solicitud" property="frecuencia"/>
         <html:hidden name="solicitud" property="serialEquipo"/>
-        <html:hidden name="solicitud" property="nombre_vista"/> 
+        <html:hidden name="solicitud" property="nombre_vista"/>
+        <html:hidden name="solicitud" property="periodo"/>
         <html:hidden name="solicitud" property="talla"/>
         <html:hidden name="usuario" property="usuario"/>
         <html:submit styleClass="btn btn-primary"> Editar </html:submit>

@@ -33,9 +33,71 @@
             <tbody>
                 <tr>
                     <td>
-                        <h1 style="display: inline">Talla: </h1> <html:text 
-                            name="equipo" 
-                            property="talla" styleClass="span3"/>
+                        <h1 style="display: inline">Talla: </h1>
+                        <logic:equal name="equipo" property="tipo_talla" value="camisa">
+                            <html:select name="equipo" property="talla" styleClass="span3">
+                                <option>S</option>
+                                <option>M</option>
+                                <option>L</option>
+                                <option>XL</option>
+                            </html:select>                            
+                        </logic:equal>
+                        <logic:equal name="equipo" property="tipo_talla" value="guantes">
+                            <html:select name="Usuario" property="talla_guantes" styleClass="span3">
+                                <option>S</option>
+                                <option>M</option>
+                                <option>L</option>
+                                <option>XL</option>
+                            </html:select>                            
+                        </logic:equal>
+                        <logic:equal name="equipo" property="tipo_talla" value="mascara">
+                            <html:select name="equipo" property="talla" styleClass="span3">
+                                <option>S</option>
+                                <option>M</option>
+                                <option>L</option>
+                                <option>XL</option> 
+                            </html:select>
+                        </logic:equal>
+                        <logic:equal name="equipo" property="tipo_talla" value="pantalon">
+                            <html:select name="equipo" property="talla" styleClass="span3">
+                                <option>28</option>
+                                <option>30</option>
+                                <option>32</option>
+                                <option>34</option>
+                                <option>36</option>
+                                <option>38</option>
+                                <option>40</option>
+                                <option>42</option>
+                                <option>44</option>
+                                <option>48</option>
+                            </html:select>                            
+                        </logic:equal>
+                        <logic:equal name="equipo" property="tipo_talla" value="zapato">
+                           <html:select name="equipo" property="talla" styleClass="span3">
+                                <option>36</option>
+                                <option>36.5</option>
+                                <option>37</option>
+                                <option>37.5</option>
+                                <option>38</option>
+                                <option>38.5</option>
+                                <option>39</option>
+                                <option>39.5</option>
+                                <option>40</option>
+                                <option>40.5</option>
+                                <option>41</option>
+                                <option>41.5</option>
+                                <option>42</option>
+                                <option>42.5</option>
+                                <option>44</option>
+                                <option>44.5</option>
+                                <option>45</option>
+                            </html:select>
+                        </logic:equal>
+                        <logic:equal name="equipo" property="tipo_talla" value="no aplica">
+                            <html:select name="equipo" property="talla" styleClass="span3">
+                                <option value="no alica">No aplica</option>
+                            </html:select>
+                        </logic:equal>
                     </td>
                     <td>
                         <h1 style="display: inline">Cantidad: </h1><html:text 

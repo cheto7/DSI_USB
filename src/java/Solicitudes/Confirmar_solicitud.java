@@ -45,7 +45,13 @@ public class Confirmar_solicitud extends org.apache.struts.action.Action {
         String usuario = request.getParameter("usuario");
         u.setUsuario(usuario);
         s.setId(Integer.parseInt(idSolicitud));
-        s.setPeriodo(Integer.parseInt(idPeriodo));
+        if (idPeriodo!=null){
+            s.setPeriodo(Integer.parseInt(idPeriodo));
+        }
+        else{
+            s.setPeriodo(Integer.parseInt(request.getParameter("periodo")));
+        }
+       
      
         ArrayList<Solicitud> solicitudes = DBMS.getInstance().obtenerSolicitudUsuario(u, s);
         request.setAttribute("solicitud", solicitudes);

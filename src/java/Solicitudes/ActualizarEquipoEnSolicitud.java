@@ -47,8 +47,10 @@ public class ActualizarEquipoEnSolicitud extends org.apache.struts.action.Action
         s.setFrecuencia(request.getParameter("frecuencia"));
         s.setNombre_vista(request.getParameter("nombre_vista"));
         s.setTalla(request.getParameter("talla"));
+        s.setPeriodo(Integer.parseInt(request.getParameter("periodo")));
         s.setSerialEquipo(Integer.parseInt(request.getParameter("serialEquipo")));
-        if (Integer.parseInt(s.getCantidad())==0){
+        System.out.println("tallaaa: "+s.getTalla());
+        if (!s.getCantidad().matches("[1-9][0-9]*")){
             request.setAttribute("cantidadNula", "error");
             request.setAttribute("solicitud", s);
             request.setAttribute("usuario", u);

@@ -55,6 +55,23 @@
         </center>
     </logic:notEmpty>
 </logic:present>
+
+<logic:present name="errorSectorUniversitario">
+    <logic:notEmpty name="errorSectorUniversitario">
+        <center>
+            <label style="color:red">Debe introducir el sector universitario</label>
+        </center>
+    </logic:notEmpty>
+</logic:present>
+
+<logic:present name="errorVidaUtil">
+    <logic:notEmpty name="errorVidaUtil">
+        <center>
+            <label style="color:red">Debe introducir la vida útil del equipo</label>
+        </center>
+    </logic:notEmpty>
+</logic:present>
+
 <html:form enctype="multipart/form-data" action = "/AgregarEquipo" acceptCharset="iso-8859-1" onsubmit = "return (this)">
     <table width="100%">
         <tr>

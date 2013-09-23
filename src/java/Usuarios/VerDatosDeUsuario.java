@@ -39,7 +39,7 @@ public class VerDatosDeUsuario extends org.apache.struts.action.Action {
         
         Usuario u = new Usuario();
         u.setUsuario(request.getParameter("usuario"));
-        u.setCi(request.getParameter("ci"));
+        /*u.setCi(request.getParameter("ci"));
         u.setPassword(request.getParameter("password"));
         u.setTelefono(request.getParameter("telefono"));
         u.setNombre(request.getParameter("nombre"));
@@ -55,7 +55,9 @@ public class VerDatosDeUsuario extends org.apache.struts.action.Action {
         u.setHabilitado(request.getParameter("habilitado"));
         u.setAdministrador(request.getParameter("administrador"));
         u.setArea_laboral(request.getParameter("area_laboral"));
-        u.setUnidad_adscripcion(request.getParameter("unidad_adscripcion"));
+        u.setUnidad_adscripcion(request.getParameter("unidad_adscripcion"));*/
+        
+        u = DBMS.getInstance().atributosUsuario(u);
         
 
         if (u.getHabilitado().equals("true")) {

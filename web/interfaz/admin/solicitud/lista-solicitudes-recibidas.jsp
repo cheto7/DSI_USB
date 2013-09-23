@@ -11,7 +11,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <html>
     <fieldset>
-        <legend>Lista de Solicitudes recibidas</legend>
+        <legend>Lista de solicitudes recibidas</legend>
         <center>
             <table width="80%">
                 <tr>

@@ -52,6 +52,14 @@ public class AgregarEquipo extends org.apache.struts.action.Action {
             request.setAttribute("errorTallaEquipo", "error");
             return mapping.findForward(FAILURE);
         }
+        if (e.getSector().equals("")) {
+            request.setAttribute("errorSectorUniversitario", "error");
+            return mapping.findForward(FAILURE);
+        }
+        if (e.getVida_util().equals("") || e.getVida_util().equals("0") || e.getTalla().equals("")) {
+            request.setAttribute("errorVidaUtil", "error");
+            return mapping.findForward(FAILURE);
+        }        
         
         System.out.println("NombreFile: "+ e.getFile().toString());
 

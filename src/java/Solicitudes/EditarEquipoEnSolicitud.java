@@ -45,6 +45,7 @@ public class EditarEquipoEnSolicitud extends org.apache.struts.action.Action {
         s.setFrecuencia(request.getParameter("frecuencia"));
         s.setSerialEquipo(Integer.parseInt(request.getParameter("serialEquipo")));
         s.setNombre_vista(request.getParameter("nombre_vista"));
+        s.setPeriodo(Integer.parseInt(request.getParameter("periodo")));
         request.setAttribute("solicitud", s);
         request.setAttribute("usuario", u);
         

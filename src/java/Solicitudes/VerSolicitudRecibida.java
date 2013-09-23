@@ -4,6 +4,7 @@
  */
 package Solicitudes;
 
+import Clases.Periodo;
 import Clases.Solicitud;
 import Clases.Usuario;
 import DBMS.DBMS;
@@ -41,6 +42,8 @@ public class VerSolicitudRecibida extends org.apache.struts.action.Action {
         
         Solicitud s = (Solicitud)form;
         Usuario u = new Usuario();
+        Periodo p = DBMS.getInstance().obtenerPeriodo(s);
+        
         ArrayList<Solicitud> solicitudes = new ArrayList<Solicitud>(0);
         ResultSet rs = DBMS.getInstance().verSolicitud(s);
         while (rs.next()) {
@@ -53,6 +56,7 @@ public class VerSolicitudRecibida extends org.apache.struts.action.Action {
             u.setCi(rs.getString("ci"));
             Solicitud nueva = new Solicitud();
             nueva.setId(rs.getInt("id"));
+            nueva.setPeriodo(rs.getInt("id_periodo"));
             nueva.setCantidad(rs.getString("cantidad"));
             nueva.setFecha_solicitud(rs.getString("fecha_solicitud"));
             nueva.setFrecuencia(rs.getString("frecuencia"));
@@ -62,6 +66,7 @@ public class VerSolicitudRecibida extends org.apache.struts.action.Action {
             nueva.setSerialEquipo(rs.getInt("serial"));
             solicitudes.add(nueva);
         }
+        request.setAttribute("periodo", p);
         request.setAttribute("solicitud", solicitudes);
         request.setAttribute("usuario", u);
         

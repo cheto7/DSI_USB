@@ -4,6 +4,7 @@
  */
 package Solicitudes;
 
+import Clases.Periodo;
 import Clases.Solicitud;
 import Clases.Usuario;
 import DBMS.DBMS;
@@ -50,17 +51,19 @@ public class ActualizarEquipoEnSolicitudAdmin extends org.apache.struts.action.A
         s.setNombre_vista(request.getParameter("nombre_vista"));
         s.setTalla(request.getParameter("talla"));
         s.setSerialEquipo(Integer.parseInt(request.getParameter("serialEquipo")));
-        if (Integer.parseInt(s.getCantidad())==0){
+        
+        Periodo p = DBMS.getInstance().obtenerPeriodo(s);        
+        request.setAttribute("periodo", p);
+        request.setAttribute("solicitud", s);
+        request.setAttribute("usuario", u);        
+        
+        if (!s.getCantidad().matches("[1-9][0-9]*")){
             request.setAttribute("cantidadNula", "error");
-            request.setAttribute("solicitud", s);
-            request.setAttribute("usuario", u);
             return mapping.findForward(FAILURE);
         }
-        request.setAttribute("solicitud", s);
-        request.setAttribute("usuario", u);
         DBMS.getInstance().modificarEnContiene(s);
 
-          ArrayList<Solicitud> solicitudes = new ArrayList<Solicitud>(0);
+        ArrayList<Solicitud> solicitudes = new ArrayList<Solicitud>(0);
         ResultSet rs = DBMS.getInstance().verSolicitud(s);
         while (rs.next()) {
             u.setUsuario(rs.getString("usuario"));

@@ -1,6 +1,5 @@
 package Registro;
 
-import Clases.Mail;
 import Clases.Noticia;
 import Clases.Usuario;
 import Clases.unidadAdscripcion;
@@ -50,7 +49,7 @@ public class Verificar extends DispatchAction {
          * Verificacion de campos obligatorios vacios
          */
         if (u.getUsuario().equals("")) {
-            u.setMensaje("El 'USB-ID' no puede ser vacío.");
+            u.setMensaje("Debe introducir su USB-ID.");
             return mapping.findForward(FAILURE);
         }
         if (u.getNombre().equals("")) {
@@ -81,21 +80,53 @@ public class Verificar extends DispatchAction {
             u.setMensaje("Debe introducir su fecha de ingreso a la USB.");
             return mapping.findForward(FAILURE);
         }
+        if (u.getEmail().equals("")) {
+            u.setMensaje("Debe introducir su correo electrónico.");
+            return mapping.findForward(FAILURE);
+        }
+        
+        /*
+         * Verifica que la fecha de ingreso no sea posterior a la fecha actual
+         */
+        java.util.Date date = new java.util.Date(); 
+        java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("dd-MM-yy");
+        String fecha = sdf.format(date);
+        String [] actual = fecha.split("-");
+        System.out.println("fechaa de ingreso: "+u.getFecha());
+        System.out.println("fechaa de actual: "+fecha);
+        String [] ingreso = u.getFecha().split("/");
+        
+        if (Integer.parseInt(ingreso[2])>Integer.parseInt(actual[2])){
+            u.setMensaje("La fecha de ingreso debe ser anterior a la fecha actual.");
+            return mapping.findForward(FAILURE);
+        }
+        if ((Integer.parseInt(ingreso[1])>Integer.parseInt(actual[1])) && 
+            Integer.parseInt(ingreso[2])>=Integer.parseInt(actual[2])){
+            u.setMensaje("La fecha de ingreso debe ser anterior a la fecha actual.");
+            return mapping.findForward(FAILURE);
+        }
+        if ((Integer.parseInt(ingreso[0])>Integer.parseInt(actual[0])) && 
+            Integer.parseInt(ingreso[2])>=Integer.parseInt(actual[2]) &&
+            Integer.parseInt(ingreso[1])>=Integer.parseInt(actual[1])){
+            u.setMensaje("La fecha de ingreso debe ser anterior a la fecha actual.");
+            return mapping.findForward(FAILURE);
+        }
+         
+        
 
         /*
          * Verifica que el nombre de usuario no este en la base de datos.
          */
         if (DBMS.getInstance().existeUsuario(u)) {
-            u.setMensaje("El nombre de usuario ya existe.");
+            u.setMensaje("El USB-ID ya existe.");
 
             return mapping.findForward(FAILURE);
         }
         /*
-         * Verifica que el nombre de usuario no este en la base de datos.
+         * Verifica la cedula del usuario no este en la base de datos.
          */
         else if (DBMS.getInstance().existeCedula(u)) {
             u.setMensaje("La cédula de identidad ya ha sido registrada.");
-
             return mapping.findForward(FAILURE);
         }
         /*

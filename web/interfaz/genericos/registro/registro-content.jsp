@@ -19,7 +19,7 @@
     <center><label style="color: red"><bean:write name="Usuario" property="mensaje" /></label></center>
 </logic:present>
 
-    <html:form styleId="Form" method="POST" action="/Verificar?method=save" onsubmit="return (this)" acceptCharset="ISO-8859-1">
+<html:form styleId="Form" method="POST" action="/Verificar?method=save" onsubmit="return (this)" acceptCharset="ISO-8859-1">
     <fieldset>
         <legend>Registro</legend>
         <table width="100%">
@@ -27,32 +27,32 @@
                 <td>
                     <label style="color:red">USB-ID:</label>
                     <html:text name="Usuario" property="usuario" styleId="usbid"></html:text>
-                    <span class="help-block">Ejemplo: usuario@usb.ve</span>                    
-                </td>
-                <td>
-                    <label style="color:red">Datos Personales:</label>
-                    <div class="controls controls-row">
+                        <span class="help-block">Ejemplo: usuario@usb.ve</span>                    
+                    </td>
+                    <td>
+                        <label style="color:red">Datos Personales:</label>
+                        <div class="controls controls-row">
                         <html:text name="Usuario" property="nombre" styleId="nombre" styleClass="span2"></html:text>
                         <html:text name="Usuario" property="apellido" styleId="apellido" styleClass="span2"></html:text>                        
-                    </div>                    
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <label style="color:red" >Contraseña:</label>
+                        </div>                    
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label style="color:red" >Contraseña:</label>
                     <html:password name="Usuario" property="password" styleId="password"></html:password>
-                </td>
-                <td>
-                    <label style="color:red">Confirmar Contraseña:</label>
-                    <input id="confirm_password" type="password" class="text" 
-                           name="confirm_password" placeholder="Confirmar Contraseña" 
-                           title="Ingrese su contraseña"/>                    
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <label style="color:red">Cédula de identidad:</label>
-                    <div class="controls controls-row">
+                    </td>
+                    <td>
+                        <label style="color:red">Confirmar Contraseña:</label>
+                        <input id="confirm_password" type="password" class="text" 
+                               name="confirm_password" placeholder="Confirmar Contraseña" 
+                               title="Ingrese su contraseña"/>                    
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label style="color:red">Cédula de identidad:</label>
+                        <div class="controls controls-row">
                         <html:text name="Usuario" property="ci" 
                                    styleId="cedula" 
                                    styleClass="span2">
@@ -63,27 +63,27 @@
                 <td>
                     <label style="color: red">Correo electrónico:</label>
                     <html:text name="Usuario" property="email" styleId="email"></html:text>
-                    <span class="help-block">Ejemplo: usuario@gmail.com</span>
-                </td>
+                        <span class="help-block">Ejemplo: usuario@gmail.com</span>
+                    </td>
 
-            </tr>
-            <tr>
-                <td>
-                    <br>
-                    <label style="color: red">Fecha de Ingreso a la USB:</label>
+                </tr>
+                <tr>
+                    <td>
+                        <br>
+                        <label style="color: red">Fecha de Ingreso a la USB:</label>
                     <html:text name="Usuario" property="fecha" styleId="fecha" 
                                styleClass="campofecha">
                     </html:text>              
                 </td>
                 <td>
-                    <label style="color: red">Teléfono:</label>
+                    <label>Teléfono:</label>
                     <html:text name="Usuario" property="telefono" styleId="tele"></html:text>                    
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <label style="color:red"> Sexo: </label>
-                    <label class="radio">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label style="color:red"> Sexo: </label>
+                        <label class="radio">
                         <html:radio property="sexo" value="masculino">
                             Masculino
                         </html:radio>
@@ -199,29 +199,30 @@
                 <td>
                     <label>Área:</label>
                     <html:select name="Usuario" property="area_laboral" styleClass="span3">
-                <option value="administrativo">Administrativa</option>
-                <option value="academico">Académica</option>
-                <option value="bombero">Bombero</option>
-                <option value="obrero">Obrero</option> 
-            </html:select>                    
-            </td>
+                       <option></option>
+                       <option value="administrativo">Administrativa</option>
+                       <option value="academico">Académica</option>
+                       <option value="bombero">Bombero</option>
+                       <option value="obrero">Obrero</option>
+                    </html:select>
+                </td>
             <td>
                 <label>Cargo:</label>
                 <html:text name="Usuario" property="cargo" styleId="apellido"></html:text>                    
-            </td>
-            </tr>
+                </td>
+                </tr>
 
-        </table>
+            </table>
 
 
 
-<center>
-        <p style="color:red"><br><br>NOTA: Todos los campos indicados en rojo deben ser llenados</p>
-        
-        <html:submit styleClass="btn btn-primary">Registrarse</html:submit>
-        </center>
-    </fieldset>
-</html:form>   
+            <center>
+                <p style="color:red"><br><br>NOTA: Todos los campos indicados en rojo deben ser llenados</p>
+
+            <html:submit styleClass="btn btn-primary">Registrarse</html:submit>
+            </center>
+        </fieldset>
+</html:form>
 
 </div>
 <div id="sidebar-first">

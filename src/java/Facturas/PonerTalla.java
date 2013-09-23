@@ -39,7 +39,7 @@ public class PonerTalla extends Action {
         String usuario = request.getParameter("usuario");
         System.out.println("usuariooooooooooooooo: "+usuario);
         */
-        if ("0".equals(f.getCantidad())){ // Intenta pedir Cero unidades de algun EPP
+        if (!String.valueOf(f.getCantidad()).matches("[1-9][0-9]*")){ // Intenta pedir Cero unidades de algun EPP
             request.setAttribute("errorCantidad", "error");
             return mapping.findForward(FAILURE);
         }
@@ -66,7 +66,7 @@ public class PonerTalla extends Action {
             select.add(new String_Cheto("42"));
             select.add(new String_Cheto("44"));
             select.add(new String_Cheto("48"));
-        }else if(request.getParameter("tipo_talla").equalsIgnoreCase(            "guantes")){
+        }else if(request.getParameter("tipo_talla").equalsIgnoreCase("guantes")){
             select.add(new String_Cheto("S"));
             select.add(new String_Cheto("M"));
             select.add(new String_Cheto("L"));

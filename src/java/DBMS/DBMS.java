@@ -1549,7 +1549,7 @@ public class DBMS {
         try {
             String sqlquery;
 
-            sqlquery = "SELECT C.id, C.cantidad,C.frecuencia, E.nombre_vista, E.imagen, C.talla,E.serial "
+            sqlquery = "SELECT C.id, C.cantidad,C.frecuencia, E.nombre_vista, E.imagen, C.talla,E.serial,S.id_periodo "
                     + "FROM \"PREPAS\".solicitud S,\"PREPAS\".contiene C,\"PREPAS\".equipo E "
                     + "WHERE S.id= '" + sol.getId() + "' AND S.usuario = '" + u.getUsuario() + "' "
                     + "AND C.id=S.id AND E.serial=C.serial";
@@ -1568,6 +1568,7 @@ public class DBMS {
                 s.setImagen(rs.getString("imagen"));
                 s.setTalla(rs.getString("talla"));
                 s.setSerialEquipo(rs.getInt("serial"));
+                s.setPeriodo(rs.getInt("id_periodo"));
                 solicitudes.add(s);
             }
             return solicitudes;
@@ -1660,7 +1661,7 @@ public class DBMS {
     public ResultSet verSolicitud(Solicitud s) {
         try {
             String sqlquery = "SELECT U.usuario, U.nombre, U.apellido,U.ci, U.sexo, U.area_laboral, U.email, "
-                    + " S.id,S.fecha_solicitud,S.modificada,C.serial,C.cantidad,C.talla,C.frecuencia, "
+                    + " S.id,S.id_periodo,S.fecha_solicitud,S.modificada,C.serial,C.cantidad,C.talla,C.frecuencia, "
                     + " E.nombre_vista,E.sector "
                     + "FROM \"PREPAS\".usuario U,\"PREPAS\".solicitud S,\"PREPAS\".contiene C, \"PREPAS\".equipo E "
                     + "WHERE U.usuario = S.usuario AND S.id = '" + s.getId() + "'AND S.fecha_solicitud= '" + s.getFecha_solicitud()
@@ -2784,6 +2785,24 @@ public class DBMS {
         }
         return null;
     }
+    
+    public Periodo obtenerPeriodo(Solicitud s) {
+        try {
+            String sqlquery = "SELECT P.id FROM \"PREPAS\".periodo P, \"PREPAS\".solicitud S "
+                    + "WHERE S.id='" + s.getId() + "' AND S.id_periodo=P.id";
+            Statement stmt = conexion.createStatement();
+            System.out.println(sqlquery);
+            ResultSet rs = stmt.executeQuery(sqlquery);
+            Periodo per = new Periodo();
+            rs.next();
+            per.setId(rs.getInt("id"));
+            return per;
+        } catch (SQLException ex) {
+            System.out.println("EXCEPCION");
+            ex.printStackTrace();
+        }
+        return null;
+    }    
 
     public ResultSet obtenerTiene(int idS, int serial) {
         try {

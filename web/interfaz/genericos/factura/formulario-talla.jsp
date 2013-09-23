@@ -14,7 +14,7 @@
         <html:hidden name="facturado" property="numero_factura"/>
         <html:hidden name="facturado" property="serial"/>
         <html:hidden name="facturado" property="cantidad"/>
-        <html:select name="facturado" property="talla" styleClass="span1">
+        <html:select name="facturado" property="talla" styleClass="span3">
             <html:optionsCollection name="select" label="value" value="value"/>
         </html:select>
         <br/>

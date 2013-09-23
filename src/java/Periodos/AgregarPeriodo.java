@@ -53,7 +53,7 @@ public class AgregarPeriodo extends org.apache.struts.action.Action {
         }
         
         String [] inicio = p.getFecha_inicio().split("-");
-        String [] fin = p.getFecha_fin().split("-");    
+        String [] fin = p.getFecha_fin().split("-");
         
         
         if (Integer.parseInt(inicio[2])>Integer.parseInt(fin[2])){

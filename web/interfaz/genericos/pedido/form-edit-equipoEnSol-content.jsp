@@ -15,7 +15,7 @@
 <legend>Editar Equipo de protección de la solicitud</legend>
 <logic:present name="cantidadNula">
         <center>
-            <label style="color:red">Error: El equipo tiene cero unidades solicitadas </label>
+            <label style="color:red">Error: Debe introducir una cantidad mayor a cero </label>
         </center>
 </logic:present>
 
@@ -40,6 +40,8 @@
                 <html:hidden name="solicitud" property="id"/>
                 <html:hidden name="solicitud" property="serialEquipo"/>
                 <html:hidden name="solicitud" property="nombre_vista"/>
+                <html:hidden name="solicitud" property="periodo"/>
+                <html:hidden name="solicitud" property="talla"/>
                 <html:hidden name="usuario" property="usuario"/>
                 <td>
                 <html:select name="solicitud" property="frecuencia" styleClass="spana">

@@ -4,6 +4,7 @@
  */
 package Solicitudes;
 
+import Clases.Periodo;
 import Clases.Solicitud;
 import Clases.Usuario;
 import DBMS.DBMS;
@@ -49,6 +50,7 @@ public class EliminarEquipoEnSolicitudAdmin extends org.apache.struts.action.Act
         s.setId(Integer.parseInt(idSolicitud));
         s.setFecha_solicitud(fecha_solicitud);
         s.setSerialEquipo(Integer.parseInt(serialEquipo));
+        Periodo p = DBMS.getInstance().obtenerPeriodo(s);
         DBMS.getInstance().EliminarEquipoEnSolicitud(s);
         
         ArrayList<Solicitud> solicitudes = new ArrayList<Solicitud>(0);
@@ -72,6 +74,7 @@ public class EliminarEquipoEnSolicitudAdmin extends org.apache.struts.action.Act
             solicitudes.add(nueva);
         }
        
+        request.setAttribute("periodo", p);
         request.setAttribute("solicitud", solicitudes);
         request.setAttribute("usuario", u);
         return mapping.findForward(SUCCESS);

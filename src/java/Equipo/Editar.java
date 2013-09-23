@@ -20,6 +20,7 @@ import org.apache.struts.action.ActionMapping;
 public class Editar extends Action {
     
     private static final String SUCCESS = "success";
+    private static final String FAILURE = "failure";
     
     @Override
     public ActionForward execute(ActionMapping mapping, ActionForm form,
@@ -27,6 +28,29 @@ public class Editar extends Action {
             throws Exception {
 
         Equipo e = (Equipo) form;
+        if ("".equals(e.getNombre_vista())) {
+            request.setAttribute("errorNombreEquipo", "error");
+            request.setAttribute("equipo", e);
+            return mapping.findForward(FAILURE);
+        }
+        if (e.getTipo().equals("")) {
+            request.setAttribute("errorTipoEquipo", "error");
+            request.setAttribute("equipo", e);
+            return mapping.findForward(FAILURE);
+        }
+        if (e.getFuncionalidad().equals("<br>")) {
+            request.setAttribute("errorFuncionalidadEquipo", "error");
+            request.setAttribute("equipo", e);
+            return mapping.findForward(FAILURE);
+        }
+        if (e.getVida_util().equals("") || e.getVida_util().equals("0") || e.getTalla().equals("")) {
+            request.setAttribute("errorVidaUtil", "error");
+            request.setAttribute("equipo", e);
+            return mapping.findForward(FAILURE);
+        }
+        
+        
+        
         DBMS.getInstance().editarEquipo(e);
         request.setAttribute("equipoEditado",e);
         

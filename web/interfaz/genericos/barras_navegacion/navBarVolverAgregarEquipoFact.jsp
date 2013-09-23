@@ -1,8 +1,9 @@
 <%-- 
-    Document   : navBarVolverConfSol
-    Created on : 28/02/2013, 04:30:41 PM
+    Document   : navBarVolverAgregarEquipoFact
+    Created on : 22/09/2013, 11:00:32 PM
     Author     : ivan
 --%>
+
 <%@ taglib uri="http://struts.apache.org/tags-bean" prefix="bean" %>
 <%@ taglib uri="http://struts.apache.org/tags-html" prefix="html" %>
 <%@ taglib uri="http://struts.apache.org/tags-logic" prefix="logic" %>
@@ -21,11 +22,9 @@
     </p> 
     
     <li>
-       <html:form action="/SiguientePaso" onsubmit="return (this)">
-            <html:hidden name="autenticado" property="usuario"/>
-            <html:hidden name="solicitud" property="id"/>
-            <html:hidden name="solicitud" property="periodo"/>
-            <html:submit style="padding:10px 20px 40px 20px"> Volver a Solicitud </html:submit>
-        </html:form>  
+        <html:form action="/Ir_pag_pedido_factura" onsubmit="return (this)">
+            <html:hidden name="facturado" property="numero_factura"/>
+            <html:submit style="padding:10px 20px 40px 20px"> Volver </html:submit>
+        </html:form>            
     </li>
 </ul>

@@ -65,12 +65,12 @@ public class EditarAdmin extends org.apache.struts.action.Action {
         /*
          * Verificacion de campos obligatorios vacios
          */
-        if (u.getNombre().equals("")) {
-            u.setMensaje("Debe introducir su nombre.");
+        if (!u.getNombre().matches("[a-zA-Z]+\\s?[a-zA-Z]*")) {
+            u.setMensaje("Debe introducir sus nombres correctamente.");
             return mapping.findForward(FAILURE);
         }
-        if (u.getApellido().equals("")) {
-            u.setMensaje("Debe introducir sus apellidos.");
+        if (!u.getApellido().matches("[a-zA-Z]+\\s?[a-zA-Z]*")) {
+            u.setMensaje("Debe introducir sus apellidos correctamente.");
             return mapping.findForward(FAILURE);
         }    
         if (u.getFecha().equals("")) {
@@ -85,6 +85,34 @@ public class EditarAdmin extends org.apache.struts.action.Action {
             u.setMensaje("Debe seleccionar su área laboral.");
             return mapping.findForward(FAILURE);
         }
+        
+        /*
+         * Verifica que la fecha de ingreso no sea posterior a la fecha actual
+         */
+        java.util.Date date = new java.util.Date(); 
+        java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("dd-MM-yy");
+        String fecha = sdf.format(date);
+        String [] actual = fecha.split("-");
+                System.out.println("fechaa de ingreso: "+u.getFecha());
+        System.out.println("fechaa de actual: "+fecha);
+        
+        String [] ingreso = u.getFecha().split("/");
+        
+        if (Integer.parseInt(ingreso[2])>Integer.parseInt(actual[2])){
+            u.setMensaje("La fecha de ingreso debe ser anterior a la fecha actual.");
+            return mapping.findForward(FAILURE);
+        }
+        if ((Integer.parseInt(ingreso[1])>Integer.parseInt(actual[1])) && 
+            Integer.parseInt(ingreso[2])>=Integer.parseInt(actual[2])){
+            u.setMensaje("La fecha de ingreso debe ser anterior a la fecha actual.");
+            return mapping.findForward(FAILURE);
+        }
+        if ((Integer.parseInt(ingreso[0])>Integer.parseInt(actual[0])) && 
+            Integer.parseInt(ingreso[2])>=Integer.parseInt(actual[2]) &&
+            Integer.parseInt(ingreso[1])>=Integer.parseInt(actual[1])){
+            u.setMensaje("La fecha de ingreso debe ser anterior a la fecha actual.");
+            return mapping.findForward(FAILURE);
+        }        
       
 
         DBMS.getInstance().modificarUsuarioAdmin(u);

@@ -21,7 +21,7 @@
     </head>
     <logic:present name="agregadoEquipo">
         <center>
-            <label style="color:red">Equipo no pudo ser agregado.</label>
+            <label style="color:red">El equipo ya fue agregado a la factura.</label>
         </center>
     </logic:present>    
     <div id="tabs">
