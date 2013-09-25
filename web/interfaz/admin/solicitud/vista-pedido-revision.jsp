@@ -26,7 +26,7 @@
     <h5>CI: <bean:write name="usuario" property="ci"/></h5>
     <h5>Email: <bean:write name="usuario" property="email"/></h5>
     <h5>Sexo: <bean:write name="usuario" property="sexo"/></h5>
-    <h5>Sector Universitario: <bean:write name="usuario" property="area_laboral"/></h5>    
+    <h5>Sector Universitario: <bean:write name="usuario" property="area_laboral"/></h5> 
     <table class="table table-hover">
         <tbody>
             <tr>

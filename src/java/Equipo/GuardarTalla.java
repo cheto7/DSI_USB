@@ -44,7 +44,7 @@ public class GuardarTalla extends org.apache.struts.action.Action {
         request.setAttribute("equipo",e);
         
         
-        if (e.getTalla().equals("")){
+        if (!String.valueOf(e.getCantidad()).matches("[1-9][0-9]*")){
             request.setAttribute("tallaVacia","error");
             return mapping.findForward(FAILURE);
         }

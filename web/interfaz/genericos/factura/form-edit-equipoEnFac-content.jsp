@@ -15,7 +15,7 @@
 <legend>Editar Equipo de protección de la factura</legend>
 <logic:present name="cantidadNula">
         <center>
-            <label style="color:red">Error: El equipo tiene cero unidades solicitadas </label>
+            <label style="color:red">Debe introducir una cantidad mayor que cero</label>
         </center>
 </logic:present>
 

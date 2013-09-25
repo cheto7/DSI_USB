@@ -4,8 +4,10 @@
  */
 package Solicitudes;
 
+import Clases.Periodo;
 import Clases.Solicitud;
 import DBMS.DBMS;
+import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.apache.struts.action.ActionForm;
@@ -38,7 +40,22 @@ public class ConfirmarModificacion extends org.apache.struts.action.Action {
         
         Solicitud s = new Solicitud();
         s.setId(Integer.parseInt(request.getParameter("id")));
+        Periodo p = DBMS.getInstance().obtenerPeriodo(s);
         DBMS.getInstance().actualizarSolicitudModificada(s);
+        System.out.println("periodooooo////: "+p.getId());
+       
+        p = DBMS.getInstance().obtenerPeriodo(p);
+        ArrayList<Solicitud> solModificadas = DBMS.getInstance().obtenerSolicitudesModificadas(p);
+        ArrayList<Solicitud> solNoModificadas = DBMS.getInstance().obtenerSolicitudesNoModificadas(p);
+        if (solModificadas.isEmpty()){
+            request.setAttribute("noHayModificadas", "mensaje");
+        }
+        if (solNoModificadas.isEmpty()){
+            request.setAttribute("noHayNoModificadas", "mensaje");
+        }        
+        request.setAttribute("solModificadas", solModificadas);
+        request.setAttribute("solNoModificadas", solNoModificadas);
+        request.setAttribute("periodo",p);
         return mapping.findForward(SUCCESS);
     }
 }
