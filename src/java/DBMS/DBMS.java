@@ -1210,10 +1210,13 @@ public class DBMS {
         ArrayList<Equipo> equipos = new ArrayList<Equipo>(0);
         try {
             
-            String sqlquery = "SELECT DISTINCT E.serial as serial,E.imagen as imagen,E.nombre_vista as nombre_vista,AUX.puntuacion + 1 as puntuacion,E.tipo_talla as tipo_talla\n" +
-                                "FROM \"PREPAS\".equipo E left join (SELECT P.serial as serial, U.usuario as usuario, P.puntuacion as puntuacion \n" +
-                                                                        "FROM \"PREPAS\".tiene T, (\"PREPAS\".usuario U left join \"PREPAS\".puntuacion P on U.usuario = P.usuario)\n" +
-                                                                        "WHERE T.usuario = U.usuario AND U.usuario = '"+ u.getUsuario() +"') AS AUX on E.serial = AUX.serial\n";
+            String sqlquery = "SELECT DISTINCT E.serial as serial,E.imagen as imagen,E.nombre_vista as nombre_vista,AUX.puntuacion + 1 as puntuacion,E.tipo_talla as tipo_talla \n" +
+                                "FROM \"PREPAS\".equipo E, (SELECT TU.serial as serial, TU.usuario as usuario, P.puntuacion as puntuacion \n" +
+                                                            "FROM (SELECT T.serial as serial, U.usuario as usuario "
+                                                                   + "FROM \"PREPAS\".tiene T, \"PREPAS\".usuario U "
+                                                                   + "WHERE T.usuario = U.usuario AND U.usuario = '"+ u.getUsuario() +"') as TU left join \"PREPAS\".puntuacion P \n" +
+                                                            "ON P.serial = TU.serial AND TU.usuario = P.usuario) as AUX \n"
+                              + "WHERE E.serial = AUX.serial\n";
 
 
             Statement stmt = conexion.createStatement();
