@@ -56,7 +56,7 @@
                         <html:text name="Usuario" property="ci" 
                                    styleId="cedula" 
                                    styleClass="span2">
-                        </html:text>                                    
+                        </html:text>
                     </div>           
 
                 </td>

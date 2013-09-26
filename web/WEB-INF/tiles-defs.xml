@@ -90,7 +90,7 @@
     
     <definition name="confirmar-mensaje" extends="formulario-pedido">
         <put name="formulario" value="/interfaz/genericos/conf-mensaje.jsp"></put>
-        <put name="navBar" value="/interfaz/genericos/barras_navegacion/navBarModificarMensaje.jsp"></put>
+        <put name="navBar" value="/inConterfaz/genericos/barras_navegacion/navBarModificarMensaje.jsp"></put>
     </definition>
     
     <definition name="ver-mensaje" extends="formulario-pedido">

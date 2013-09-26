@@ -21,7 +21,9 @@
         </center>
     </logic:present>
     <logic:present name="tallaVacia">
-        <label style="color:red">Error: El campo talla no puede ser vacío</label>
+        <center>
+            <label style="color:red">Error: Debe introducir una cantidad mayor que cero</label>
+        </center>
     </logic:present>        
     <h1 style="display: inline">Nombre de equipo: </h1><bean:write name="equipo" property="nombre_vista"/><br>
     <h1 style="display: inline">Tipo de talla: </h1><bean:write name="equipo" property="tipo_talla"/><br><br><br>
@@ -43,7 +45,7 @@
                             </html:select>                            
                         </logic:equal>
                         <logic:equal name="equipo" property="tipo_talla" value="guantes">
-                            <html:select name="Usuario" property="talla_guantes" styleClass="span3">
+                            <html:select name="equipo" property="talla" styleClass="span3">
                                 <option>S</option>
                                 <option>M</option>
                                 <option>L</option>
@@ -95,7 +97,7 @@
                         </logic:equal>
                         <logic:equal name="equipo" property="tipo_talla" value="no aplica">
                             <html:select name="equipo" property="talla" styleClass="span3">
-                                <option value="no alica">No aplica</option>
+                                <option value="No aplica">No aplica</option>
                             </html:select>
                         </logic:equal>
                     </td>

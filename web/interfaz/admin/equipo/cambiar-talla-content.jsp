@@ -15,16 +15,19 @@
     <legend>Cambiar talla/cantidad a equipo</legend>
 </head>
 <body>
+        <h1 style="display: inline">Nombre de equipo: </h1><bean:write name="equipo" property="nombre_vista"/><br>
+    <h1 style="display: inline">Tipo de talla: </h1><bean:write name="equipo" property="tipo_talla"/><br><br><br>
     <logic:present name="tallaNoAgregada">
         <center>
             <label style="color:red">Error: El equipo ya tiene esta talla registrada</label>
         </center>
     </logic:present>
     <logic:present name="tallaVacia">
-        <label style="color:red">Error: El campo talla no puede ser vacío</label>
+        <center>
+            <label style="color:red">Error: Debe introducir una cantidad mayor que cero</label>
+        </center>
     </logic:present>        
-    <h1 style="display: inline">Nombre de equipo: </h1><bean:write name="equipo" property="nombre_vista"/><br>
-    <h1 style="display: inline">Tipo de talla: </h1><bean:write name="equipo" property="tipo_talla"/><br><br><br>
+
 
     
     <html:form action = "/CambiarTallaEquipo" onsubmit = "return (this)">

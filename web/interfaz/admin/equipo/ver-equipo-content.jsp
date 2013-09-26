@@ -49,7 +49,7 @@
 
     <body>
         <fieldset>
-            <legend>Datos del equipo de protección</legend>.
+            <legend>Datos del equipo de protección</legend>
             <logic:present name="errorTallaNoAplica">
                 <center>
                     <label style="color:red">Error: No aplican tallas al equipo de protección </label>
@@ -75,35 +75,35 @@
                                 <td>
                                     <h1 style="display: inline">Tipo:</h1>
                                     <bean:write name="equipo" property="tipo"></bean:write> 
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <h1 style="display: inline">Funcionalidad:</h1>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <h1 style="display: inline">Funcionalidad:</h1>
                                     <bean:write name="equipo" property="funcionalidad"></bean:write>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <h1 style="display: inline">Norma técnica asociada:</h1>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <h1 style="display: inline">Norma técnica asociada:</h1>
                                     <bean:write name="equipo" property="norma"></bean:write>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <h1 style="display: inline">Vida útil: </h1>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <h1 style="display: inline">Vida útil: </h1>
                                     <bean:write name="equipo" property="vida_util"></bean:write>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <h1 style="display: inline">Sector Universitario: </h1>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <h1 style="display: inline">Sector Universitario: </h1>
                                     <bean:write name="equipo" property="sector"></bean:write>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <h1 style="display: inline">Tipo de talla:</h1>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <h1 style="display: inline">Tipo de talla:</h1>
                                     <bean:write name="equipo" property="tipo_talla"></bean:write>
                                 </td>
                             </tr>                         
@@ -116,22 +116,23 @@
                     </center>
                 </div>
                 <!--<div id="tabla2">-->
-                <table class="table table-hover">
-                    <tbody>
-                        <!--<tr>
-                            <td colspan="3">
-                                <center>
-                                    <img width="100" src="assets/materiales/<bean:write name="equipo" property="nombre_vista"/>.png" />
-                                </center>
-                            </td>
-                        </tr>-->                            
-                        <tr>
-                            <th><center>Talla</center></th>
-                            <th><center>Cantidad</center></th>
-                            <th></th>
-                        </tr>
-                        <logic:present name="listaTallas">
-                            <logic:notEmpty name="listaTallas">
+                <logic:present name="listaTallas">
+                    <logic:notEmpty name="listaTallas">                
+                        <table class="table table-hover">
+                            <tbody>
+                                <!--<tr>
+                                    <td colspan="3">
+                                        <center>
+                                            <img width="100" src="assets/materiales/<bean:write name="equipo" property="nombre_vista"/>.png" />
+                                        </center>
+                                    </td>
+                                </tr>-->                            
+                                <tr>
+                                    <th><center>Talla</center></th>
+                                    <th><center>Cantidad</center></th>
+                                    <th colspan="2"></th>
+                                </tr>
+
                                 <logic:iterate id="talla" name="listaTallas">
 
                                     <tr>
@@ -160,7 +161,7 @@
                                                 <html:submit styleClass="btn btn-primary">Cambiar</html:submit>
                                             </html:form>
                                         </td>
-                                            <td>
+                                        <td>
                                             <html:form action = "/EliminarTalla" onsubmit = "return (this)">
                                                 <html:hidden name="equipo" property="serial"/>
                                                 <html:hidden name="equipo" property="imagen"/>
@@ -177,13 +178,14 @@
                                                 <html:hidden name="talla" property="cantidad"/>
                                                 <html:submit styleClass="btn btn-danger">Eliminar</html:submit>
                                             </html:form>                                                
-                                            </td>
+                                        </td>
                                     </tr>
                                 </logic:iterate>
-                            </logic:notEmpty>
-                        </logic:present>
-                    </tbody>
-                </table>
+
+                            </tbody>
+                        </table>
+                    </logic:notEmpty>
+                </logic:present>                                
                 <!--</div>-->
             </div>
 
