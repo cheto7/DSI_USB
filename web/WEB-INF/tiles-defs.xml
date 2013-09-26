@@ -137,6 +137,10 @@
         <put name="footer" value="/interfaz/genericos/plantilla_general/footer.jsp"></put> 
     </definition>
     
+    <definition name="formulario-pedidoOtro" extends="formulario-pedido">        
+        <put name="navBar" value="/interfaz/genericos/barras_navegacion/navBarSolicitudOtro.jsp"></put>
+    </definition>
+    
     <definition name="formulario-factura-agregar-equipo" path="/interfaz/genericos/pedido/plantilla-pedido.jsp">
         <put name="script" value="/interfaz/genericos/pedido/script-pedido.jsp"></put>
         <put name="formulario" value="/interfaz/genericos/factura/formulario-factura.jsp"></put>
