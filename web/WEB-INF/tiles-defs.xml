@@ -151,7 +151,8 @@
     
     <definition name="formulario-solicitud-agregar-puntuacion" extends="formulario-factura-agregar-equipo">
         <put name="formulario" value="/interfaz/genericos/pedido/formulario-puntuacion.jsp"></put>
-        <put name="navBar" value="/interfaz/genericos/barras_navegacion/navBarpedido.jsp"></put>
+        <put name="navBar" value="/interfaz/admin/barras_navegacion/navBarVolverEquiposEvaluar.jsp"></put>
+        
     </definition>
     
      <definition name="formulario-factura" extends="formulario-pedido">
