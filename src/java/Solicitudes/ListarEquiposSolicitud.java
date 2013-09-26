@@ -22,7 +22,9 @@ import org.apache.struts.action.ActionMapping;
  */
 public class ListarEquiposSolicitud extends org.apache.struts.action.Action {
 
-    /* forward name="success" path="" */
+    /*
+     * forward name="success" path=""
+     */
     private static final String SUCCESS = "success";
     private static final String FAILURE = "failure";
 
@@ -41,17 +43,23 @@ public class ListarEquiposSolicitud extends org.apache.struts.action.Action {
             HttpServletRequest request, HttpServletResponse response)
             throws Exception {
 
-        HttpSession session = request.getSession();
-        String autenticado = (String) session.getAttribute("usuarioAutenticado");
+        String usuario = request.getParameter("nombre_usuario"); //En caso de solicitar por Otro
+
+        if (usuario == null) {
+            HttpSession session = request.getSession();
+            usuario = (String) session.getAttribute("usuarioAutenticado");
+        }
+        
         Usuario u = new Usuario();
-        u.setUsuario(autenticado);
+        u.setUsuario(usuario);
         u = DBMS.getInstance().atributosUsuario(u);
 
-        /* Aqui se debe preguntar por el TIPO DE USUARIO para saber que
-         * equipos se van a listar
+        /*
+         * Aqui se debe preguntar por el TIPO DE USUARIO para saber que equipos
+         * se van a listar
          */
         Solicitud solicitud = DBMS.getInstance().agregarASolicitud(u);
-        if (solicitud==null){
+        if (solicitud == null) {
             request.setAttribute("periodoCerrado", "error");
             return mapping.findForward(FAILURE);
         }
@@ -66,6 +74,7 @@ public class ListarEquiposSolicitud extends org.apache.struts.action.Action {
         request.setAttribute("equiposObrero", equiposObrero);
         request.setAttribute("equiposGen", equiposGen);
         request.setAttribute("solicitud", solicitud);
+        request.setAttribute("usuarioOtro", solicitud);
         return mapping.findForward(SUCCESS);
     }
 }

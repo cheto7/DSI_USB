@@ -46,7 +46,11 @@ public class AgregarEquipoASolicitud extends org.apache.struts.action.Action {
         String ttalla = request.getParameter("tipo_talla");
         String frecuencia = request.getParameter("frecuencia");
         String cantidad = request.getParameter("cantidad");
-        String usuario = request.getParameter("usuario");
+        String usuario = request.getParameter("nombre_usuario"); //En caso de solicitar por Otro
+        
+        if(usuario == null)
+            usuario = request.getParameter("usuario");
+        
         System.out.println("usuariooooooooooooooo: "+usuario);
         
         if (!cantidad.matches("[1-9][0-9]*")){ // Intenta pedir Cero unidades de algun EPP u otra cosa
@@ -60,6 +64,7 @@ public class AgregarEquipoASolicitud extends org.apache.struts.action.Action {
         equipo.setSerial(Integer.parseInt(serial));
         equipo.setTipo_talla(ttalla);
         DBMS.getInstance().agregarAContiene(equipo,solicitud,frecuencia,cantidad);
+        request.setAttribute("usuarioOtro", solicitud);
         return mapping.findForward(SUCCESS);
     }
 }

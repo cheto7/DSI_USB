@@ -22,7 +22,9 @@ import org.apache.struts.action.ActionMapping;
  */
 public class realizar_SolicitudOtros extends org.apache.struts.action.Action {
 
-    /* forward name="success" path="" */
+    /*
+     * forward name="success" path=""
+     */
     private static final String SUCCESS = "success";
     private static final String FAILURE = "failure";
 
@@ -40,18 +42,26 @@ public class realizar_SolicitudOtros extends org.apache.struts.action.Action {
     public ActionForward execute(ActionMapping mapping, ActionForm form,
             HttpServletRequest request, HttpServletResponse response)
             throws Exception {
-        
-        String autenticado = (String) request.getParameter("usuario");
+
+
         Usuario u = new Usuario();
-        u.setUsuario(autenticado);
-        System.out.println("_________"+u.getUsuario()+"_________");
+        String usuario = request.getParameter("nombre_usuario"); //En caso de solicitar por Otro
+
+        if (usuario == null) {
+            usuario = (String) request.getParameter("usuario");
+        }
+        u.setUsuario(usuario);
+
+
+        System.out.println("_________" + u.getUsuario() + "_________");
         u = DBMS.getInstance().atributosUsuario(u);
 
-        /* Aqui se debe preguntar por el TIPO DE USUARIO para saber que
-         * equipos se van a listar
+        /*
+         * Aqui se debe preguntar por el TIPO DE USUARIO para saber que equipos
+         * se van a listar
          */
         Solicitud solicitud = DBMS.getInstance().agregarASolicitud(u);
-        if (solicitud==null){
+        if (solicitud == null) {
             request.setAttribute("periodoCerrado", "error");
             return mapping.findForward(FAILURE);
         }
@@ -66,6 +76,8 @@ public class realizar_SolicitudOtros extends org.apache.struts.action.Action {
         request.setAttribute("equiposObrero", equiposObrero);
         request.setAttribute("equiposGen", equiposGen);
         request.setAttribute("solicitud", solicitud);
+        request.setAttribute("usuarioOtro", solicitud);
+        System.out.println("_________" + solicitud.getNombre_usuario() + "_________");
         return mapping.findForward(SUCCESS);
     }
 }

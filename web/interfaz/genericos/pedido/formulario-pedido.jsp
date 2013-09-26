@@ -49,6 +49,7 @@
                                 <html:hidden name="eq" property="tipo_talla"/>
                                 <html:hidden name="solicitud" property="id"/>
                                 <html:hidden name="solicitud" property="periodo"/>
+                                <html:hidden name="usuarioOtro" property="nombre_usuario"/>
                                 <html:hidden name="autenticado" property="usuario"/>
                             <td>
                                 <html:select name="solicitud" property="frecuencia" styleClass="spana">
@@ -66,8 +67,8 @@
                         <td>
                         <center>
                             <html:submit styleClass="btn btn-primary"> Agregar </html:submit>
-                            </center>
-                            </td>
+                        </center>
+                        </td>
                     </html:form>
                     </tr>
                 </logic:iterate>
@@ -81,6 +82,9 @@
                                 <html:hidden name="eq" property="tipo_talla"/>
                                 <html:hidden name="solicitud" property="id"/>
                                 <html:hidden name="solicitud" property="periodo"/>
+                                <logic:present name="usuarioOtro">
+                                    <html:hidden name="usuarioOtro" property="nombre_usuario"/>                                
+                                </logic:present>
                                 <html:hidden name="autenticado" property="usuario"/>
                             <td>
                                 <html:select name="solicitud" property="frecuencia" styleClass="spana">
@@ -97,7 +101,7 @@
                         </td>
                         <td>
                             <html:submit styleClass="btn btn-primary"> Agregar </html:submit>
-                            </td>
+                        </td>
                     </html:form>
                     </tr>
                 </logic:iterate>
@@ -138,6 +142,7 @@
                                 <html:hidden name="eq" property="tipo_talla"/>
                                 <html:hidden name="solicitud" property="id"/>
                                 <html:hidden name="solicitud" property="periodo"/>
+                                <html:hidden name="usuarioOtro" property="nombre_usuario"/>
                                 <html:hidden name="autenticado" property="usuario"/>
                             <td>
                                 <html:select name="solicitud" property="frecuencia" styleClass="spana">
@@ -154,7 +159,7 @@
                         </td>
                         <td>
                             <html:submit styleClass="btn btn-primary"> Agregar </html:submit>
-                            </td>
+                        </td>
                     </html:form>
                     </tr>
                 </logic:iterate>
@@ -167,6 +172,7 @@
                                 <html:hidden name="eq" property="tipo_talla"/>
                                 <html:hidden name="solicitud" property="id"/>
                                 <html:hidden name="solicitud" property="periodo"/>
+                                <html:hidden name="usuarioOtro" property="nombre_usuario"/>
                                 <html:hidden name="autenticado" property="usuario"/>
                             <td>
                                 <html:select name="solicitud" property="frecuencia" styleClass="spana">
@@ -183,7 +189,7 @@
                         </td>
                         <td>
                             <html:submit styleClass="btn btn-primary"> Agregar </html:submit>
-                            </td>
+                        </td>
                     </html:form>
                     </tr>
                 </logic:iterate>
@@ -225,6 +231,7 @@
                                 <html:hidden name="eq" property="tipo_talla"/>
                                 <html:hidden name="solicitud" property="id"/>
                                 <html:hidden name="solicitud" property="periodo"/>
+                                <html:hidden name="usuarioOtro" property="nombre_usuario"/>
                                 <html:hidden name="autenticado" property="usuario"/>
                             <td>
                                 <html:select name="solicitud" property="frecuencia" styleClass="spana">
@@ -241,7 +248,7 @@
                         </td>
                         <td>
                             <html:submit styleClass="btn btn-primary"> Agregar </html:submit>
-                            </td>
+                        </td>
                     </html:form>
                     </tr>
                 </logic:iterate>
@@ -254,6 +261,7 @@
                                 <html:hidden name="eq" property="tipo_talla"/>
                                 <html:hidden name="solicitud" property="id"/>
                                 <html:hidden name="solicitud" property="periodo"/>
+                                <html:hidden name="usuarioOtro" property="nombre_usuario"/>
                                 <html:hidden name="autenticado" property="usuario"/>
                             <td>
                                 <html:select name="solicitud" property="frecuencia" styleClass="spana">
@@ -270,7 +278,7 @@
                         </td>
                         <td>
                             <html:submit styleClass="btn btn-primary"> Agregar </html:submit>
-                            </td>
+                        </td>
                     </html:form>
                     </tr>
                 </logic:iterate>
@@ -310,6 +318,7 @@
                                 <html:hidden name="eq" property="tipo_talla"/>
                                 <html:hidden name="solicitud" property="id"/>
                                 <html:hidden name="solicitud" property="periodo"/>
+                                <html:hidden name="usuarioOtro" property="nombre_usuario"/>
                                 <html:hidden name="autenticado" property="usuario"/>
                             <td>
                                 <html:select name="solicitud" property="frecuencia" styleClass="spana">
@@ -326,7 +335,7 @@
                         </td>
                         <td>
                             <html:submit styleClass="btn btn-primary"> Agregar </html:submit>
-                            </td>
+                        </td>
                     </html:form>
                     </tr>
                 </logic:iterate>
@@ -339,6 +348,7 @@
                                 <html:hidden name="eq" property="tipo_talla"/>
                                 <html:hidden name="solicitud" property="id"/>
                                 <html:hidden name="solicitud" property="periodo"/>
+                                <html:hidden name="usuarioOtro" property="nombre_usuario"/>
                                 <html:hidden name="autenticado" property="usuario"/>
                             <td>
                                 <html:select name="solicitud" property="frecuencia" styleClass="spana">
@@ -355,7 +365,7 @@
                         </td>
                         <td>
                             <html:submit styleClass="btn btn-primary"> Agregar </html:submit>
-                            </td>
+                        </td>
                     </html:form>
                     </tr>
                 </logic:iterate>
@@ -377,6 +387,7 @@
             <html:form action="/SiguientePaso" onsubmit="return (this)">
                 <html:hidden name="solicitud" property="id"/>
                 <html:hidden name="solicitud" property="periodo"/>
+                <html:hidden name="usuarioOtro" property="nombre_usuario"/>
                 <html:hidden name="autenticado" property="usuario"/>
                 <html:submit styleClass="btn btn-success"> Siguiente </html:submit>
             </html:form>

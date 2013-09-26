@@ -41,7 +41,12 @@ public class ActualizarEquipoEnSolicitud extends org.apache.struts.action.Action
         
         Solicitud s = new Solicitud();
         Usuario u = new Usuario();
-        u.setUsuario(request.getParameter("usuario"));
+        String usuario = request.getParameter("nombre_usuario"); //En caso de solicitar por Otro
+
+        if (usuario == null)        
+            usuario = (request.getParameter("usuario"));
+        
+        u.setUsuario(usuario);
         s.setId(Integer.parseInt(request.getParameter("id")));
         s.setCantidad(request.getParameter("cantidad"));
         s.setFrecuencia(request.getParameter("frecuencia"));
@@ -49,6 +54,7 @@ public class ActualizarEquipoEnSolicitud extends org.apache.struts.action.Action
         s.setTalla(request.getParameter("talla"));
         s.setPeriodo(Integer.parseInt(request.getParameter("periodo")));
         s.setSerialEquipo(Integer.parseInt(request.getParameter("serialEquipo")));
+        s.setNombre_usuario(usuario);
         System.out.println("tallaaa: "+s.getTalla());
         if (!s.getCantidad().matches("[1-9][0-9]*")){
             request.setAttribute("cantidadNula", "error");
@@ -61,6 +67,7 @@ public class ActualizarEquipoEnSolicitud extends org.apache.struts.action.Action
         DBMS.getInstance().modificarEnContiene(s);
         ArrayList<Solicitud> solicitudes = DBMS.getInstance().obtenerSolicitudUsuario(u, s);
         request.setAttribute("solicitud", solicitudes);        
+        request.setAttribute("usuarioOtro", s);        
         
         return mapping.findForward(SUCCESS);
     }

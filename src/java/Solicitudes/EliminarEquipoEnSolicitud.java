@@ -20,7 +20,9 @@ import org.apache.struts.action.ActionMapping;
  */
 public class EliminarEquipoEnSolicitud extends org.apache.struts.action.Action {
 
-    /* forward name="success" path="" */
+    /*
+     * forward name="success" path=""
+     */
     private static final String SUCCESS = "success";
 
     /**
@@ -37,21 +39,26 @@ public class EliminarEquipoEnSolicitud extends org.apache.struts.action.Action {
     public ActionForward execute(ActionMapping mapping, ActionForm form,
             HttpServletRequest request, HttpServletResponse response)
             throws Exception {
-        
+
         Usuario u = new Usuario();
         Solicitud s = new Solicitud();
         String idSolicitud = request.getParameter("id");
-        String usuario = request.getParameter("usuario");
         String serialEquipo = request.getParameter("serialEquipo");
+        String usuario = request.getParameter("nombre_usuario"); //En caso de solicitar por Otro
+
+        if (usuario == null)
+            usuario = request.getParameter("usuario");
         
         u.setUsuario(usuario);
         s.setId(Integer.parseInt(idSolicitud));
+        s.setNombre_usuario(usuario);
         s.setSerialEquipo(Integer.parseInt(serialEquipo));
         DBMS.getInstance().EliminarEquipoEnSolicitud(s);
-        ArrayList<Solicitud> solicitudes = DBMS.getInstance().obtenerSolicitudUsuario(u,s);
-        
+        ArrayList<Solicitud> solicitudes = DBMS.getInstance().obtenerSolicitudUsuario(u, s);
+
         request.setAttribute("solicitud", solicitudes);
         request.setAttribute("usuario", u);
+        request.setAttribute("usuarioOtro", s);
         return mapping.findForward(SUCCESS);
     }
 }

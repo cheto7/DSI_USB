@@ -20,7 +20,9 @@ import org.apache.struts.action.ActionMapping;
  */
 public class Confirmar_solicitud extends org.apache.struts.action.Action {
 
-    /* forward name="success" path="" */
+    /*
+     * forward name="success" path=""
+     */
     private static final String SUCCESS = "success";
 
     /**
@@ -37,25 +39,31 @@ public class Confirmar_solicitud extends org.apache.struts.action.Action {
     public ActionForward execute(ActionMapping mapping, ActionForm form,
             HttpServletRequest request, HttpServletResponse response)
             throws Exception {
-        
+
         Usuario u = new Usuario();
         Solicitud s = new Solicitud();
         String idSolicitud = request.getParameter("id");
         String idPeriodo = request.getParameter("periodo");
-        String usuario = request.getParameter("usuario");
+        String usuario = request.getParameter("nombre_usuario"); //En caso de solicitar por Otro
+
+        if (usuario == null) {
+            usuario =  request.getParameter("usuario");
+        }       
+
         u.setUsuario(usuario);
         s.setId(Integer.parseInt(idSolicitud));
-        if (idPeriodo!=null){
+        s.setNombre_usuario(usuario);
+        if (idPeriodo != null) {
             s.setPeriodo(Integer.parseInt(idPeriodo));
-        }
-        else{
+        } else {
             s.setPeriodo(Integer.parseInt(request.getParameter("periodo")));
         }
-       
-     
+
+
         ArrayList<Solicitud> solicitudes = DBMS.getInstance().obtenerSolicitudUsuario(u, s);
         request.setAttribute("solicitud", solicitudes);
-        request.setAttribute("usuario", u);
+        request.setAttribute("usuario", u);        
+        request.setAttribute("usuarioOtro", s);        
         return mapping.findForward(SUCCESS);
     }
 }

@@ -22,7 +22,8 @@
     </p> 
     
     <li>
-        <html:form action="/Ir_pag_pedido" onsubmit="return (this)">
+        <html:form action="/Ir_pag_pedido" onsubmit="return (this)">            
+            <html:hidden name="usuarioOtro" property="nombre_usuario"/>
             <html:hidden name="autenticado" property="usuario"/>
             <html:submit style="padding:10px 20px 40px 20px"> Seguir Agregando </html:submit>
         </html:form>
