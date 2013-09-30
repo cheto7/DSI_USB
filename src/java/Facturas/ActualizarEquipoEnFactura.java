@@ -5,9 +5,7 @@
 package Facturas;
 
 import Clases.Facturado;
-import Clases.Solicitud;
 import DBMS.DBMS;
-import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.apache.struts.action.Action;
@@ -41,7 +39,7 @@ public class ActualizarEquipoEnFactura extends Action{
         
         Facturado f = (Facturado) form;
         
-        if (f.getCantidad()==0){
+        if (f.getCantidad()<=0){
             request.setAttribute("cantidadNula", "error");
             request.setAttribute("facturado", f);
             return mapping.findForward(FAILURE);

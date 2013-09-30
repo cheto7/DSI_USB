@@ -39,7 +39,7 @@ public class FormularioEditarUsuario extends org.apache.struts.action.Action {
             throws Exception {
 
         Usuario u = (Usuario) form;
-        u = DBMS.getInstance().atributosUsuario(u);
+        u = DBMS.getInstance().atributosUsuarioSinPass(u);
         request.setAttribute("Usuario", u);
 
         unidadAdscripcion actual = new unidadAdscripcion();

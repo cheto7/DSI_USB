@@ -1,13 +1,10 @@
 
 package Editar;
 
-import Clases.Noticia;
 import Clases.Usuario;
 import DBMS.DBMS;
-import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
@@ -38,7 +35,13 @@ public class EditarUsuarioListar extends org.apache.struts.action.Action {
             throws Exception {
                
         Usuario u = (Usuario) form;
-        Boolean modificado = DBMS.getInstance().modificarUsuario(u);
+        Boolean modificado;
+        if (u.getPassword().equals("")){
+            modificado = DBMS.getInstance().modificarUsuarioSinPas(u);
+        }
+        else{
+            modificado = DBMS.getInstance().modificarUsuario(u);
+        }
         
         if (modificado) {
             u.setMensaje("Los datos del usuario ");

@@ -55,7 +55,7 @@
                     <tr>
                         <th width="20%"><center>Fecha</center></th>
                         <th width="50%" ><center>Proveedor</center></th>
-                        <th width="30%" colspan="3"><center>Opciones</center></th>
+                        <th width="30%" colspan="2"><center>Opciones</center></th>
                     </tr>
 
                 <logic:iterate name="facturasNoValidadas" id="factura">
@@ -76,7 +76,7 @@
                         <html:form action = "/FormularioEditarFactura" onsubmit = "return (this)">
                             <html:hidden name="factura" property="numero_factura"/>
                             <html:hidden name="factura" property="proveedor"/>
-                            <html:submit styleClass="btn btn-primary"> Editar </html:submit>
+                            <html:submit styleClass="btn btn-primary"> Ver </html:submit>
                         </html:form> 
                     </center>
                     </td>
@@ -91,7 +91,7 @@
                     </center>
                     </td>
 
-                    <td>
+                    <%--<td>
                     <center>
                         <html:form action="/ValidarFactura" onsubmit="return (this)">
                             <html:hidden name="factura" property="numero_factura"/>
@@ -99,7 +99,7 @@
                             <html:submit styleClass="btn btn-success"> Validar </html:submit>
                         </html:form>
                     </center>
-                    </td>
+                    </td>--%>
                     </tr>
 
                 </logic:iterate>

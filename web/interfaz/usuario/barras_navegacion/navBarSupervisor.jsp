@@ -68,12 +68,12 @@
                 </html:form>
             </li> 
 
-            <li>
+            <%--<li>
                 <html:form action="/ColeccionUsuarios" onsubmit="return (this)">
                     <html:hidden name="autenticado" property="usuario"/>
                     <html:submit style="padding:0px 10px 30px 0px">Pedidos</html:submit>
                 </html:form>
-            </li> 
+            </li> --%>
         </div>
 
 

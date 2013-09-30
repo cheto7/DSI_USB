@@ -55,8 +55,8 @@
     $(document).ready(function(){    
         $("#Form").validate({
             rules: {
-                password: {required: true,minlength: 5},
-                confirm_password: {	required: true,	minlength: 5, equalTo: "#password"}
+                password: {required: false,minlength: 5},
+                confirm_password: {	required: false,minlength: 5, equalTo: "#password"}
        
             },
 				

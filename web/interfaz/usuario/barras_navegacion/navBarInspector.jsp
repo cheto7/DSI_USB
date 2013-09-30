@@ -59,45 +59,39 @@
 
     <div id="accordion">
         <h3>Inspeccionar</h3>
-        <%--esperar por las acciones de ivan el terrible y/o chetix --%>
         <div>             
             <li>
                 <html:form action="/ListadosGenerales" onsubmit="return (this)"> 
                     <html:submit style="padding:0px 10px 30px 0px">Consolidados</html:submit>
                 </html:form>
-            </li>    
+            </li>  
             <li>
-                <html:form action="/listarSolicitantes" onsubmit="return (this)"> 
+                <html:form action="/ListadoGeneral" onsubmit="return (this)">
+                    <html:submit style="padding:0px 10px 30px 0px">Consultar</html:submit>
+                </html:form>
+            </li>            
+            <li>
+                <html:form action="/periodoEntrega" onsubmit="return (this)"> 
                     <html:submit style="padding:0px 10px 30px 0px">Entregas</html:submit>
                 </html:form>
-            </li>    
-
+            </li>
+            <li>
+                <html:form action="/ListarEquipo" onsubmit="return (this)">
+                    <html:submit style="padding:0px 10px 30px 0px">Equipos</html:submit>
+                </html:form>
+            </li>
             <li>
                 <html:form action="/ColeccionUsuarios" onsubmit="return (this)">
                     <html:hidden name="autenticado" property="usuario"/>
                     <html:submit style="padding:0px 10px 30px 0px">Usuarios</html:submit>
                 </html:form>
             </li>
-
-            
-            <li>
-                <html:form action="/ListarEquipo" onsubmit="return (this)">
-                    <html:submit style="padding:0px 10px 30px 0px">Equipos</html:submit>
-                </html:form>
-            </li>
-
-            <li>
-                <html:form action="/ListadoGeneral" onsubmit="return (this)">
-                    <html:submit style="padding:0px 10px 30px 0px">Consultar</html:submit>
-                </html:form>
-            </li>
-
-            <li>
+            <%--<li>
                 <html:form action="/ColeccionUsuarios" onsubmit="return (this)">
                     <html:hidden name="autenticado" property="usuario"/>
                     <html:submit style="padding:0px 10px 30px 0px">Pedidos</html:submit>
                 </html:form>
-            </li> 
+            </li> --%>
         </div>
 
 

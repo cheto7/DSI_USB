@@ -47,7 +47,6 @@
                 <html:password name="Usuario" property="password" styleId="password"></html:password>
             </td>
             <td>
-
                 <label>Confirmar Contraseña:</label>
                 <input id="confirm_password" type="password" class="text" name="confirm_password" placeholder="Confirmar Contraseña" title="Ingrese su contraseña"/>
             </td>
@@ -63,15 +62,15 @@
             </td>
         </tr>
 
-    </table>
-    <legend>Tallas personales:</legend>
-    <table width="90%">
+        </table>
+        <legend>Tallas personales:</legend>
+        <table width="90%">
 
-        <tr>
+            <tr>
 
-            <td>   
-                <h1 style="display: inline">Talla Mascara:</h1>
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <td>   
+                    <h1 style="display: inline">Talla Mascara:</h1>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 <html:select name="Usuario" property="talla_mascara" style="width: 55px">
             <option>
                 <bean:write name="Usuario" property="talla_mascara"></bean:write>
@@ -182,11 +181,11 @@
         <td> 
             <label>Cargo:</label>
             <html:text name="Usuario" property="cargo"></html:text>
-        </td>
-    </tr>        
-    <tr>
-        <td>
-            <label>Área:</label>
+            </td>
+        </tr>        
+        <tr>
+            <td>
+                <label>Área:</label>
             <html:select name="Usuario" property="area_laboral" styleClass="span1" style="width: 150px">
         <option>
             <bean:write name="Usuario" property="area_laboral"></bean:write>

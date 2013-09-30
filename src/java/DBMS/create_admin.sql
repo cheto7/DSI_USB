@@ -1,6 +1,6 @@
-DELETE FROM "PREPAS".usuario;
+/*DELETE FROM "PREPAS".usuario;
 DELETE FROM "PREPAS".noticia;
-DELETE FROM "PREPAS".proveedor;
+DELETE FROM "PREPAS".proveedor;*/
 
 INSERT INTO "PREPAS".usuario VALUES ('cheto@usb.ve','$2a$06$VPlSQ3I4V1qA9IqzY900Quq4s85qRvdg5MS70vZh8gdzYW90XAYXi','cheto1@usb.ve','cheto','rodriguez','19227483','','04262047676','DSI','masculino','S','S','28','S','36','true','administrador');
 INSERT INTO "PREPAS".usuario VALUES ('msoto@usb.ve','$2a$06$VPlSQ3I4V1qA9IqzY900Quq4s85qRvdg5MS70vZh8gdzYW90XAYXi','msoto@usb.ve','Minerva','Soto','','','','DSI','femenino','','','','','','true','administrador');

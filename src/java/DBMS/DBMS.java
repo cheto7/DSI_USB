@@ -419,6 +419,48 @@ public class DBMS {
         }
         return u;
     }
+    
+    
+    /*
+     * Retorna todos los atributos del usuario a consultar.
+     */
+    public Usuario atributosUsuarioSinPass(Usuario us) {
+
+        Usuario u = new Usuario();
+        try {
+            String sqlquery = "SELECT * FROM \"PREPAS\".usuario "
+                    + "WHERE usuario = '" + us.getUsuario() + "'";
+
+            Statement stmt = conexion.createStatement();
+            System.out.println(sqlquery);
+            ResultSet rs = stmt.executeQuery(sqlquery);
+                       
+            rs.next();
+            u.setUsuario(rs.getString("usuario"));
+            u.setTelefono(rs.getString("telefono"));
+            u.setNombre(rs.getString("nombre"));
+            u.setApellido(rs.getString("apellido"));
+            u.setEmail(rs.getString("email"));
+            u.setFecha(rs.getString("fecha"));
+            u.setSexo(rs.getString("sexo"));
+            u.setTalla_mascara(rs.getString("talla_mascara"));
+            u.setTalla_camisa(rs.getString("talla_camisa"));
+            u.setTalla_pantalon(rs.getString("talla_pantalon"));
+            u.setTalla_guantes(rs.getString("talla_guantes"));
+            u.setTalla_zapato(rs.getString("talla_zapato"));
+            u.setHabilitado(rs.getString("habilitado"));
+            u.setAdministrador(rs.getString("administrador"));
+            u.setArea_laboral(rs.getString("area_laboral"));
+            u.setUnidad_adscripcion(rs.getString("unidad_adscripcion"));
+            u.setCi(rs.getString("ci"));
+            u.setCargo(rs.getString("cargo"));
+            return u;
+
+        } catch (SQLException ex) {
+            System.out.println("EXCEPCION");
+        }
+        return u;
+    }    
 
     /*
      * Agrega un usuario a la base de datos.
@@ -811,6 +853,35 @@ public class DBMS {
         }
         return false;
     }
+    
+    
+    /*
+     * Modifica un usuario existente en la base de datos sin cambiar passwd.
+     */
+    public Boolean modificarUsuarioSinPas(Usuario u) {
+        try {
+            String sqlquery = "UPDATE \"PREPAS\".usuario SET "
+                    + "cargo = '" + u.getCargo() + "' , "
+                    + "telefono = '" + u.getTelefono() + "' , "
+                    + "administrador = '" + u.getAdministrador() + "' , "
+                    + "email = '" + u.getEmail() + "' , "
+                    + "unidad_adscripcion = '" + u.getUnidad_adscripcion() + "' , "
+                    + "talla_mascara = '" + u.getTalla_mascara() + "' , "
+                    + "talla_camisa = '" + u.getTalla_camisa() + "' , "
+                    + "talla_pantalon = '" + u.getTalla_pantalon() + "' , "
+                    + "talla_guantes = '" + u.getTalla_guantes() + "' , "
+                    + "area_laboral = '" + u.getArea_laboral() + "' , "
+                    + "talla_zapato = '" + u.getTalla_zapato() + "'"
+                    + "WHERE usuario = '" + u.getUsuario() + "'";
+            Statement stmt = conexion.createStatement();
+            System.out.println(sqlquery);
+            Integer i = stmt.executeUpdate(sqlquery);
+            return i > 0;
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return false;
+    }    
     
     public Mensaje modificarMensaje(Mensaje m) {
         Mensaje me = null;
