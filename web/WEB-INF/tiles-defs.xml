@@ -100,7 +100,7 @@
     
     <definition name="confirmar-eliminar" extends="formulario-pedido">
         <put name="formulario" value="/interfaz/admin/lista_usuarios/eliminar/conf-eliminar.jsp"></put>
-        <put name="navBar" value="/interfaz/admin/barras_navegacion/navBarListar.jsp"></put>
+        <put name="navBar" value="/interfaz/admin/barras_navegacion/navBarVolverDatosUsuario.jsp"></put>
     </definition>
     
     <definition name="interfaz-administrador" extends="formulario-pedido">
@@ -233,7 +233,7 @@
     
     <definition name="form_listado" extends="formulario-pedido">
         <put name="formulario" value="/interfaz/admin/pedido/listado_content.jsp"></put>
-        <put name="navBar" value="/interfaz/genericos/barras_navegacion/navBarpedido.jsp"></put>
+        <put name="navBar" value="/interfaz/admin/barras_navegacion/navBarConsultar.jsp"></put>
     </definition>
     
     <definition name="formulario-editar-noticia" extends="formulario-agregar-noticia">
