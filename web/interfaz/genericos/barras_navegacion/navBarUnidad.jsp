@@ -28,6 +28,12 @@
         </html:form>
     </li>
     <li>
+        <html:form action="/gestionarCargo" onsubmit="return (this)">
+            <html:hidden name="autenticado" property="usuario"/>
+            <html:submit style="padding:10px 20px 40px 20px">Cargos</html:submit>
+        </html:form>
+    </li>    
+    <li>
         <html:form action="/solicitudOtros" onsubmit="return (this)">
             <html:hidden name="autenticado" property="usuario"/>
             <html:submit style="padding:10px 20px 40px 20px">Solicitar por Otros</html:submit>

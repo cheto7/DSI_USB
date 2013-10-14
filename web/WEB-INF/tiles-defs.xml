@@ -319,6 +319,10 @@
     <definition name="agregarUnidad" extends="formulario-pedido">
         <put name="formulario" value="/interfaz/admin/unidad/agregarUnidad.jsp"></put>
         <put name="navBar" value="/interfaz/admin/barras_navegacion/navBarVolverListaUsuario.jsp"></put>
+    </definition>
+    <definition name="agregarCargo" extends="formulario-pedido">
+        <put name="formulario" value="/interfaz/admin/cargo/agregarCargo.jsp"></put>
+        <put name="navBar" value="/interfaz/admin/barras_navegacion/navBarVolverListaUsuario.jsp"></put>
     </definition>    
        <definition name="coleccion-usuarios" extends="formulario-pedido">
         <put name="formulario" value="/interfaz/admin/lista_usuarios/content-lista-usuarios.jsp"></put>

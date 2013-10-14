@@ -1,3 +1,9 @@
+<%-- 
+    Document   : agregarCargo
+    Created on : 02/10/2013, 05:01:40 PM
+    Author     : ivan
+--%>
+
 <%@ taglib uri="http://struts.apache.org/tags-bean" prefix="bean" %>
 <%@ taglib uri="http://struts.apache.org/tags-html" prefix="html" %>
 <%@ taglib uri="http://struts.apache.org/tags-logic" prefix="logic" %>
@@ -6,13 +12,13 @@
 <%@ page contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <script>
     $(function() {
-        $("#editUnidad").attr('placeholder', 'Nombre unidad de adscripción');
+        $("#editCargo").attr('placeholder', 'Nombre del cargo');
     });
     
 </script>
 
 <fieldset>
-    <legend>Registrar Unidad</legend>
+    <legend>Registrar Cargo</legend>
     
 <logic:present name="mensajeUsuarioEditado">
     <logic:notEmpty name="mensajeUsuarioEditado">
@@ -26,55 +32,54 @@
 <logic:present name="mensajeUsuarioNoEditado">
     <logic:notEmpty name="mensajeUsuarioNoEditado">
         <center>
-            <label style="color:red">Error:<bean:write name="mensajeUsuarioNoEditado" property="mensaje"/></label>
+            <label style="color:red">Error: <bean:write name="mensajeUsuarioNoEditado" property="mensaje"/></label>
         </center>
     </logic:notEmpty>
 </logic:present>
-    <html:form styleId="Form" method="POST" action="/registrarUnidadAdscripcion" acceptCharset="ISO-8859-1" onsubmit="return (this)">
-        <!--<label>Nombre Unidad:</label>-->
-        <html:text name="Usuario" value="" property="nombre" styleClass="span6" styleId="editUnidad"></html:text>
+    <html:form styleId="Form" method="POST" action="/registrarCargo" acceptCharset="ISO-8859-1" onsubmit="return (this)">
+        <html:text name="Cargo" value="" property="cargo" styleClass="span6" styleId="editCargo"></html:text>
         <html:submit styleClass="btn btn-primary"> Registrar </html:submit>
     </html:form>
 
 
-    <legend>Unidades Registradas</legend>
-    <logic:notPresent name="unidadAdscripcion">
+    <legend>Cargos registrados</legend>
+    <logic:notPresent name="cargo">
         <label>
-            <center> No hay unidades que mostrar.</center>
+            <center> No hay cargos que mostrar.</center>
         </label>
     </logic:notPresent>
 
-    <logic:present name="unidadAdscripcion">
+    <logic:present name="cargo">
 
-        <logic:empty name="unidadAdscripcion">
+        <logic:empty name="cargo">
             <label>
-                <center> No hay unidades que mostrar.</center>
+                <center> No hay cargos que mostrar.</center>
             </label>
         </logic:empty>
         <br>
 
-        <logic:notEmpty name="unidadAdscripcion">
+        <logic:notEmpty name="cargo">
             <table class="table table-hover">
                 <tbody>
 
 
-                    <logic:iterate name="unidadAdscripcion" id="unidadAdscripcion">
+                    <logic:iterate name="cargo" id="cargo">
 
                         <%
                             if (request.getAttribute("editar") != null) {
                                 if (request.getAttribute("editar").equals("Activado")) {
                         %>
                         <tr>
-                            <html:form action = "/editarUnidad" acceptCharset="ISO-8859-1" onsubmit = "return (this)">
+                            <html:form action = "/editarCargoConfirm" acceptCharset="ISO-8859-1" onsubmit = "return (this)">
                                 <td>          
                                     <h1>
-                                        <p><html:text name="unidadAdscripcion" 
-                                                   property="nombre" 
-                                                   styleId="editUnidad"
+                                        <p><html:text name="cargo" 
+                                                   property="cargo" 
+                                                   styleId="editCargo"
                                                    styleClass="span5">
                                                 
                                             </html:text></p>
-                                        <html:hidden name="unidadAdscripcion" property="id"/>
+                                        <html:hidden name="cargo" property="id"/>
                                     </h1>
                                 </td>
                                 <td></td>
@@ -91,7 +96,7 @@
                         <tr>
                             <td >
                                 <h1>
-                                    <p> <bean:write name="unidadAdscripcion" property="nombre"></bean:write></p>
+                                    <p> <bean:write name="cargo" property="cargo"></bean:write></p>
                                 </h1>
                             </td>
 
@@ -104,17 +109,17 @@
                             </td>
 
                             <td>
-                                <html:form action = "/editarUnidadAdscripcion" acceptCharset="ISO-8859-1" onsubmit = "return (this)">
-                                    <html:hidden name="unidadAdscripcion" property="nombre"/>
-                                    <html:hidden name="unidadAdscripcion" property="id"/>
+                            <html:form action = "/editarCargo" acceptCharset="ISO-8859-1" onsubmit = "return (this)">
+                                    <html:hidden name="cargo" property="cargo"/>
+                                    <html:hidden name="cargo" property="id"/>
                                     <html:hidden name="autenticado" property="usuario"/>
                                     <html:submit styleClass="btn btn-success"> Editar </html:submit>
                                 </html:form> 
                             </td>
 
                             <td>
-                                <html:form method="POST" action="/eliminarUnidadAdscripcion" acceptCharset="ISO-8859-1" onsubmit="return (this)">
-                                    <html:hidden name="unidadAdscripcion" property="id"/>                                    
+                                <html:form method="POST" action="/eliminarCargo" acceptCharset="ISO-8859-1" onsubmit="return (this)">
+                                    <html:hidden name="cargo" property="id"/>                                    
                                     <html:submit styleClass="btn btn-danger"> Eliminar </html:submit>
                                 </html:form>                                                                   
                             </td>
@@ -124,7 +129,7 @@
                         <tr>
                             <td >
                                 <h1>
-                                    <p> <bean:write name="unidadAdscripcion" property="nombre"></bean:write></p>
+                                    <p> <bean:write name="cargo" property="cargo"></bean:write></p>
                                 </h1>
                             </td>
 
@@ -137,17 +142,17 @@
                             </td>
 
                             <td>
-                                <html:form action = "/editarUnidadAdscripcion" acceptCharset="ISO-8859-1" onsubmit = "return (this)">
-                                    <html:hidden name="unidadAdscripcion" property="nombre"/>
-                                    <html:hidden name="unidadAdscripcion" property="id"/>
+                            <html:form action = "/editarCargo" acceptCharset="ISO-8859-1" onsubmit = "return (this)">
+                                    <html:hidden name="cargo" property="cargo"/>
+                                    <html:hidden name="cargo" property="id"/>
                                     <html:hidden name="autenticado" property="usuario"/>
                                     <html:submit styleClass="btn btn-success"> Editar </html:submit>
                                 </html:form> 
                             </td>
 
                             <td>
-                                <html:form method="POST" action="/eliminarUnidadAdscripcion" acceptCharset="ISO-8859-1" onsubmit="return (this)">
-                                    <html:hidden name="unidadAdscripcion" property="id"/>                                    
+                                <html:form method="POST" action="/eliminarCargo" acceptCharset="ISO-8859-1" onsubmit="return (this)">
+                                    <html:hidden name="cargo" property="id"/>                                    
                                     <html:submit styleClass="btn btn-danger"> Eliminar </html:submit>
                                 </html:form>                                                                   
                             </td>
@@ -161,6 +166,4 @@
 
     <br>   
 
-    </fielset>           	
-
-
+    </fielset>

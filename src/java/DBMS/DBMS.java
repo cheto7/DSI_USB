@@ -54,20 +54,20 @@ public class DBMS {
         String q = "";
         ArrayList<String_Cheto> q1 = new ArrayList<String_Cheto>(0);
         if (lg.getOrganizadoPor().equals("usuario")) {
-            q += "select u.usuario as usuario, u.nombre as nombre, u.apellido as apellido,"
-                    + " e.nombre_vista as nombre_equipo, c.talla as talla, c.cantidad as cantidad ";
-            q1.add(new String_Cheto("usuario"));
-            q1.add(new String_Cheto("nombre"));
-            q1.add(new String_Cheto("apellido"));
-            q1.add(new String_Cheto("nombre_equipo"));
-            q1.add(new String_Cheto("talla"));
-            q1.add(new String_Cheto("cantidad"));
+            q += "select u.usuario as USBID, u.nombre as Nombre, u.apellido as Apellido,"
+                    + " e.nombre_vista as Equipo, c.talla as Talla, c.cantidad as Cantidad ";
+            q1.add(new String_Cheto("USBID"));
+            q1.add(new String_Cheto("Nombre"));
+            q1.add(new String_Cheto("Apellido"));
+            q1.add(new String_Cheto("Equipo"));
+            q1.add(new String_Cheto("Talla"));
+            q1.add(new String_Cheto("Cantidad"));
             res.add(q1);
         } else if (lg.getOrganizadoPor().equals("equipo")) {
-            q += "select e.nombre_vista as nombre_equipo, c.talla as talla, SUM(c.cantidad) as cantidad ";
-            q1.add(new String_Cheto("nombre_equipo"));
-            q1.add(new String_Cheto("talla"));
-            q1.add(new String_Cheto("cantidad"));
+            q += "select e.nombre_vista as Equipo, c.talla as Talla, SUM(c.cantidad) as Cantidad ";
+            q1.add(new String_Cheto("Equipo"));
+            q1.add(new String_Cheto("Talla"));
+            q1.add(new String_Cheto("Cantidad"));
             res.add(q1);
         }
         q += "from \"PREPAS\".solicitud as s, \"PREPAS\".contiene as c, \"PREPAS\".equipo as e, "
@@ -79,16 +79,16 @@ public class DBMS {
         }
 
         if (!(lg.getEquipo().equals(""))) {
-            q += "and e.nombre_vista = \'" + lg.getEquipo() + "\' ";
+            q += "and e.nombre_vista ilike \'" + lg.getEquipo() + "\' ";
         }
         if (!(lg.getUsuario().equals(""))) {
-            q += "and u.usuario = \'" + lg.getUsuario() + "\' ";
+            q += "and u.usuario ilike \'" + lg.getUsuario() + "\' "; // ignoreCase
         }
         if (!(lg.getSexo().equals(""))) {
             q += "and u.sexo = \'" + lg.getSexo() + "\' ";
         }
         if (!(lg.getTipo().equals(""))) {
-            q += "and e.sector = \'" + lg.getTipo() + "\' ";
+            q += "and u.area_laboral ilike \'" + lg.getTipo() + "\' ";
         }
         if (lg.getOrganizadoPor().equals("usuario")) {
             q += "order by  u.usuario";
@@ -551,6 +551,7 @@ public class DBMS {
                     u.setHabilitado(rs.getString("habilitado"));
                     u.setAdministrador(rs.getString("administrador"));
                     u.setArea_laboral(rs.getString("area_laboral"));
+                    u.setCargo(rs.getString("cargo"));
                     usrs.add(u);
                 }
             }
@@ -593,6 +594,7 @@ public class DBMS {
                     u.setHabilitado(rs.getString("habilitado"));
                     u.setAdministrador(rs.getString("administrador"));
                     u.setArea_laboral(rs.getString("area_laboral"));
+                    u.setCargo(rs.getString("cargo"));
                     usrs.add(u);
                 }
             }
@@ -2346,6 +2348,31 @@ public class DBMS {
         }
         return unidades;
     }
+    
+    public ArrayList<Cargo> obtenerCargos() {
+        ArrayList<Cargo> cargos = new ArrayList<Cargo>(0);
+        try {
+            String sqlquery;
+            sqlquery = "SELECT * FROM \"PREPAS\".cargo ORDER BY cargo";
+
+            Statement stmt = conexion.createStatement();
+            System.out.println(sqlquery);
+            ResultSet rs = stmt.executeQuery(sqlquery);
+
+            while (rs.next()) {
+                Cargo c = new Cargo();
+                c.setId(rs.getInt("id"));
+                c.setCargo(rs.getString("cargo"));
+
+                cargos.add(c);
+            }
+            return cargos;
+        } catch (SQLException ex) {
+            System.out.println("EXCEPCION");
+            ex.printStackTrace();
+        }
+        return cargos;
+    }    
 
     /*
      * Elimina un usuario de la base de datos
@@ -2365,6 +2392,22 @@ public class DBMS {
         }
         return false;
     }
+    
+    public Boolean eliminarCargo(String id) {
+        try {
+            String sqlquery = "DELETE FROM \"PREPAS\".cargo WHERE "
+                    + "id = '" + id + "' ";
+
+            Statement stmt = conexion.createStatement();
+            System.out.println(sqlquery);
+            Integer i = stmt.executeUpdate(sqlquery);
+
+            return i > 0;
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return false;
+    }    
 
     public ArrayList<unidadAdscripcion> obtenerRestoUnidades(String id) {
         ArrayList<unidadAdscripcion> unidades = new ArrayList<unidadAdscripcion>(0);
@@ -2393,25 +2436,80 @@ public class DBMS {
         }
         return unidades;
     }
-
-    public Boolean editarUnidad(unidadAdscripcion u) {
+    
+    public ArrayList<Cargo> obtenerRestoCargos(String id) {
+        ArrayList<Cargo> cargos = new ArrayList<Cargo>(0);
         try {
-            if (u.getNombre().equals("")){
-                return false;
-            }
-            String sqlquery = "UPDATE \"PREPAS\".unidadAdscripcion "
-                    + "SET  nombre = '" + u.getNombre() + "' "
-                    + "     WHERE id = " + u.getId() + " ";
+            String sqlquery;
+            sqlquery = "SELECT * FROM \"PREPAS\".cargo ORDER BY cargo";
 
             Statement stmt = conexion.createStatement();
             System.out.println(sqlquery);
-            Integer i = stmt.executeUpdate(sqlquery);
-            return i > 0;
+            ResultSet rs = stmt.executeQuery(sqlquery);
+
+            while (rs.next()) {
+                if (rs.getString("id").equalsIgnoreCase(id)) {
+                    System.out.println("Removiendo cargo de la Lista");
+                } else {
+                    Cargo c = new Cargo();
+                    c.setId(rs.getInt("id"));
+                    c.setCargo(rs.getString("cargo"));
+                    cargos.add(c);
+                }
+            }
+            return cargos;
+        } catch (SQLException ex) {
+            System.out.println("EXCEPCION");
+            ex.printStackTrace();
+        }
+        return cargos;
+    }    
+    
+
+    public Boolean editarUnidad(unidadAdscripcion u) {
+        try {
+            Boolean noExiste = noExisteUnidad(u.getNombre());
+            if(noExiste){
+                String sqlquery = "UPDATE \"PREPAS\".unidadAdscripcion "
+                        + "SET  nombre = '" + u.getNombre() + "' "
+                        + "     WHERE id = " + u.getId() + " ";
+
+                Statement stmt = conexion.createStatement();
+                System.out.println(sqlquery);
+                Integer i = stmt.executeUpdate(sqlquery);
+                return i > 0;
+            }
+            else{
+                return false;
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return false;
     }
+    
+    public Boolean editarCargo(Cargo c) {
+        try {
+            Boolean noExiste = noExisteCargo(c);
+            if (noExiste){
+                String sqlquery = "UPDATE \"PREPAS\".cargo "
+                        + "SET  cargo = '" + c.getCargo() + "' "
+                        + "     WHERE id = " + c.getId() + " ";
+
+                Statement stmt = conexion.createStatement();
+                System.out.println(sqlquery);
+                Integer i = stmt.executeUpdate(sqlquery);
+                return i > 0;
+            }
+            else{
+                return false;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+    
 
     public Boolean noExisteUnidad(String n) {
         try {
@@ -2434,6 +2532,27 @@ public class DBMS {
         }
         return true;
     }
+    
+    public Boolean noExisteCargo(Cargo c) {
+        try {
+            String sqlquery;
+            sqlquery = "SELECT * FROM \"PREPAS\".cargo";
+
+            Statement stmt = conexion.createStatement();
+            System.out.println(sqlquery);
+            ResultSet rs = stmt.executeQuery(sqlquery);
+
+            while (rs.next()) {
+                if (rs.getString("cargo").equals(c.getCargo())){
+                    return false;
+                }
+            }
+            return true;
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return true;
+    }    
 
     public Boolean agregarUnidad(String n) {
         try {
@@ -2454,6 +2573,26 @@ public class DBMS {
         }
         return false;
     }
+    
+    public Boolean agregarCargo(Cargo c) {
+        try {
+            Boolean noExiste = noExisteCargo(c);
+            if (noExiste) {
+                String sqlquery;
+                sqlquery = "INSERT INTO \"PREPAS\".cargo (cargo) "
+                        + "VALUES ('" + c.getCargo() + "')";
+
+                Statement stmt = conexion.createStatement();
+                System.out.println(sqlquery);
+                Integer i = stmt.executeUpdate(sqlquery);
+                return i > 0;
+            }
+            return false;
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return false;
+    }    
 
     public ArrayList<Entregas> consultarSolicitudes() {
         ArrayList<Entregas> solicitudes = new ArrayList<Entregas>(0);
@@ -2515,7 +2654,7 @@ public class DBMS {
 
             String sqlquery = "SELECT U.usuario, U.nombre, U.apellido, U.sexo, U.area_laboral, U.email, "
                     + " S.id,S.fecha_solicitud,S.modificada,C.serial,C.cantidad,C.talla,C.frecuencia, "
-                    + " E.nombre_vista,E.sector "
+                    + " E.nombre_vista,E.sector, E.norma "
                     + "FROM \"PREPAS\".usuario U,\"PREPAS\".solicitud S,\"PREPAS\".contiene C, \"PREPAS\".equipo E "
                     + "WHERE U.usuario = S.usuario AND S.id = '" + s + "' AND S.id = C.id AND C.serial = E.serial";
 
@@ -2525,7 +2664,7 @@ public class DBMS {
 
             while (rs.next()) {
                 Entregas nueva = new Entregas();
-                System.out.println("Agregando a la Lista: " + nueva.getUsuario());
+                //int sugerido;
                 nueva.setIdSolicitud(rs.getString("id"));
                 nueva.setSerialEquipo(rs.getString("serial"));
                 nueva.setEquipo(rs.getString("nombre_vista"));
@@ -2533,6 +2672,15 @@ public class DBMS {
                 nueva.setCantidad_solicitada(rs.getInt("cantidad"));
                 nueva.setFecha_solicitud(rs.getString("fecha_solicitud"));
                 nueva.setTalla(rs.getString("talla"));
+                nueva.setFecha_entrega(rs.getString("norma")); // uso fecha entrega para pasar la norma
+//                if(rs.getString("frecuencia").equals("Diario")){ //seteo en frecuencia la cantidad sugerida
+//                    sugerido = nueva.getCantidad_solicitada() * 7;
+//                    nueva.setSugerido(sugerido);
+//                }
+//                if(rs.getString("frecuencia").equals("Semanal")){ //seteo en frecuencia la cantidad sugerida
+//                    sugerido = nueva.getCantidad_solicitada() * 7;
+//                    nueva.setSugerido(sugerido);
+//                }
 
                 int idS = Integer.parseInt(nueva.getIdSolicitud());
                 int serial = Integer.parseInt(nueva.getSerialEquipo());
@@ -2681,6 +2829,7 @@ public class DBMS {
                     + "talla_guantes = '" + u.getTalla_guantes() + "' , "
                     + "talla_zapato = '" + u.getTalla_zapato() + "' , "
                     + "unidad_adscripcion = '" + u.getUnidad_adscripcion() + "' , "
+                    + "cargo = '" + u.getCargo() + "' , "
                     + "area_laboral = '" + u.getArea_laboral() + "' "
                     + "WHERE usuario = '" + u.getUsuario() + "'";
             Statement stmt = conexion.createStatement();
@@ -3055,6 +3204,32 @@ public class DBMS {
         }
         return equipos;
     }
+    
+    public ArrayList<Equipo> obtenerTallasEquipo() {
+        ArrayList<Equipo> equipos = new ArrayList<Equipo>(0);
+        try {
+            String sqlquery = "SELECT E.nombre_vista, T.talla, T.cantidad FROM \"PREPAS\".equipoTalla T, \"PREPAS\".equipo E "
+                    + "WHERE T.serial=E.serial ORDER BY E.nombre_vista";
+
+            Statement stmt = conexion.createStatement();
+            System.out.println(sqlquery);
+            ResultSet rs = stmt.executeQuery(sqlquery);
+
+            while (rs.next()) {
+                Equipo eq = new Equipo();
+                eq.setNombre_vista(rs.getString("nombre_vista"));
+                eq.setTalla(rs.getString("talla"));
+                eq.setCantidad(rs.getInt("cantidad"));
+                equipos.add(eq);
+            }
+            return equipos;
+        } catch (SQLException ex) {
+            System.out.println("EXCEPCION");
+            ex.printStackTrace();
+        }
+        return equipos;
+    }    
+    
     public Boolean eliminarTalla (Equipo e){
         try {
             String sqlquery = "DELETE FROM \"PREPAS\".equipoTalla WHERE "
@@ -3077,7 +3252,7 @@ public class DBMS {
         try {
             String sqlquery = "SELECT S.id,U.nombre,U.apellido,U.ci,U.unidad_adscripcion,S.fecha_solicitud "
                     + "FROM  \"PREPAS\".periodo P, \"PREPAS\".solicitud S, \"PREPAS\".usuario U "
-                    + "WHERE P.fecha_inicio='" + p.getFecha_inicio() + "' AND P.fecha_fin='"+p.getFecha_fin()+"' AND "
+                    + "WHERE P.fecha_inicio='" + p.getFecha_inicio() + "' AND P.fecha_fin='"+p.getFecha_fin()+"' AND S.id_periodo=P.id AND "
                     + "S.modificada= 'true' AND S.usuario=U.usuario "
                     + "ORDER BY U.ci DESC";
             Statement stmt = conexion.createStatement();

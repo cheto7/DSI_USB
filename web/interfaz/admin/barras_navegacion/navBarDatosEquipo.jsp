@@ -27,7 +27,7 @@
         <bean:write name="autenticado" property="apellido"></bean:write>
     </p>
     <li>
-        <html:form action = "/FormularioEditarEquipo" onsubmit = "return (this)">
+        <html:form action = "/FormularioEditarEquipo" acceptCharset="ISO-8859-1" onsubmit = "return (this)">
             <html:hidden name="equipo" property="serial"/>
             <html:hidden name="equipo" property="imagen"/>
             <html:hidden name="equipo" property="tipo"/>
@@ -43,7 +43,7 @@
         </html:form>        
     </li>
     <li>
-        <html:form action="/GestionarTallas" onsubmit="return (this)">
+        <html:form action="/GestionarTallas" acceptCharset="ISO-8859-1" onsubmit="return (this)">
             <html:hidden name="autenticado" property="usuario"/>
             <html:hidden name="equipo" property="serial"/>
             <html:hidden name="equipo" property="imagen"/>
@@ -61,7 +61,7 @@
     </li>
 
     <li>
-        <html:form action = "/ListarEquipo" onsubmit="return (this)">
+        <html:form action = "/ListarEquipo" acceptCharset="ISO-8859-1" onsubmit="return (this)">
             <html:hidden name="autenticado" property="usuario"/>
             <html:submit style="padding:10px 20px 40px 20px"> Volver </html:submit>
         </html:form> 

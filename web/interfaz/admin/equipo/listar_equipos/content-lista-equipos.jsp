@@ -9,7 +9,7 @@
 <%@ taglib uri="http://struts.apache.org/tags-logic" prefix="logic" %>
 <%@ taglib uri="http://struts.apache.org/tags-tiles" prefix="tiles" %>
 
-<%@page contentType="text/html" pageEncoding="UTF-8"%> 
+<%@ page contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 
 <logic:present name="mensajeEquipoEditado">
     <logic:notEmpty name="mensajeEquipoEditado">
@@ -23,7 +23,7 @@
 </logic:present>
 
 <fieldset>
-    <legend>Lista de Equipos de protecciÃ³n</legend> 
+    <legend>Lista de Equipos de protección</legend> 
 
     <logic:notPresent name="equipos">
         <center>
@@ -44,7 +44,7 @@
             <table class="table table-hover" style="table-layout:fixed">
                 <tbody>
                     <tr>
-                <th width="40%"><center>Nombre</center></th>
+                        <th width="40%"><center>Nombre</center></th>
                 <th width="15%"><center>Imagen</center></th>
                 <!--<th width="15%"><center>En existencia</center></th>-->
                 <th colspan="2" width="30%"><center>Opciones</center></th>
@@ -56,22 +56,22 @@
                         <td>
                             <h1>
                                 <p> <bean:write name="equipo" property="nombre_vista"></bean:write></p>
-                            </h1>
+                                </h1>
+                            </td>
+
+                            <td>
+                                <p> <img width="50" src="assets/materiales/<bean:write name="equipo" property="nombre_vista"/>.png" /></p>
                         </td>
 
-                        <td>
-                            <p> <img width="50" src="assets/materiales/<bean:write name="equipo" property="nombre_vista"/>.png" /></p>
-                        </td>
-                        
                         <!--<td>
                     <center>
                             <p> <bean:write name="equipo" property="cantidad"></bean:write> </p>
                             </center>
                         </td>-->
 
-                        <td>
-                    <center>
-                        <html:form action = "/VerDatosEquipo" onsubmit = "return (this)">
+                            <td>
+                        <center>
+                        <html:form action = "/VerDatosEquipo" acceptCharset="ISO-8859-1" onsubmit = "return (this)">
                             <html:hidden name="equipo" property="serial"/>
                             <html:hidden name="equipo" property="imagen"/>
                             <html:hidden name="equipo" property="tipo"/>
@@ -85,26 +85,12 @@
                             <html:hidden name="equipo" property="norma"/>
                             <html:submit styleClass="btn btn-primary"> Ver </html:submit>
                         </html:form>
-                    <%--<html:form action = "/FormularioEditarEquipo" onsubmit = "return (this)">
-                            <html:hidden name="equipo" property="serial"/>
-                            <html:hidden name="equipo" property="imagen"/>
-                            <html:hidden name="equipo" property="tipo"/>
-                            <html:hidden name="equipo" property="nombre_vista"/>
-                            <html:hidden name="equipo" property="cantidad"/>
-                            <html:hidden name="equipo" property="evaluacion"/>
-                            <html:hidden name="equipo" property="funcionalidad"/>
-                            <html:hidden name="equipo" property="sector"/>
-                            <html:hidden name="equipo" property="vida_util"/>
-                            <html:hidden name="equipo" property="tipo_talla"/>
-                            <html:hidden name="equipo" property="norma"/>
-                            <html:submit styleClass="btn btn-success"> Editar </html:submit>
-                        </html:form> --%>
                     </center>
                     </td>
 
                     <td>
                     <center>
-                        <html:form action="/ConfirmarEliminarEquipo" onsubmit="return (this)">
+                        <html:form action="/ConfirmarEliminarEquipo" acceptCharset="ISO-8859-1" onsubmit="return (this)">
                             <html:hidden name="equipo" property="nombre_vista"/>
                             <html:hidden name="equipo" property="serial"/>
                             <html:submit styleClass="btn btn-danger"> Descontinuar </html:submit>
@@ -117,5 +103,11 @@
                 </tbody>
             </table>
         </logic:notEmpty>
+        <center>
+            <html:form action="/DownloadInventario" onsubmit="return (this)">
+                <input type="image" src="assets/botonXlsInventario.png" 
+                       alt="Descargar reporte de solicitudes" />
+            </html:form>            
+        </center>
     </logic:present>
 </fieldset>

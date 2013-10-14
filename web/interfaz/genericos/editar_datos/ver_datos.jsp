@@ -9,21 +9,7 @@
 <%@ taglib uri="http://struts.apache.org/tags-logic" prefix="logic" %>
 <%@ taglib uri="http://struts.apache.org/tags-tiles" prefix="tiles" %>
 
-<%@ page contentType="text/html; charset=UTF-8" %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-        <title><tiles:getAsString name="titulo" ignore="true" /></title>
-        <script type="text/javascript" src="assets/js/jquery-1.8.2.js"></script>
-        <script type="text/javascript" src="assets/js/magia.js"></script>
-        <script type="text/javascript" src="assets/bootstrap/js/bootstrap.js"></script>
-        <link href="assets/bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css"/>
-        <link href="assets/bootstrap/css/bootstrap-responsive.css" rel="stylesheet" type="text/css"/>
-        <link href="assets/css/style.css" rel="stylesheet" type="text/css" />
-    </head>
-
-    <body>
+<%@ page contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
         <fieldset>
             <legend>Datos Personales</legend> 
 
@@ -56,7 +42,7 @@
                     </tr>
                     <tr>
                         <td>
-                            <h1 style="display: inline">Unidad Adscripci√≥n: </h1>
+                            <h1 style="display: inline">Unidad AdscripciÛn: </h1>
                             <bean:write name="Usuario" property="unidad_adscripcion"></bean:write>
                         </td>
                     </tr>
@@ -86,13 +72,13 @@
                     </tr>
                     <tr>
                         <td>
-                            <h1 style="display: inline">Tel√©fono: </h1>
+                            <h1 style="display: inline">TelÈfono: </h1>
                             <bean:write name="Usuario" property="telefono"></bean:write>
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            <h1 style="display: inline">Talla m√°scara: </h1>
+                            <h1 style="display: inline">Talla m·scara: </h1>
                             <bean:write name="Usuario" property="talla_mascara"></bean:write>
                         </td>
                     </tr>
@@ -104,7 +90,7 @@
                     </tr>
                     <tr>
                         <td>
-                            <h1 style="display: inline">Talla pantal√≥n: </h1>
+                            <h1 style="display: inline">Talla pantalÛn: </h1>
                             <bean:write name="Usuario" property="talla_pantalon"></bean:write>
                         </td>
                     </tr>
@@ -126,7 +112,7 @@
             <table align="center">
                 <tr>
                     <td>
-                        <html:form action = "/FormularioEditarUsuario" onsubmit = "return (this)">
+                    <html:form action = "/FormularioEditarUsuario"  acceptCharset="ISO-8859-1" onsubmit = "return (this)">
                             <html:hidden name="Usuario" property="usuario"/>
                             <html:hidden name="Usuario" property="nombre"/>
                             <html:hidden name="Usuario" property="email"/>
@@ -151,6 +137,3 @@
                 </tr>
             </table>
         </fieldset>
-
-    </body>
-</html>

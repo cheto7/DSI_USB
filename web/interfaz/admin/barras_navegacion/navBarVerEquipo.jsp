@@ -14,7 +14,7 @@
         <bean:write name="autenticado" property="apellido"></bean:write>
     </p>
     <li>
-        <html:form action = "/VerDatosEquipo" onsubmit = "return (this)">
+        <html:form action = "/VerDatosEquipo" acceptCharset="ISO-8859-1" onsubmit = "return (this)">
             <html:hidden name="equipo" property="serial"/>
             <html:hidden name="equipo" property="imagen"/>
             <html:hidden name="equipo" property="tipo"/>

@@ -12,14 +12,13 @@
 <script type="text/javascript" src="assets/js/jquery-te-1.0.5.min.js" charset="utf-8"></script>
 <link type="text/css" rel="stylesheet" href="assets/css/jquery-te-Style.css" charset="utf-8" />
 
-<legend>Seguro de validar la factura?</legend>
-<p>Al validar se agregaran los equipos a la Base de Datos y no podra seguir modificando</p>
-        
-            <html:form action = "/IrValidarFactura" acceptCharset="iso-8859-1" onsubmit = "return (this)">
-                <html:hidden name="factura" property="numero_factura"/>
-                
-                <center>
-                    <html:submit styleClass="btn btn-primary"> Validar </html:submit>
-                </center>
-            </html:form>
-        
+<legend>¿Seguro de validar la factura?</legend>
+<center>
+    <p>Al validar la factura se agregaran los equipos al inventario y no podrá seguir modificándola</p>
+</center>        
+<html:form action = "/IrValidarFactura" acceptCharset="iso-8859-1" onsubmit = "return (this)">
+    <html:hidden name="factura" property="numero_factura"/>
+    <center>
+        <html:submit styleClass="btn btn-primary"> Validar </html:submit>
+    </center>
+</html:form>

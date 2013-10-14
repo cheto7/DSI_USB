@@ -9,7 +9,7 @@
 <%@ taglib uri="http://struts.apache.org/tags-logic" prefix="logic" %>
 <%@ taglib uri="http://struts.apache.org/tags-tiles" prefix="tiles" %>
 
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ page contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
@@ -46,7 +46,7 @@
                             <tbody>
                                     <tr>
                                         <td>
-                                            <h1 style="display: inline">Nombre/RazÃ³n social:</h1>
+                                            <h1 style="display: inline">Nombre/Razón social:</h1>
                                              <bean:write name="proveedor" property="nombre"></bean:write>
                                         </td>
                                     </tr>
@@ -71,13 +71,13 @@
                                      </tr>
                                       <tr>
                                         <td>
-                                            <h1 style="display: inline">DirecciÃ³n:</h1>
+                                            <h1 style="display: inline">Dirección:</h1>
                                             <bean:write name="proveedor" property="direccion"></bean:write>
                                         </td>
                                       </tr>
                                       <tr>
                                         <td>
-                                            <h1 style="display: inline">TelÃ©fono: </h1>
+                                            <h1 style="display: inline">Teléfono: </h1>
                                             <bean:write name="proveedor" property="telefono"></bean:write>
                                         </td>
                                       </tr>
@@ -86,7 +86,7 @@
                         <table align="center">
                             <tr>
                                 <td>
-                                <html:form action = "/FormularioEditarProveedor" onsubmit = "return (this)">
+                                <html:form action = "/FormularioEditarProveedor"  acceptCharset="ISO-8859-1" onsubmit = "return (this)">
                                     <html:hidden name="proveedor" property="rif"/>
                                     <html:hidden name="proveedor" property="nombre"/>
                                     <html:hidden name="proveedor" property="email"/>
@@ -97,7 +97,7 @@
                                 </html:form>
                                 </td>
                                 <td>
-                                <html:form action = "/ConfirmarEliminarProveedor" onsubmit = "return (this)">
+                                <html:form action = "/ConfirmarEliminarProveedor" acceptCharset="ISO-8859-1" onsubmit = "return (this)">
                                     <html:hidden name="proveedor" property="rif"/>
                                     <html:hidden name="proveedor" property="nombre"/>
                                     <html:hidden name="proveedor" property="email"/>

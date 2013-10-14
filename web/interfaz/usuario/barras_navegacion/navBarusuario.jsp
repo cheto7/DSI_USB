@@ -8,7 +8,7 @@
 <%@ taglib uri="http://struts.apache.org/tags-logic" prefix="logic" %>
 <%@ taglib uri="http://struts.apache.org/tags-tiles" prefix="tiles" %>
 
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ page contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 
 <link rel="stylesheet" href="assets/css/jquery-ui.css" />
 <script src="assets/js/jquery-ui.js"></script>
@@ -34,11 +34,11 @@
     <%--<li>
         <html:form action = "/FormularioEditarAdmin" onsubmit="return (this)">
             <html:hidden name="autenticado" property="usuario"/>
-            <html:submit style="padding:10px 20px 40px 20px"> Editar InformaciÃ³n </html:submit>
+            <html:submit style="padding:10px 20px 40px 20px"> Editar Información </html:submit>
         </html:form> 
     </li>--%>
     <li>
-        <html:form action = "/VerInforPersonal" onsubmit="return (this)">
+        <html:form action = "/VerInforPersonal" acceptCharset="ISO-8859-1" onsubmit="return (this)">
             <html:hidden name="autenticado" property="usuario"/>
             <html:submit style="padding:10px 20px 40px 20px"> Datos Personales </html:submit>
         </html:form>
@@ -60,12 +60,12 @@
 
     <li>
         <html:form action="/CerrarSesion" onsubmit="return (this)"> 
-            <html:submit style="padding:10px 20px 40px 20px">Cerrar SesiÃ³n</html:submit>
+            <html:submit style="padding:10px 20px 40px 20px">Cerrar Sesión</html:submit>
         </html:form> 
     </li>
 
     <div id="accordion">
-        <h3>AdministraciÃ³n</h3>
+        <h3>Administración</h3>
         <div>
 
             <li>
@@ -124,7 +124,7 @@
             </li>
             <li>
                 <html:form action="/ListarPeriodos" onsubmit="return (this)">
-                    <html:submit style="padding:0px 10px 30px 0px">PerÃ­odos</html:submit>
+                    <html:submit style="padding:0px 10px 30px 0px">Períodos</html:submit>
                 </html:form>
             </li> 
             <li>

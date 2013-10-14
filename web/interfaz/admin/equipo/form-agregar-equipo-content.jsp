@@ -4,7 +4,7 @@
     Author     : cheto
 --%>
 
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ page contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://struts.apache.org/tags-bean" prefix="bean" %>
 <%@ taglib uri="http://struts.apache.org/tags-html" prefix="html" %>
 <%@ taglib uri="http://struts.apache.org/tags-logic" prefix="logic" %>
@@ -12,7 +12,7 @@
 <script type="text/javascript" src="assets/js/jquery-te-1.0.5.min.js" charset="utf-8"></script>
 <link type="text/css" rel="stylesheet" href="assets/css/jquery-te-Style.css" charset="utf-8" />
 
-<legend>Agregar equipo de protecciÃ³n</legend>
+<legend>Agregar equipo de protección</legend>
 <logic:present name="equipoNulo">
     <logic:notEmpty name="equipoNulo">
         <center>
@@ -51,7 +51,7 @@
 <logic:present name="errorFormatoEquipo">
     <logic:notEmpty name="errorFormatoEquipo">
         <center>
-            <label style="color:red">Debe introducir un imagen vÃ¡lida (jpg,png,gif)</label>
+            <label style="color:red">Debe introducir un imagen válida (jpg,png,gif)</label>
         </center>
     </logic:notEmpty>
 </logic:present>
@@ -67,12 +67,12 @@
 <logic:present name="errorVidaUtil">
     <logic:notEmpty name="errorVidaUtil">
         <center>
-            <label style="color:red">Debe introducir la vida Ãºtil del equipo</label>
+            <label style="color:red">Debe introducir la vida útil del equipo</label>
         </center>
     </logic:notEmpty>
 </logic:present>
 
-<html:form enctype="multipart/form-data" action = "/AgregarEquipo" acceptCharset="iso-8859-1" onsubmit = "return (this)">
+<html:form enctype="multipart/form-data" action = "/AgregarEquipo" acceptCharset="ISO-8859-1" onsubmit = "return (this)">
     <table width="100%">
         <tr>
             <td>
@@ -83,11 +83,11 @@
                 <label>Sector universitario:</label>
                 <html:select name="Equipo" property="sector">
             <option> </option>
-            <option value="academico">AcadÃ©mico</option>
+            <option value="academico">Académico</option>
             <option value="administrativo">Administrativo</option>
             <option value="bombero">Bombero</option>
             <option value="obrero">Obrero</option>
-            <option value="generico">GenÃ©rico</option>
+            <option value="generico">Genérico</option>
         </html:select>                
     </td>
 </tr>
@@ -102,8 +102,8 @@
     <option> </option>
     <option value="camisa">Camisa</option>
     <option value="guantes">Guantes</option>
-    <option value="mascara">MÃ¡scara</option>
-    <option value="pantalon">PantalÃ³n</option>
+    <option value="mascara">Máscara</option>
+    <option value="pantalon">Pantalón</option>
     <option value="zapato">Zapato</option>
     <option value="no aplica">No Aplica</option>
 </html:select>
@@ -121,7 +121,7 @@
 </tr>
 <tr>
     <td>
-        <label>Norma tÃ©cnica asociada:</label>
+        <label>Norma técnica asociada:</label>
         <html:text name="Equipo" property="norma" styleClass="span4" ></html:text>
     </td>
     <td></td>
@@ -134,14 +134,14 @@
     <td></td>
 </tr>--%>
 <tr>
-    <td style="display: inline"><label>Vida Ãºtil:</label>
+    <td style="display: inline"><label>Vida útil:</label>
         <html:text name="Equipo" property="vida_util" styleClass="span2" value="0"></html:text>
         <html:select name="Equipo" property="talla" styleClass="span2">
             <option></option>
-            <option>DÃ­as</option>
+            <option>Días</option>
             <option>Semanas</option>
             <option>Meses</option>
-            <option>AÃ±os</option>
+            <option>Años</option>
         </html:select>  
     </td>
     <td></td>

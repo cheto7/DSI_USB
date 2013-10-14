@@ -4,6 +4,7 @@
  */
 package Editar;
 
+import Clases.Cargo;
 import Clases.Usuario;
 import Clases.unidadAdscripcion;
 import DBMS.DBMS;
@@ -57,12 +58,16 @@ public class FormularioEditarUsuarioAdmin extends org.apache.struts.action.Actio
         u.setAdministrador(request.getParameter("administrador"));
         //u.setAdministrador(DBMS.getInstance().PrivilegiosUsuario(u));
         u.setArea_laboral(request.getParameter("area_laboral"));
-
+        u.setCargo(request.getParameter("cargo"));
+        u.setUnidad_adscripcion(request.getParameter("unidad_adscripcion"));
+        
         request.setAttribute("Usuario", u);
         request.setAttribute("autenticado", request.getParameter("autenticado"));
-        u.setUnidad_adscripcion(request.getParameter("unidad_adscripcion"));
+
         ArrayList<unidadAdscripcion> select = DBMS.getInstance().obtenerUnidadesAdscripcion();
         request.setAttribute("select", select);
+        ArrayList<Cargo> cargos = DBMS.getInstance().obtenerCargos();
+        request.setAttribute("cargos", cargos);        
         return mapping.findForward(SUCCESS); 
     }
 }

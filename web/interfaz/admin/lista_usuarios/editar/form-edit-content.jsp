@@ -36,7 +36,7 @@
     </tr>
 </table>
 
-<html:form action = "/Editar" styleId="Form" onsubmit = "return (this)">
+<html:form action = "/Editar" styleId="Form" acceptCharset="ISO-8859-1" onsubmit = "return (this)">
     <html:hidden name="Usuario" property="usuario"/>
     <html:hidden name="Usuario" property="administrador"/>
     <html:hidden name="autenticado" property="usuario"/>
@@ -180,7 +180,17 @@
         </td>
         <td> 
             <label>Cargo:</label>
-            <html:text name="Usuario" property="cargo"></html:text>
+            <%--<html:text name="Usuario" property="cargo"></html:text>--%>
+                <logic:present name="cargos">
+                    <logic:notEmpty name="cargos">
+                        <html:select name="Usuario" property="cargo" styleClass="span6">
+                            <html:optionsCollection name="cargos" value="cargo" label="cargo"/>
+                        </html:select>
+                    </logic:notEmpty>
+                    <logic:empty name="cargos">
+                        No hay Cargos registrados
+                    </logic:empty>
+                </logic:present>
             </td>
         </tr>        
         <tr>

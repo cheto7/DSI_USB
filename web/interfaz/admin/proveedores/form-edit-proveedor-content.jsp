@@ -4,7 +4,7 @@
     Author     : ivan
 --%>
 
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ page contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://struts.apache.org/tags-bean" prefix="bean" %>
 <%@ taglib uri="http://struts.apache.org/tags-html" prefix="html" %>
 <%@ taglib uri="http://struts.apache.org/tags-logic" prefix="logic" %>
@@ -26,17 +26,17 @@
         </center>
 </logic:present>
 
-<html:form action = "/EditarProveedor" acceptCharset="iso-8859-1" onsubmit = "return (this)">
+<html:form action = "/EditarProveedor" acceptCharset="ISO-8859-1" onsubmit = "return (this)">
 
     <label>RIF:</label>
     <html:text name="Proveedor" property="rif" styleClass="span5">
         <bean:write name="proveedor" property="rif"/>
     </html:text><br>
-    <label>Nombre / RazÃ³n Social:</label>
+    <label>Nombre / Razón Social:</label>
     <html:text name="Proveedor" property="nombre" styleClass="span5">
         <bean:write name="proveedor" property="nombre"/>
     </html:text><br>
-    <label>DirecciÃ³n:</label>
+    <label>Dirección:</label>
     <html:textarea name="Proveedor" property="direccion" rows="4" styleClass="span5">
         <bean:write name="proveedor" property="direccion"/>
     </html:textarea><br>
@@ -48,7 +48,7 @@
     <html:text name="Proveedor" property="contacto" styleClass="span5">
         <bean:write name="proveedor" property="contacto"/>
     </html:text><br>
-    <label>TelÃ©fono:</label>
+    <label>Teléfono:</label>
     <html:text name="Proveedor" property="telefono" styleClass="span5">
         <bean:write name="proveedor" property="telefono"/>
     </html:text><br>

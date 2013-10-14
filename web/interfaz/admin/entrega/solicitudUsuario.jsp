@@ -14,7 +14,7 @@
 <legend>Solicitud de usuario</legend>
 <label style="color:blue">
     <center>
-        <p id="Parrafo">Una vez registrada la entrega de equipos no se podrá dehacer.</p>
+        <p id="Parrafo">Una vez registrada la entrega de equipos no se podrá deshacer.</p>
     </center>                    
 </label>
 <logic:present name="noHayEquipo">
@@ -46,45 +46,54 @@
     </logic:notEmpty>
 </logic:present>
 
-
-<table class="table table-hover" width="100%">
-    <tbody>
-        <tr>
-            <th width="35%">Equipo</th>
-            <th width="15%">Imagen</th>
-            <th>Talla</th>
-            <th><center>Solicitada</center></th>
-            <th>Entregada</th>
-            <th><center>Entregar</center></th>
-            <th colspan="2"></th>
-        </tr>
+<logic:empty name="solicitud">
+    <center>
+        <label style="color:red">
+            <p id="Parrafo">No hay equipos en la solicitud.</p>
+        </label>
+    </center>
+</logic:empty>
 
 <logic:notEmpty name="solicitud">
-    <logic:iterate name="solicitud" id="solicitud">
-        <tr>
-            <html:form action="/entregarEquipo" onsubmit="return (this)">
-                <td> <bean:write name="solicitud" property="equipo" /> </td>
-                <td><img width="70px" src="assets/materiales/<bean:write name="solicitud" property="equipo"/>.png" /></td>
-                <td>
-                    <bean:write name="solicitud" property="talla"/>
-                </td>
-                <td>
-                    <center> 
-                        <bean:write name="solicitud" property="cantidad_solicitada" />
-                    </center>
-                </td>
-        <td>
-        <center>
-            <bean:write name="solicitud" property="cantidad_entregada" />
+    <table class="table table-hover" width="100%">
+        <tbody>
+            <tr>
+                <th width="35%">Equipo</th>
+                <th width="15%">Imagen</th>
+                <th>Talla</th>
+                <th><center>Aprobada</center></th>
+    <th><center>Sugerida</center></th>
+<th>Entregada</th>
+<th colspan="2"><center>Entregar</center></th>
+</tr>
+
+<logic:iterate name="solicitud" id="solicitud">
+    <tr>
+        <html:form action="/entregarEquipo" onsubmit="return (this)">
+            <td> <bean:write name="solicitud" property="equipo" /> </td>
+            <td><img width="70px" src="assets/materiales/<bean:write name="solicitud" property="equipo"/>.png" /></td>
+            <td>
+                <bean:write name="solicitud" property="talla"/>
+            </td>
+            <td>
+        <center> 
+            <bean:write name="solicitud" property="cantidad_solicitada"/>
         </center>
     </td>
     <td>
+        <%--<bean:write name="solicitud" property="sugerido"/>--%>
+    </td>
+    <td>
     <center>
-        <html:text name="solicitud" property="cantidad_entregada" style="width:20px" />
+        <bean:write name="solicitud" property="cantidad_entregada" />
     </center>
 </td>
 <td>
+<center>
+    <html:text name="solicitud" property="cantidad_entregada" style="width:20px" />
+</center>
 </td>
+
 <td>
     <html:hidden name="solicitud" property="idSolicitud"/>                                    
     <html:hidden name="solicitud" property="usuario"/>
@@ -94,16 +103,19 @@
     <html:hidden name="periodos" property="fecha_fin"/>
     <html:submit styleClass="btn btn-success"> Entregar</html:submit>
 </html:form>
-</td>              
+</td>
 </tr>
 
 </logic:iterate>
-</logic:notEmpty>
+
 </tbody>
 </table>
+</logic:notEmpty>
 <center>
-    <html:form action="/DownloadEntregaPDF" onsubmit="return (this)">
-        <html:hidden name="solicitud" property="idSolicitud"/>
-        <input type="image" src="/assets/BotonPDFEntrega.png" alt="Descargar comprobante de entrega" />
-    </html:form>
+    <logic:notEmpty name="solicitud">
+        <html:form action="/DownloadEntregaPDF" onsubmit="return (this)">
+            <html:hidden name="solicitud" property="idSolicitud"/>
+            <input type="image" src="assets/BotonPDFEntrega.png" alt="Descargar comprobante de entrega" />
+        </html:form>
+    </logic:notEmpty>
 </center>

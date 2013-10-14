@@ -2,10 +2,10 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package Unidad;
+package Cargo;
 
+import Clases.Cargo;
 import Clases.Usuario;
-import Clases.unidadAdscripcion;
 import DBMS.DBMS;
 import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
@@ -16,13 +16,11 @@ import org.apache.struts.action.ActionMapping;
 
 /**
  *
- * @author daniel
+ * @author ivan
  */
-public class editarUnidad extends org.apache.struts.action.Action {
+public class editarCargoConfirm extends org.apache.struts.action.Action {
 
-    /*
-     * forward name="success" path=""
-     */
+    /* forward name="success" path="" */
     private static final String SUCCESS = "success";
 
     /**
@@ -39,31 +37,33 @@ public class editarUnidad extends org.apache.struts.action.Action {
     public ActionForward execute(ActionMapping mapping, ActionForm form,
             HttpServletRequest request, HttpServletResponse response)
             throws Exception {
-        unidadAdscripcion editar = new unidadAdscripcion();
+        
+        Cargo editar = new Cargo();
         Usuario u = new Usuario();
 
-        editar.setId(request.getParameter("id"));
-        editar.setNombre(request.getParameter("nombre"));
+        editar.setId(Integer.parseInt(request.getParameter("id")));
+        editar.setCargo(request.getParameter("cargo"));
         
-        if (editar.getNombre().equals("")){
-            u.setMensaje("Debe llenar el nombre de la unidad. ");
+        if (editar.getCargo().equals("")){
+            u.setMensaje("No puede dejar vacío el nombre del cargo. ");
             request.setAttribute("mensajeUsuarioNoEditado", u);
-            ArrayList<unidadAdscripcion> listaUnidades = DBMS.getInstance().obtenerUnidadesAdscripcion();
-            request.setAttribute("unidadAdscripcion", listaUnidades);
+            ArrayList<Cargo> cargo = DBMS.getInstance().obtenerCargos();
+            request.setAttribute("cargo", cargo);            
             return mapping.findForward(SUCCESS);
         }
-        
-        Boolean modificado = DBMS.getInstance().editarUnidad(editar);
+
+        Boolean modificado = DBMS.getInstance().editarCargo(editar);     
 
         if (modificado) {
-            u.setMensaje("La Unidad ha sido Modificada. ");
+            u.setMensaje("El cargo ha sido Modificado. ");
             request.setAttribute("mensajeUsuarioEditado", u);
         } else {
-            u.setMensaje("La unidad ya ha sido registrada previamente. ");
+            u.setMensaje("Ya fue registrado el cargo previamente. ");
             request.setAttribute("mensajeUsuarioNoEditado", u);
         }
-        ArrayList<unidadAdscripcion> listaUnidades = DBMS.getInstance().obtenerUnidadesAdscripcion();
-        request.setAttribute("unidadAdscripcion", listaUnidades);
+        ArrayList<Cargo> cargo = DBMS.getInstance().obtenerCargos();
+        request.setAttribute("cargo", cargo);        
+
         return mapping.findForward(SUCCESS);
     }
 }

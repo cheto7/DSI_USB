@@ -1,5 +1,6 @@
 package Editar;
 
+import Clases.Cargo;
 import Clases.Usuario;
 import Clases.unidadAdscripcion;
 import javax.servlet.http.HttpServletRequest;
@@ -48,7 +49,16 @@ public class FormularioEditarUsuario extends org.apache.struts.action.Action {
         select.add(actual);
         ArrayList<unidadAdscripcion> resto = DBMS.getInstance().obtenerUnidadesAdscripcion();
         select.addAll(resto);
+        
+        Cargo cargoactual = new Cargo();
+        cargoactual.setCargo(u.getCargo());
+        ArrayList<Cargo> cargos = new ArrayList<Cargo>(0);
+        cargos.add(cargoactual);
+        ArrayList<Cargo> restocargos = DBMS.getInstance().obtenerCargos();
+        cargos.addAll(restocargos);
+        
         request.setAttribute("select", select);
+        request.setAttribute("cargos", cargos);
 
         return mapping.findForward(SUCCESS);
     }

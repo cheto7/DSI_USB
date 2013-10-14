@@ -1,4 +1,8 @@
-package Registro;
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package Cargo;
 
 import Clases.Cargo;
 import Clases.unidadAdscripcion;
@@ -12,14 +16,11 @@ import org.apache.struts.action.ActionMapping;
 
 /**
  *
- * @author cheo
+ * @author ivan
  */
+public class editarCargo extends org.apache.struts.action.Action {
 
-/*
- * Accion que lleva a la pagina de registro.
- */
-public class Registro extends org.apache.struts.action.Action {
-
+    /* forward name="success" path="" */
     private static final String SUCCESS = "success";
 
     /**
@@ -36,26 +37,23 @@ public class Registro extends org.apache.struts.action.Action {
     public ActionForward execute(ActionMapping mapping, ActionForm form,
             HttpServletRequest request, HttpServletResponse response)
             throws Exception {
+        
+        String idCargo = request.getParameter("id");
+        String cargo = request.getParameter("cargo");
+        Cargo editar = new Cargo();
+        
+        editar.setId(Integer.parseInt(idCargo));
+        editar.setCargo(cargo);
 
-        unidadAdscripcion vacia = new unidadAdscripcion();
-        vacia.setNombre("");
-        
-        Cargo cargo = new Cargo();
-        cargo.setCargo("");
-        
         ArrayList<Cargo> cargos = new ArrayList<Cargo>(0);
-        ArrayList<Cargo> restocargos = DBMS.getInstance().obtenerCargos();
-        cargos.add(cargo);
-        cargos.addAll(restocargos);
+        cargos.add(editar);
+        
+        ArrayList<Cargo> resto = DBMS.getInstance().obtenerRestoCargos(idCargo);
+        cargos.addAll(resto);
+        
+        request.setAttribute("cargo", cargos);
+        request.setAttribute("editar", "Activado");
 
-        ArrayList<unidadAdscripcion> select = new ArrayList<unidadAdscripcion>(0);
-        ArrayList<unidadAdscripcion> resto = DBMS.getInstance().obtenerUnidadesAdscripcion();
-        select.add(vacia);
-        select.addAll(resto);
-        
-        request.setAttribute("cargos", cargos); 
-        request.setAttribute("select", select); 
-        
         return mapping.findForward(SUCCESS);
     }
 }

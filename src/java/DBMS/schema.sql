@@ -260,3 +260,12 @@ CREATE TABLE "PREPAS".mensaje (
 ) WITH (
 OIDS = FALSE
 );
+
+CREATE TABLE "PREPAS".cargo (
+    id SERIAL NOT NULL,
+    cargo VARCHAR NOT NULL, 
+
+    CONSTRAINT PK_cargo PRIMARY KEY (id)
+) WITH (
+OIDS = FALSE
+);

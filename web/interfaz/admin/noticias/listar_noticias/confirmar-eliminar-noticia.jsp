@@ -8,12 +8,12 @@
 <%@ taglib uri="http://struts.apache.org/tags-logic" prefix="logic" %>
 <%@ taglib uri="http://struts.apache.org/tags-tiles" prefix="tiles" %>
 
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ page contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 
 <fieldset>
     <center>
         <br><br><br>
-        <label>Â¿Desea eliminar la noticia
+        <label>¿Desea eliminar la noticia
             '<bean:write name="noticia" property="titulo"/>'
             ?
         </label>

@@ -11,6 +11,7 @@
 <%@ taglib uri="http://struts.apache.org/tags-html" prefix="html" %>
 <%@ taglib uri="http://struts.apache.org/tags-logic" prefix="logic" %>
 <%@ taglib uri="http://struts.apache.org/tags-tiles" prefix="tiles" %>
+<%@ page contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -77,6 +78,12 @@
                     </tr>
                     <tr>
                         <td>
+                            <h1 style="display: inline">Cargo:</h1>
+                            <bean:write name="Usuario" property="cargo"></bean:write>
+                        </td>
+                    </tr>                        
+                    <tr>
+                        <td>
                             <h1 style="display: inline">Teléfono: </h1>
                             <bean:write name="Usuario" property="telefono"></bean:write>
                         </td>
@@ -128,7 +135,6 @@
             </table>
             <table align="center">
                 <tr>
-                    <%--<td> <h1 style="display: inline">Modificar datos: </h1></td>--%>
                     <td>
                         <br>
                             <html:form action = "/FormularioEditarUsuarioAdmin" onsubmit = "return (this)" 
@@ -147,9 +153,9 @@
                             <html:hidden name="Usuario" property="talla_zapato"/>
                             <html:hidden name="Usuario" property="habilitado"/>
                             <html:hidden name="Usuario" property="apellido"/>
-                            <html:hidden name="Usuario" property="apellido"/>
                             <html:hidden name="Usuario" property="telefono"/>
                             <html:hidden name="Usuario" property="unidad_adscripcion"/>
+                            <html:hidden name="Usuario" property="cargo"/>
                             <html:hidden name="Usuario" property="administrador"/>
                             <html:hidden name="Usuario" property="area_laboral"/>
                             <html:hidden name="autenticado" property="usuario"/>

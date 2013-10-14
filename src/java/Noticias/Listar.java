@@ -21,7 +21,7 @@ public class Listar extends org.apache.struts.action.Action {
     public ActionForward execute(ActionMapping mapping, ActionForm form,
             HttpServletRequest request, HttpServletResponse response)
             throws Exception {
-
+        
         ArrayList<Noticia> noticias = DBMS.getInstance().obtenerNoticias();
         request.setAttribute("noticias", noticias);
         return mapping.findForward(SUCCESS);

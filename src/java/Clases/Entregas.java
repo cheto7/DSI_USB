@@ -20,6 +20,15 @@ public class Entregas extends ActionForm {
     private String fecha_solicitud;
     private String fecha_entrega;
     private String talla;
+    private int sugerido;
+
+    public int getSugerido() {
+        return sugerido;
+    }
+
+    public void setSugerido(int sugerido) {
+        this.sugerido = sugerido;
+    }
 
     public String getTalla() {
         return talla;

@@ -1,17 +1,16 @@
 
- <%-- 
-    Document   : content-lista-usuarios
-    Created on : 
-    Author     : azocar
+<%-- 
+   Document   : content-lista-usuarios
+   Created on : 
+   Author     : azocar
 --%>
 
 <%@ taglib uri="http://struts.apache.org/tags-bean" prefix="bean" %>
 <%@ taglib uri="http://struts.apache.org/tags-html" prefix="html" %>
 <%@ taglib uri="http://struts.apache.org/tags-logic" prefix="logic" %>
 <%@ taglib uri="http://struts.apache.org/tags-tiles" prefix="tiles" %>
-<%@page contentType="text/html" pageEncoding="ISO-8859-1"%>
+<%@ page contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
 <title>Dirección de Seguridad Integral</title>
 <script type="text/javascript" src="assets/js/jquery-1.8.2.js"></script>
 <script type="text/javascript" src="assets/js/jquery-ui.js"></script>
@@ -55,6 +54,9 @@
             });
         </script>
     </head>
+    <fieldset>
+        <legend>Lista de Usuarios</legend>
+    </fieldset>
     <logic:present name="mensajeUsuarioEditado">
         <logic:notEmpty name="mensajeUsuarioEditado">
             <center>
@@ -72,10 +74,6 @@
             </center>
         </logic:notEmpty>
     </logic:present>
-
-    <fieldset>
-        <legend>Lista de Usuarios</legend>
-    </fieldset>
     <div id="tabs">
         <ul>
             <li><a href="#tabs-1">No Habilitados</a></li>
@@ -104,13 +102,14 @@
                             <tr>
                                 <th>USB-ID</th>
                                 <th>Nombres y Apellidos</th>
-                                <th colspan="3"><center>Opciones</center></th>
+                                <th>Cédula</th>
+                                <th><center>Opciones</center></th>
                         </tr>
 
                         <logic:iterate name="usuariosHab" id="usuario">
 
                             <tr>
-                                <td >
+                                <td>
                                     <h1>
                                         <p> <bean:write name="usuario" property="usuario"></bean:write>
                                     </h1>
@@ -118,11 +117,13 @@
 
                                 <td>
                                     <p> <bean:write name="usuario" property="nombre"/>
-                                    <bean:write name="usuario" property="apellido"/> </p>
+                                        <bean:write name="usuario" property="apellido"/></p>
                                 </td>
-
                                 <td>
-                                    <html:form action = "/VerDatosDeUsuario" onsubmit = "return (this)">
+                                    <bean:write name="usuario" property="ci"/>
+                                </td>
+                                <td>
+                                    <html:form action = "/VerDatosDeUsuario" acceptCharset="ISO-8859-1" onsubmit = "return (this)">
                                         <html:hidden name="usuario" property="usuario"/>
                                         <html:hidden name="usuario" property="ci"/>
                                         <html:hidden name="usuario" property="nombre"/>
@@ -142,17 +143,12 @@
                                         <html:hidden name="usuario" property="administrador"/>
                                         <html:hidden name="usuario" property="area_laboral"/>                                      
                                         <html:hidden name="autenticado" property="usuario"/>
+                                        <html:hidden name="usuario" property="cargo"/>
                                         <html:submit styleClass="btn btn-success"> Ver </html:submit>
                                     </html:form> 
                                 </td>
 
                                 <td>
-                                    <%-- html:form action = "/Deshabilitar" onsubmit = "return (this)"--%>
-                                    <%--<html:form action = "/Formulario_OtorgarPermiso" onsubmit = "return (this)">
-                                        <html:hidden name="usuario" property="usuario"/>
-                                        <html:hidden name="autenticado" property="usuario"/>
-                                        <html:submit styleClass="btn btn-warning"> Permisos </html:submit>
-                                    </html:form>--%>
                                 </td>
                             </tr>
 
@@ -185,6 +181,7 @@
                             <tr>
                                 <th>USB-ID</th>
                                 <th>Nombres y Apellidos</th>
+                                <th>Cédula</th>
                                 <th>Opciones</th>
                             </tr>
 
@@ -201,45 +198,34 @@
                                         <p> <bean:write name="usuario" property="nombre"/>
                                             <bean:write name="usuario" property="apellido"/></p>
                                     </td>
-
-                                    <%--<td>
-                                        <html:form action = "/Habilitar" onsubmit = "return (this)">
-                                            <html:hidden name="usuario" property="usuario"/>
-                                            <html:hidden name="autenticado" property="usuario"/>
-                                            <html:submit styleClass="btn btn-warning"> Habilitar </html:submit>
-                                        </html:form> 
-                                    </td>
-
                                     <td>
-                                        <html:form method="POST" action="/ConfirmarEliminar?method=save" onsubmit="return (this)">
+                                        <bean:write name="usuario" property="ci"/>
+                                    </td>                                    
+                                    <td>
+                                        <html:form action = "/VerDatosDeUsuario" acceptCharset="ISO-8859-1" onsubmit = "return (this)">
                                             <html:hidden name="usuario" property="usuario"/>
-                                            <html:submit styleClass="btn btn-danger"> Eliminar </html:submit>
-                                        </html:form>
-                                    </td>--%>
-                                <td>
-                                    <html:form action = "/VerDatosDeUsuario" onsubmit = "return (this)">
-                                        <html:hidden name="usuario" property="usuario"/>
-                                        <html:hidden name="usuario" property="ci"/>
-                                        <html:hidden name="usuario" property="nombre"/>
-                                        <html:hidden name="usuario" property="email"/>
-                                        <html:hidden name="usuario" property="password"/>
-                                        <html:hidden name="usuario" property="fecha"/>
-                                        <html:hidden name="usuario" property="sexo"/>
-                                        <html:hidden name="usuario" property="talla_mascara"/>
-                                        <html:hidden name="usuario" property="talla_camisa"/>
-                                        <html:hidden name="usuario" property="talla_pantalon"/>
-                                        <html:hidden name="usuario" property="talla_guantes"/>
-                                        <html:hidden name="usuario" property="talla_zapato"/>
-                                        <html:hidden name="usuario" property="habilitado"/>
-                                        <html:hidden name="usuario" property="apellido"/>
-                                        <html:hidden name="usuario" property="telefono"/>
-                                        <html:hidden name="usuario" property="administrador"/>
-                                        <html:hidden name="usuario" property="area_laboral"/>                                      
-                                        <html:hidden name="autenticado" property="usuario"/>
-                                        <html:hidden name="usuario" property="unidad_adscripcion"/>
-                                        <html:submit styleClass="btn btn-success"> Ver </html:submit>
-                                    </html:form> 
-                                </td>                                    
+                                            <html:hidden name="usuario" property="ci"/>
+                                            <html:hidden name="usuario" property="nombre"/>
+                                            <html:hidden name="usuario" property="email"/>
+                                            <html:hidden name="usuario" property="password"/>
+                                            <html:hidden name="usuario" property="fecha"/>
+                                            <html:hidden name="usuario" property="sexo"/>
+                                            <html:hidden name="usuario" property="talla_mascara"/>
+                                            <html:hidden name="usuario" property="talla_camisa"/>
+                                            <html:hidden name="usuario" property="talla_pantalon"/>
+                                            <html:hidden name="usuario" property="talla_guantes"/>
+                                            <html:hidden name="usuario" property="talla_zapato"/>
+                                            <html:hidden name="usuario" property="habilitado"/>
+                                            <html:hidden name="usuario" property="apellido"/>
+                                            <html:hidden name="usuario" property="telefono"/>
+                                            <html:hidden name="usuario" property="administrador"/>
+                                            <html:hidden name="usuario" property="area_laboral"/>                                      
+                                            <html:hidden name="autenticado" property="usuario"/>
+                                            <html:hidden name="usuario" property="unidad_adscripcion"/>
+                                            <html:hidden name="usuario" property="cargo"/>
+                                            <html:submit styleClass="btn btn-success"> Ver </html:submit>
+                                        </html:form> 
+                                    </td>                                    
                                 </tr>
 
                             </logic:iterate>
@@ -250,4 +236,3 @@
         </div>
     </div>
 </html>
-

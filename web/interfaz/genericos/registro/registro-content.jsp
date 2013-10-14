@@ -95,10 +95,10 @@
                     </label>                                
                 </td>
                 <td>
-                    <label style="color:red">Unidad Adscripción:</label>
+                    <label style="color:red">Unidad de adscripción:</label>
                     <logic:present name="select">
                         <logic:empty name="select">
-                            <html:select name="Usuario" property="unidad_adscripcion" styleClass="span5" style="width:250px">
+                            <html:select name="Usuario" property="unidad_adscripcion" styleClass="span6">
 
                                 <html:option value= "" > Unidad de Adscripcion</html:option>                    
 
@@ -106,7 +106,7 @@
                         </logic:empty>
 
                         <logic:notEmpty name="select">
-                            <html:select name="Usuario" property="unidad_adscripcion" styleClass="span5" style="width:250px">                                   
+                            <html:select name="Usuario" property="unidad_adscripcion" styleClass="span5">
                                 <html:optionsCollection name="select" value="nombre" label="nombre"/>                                            
                             </html:select>
                         </logic:notEmpty>
@@ -198,7 +198,7 @@
             <tr>
                 <td>
                     <label>Área:</label>
-                    <html:select name="Usuario" property="area_laboral" styleClass="span3">
+                    <html:select name="Usuario" property="area_laboral" styleClass="span2">
                        <option></option>
                        <option value="administrativo">Administrativa</option>
                        <option value="academico">Académica</option>
@@ -208,7 +208,16 @@
                 </td>
             <td>
                 <label>Cargo:</label>
-                <html:text name="Usuario" property="cargo" styleId="apellido"></html:text>                    
+                <logic:present name="cargos">
+                    <logic:notEmpty name="cargos">
+                        <html:select name="Usuario" property="cargo" styleClass="span6">
+                            <html:optionsCollection name="cargos" value="cargo" label="cargo"/>
+                        </html:select>
+                    </logic:notEmpty>
+                    <logic:empty name="cargos">
+                        No hay Cargos registrados
+                    </logic:empty>
+                </logic:present>
                 </td>
                 </tr>
 

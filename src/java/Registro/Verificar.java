@@ -1,5 +1,6 @@
 package Registro;
 
+import Clases.Cargo;
 import Clases.Noticia;
 import Clases.Usuario;
 import Clases.unidadAdscripcion;
@@ -44,6 +45,8 @@ public class Verificar extends DispatchAction {
 
         ArrayList<unidadAdscripcion> select = DBMS.getInstance().obtenerUnidadesAdscripcion();
         request.setAttribute("select", select);
+        ArrayList<Cargo> cargos = DBMS.getInstance().obtenerCargos();
+        request.setAttribute("cargos", cargos);
         
         /*
          * Verificacion de campos obligatorios vacios

@@ -9,7 +9,7 @@
 <%@ taglib uri="http://struts.apache.org/tags-logic" prefix="logic" %>
 <%@ taglib uri="http://struts.apache.org/tags-tiles" prefix="tiles" %>
 
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ page contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
@@ -58,7 +58,7 @@
                         <table class="table table-hover">
                             <tbody>
                                 <tr>
-                                    <th><center>Nombre/RazÃ³n Social</center></th>
+                                    <th><center>Nombre/Razón Social</center></th>
                                     <th><center>RIF</center></th>
                                     <th><center>Opciones</center></th>
                                 </tr>
@@ -79,7 +79,7 @@
 
                                         <td>
                                             <center>
-                                                <html:form action="/VerProveedor" onsubmit="return (this)">
+                                                <html:form action="/VerProveedor" acceptCharset="ISO-8859-1" onsubmit="return (this)">
                                                     <html:hidden name="proveedor" property="rif"/>
                                                     <html:hidden name="proveedor" property="nombre"/>
                                                     <html:hidden name="proveedor" property="email"/>

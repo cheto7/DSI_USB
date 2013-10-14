@@ -33,24 +33,28 @@
                 </option>
             </logic:iterate>
         </html:select>
-            </td>
+    </td>
 
-        </tr>
-        <tr>
+</tr>
+<tr>
     <td>
         <label>Equipo:</label>
         <html:text name="ListadoGeneral" property="equipo" styleClass="span5" ></html:text><br>
     </td>
     <td>
-        <label>Tipo:</label>
+        <label>Tipo de usuario:</label>
         <html:select name="ListadoGeneral" property="tipo">            
-    <option value="">No Aplica</option>            
-    <option value="academico">Académico</option>
-    <option value="administrativo">Administrativo</option>
-    <option value="bombero">Bombero</option>
-    <option value="obrero">Obrero</option>
-    <option value="generico">Genérico</option>
-</html:select>
+            <option value="">No Aplica</option>            
+            <%--<option value="academico">Académico</option>
+            <option value="administrativo">Administrativo</option>
+            <option value="bombero">Bombero</option>
+            <option value="obrero">Obrero</option>
+            <option value="generico">Genérico</option>--%>
+            <option value="administrativo">Administrativo</option>
+            <option value="academico">Académico</option>
+            <option value="bombero">Bombero</option>
+            <option value="obrero">Obrero</option>            
+        </html:select>
 </td>
 
 </tr>
@@ -76,6 +80,6 @@
 </table>
 <center>
     <html:submit styleClass="btn btn-primary"> Consultar </html:submit>
-</center>
+    </center>
 
 </html:form>

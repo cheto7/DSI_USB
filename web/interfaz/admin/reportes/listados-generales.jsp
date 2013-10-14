@@ -43,7 +43,7 @@
                         <html:hidden name="periodo" property="fecha_fin"/>
                         <input type="image" src="assets/botonXlsMaterial-Unidad.png" 
                                alt="Descargar reporte de solicitudes" />
-                    </html:form>                    
+                    </html:form>
                 </td>
             </tr> 
         </tbody>

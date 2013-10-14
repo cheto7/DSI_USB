@@ -4,11 +4,12 @@
     Author     : smaf
 --%>
 
-<%@ page contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%> 
 <%@ taglib uri="http://struts.apache.org/tags-bean" prefix="bean" %>
 <%@ taglib uri="http://struts.apache.org/tags-html" prefix="html" %>
 <%@ taglib uri="http://struts.apache.org/tags-logic" prefix="logic" %>
 <%@ taglib uri="http://struts.apache.org/tags-tiles" prefix="tiles" %>
+
+<%@ page contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <script type="text/javascript" src="assets/js/jquery-te-1.0.5.min.js" charset="utf-8"></script>
 <link type="text/css" rel="stylesheet" href="assets/css/jquery-te-Style.css" charset="utf-8" />
 

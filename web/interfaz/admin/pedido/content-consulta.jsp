@@ -34,13 +34,22 @@
                 <tbody>
                     
                 <logic:iterate name="ConSol" id="sol">
-                    <tr>
-                    <logic:iterate name="sol" id="str">
-                    
-                <th><center><bean:write name="str" property="value"></bean:write></center></th>
-                
-                    </logic:iterate>
-                    </tr>
+                    <logic:notEmpty name="sol">
+                        <tr>
+                        <logic:iterate name="sol" id="str">
+                            <th>
+                            <center>
+                                <bean:write name="str" property="value"/>
+                            </center>
+                            </th>
+                        </logic:iterate>
+                        </tr>
+                    </logic:notEmpty>
+                    <logic:empty name="sol">
+                        <center>
+                            <label style="color:red"> La consulta no devolvio resultados.</label>
+                        </center>
+                    </logic:empty>
                 </logic:iterate>
                 
                 </tbody>

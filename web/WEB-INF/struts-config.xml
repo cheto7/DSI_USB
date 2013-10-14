@@ -23,7 +23,7 @@
         <form-bean name="Editar" type="Clases.Editar"/>
         <form-bean name="Email" type="Clases.Email"/>
         <form-bean name="Puntuacion" type="Clases.Puntuacion"/>
-        
+        <form-bean name="Cargo" type="Clases.Cargo"/>
     </form-beans>
     <global-exceptions>
     
@@ -529,7 +529,24 @@
         <action path="/registrarUnidadAdscripcion" type="Unidad.registrarUnidadAdscripcion" name="Usuario" scope="request">
             <forward name="success" path="/vistas/unidad/formulario_agregarUnidad.jsp"/>
         </action>
-        <action path="/VerInforPersonal" type="Editar.VerInforPersonal" scope="request" parameter="method"
+        
+        <action path="/editarCargo" type="Cargo.editarCargo" name="Usuario" scope="request">
+            <forward name="success" path="/vistas/cargo/formulario_agregarCargo.jsp"/>
+        </action>
+        <action path="/editarCargoConfirm" type="Cargo.editarCargoConfirm" name="Usuario" scope="request">
+            <forward name="success" path="/vistas/cargo/formulario_agregarCargo.jsp"/>
+        </action>        
+        <action path="/eliminarCargo" type="Cargo.eliminarCargo" name="Usuario" scope="request">
+            <forward name="success" path="/vistas/cargo/formulario_agregarCargo.jsp"/>
+        </action>
+        <action path="/registrarCargo" type="Cargo.registrarCargo" name="Usuario" scope="request">
+            <forward name="success" path="/vistas/cargo/formulario_agregarCargo.jsp"/>
+        </action>
+        <action path="/gestionarCargo" type="Cargo.listarCargo" scope="request" name="Usuario">
+            <forward name="success" path="/vistas/cargo/formulario_agregarCargo.jsp"/>
+        </action>
+        
+        <action path="/VerInforPersonal" type="Editar.VerInforPersonal" scope="request"
                 name="Usuario">
             <forward name="success" path="/vistas/lista_usuarios/datos-usuario.jsp"></forward>
         </action>        
@@ -629,6 +646,9 @@
             <forward name="success" path="/vistas/entrega/solicitud.jsp"/>
         </action>
         <action path="/DownloadEntregaPDF" type="Reportes.DownloadEntregaPDF" scope="request" name="Entregas">
+            <forward name="success" path="/vistas/error/welcomeStruts.jsp"></forward>
+        </action>
+        <action path="/DownloadInventario" type="Reportes.DownloadInventario" name="Equipo">
             <forward name="success" path="/vistas/error/welcomeStruts.jsp"></forward>
         </action>
         

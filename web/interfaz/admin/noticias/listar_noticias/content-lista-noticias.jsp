@@ -9,8 +9,7 @@
 <%@ taglib uri="http://struts.apache.org/tags-logic" prefix="logic" %>
 <%@ taglib uri="http://struts.apache.org/tags-tiles" prefix="tiles" %>
 
-<%@page contentType="text/html" pageEncoding="UTF-8"%> 
-
+<%@ page contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <logic:present name="mensajeNoticiaEditada">
     <logic:notEmpty name="mensajeNoticiaEditada">
         <center>
@@ -44,7 +43,7 @@
             <table class="table table-hover" width="100%">
                 <tbody>
                     <tr>
-                        <th width="10%"><center>TÃ­tulo</center></th>
+                        <th width="10%"><center>Título</center></th>
                         <th width="12%"><center>Fecha</center></th>
                         <th width="40%"><center>Contenido</center></th>
                         <th colspan="2"><center>Opciones</center></th>
@@ -67,7 +66,7 @@
 
                         <td>
                     <center>
-                        <html:form action = "/FormularioEditarNoticia" onsubmit = "return (this)">
+                    <html:form action = "/FormularioEditarNoticia" acceptCharset="ISO-8859-1" onsubmit = "return (this)">
                             <html:hidden name="noticia" property="titulo"/>
                             <html:hidden name="noticia" property="contenido"/>
                             <html:hidden name="noticia" property="usuario"/>
@@ -78,7 +77,7 @@
 
                     <td>
                     <center>
-                        <html:form action="/ConfirmarEliminarNoticia" onsubmit="return (this)">
+                        <html:form action="/ConfirmarEliminarNoticia" acceptCharset="ISO-8859-1" onsubmit="return (this)">
                             <html:hidden name="noticia" property="titulo"/>
                             <html:hidden name="noticia" property="contenido"/>
                             <html:hidden name="noticia" property="usuario"/>

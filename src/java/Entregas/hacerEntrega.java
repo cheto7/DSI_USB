@@ -6,10 +6,8 @@ package Entregas;
 
 import Clases.Entregas;
 import Clases.Periodo;
-import Clases.Solicitud;
 import Clases.Usuario;
 import DBMS.DBMS;
-import java.sql.ResultSet;
 import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

@@ -4,6 +4,7 @@
  */
 package Editar;
 
+import Clases.Cargo;
 import Clases.Usuario;
 import Clases.unidadAdscripcion;
 import DBMS.DBMS;
@@ -58,9 +59,12 @@ public class EditarAdmin extends org.apache.struts.action.Action {
         u.setAdministrador(request.getParameter("administrador"));
         u.setArea_laboral(request.getParameter("area_laboral"));
         u.setUnidad_adscripcion(request.getParameter("unidad_adscripcion"));
+        u.setCargo(request.getParameter("cargo"));
   
         ArrayList<unidadAdscripcion> select = DBMS.getInstance().obtenerUnidadesAdscripcion();
-        request.setAttribute("select", select);     
+        request.setAttribute("select", select);
+        ArrayList<Cargo> cargos = DBMS.getInstance().obtenerCargos();
+        request.setAttribute("cargos", cargos);
         request.setAttribute("Usuario", u);
         /*
          * Verificacion de campos obligatorios vacios

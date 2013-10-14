@@ -58,7 +58,7 @@
 <h1 style="display: inline">Cédula:</h1> 
 <bean:write name="Usuario" property="ci"/><br>
 
-<html:form action = "/EditarAdmin" styleId="Form" onsubmit = "return (this)" >
+<html:form action = "/EditarAdmin" acceptCharset="ISO-8859-1" styleId="Form" onsubmit = "return (this)" >
     <html:hidden name="Usuario" property="usuario"/>
     <html:hidden name="Usuario" property="ci"/>
     <%--<html:hidden name="Usuario" property="administrador"/>--%>
@@ -67,9 +67,7 @@
     <table>
         <tr>
             <td>
-                <h1 style="display: inline">Nombres:</h1> 
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <h1 style="display: inline">Nombres:</h1>
                 <html:text name="Usuario" property="nombre"></html:text>
             </td>
             <td>
@@ -88,7 +86,7 @@
             </td>
         </tr>
         <tr>
-            <td>
+            <td colspan="2">
                 <h1 style="display: inline">Correo electrónico alternativo:</h1>
                 <html:text name="Usuario" property="email"></html:text>
             </td>
@@ -101,22 +99,44 @@
                 <%--<html:textarea name="Usuario" property="unidad_adscripcion" rows="5" styleId="dir" styleClass="span5"></html:textarea><br>    --%>
                 <logic:present name="select">
                     <logic:notEmpty name="select">
-                        <html:select name="Usuario" property="unidad_adscripcion" styleClass="span1" style="width:250px">
-                            <option value="<bean:write name="Usuario" property="unidad_adscripcion"/>">
-                                <bean:write name="Usuario" property="unidad_adscripcion"/>
-                            </option>
-                            <logic:iterate name="select" id="unidadAdscripcion">
-                                <option value="<bean:write name="unidadAdscripcion" property="nombre"/>">
-                                    <bean:write name="unidadAdscripcion" property="nombre"></bean:write>
-                                </option>
-                            </logic:iterate>
-                        </html:select>
-                    </logic:notEmpty>
-                    <logic:empty name="select">
-                        No hay unidades de adscripción registradas
-                    </logic:empty>
-                </logic:present>
-            </td>
+                        <html:select name="Usuario" property="unidad_adscripcion" styleClass="span5">
+                    <option value="<bean:write name="Usuario" property="unidad_adscripcion"/>">
+                        <bean:write name="Usuario" property="unidad_adscripcion"/>
+                    </option>
+                    <logic:iterate name="select" id="unidadAdscripcion">
+                        <option value="<bean:write name="unidadAdscripcion" property="nombre"/>">
+                            <bean:write name="unidadAdscripcion" property="nombre"></bean:write>
+                        </option>
+                    </logic:iterate>
+                </html:select>
+            </logic:notEmpty>
+            <logic:empty name="select">
+                No hay unidades de adscripción registradas
+            </logic:empty>
+        </logic:present>
+    </td>
+</tr>
+<tr>
+    <td colspan="2">
+        <h1 style="display: inline">Cargo: </h1>
+        <logic:present name="cargos">
+            <logic:notEmpty name="cargos">
+                <html:select name="Usuario" property="cargo" styleClass="span5">
+                    <option>
+                        <bean:write name="Usuario" property="cargo"/>
+                    </option>
+                    <logic:iterate name="cargos" id="cargo">
+                        <option>
+                            <bean:write name="cargo" property="cargo"></bean:write>
+                        </option>
+                    </logic:iterate>
+                </html:select>
+            </logic:notEmpty>
+            <logic:empty name="cargos">
+        No hay cargos registradas
+            </logic:empty>
+        </logic:present>
+</td>
 </tr>
 <tr>
     <td>
@@ -152,8 +172,8 @@
 <table width="100%">
     <tr>
         <td>
-    <h1 style="display: inline">Talla de Máscara:</h1>
-    <html:select name="Usuario" property="talla_mascara" styleClass="span2">
+            <h1 style="display: inline">Talla de Máscara:</h1>
+            <html:select name="Usuario" property="talla_mascara" styleClass="span2">
         <option>
             <bean:write name="Usuario" property="talla_mascara"></bean:write>
         </option>
@@ -162,25 +182,25 @@
         <option>L</option>
         <option>XL</option>
     </html:select>
-        </td>
-        <td>
+</td>
+<td>
 
     <h1 style="display: inline">Talla de Camisa:</h1>
     <html:select name="Usuario" property="talla_camisa" styleClass="span2">
-        <option>
-            <bean:write name="Usuario" property="talla_camisa"></bean:write>
-        </option>
-        <option>S</option>
-        <option>M</option>
-        <option>L</option>
-        <option>XL</option>
-    </html:select>
-        </td>
+    <option>
+        <bean:write name="Usuario" property="talla_camisa"></bean:write>
+    </option>
+    <option>S</option>
+    <option>M</option>
+    <option>L</option>
+    <option>XL</option>
+</html:select>
+</td>
 </tr>
 <tr>
     <td>
-<h1 style="display: inline">Talla de Pantalón:</h1>
-<html:select name="Usuario" property="talla_pantalon" styleClass="span2">
+        <h1 style="display: inline">Talla de Pantalón:</h1>
+        <html:select name="Usuario" property="talla_pantalon" styleClass="span2">
     <option>
         <bean:write name="Usuario" property="talla_pantalon"></bean:write>
     </option>
@@ -195,10 +215,10 @@
     <option>44</option>
     <option>48</option>
 </html:select>
-    </td>
-    <td>
-<h1 style="display: inline">Talla de Guantes:</h1>
-<html:select name="Usuario" property="talla_guantes" styleClass="span2">
+</td>
+<td>
+    <h1 style="display: inline">Talla de Guantes:</h1>
+    <html:select name="Usuario" property="talla_guantes" styleClass="span2">
     <option>
         <bean:write name="Usuario" property="talla_guantes"></bean:write>
     </option>
@@ -207,13 +227,13 @@
     <option>L</option>
     <option>XL</option>
 </html:select>
-    </td>
+</td>
 </tr>
 <tr>
-<td>
-<h1 style="display: inline">Talla de Zapato:</h1>
-&nbsp;&nbsp;
-<html:select name="Usuario" property="talla_zapato" styleClass="span2">
+    <td>
+        <h1 style="display: inline">Talla de Zapato:</h1>
+        &nbsp;&nbsp;
+        <html:select name="Usuario" property="talla_zapato" styleClass="span2">
     <option>
         <bean:write name="Usuario" property="talla_zapato"></bean:write>
     </option>
@@ -235,23 +255,23 @@
     <option>44.5</option>
     <option>45</option>
 </html:select>
-    </td>
-    <td></td>
+</td>
+<td></td>
 </tr>
 </table>
 <table width="100%">
     <tr>
         <td>
-<legend>Área laboral:</legend>
-<html:select name="Usuario" property="area_laboral" styleClass="span3" >
-    <option>
-        <bean:write name="Usuario" property="area_laboral"></bean:write>
-    </option>
-    <option>Administrativa</option>
-    <option>Académica</option>
-    <option>Bombero</option>
-    <option>Obrero</option> 
-</html:select>
+    <legend>Área laboral:</legend>
+    <html:select name="Usuario" property="area_laboral" styleClass="span3" >
+        <option>
+            <bean:write name="Usuario" property="area_laboral"></bean:write>
+        </option>
+        <option>Administrativa</option>
+        <option>Académica</option>
+        <option>Bombero</option>
+        <option>Obrero</option> 
+    </html:select>
 </td>
 <td>
 <legend>Permisos:</legend>
@@ -264,7 +284,7 @@
     <option value="inspector">Inspector</option>
     <option value="administrador">Administrador</option> 
 </html:select>
-    </td>
+</td>
 </tr>
 
 </table>
