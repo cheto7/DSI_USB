@@ -32,12 +32,12 @@
         <logic:notEmpty name="ConSol">
             <table class="table table-hover">
                 <tbody>
-                    
-                <logic:iterate name="ConSol" id="sol">
-                    <logic:notEmpty name="sol">
-                        <tr>
-                        <logic:iterate name="sol" id="str">
-                            <th>
+
+                    <logic:iterate name="ConSol" id="sol">
+                        <logic:notEmpty name="sol">
+                            <tr>
+                                <logic:iterate name="sol" id="str">
+                                    <th>
                             <center>
                                 <bean:write name="str" property="value"/>
                             </center>
@@ -51,7 +51,7 @@
                         </center>
                     </logic:empty>
                 </logic:iterate>
-                
+
                 </tbody>
             </table>
         </logic:notEmpty>

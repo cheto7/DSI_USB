@@ -6,7 +6,6 @@ package Reportes;
 
 import Clases.Equipo;
 import Clases.Periodo;
-import Clases.Usuario;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.apache.struts.action.ActionForm;
@@ -20,11 +19,9 @@ import javax.servlet.ServletOutputStream;
 import org.apache.poi.hssf.usermodel.HSSFCell;
 import org.apache.poi.hssf.usermodel.HSSFCellStyle;
 import org.apache.poi.hssf.usermodel.HSSFFont;
-import org.apache.poi.hssf.usermodel.HSSFRichTextString;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
-import org.apache.poi.hssf.util.HSSFColor;
 
 public class DownloadXLS extends org.apache.struts.action.Action {
 
@@ -92,28 +89,61 @@ public class DownloadXLS extends org.apache.struts.action.Action {
         cell = row.createCell(cero);
         cell.setCellStyle(headerCellStyle);
         cell.setCellValue("Equipo");
+        
         cell = row.createCell(uno);
         cell.setCellStyle(headerCellStyle);
-        cell.setCellValue("Talla");
+        cell.setCellValue("Funcionalidad");
+        
         cell = row.createCell(dos);
         cell.setCellStyle(headerCellStyle);
-        cell.setCellValue("Cantidad");
+        cell.setCellValue("Norma");
+        
+        cell = row.createCell((short)3);
+        cell.setCellStyle(headerCellStyle);
+        cell.setCellValue("Talla");
+        
+        cell = row.createCell((short)4);
+        cell.setCellStyle(headerCellStyle);
+        cell.setCellValue("Cantidad aprobada");
+        
+        cell = row.createCell((short)5);
+        cell.setCellStyle(headerCellStyle);
+        cell.setCellValue("En existencia");        
 
         //String usuario = (String) session.getAttribute("usuarioAutenticado");
         ArrayList <Equipo> pedidos = DBMS.getInstance().obtenerMaterialCantidad(p);
 
-        HSSFCell celltemp,celltemp1, celltemp2;
-        
+        HSSFCell celltemp;
+        String areaAnterior = null;
         for (short i = 0; i < pedidos.size(); i++) {
             row = sheet.createRow(contador++);
+            
+            if (!pedidos.get(i).getSector().equals(areaAnterior)){
+                row = sheet.createRow(contador++);                
+                celltemp = row.createCell((short)0);
+                celltemp.setCellValue(pedidos.get(i).getSector());
+                celltemp.setCellStyle(headerCellStyle);
+                areaAnterior = pedidos.get(i).getSector();
+                row = sheet.createRow(contador++);
+            }
+ 
             celltemp = row.createCell((short)0);
             celltemp.setCellValue(pedidos.get(i).getNombre_vista());
             
-            celltemp1 = row.createCell((short)1);
-            celltemp1.setCellValue(pedidos.get(i).getTalla());
+            celltemp = row.createCell((short)1);
+            celltemp.setCellValue(pedidos.get(i).getFuncionalidad());
             
-            celltemp2 = row.createCell((short)2);
-            celltemp2.setCellValue(pedidos.get(i).getCantidad());
+            celltemp = row.createCell((short)2);
+            celltemp.setCellValue(pedidos.get(i).getNorma());
+            
+            celltemp = row.createCell((short)3);
+            celltemp.setCellValue(pedidos.get(i).getTalla());
+            
+            celltemp = row.createCell((short)4);
+            celltemp.setCellValue(pedidos.get(i).getCantidad());
+            
+            celltemp = row.createCell((short)5);
+            celltemp.setCellValue(pedidos.get(i).getSerial());  //existencia del equipo          
         }
 
         ServletOutputStream out = response.getOutputStream();

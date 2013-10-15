@@ -81,7 +81,9 @@
         </center>
     </td>
     <td>
-        <%--<bean:write name="solicitud" property="sugerido"/>--%>
+        <center>
+            <bean:write name="solicitud" property="sugerido"/>
+        </center>
     </td>
     <td>
     <center>

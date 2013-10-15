@@ -49,7 +49,7 @@
 <center><td>
     <html:form action="/Download" onsubmit="return (this)">
         <html:hidden name="solicitud" property="id"/>
-        <input type="image" src="/assets/Boton PDF comprobante pedido DEF.png" alt="Descargar comprobante" />
+        <input type="image" src="assets/Boton PDF comprobante pedido DEF.png" alt="Descargar comprobante" />
     </html:form>
         
 </td>

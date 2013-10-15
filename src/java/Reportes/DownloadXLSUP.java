@@ -82,12 +82,12 @@ public class DownloadXLSUP extends org.apache.struts.action.Action {
         sheet.setColumnWidth((short)0, (short)2500);
         sheet.setColumnWidth((short)1, (short)6000);
         sheet.setColumnWidth((short)2, (short)6000);
-        sheet.setColumnWidth((short)3, (short)7000);
-        sheet.setColumnWidth((short)4, (short)3000);
+        sheet.setColumnWidth((short)3, (short)10000);
+        sheet.setColumnWidth((short)4, (short)10000);
         sheet.setColumnWidth((short)5, (short)2500);
         sheet.setColumnWidth((short)6, (short)13000);
         sheet.setColumnWidth((short)7, (short)3000);
-        sheet.setColumnWidth((short)8, (short)3000);
+        sheet.setColumnWidth((short)8, (short)5000);
         //==========================================
         HSSFRow row = sheet.createRow(0);
         HSSFCell cell = row.createCell(cero);
@@ -106,19 +106,28 @@ public class DownloadXLSUP extends org.apache.struts.action.Action {
         setEncabezado(row, cell,(short)0, headerCellStyle,"Cédula");
         setEncabezado(row, cell,(short)1, headerCellStyle,"Nombres");
         setEncabezado(row, cell,(short)2, headerCellStyle,"Apellidos");
-        setEncabezado(row, cell,(short)3, headerCellStyle,"Unidad de adscripción");
-        setEncabezado(row, cell,(short)4, headerCellStyle,"Área laboral");
+        setEncabezado(row, cell,(short)3, headerCellStyle,"Cargo");
+        setEncabezado(row, cell,(short)4, headerCellStyle,"Unidad de adscripción");
         setEncabezado(row, cell,(short)5, headerCellStyle,"Sexo");
         setEncabezado(row, cell,(short)6, headerCellStyle,"Equipo");
         setEncabezado(row, cell,(short)7, headerCellStyle,"Talla");
-        setEncabezado(row, cell,(short)8, headerCellStyle,"Cantidad");
+        setEncabezado(row, cell,(short)8, headerCellStyle,"Cantidad aprobada");
 
         ArrayList <Usuario> usuarios = DBMS.getInstance().obtenerUsuarioCantidad(p);
 
         HSSFCell celltemp;
+        String areaAnterior = null;
         
         for (short i = 0; i < usuarios.size(); i++) {
             row = sheet.createRow(contador++);
+            if(!usuarios.get(i).getArea_laboral().equals(areaAnterior)){
+                row = sheet.createRow(contador++);
+                celltemp = row.createCell((short)0);
+                celltemp.setCellValue(usuarios.get(i).getArea_laboral());
+                celltemp.setCellStyle(headerCellStyle);
+                areaAnterior = usuarios.get(i).getArea_laboral();
+                row = sheet.createRow(contador++);
+            }
             celltemp = row.createCell((short)0);
             celltemp.setCellValue(usuarios.get(i).getCi());
             
@@ -129,10 +138,10 @@ public class DownloadXLSUP extends org.apache.struts.action.Action {
             celltemp.setCellValue(usuarios.get(i).getApellido());
             
             celltemp = row.createCell((short)3);
-            celltemp.setCellValue(usuarios.get(i).getUnidad_adscripcion());
+            celltemp.setCellValue(usuarios.get(i).getCargo());            
             
             celltemp = row.createCell((short)4);
-            celltemp.setCellValue(usuarios.get(i).getArea_laboral());
+            celltemp.setCellValue(usuarios.get(i).getUnidad_adscripcion());
             
             celltemp = row.createCell((short)5);
             celltemp.setCellValue(usuarios.get(i).getSexo());

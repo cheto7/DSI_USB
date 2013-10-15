@@ -20,9 +20,9 @@
 
                 <label>Usuario:</label>
                 <html:text name="ListadoGeneral" property="usuario" styleClass="span5"></html:text><br>
-            </td>
-            <td>
-                <label>Periodo:</label>
+                </td>
+                <td>
+                    <label>Periodo:</label>
 
                 <html:select name="ListadoGeneral" property="periodo">         
             <option value="todos">Todos</option>
@@ -40,21 +40,21 @@
     <td>
         <label>Equipo:</label>
         <html:text name="ListadoGeneral" property="equipo" styleClass="span5" ></html:text><br>
-    </td>
-    <td>
-        <label>Tipo de usuario:</label>
+        </td>
+        <td>
+            <label>Tipo de usuario:</label>
         <html:select name="ListadoGeneral" property="tipo">            
-            <option value="">No Aplica</option>            
-            <%--<option value="academico">Académico</option>
-            <option value="administrativo">Administrativo</option>
-            <option value="bombero">Bombero</option>
-            <option value="obrero">Obrero</option>
-            <option value="generico">Genérico</option>--%>
-            <option value="administrativo">Administrativo</option>
-            <option value="academico">Académico</option>
-            <option value="bombero">Bombero</option>
-            <option value="obrero">Obrero</option>            
-        </html:select>
+    <option value="">No Aplica</option>            
+    <%--<option value="academico">Académico</option>
+    <option value="administrativo">Administrativo</option>
+    <option value="bombero">Bombero</option>
+    <option value="obrero">Obrero</option>
+    <option value="generico">Genérico</option>--%>
+    <option value="administrativo">Administrativo</option>
+    <option value="academico">Académico</option>
+    <option value="bombero">Bombero</option>
+    <option value="obrero">Obrero</option>            
+</html:select>
 </td>
 
 </tr>

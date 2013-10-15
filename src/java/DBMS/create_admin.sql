@@ -9,6 +9,6 @@ INSERT INTO "PREPAS".usuario VALUES ('karen@usb.ve','$2a$06$VPlSQ3I4V1qA9IqzY900
 INSERT INTO "PREPAS".usuario VALUES ('ivan@usb.ve','$2a$06$VPlSQ3I4V1qA9IqzY900Quq4s85qRvdg5MS70vZh8gdzYW90XAYXi','ivan@usb.ve','Ivan','Travecedo','19227486','','04262047676','DSI','masculino','S','S','28','S','36','true','supervisor');
 INSERT INTO "PREPAS".usuario VALUES ('octavio@usb.ve','$2a$06$VPlSQ3I4V1qA9IqzY900Quq4s85qRvdg5MS70vZh8gdzYW90XAYXi','octavio@usb.ve','Octavio','Manzano','19227487','','04262047676','DSI','masculino','S','S','28','S','36','false','usuario');
 
-/*INSERT INTO "PREPAS".noticia VALUES ('cheto@usb.ve','Inician trabajos','Inician actividades de implementacion del 60% del sistema de la DSI ','2012-11-29');
-/*INSERT INTO "PREPAS".noticia VALUES ('mgomez@usb.ve','Entrega 30%','Ya se encuentra habilitado el sistema para la DSI con el 30% de los casos de uso implementados. ','2012-11-29');
+--INSERT INTO "PREPAS".noticia VALUES ('cheto@usb.ve','Inician trabajos','Inician actividades de implementacion del 60% del sistema de la DSI ','2012-11-29');
+--INSERT INTO "PREPAS".noticia VALUES ('mgomez@usb.ve','Entrega 30%','Ya se encuentra habilitado el sistema para la DSI con el 30% de los casos de uso implementados. ','2012-11-29');
 

@@ -28,7 +28,6 @@ public class Consulta extends Action{
             throws Exception {
         
         ListadoGeneral lg = (ListadoGeneral) form;
-        
         ArrayList < ArrayList <String_Cheto> > arr = DBMS.DBMS.getInstance().consultarSolicitudes(lg);
         request.setAttribute("ConSol", arr);
         return mapping.findForward(SUCCESS);

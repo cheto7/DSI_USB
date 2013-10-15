@@ -101,14 +101,23 @@ public class DownloadXLSMU extends org.apache.struts.action.Action {
         setEncabezado(row, cell,(short)0, headerCellStyle,"Equipo");
         setEncabezado(row, cell,(short)1, headerCellStyle,"Unidad de adscripción");
         setEncabezado(row, cell,(short)2, headerCellStyle,"Talla");
-        setEncabezado(row, cell,(short)3, headerCellStyle,"Cantidad");
+        setEncabezado(row, cell,(short)3, headerCellStyle,"Cantidad aprobada");
 
         ArrayList <Equipo> equipos = DBMS.getInstance().obtenerEquipoUnidad(p);
 
         HSSFCell celltemp;
+        String areaAnterior = null;
         
         for (short i = 0; i < equipos.size(); i++) {
             row = sheet.createRow(contador++);
+            if (!equipos.get(i).getSector().equals(areaAnterior)){
+                row = sheet.createRow(contador++);                
+                celltemp = row.createCell((short)0);
+                celltemp.setCellValue(equipos.get(i).getSector());
+                celltemp.setCellStyle(headerCellStyle);
+                areaAnterior = equipos.get(i).getSector();
+                row = sheet.createRow(contador++);
+            }
             celltemp = row.createCell((short)0);
             celltemp.setCellValue(equipos.get(i).getNombre_vista());
             

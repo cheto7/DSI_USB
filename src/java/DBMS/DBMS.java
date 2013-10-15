@@ -2654,7 +2654,7 @@ public class DBMS {
 
             String sqlquery = "SELECT U.usuario, U.nombre, U.apellido, U.sexo, U.area_laboral, U.email, "
                     + " S.id,S.fecha_solicitud,S.modificada,C.serial,C.cantidad,C.talla,C.frecuencia, "
-                    + " E.nombre_vista,E.sector, E.norma "
+                    + " E.nombre_vista,E.sector, E.norma, E.tiempo_vida "
                     + "FROM \"PREPAS\".usuario U,\"PREPAS\".solicitud S,\"PREPAS\".contiene C, \"PREPAS\".equipo E "
                     + "WHERE U.usuario = S.usuario AND S.id = '" + s + "' AND S.id = C.id AND C.serial = E.serial";
 
@@ -2664,7 +2664,23 @@ public class DBMS {
 
             while (rs.next()) {
                 Entregas nueva = new Entregas();
-                //int sugerido;
+                int sugerido,factor;
+                
+                String tiempo = rs.getString("tiempo_vida").split("\\s")[1];
+                int vida = Integer.parseInt(rs.getString("tiempo_vida").split("\\s")[0]);
+                if (tiempo.equalsIgnoreCase("Días")){
+                    factor = 200 / (vida);
+                }
+                else if (tiempo.equalsIgnoreCase("Semanas")){
+                    factor = 200 / (vida) * 5;
+                }
+                else if (tiempo.equalsIgnoreCase("Meses")){
+                    factor = 200 / (vida) * 20;
+                }
+                else { //anio
+                    factor = 200 / (vida) * 200;
+                }
+                
                 nueva.setIdSolicitud(rs.getString("id"));
                 nueva.setSerialEquipo(rs.getString("serial"));
                 nueva.setEquipo(rs.getString("nombre_vista"));
@@ -2673,14 +2689,29 @@ public class DBMS {
                 nueva.setFecha_solicitud(rs.getString("fecha_solicitud"));
                 nueva.setTalla(rs.getString("talla"));
                 nueva.setFecha_entrega(rs.getString("norma")); // uso fecha entrega para pasar la norma
-//                if(rs.getString("frecuencia").equals("Diario")){ //seteo en frecuencia la cantidad sugerida
-//                    sugerido = nueva.getCantidad_solicitada() * 7;
-//                    nueva.setSugerido(sugerido);
-//                }
-//                if(rs.getString("frecuencia").equals("Semanal")){ //seteo en frecuencia la cantidad sugerida
-//                    sugerido = nueva.getCantidad_solicitada() * 7;
-//                    nueva.setSugerido(sugerido);
-//                }
+                if(rs.getString("frecuencia").equals("Diaria")){ //seteo en frecuencia la cantidad sugerida
+                    sugerido = factor;
+                    nueva.setSugerido(sugerido);
+                }
+                else if(rs.getString("frecuencia").equals("Semanal")){ //seteo en frecuencia la cantidad sugerida
+                    sugerido = factor / 5;
+                }
+                else if(rs.getString("frecuencia").equals("Mensual")){
+                    sugerido = factor / 20;
+                }
+                else if(rs.getString("frecuencia").equals("Trimestral")){
+                    sugerido = factor / 60;
+                }
+                else {
+                    sugerido = factor / 90;
+                }
+                
+                if (sugerido<1){
+                    nueva.setSugerido(1);
+                }
+                else{
+                    nueva.setSugerido(sugerido);
+                }
 
                 int idS = Integer.parseInt(nueva.getIdSolicitud());
                 int serial = Integer.parseInt(nueva.getSerialEquipo());
@@ -3301,15 +3332,21 @@ public class DBMS {
     public ArrayList<Equipo> obtenerMaterialCantidad(Periodo p) {
         ArrayList<Equipo> equipos = new ArrayList<Equipo>(0);
         try {
-            String sqlquery= "SELECT E.nombre_vista, C.talla, SUM(C.cantidad) AS cantidad "
-                    + "FROM \"PREPAS\".periodo P, \"PREPAS\".solicitud S, \"PREPAS\".contiene C, \"PREPAS\".equipo E "
+            String sqlquery= "SELECT U.area_laboral, E.nombre_vista, C.talla, SUM(C.cantidad) AS cantidad, "
+                    + "              E.funcionalidad, E.norma, Q.cantidad AS existencia "
+                    + "FROM \"PREPAS\".periodo P, \"PREPAS\".solicitud S, \"PREPAS\".contiene C, \"PREPAS\".equipo E, "
+                    + "\"PREPAS\".equipoTalla Q, \"PREPAS\".usuario U "
                     + "WHERE P.fecha_inicio='"+p.getFecha_inicio()+"' AND "
-                    + "      P.fecha_fin = '"+p.getFecha_fin()+"' AND "
+                    + "      P.fecha_fin = '"+p.getFecha_fin()+"' AND "                    
                     + "      P.id = S.id_periodo AND "
+                    + "      S.modificada = 'true' AND "                    
                     + "      C.id = S.id AND "
-                    + "      C.serial = E.serial "
-                    + "GROUP BY E.nombre_vista, C.talla, C.cantidad "
-                    + "ORDER BY E.nombre_vista";
+                    + "      C.serial = E.serial AND "
+                    + "      U.usuario = S.usuario AND "
+                    + "      E.serial = Q.serial AND "
+                    + "      C.talla = Q.talla "
+                    + "GROUP BY U.area_laboral, E.nombre_vista, C.talla, E.funcionalidad,E.norma, Q.cantidad "
+                    + "ORDER BY U.area_laboral, E.nombre_vista";
           
             
             Statement stmt = conexion.createStatement();
@@ -3321,6 +3358,10 @@ public class DBMS {
                 e.setNombre_vista(rs.getString("nombre_vista"));
                 e.setTalla(rs.getString("talla"));
                 e.setCantidad(rs.getInt("cantidad"));
+                e.setFuncionalidad(rs.getString("funcionalidad"));
+                e.setNorma(rs.getString("norma"));
+                e.setSerial(rs.getInt("existencia")); // aqui paso la cantidad en existencia
+                e.setSector(rs.getString("area_laboral"));
                 equipos.add(e);
             }
             return equipos;
@@ -3334,11 +3375,12 @@ public class DBMS {
      public ArrayList<Usuario> obtenerUsuarioCantidad(Periodo p) {
         ArrayList<Usuario> usuarios = new ArrayList<Usuario>(0);
         try {
-            String sqlquery= "SELECT U.ci, U.nombre, U.apellido, U.unidad_adscripcion, U.area_laboral, U.sexo, "
+            String sqlquery= "SELECT U.ci, U.nombre, U.apellido, U.unidad_adscripcion, U.area_laboral, U.sexo, U.cargo, "
                     + "       E.nombre_vista, C.talla, C.cantidad "
                     + "FROM \"PREPAS\".periodo P, \"PREPAS\".solicitud S, \"PREPAS\".contiene C, \"PREPAS\".equipo E, \"PREPAS\".usuario U "
                     + "WHERE P.fecha_inicio='"+p.getFecha_inicio()+"' AND "
                     + "      P.fecha_fin = '"+p.getFecha_fin()+"' AND "
+                    + "      S.modificada = 'true' AND "
                     + "      P.id = S.id_periodo AND "
                     + "      C.id = S.id AND "
                     + "      C.serial = E.serial AND "
@@ -3358,6 +3400,7 @@ public class DBMS {
                 u.setUnidad_adscripcion(rs.getString("unidad_adscripcion"));
                 u.setArea_laboral(rs.getString("area_laboral"));
                 u.setSexo(rs.getString("sexo"));
+                u.setCargo(rs.getString("cargo"));
                 u.setTalla_camisa(rs.getString("nombre_vista")); //talla camisa usado para pasar nombre de equipo
                 u.setTalla_guantes(rs.getString("talla"));//talla guantes usado para pasar talla de equipo
                 u.setTalla_mascara(rs.getString("cantidad")); //talla mascara usado para pasar cantidad de equipo
@@ -3374,16 +3417,17 @@ public class DBMS {
     public ArrayList<Equipo> obtenerEquipoUnidad(Periodo p) {
         ArrayList<Equipo> equipos = new ArrayList<Equipo>(0);
         try {
-            String sqlquery= "SELECT U.unidad_adscripcion, E.nombre_vista, C.talla, SUM(C.cantidad) AS cantidad "
+            String sqlquery= "SELECT U.unidad_adscripcion,U.area_laboral, E.nombre_vista, C.talla, SUM(C.cantidad) AS cantidad "
                     + "FROM \"PREPAS\".periodo P, \"PREPAS\".solicitud S, \"PREPAS\".contiene C, \"PREPAS\".equipo E, \"PREPAS\".usuario U "
                     + "WHERE P.fecha_inicio='"+p.getFecha_inicio()+"' AND "
                     + "      P.fecha_fin = '"+p.getFecha_fin()+"' AND "
+                    + "      S.modificada = 'true' AND "
                     + "      P.id = S.id_periodo AND "
                     + "      C.id = S.id AND "
                     + "      C.serial = E.serial AND "
                     + "      S.usuario = U.usuario "
-                    + "GROUP BY E.nombre_vista,C.talla, U.unidad_adscripcion "
-                    + "ORDER BY E.nombre_vista";
+                    + "GROUP BY E.nombre_vista,C.talla, U.unidad_adscripcion,U.area_laboral "
+                    + "ORDER BY U.area_laboral, E.nombre_vista, U.unidad_adscripcion";
           
             
             Statement stmt = conexion.createStatement();
@@ -3396,6 +3440,7 @@ public class DBMS {
                 e.setTalla(rs.getString("talla"));
                 e.setCantidad(rs.getInt("cantidad"));
                 e.setFuncionalidad(rs.getString("unidad_adscripcion"));
+                e.setSector(rs.getString("area_laboral"));
                 equipos.add(e);
             }
             return equipos;
