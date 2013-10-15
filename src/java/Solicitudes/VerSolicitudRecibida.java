@@ -46,6 +46,7 @@ public class VerSolicitudRecibida extends org.apache.struts.action.Action {
         
         ArrayList<Solicitud> solicitudes = new ArrayList<Solicitud>(0);
         ResultSet rs = DBMS.getInstance().verSolicitud(s);
+        String modificada = "false";
         while (rs.next()) {
             u.setUsuario(rs.getString("usuario"));
             u.setNombre(rs.getString("nombre"));
@@ -61,10 +62,14 @@ public class VerSolicitudRecibida extends org.apache.struts.action.Action {
             nueva.setFecha_solicitud(rs.getString("fecha_solicitud"));
             nueva.setFrecuencia(rs.getString("frecuencia"));
             nueva.setModificada(rs.getString("modificada"));
+            modificada = nueva.getModificada();
             nueva.setNombre_vista(rs.getString("nombre_vista"));
             nueva.setTalla(rs.getString("talla"));
             nueva.setSerialEquipo(rs.getInt("serial"));
             solicitudes.add(nueva);
+        }
+        if (modificada.equals("true")){
+            request.setAttribute("modificada", modificada);    
         }
         request.setAttribute("periodo", p);
         request.setAttribute("solicitud", solicitudes);
