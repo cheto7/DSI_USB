@@ -15,6 +15,11 @@
         <label style="color:red">El período de solicitud de equipos se encuentra cerrado.</label>
     </center>
 </logic:present>
+<logic:present name="solicitudAprobada">
+    <center>
+        <label style="color:red">Su solicitud para este periodo ya fue aprobada.</label>
+    </center>
+</logic:present>
 <logic:present name="mensaje">
     <logic:notEmpty name="mensaje">
         <center>

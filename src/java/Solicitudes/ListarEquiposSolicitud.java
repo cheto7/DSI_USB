@@ -63,6 +63,10 @@ public class ListarEquiposSolicitud extends org.apache.struts.action.Action {
             request.setAttribute("periodoCerrado", "error");
             return mapping.findForward(FAILURE);
         }
+        if (solicitud.getModificada().equals("true")){
+            request.setAttribute("solicitudAprobada", "error");
+            return mapping.findForward(FAILURE);
+        }
         ArrayList<Equipo> equiposAcad = DBMS.getInstance().obtenerEquiposSolicitudAcademico(u);
         ArrayList<Equipo> equiposAdmin = DBMS.getInstance().obtenerEquiposSolicitudAdmin(u);
         ArrayList<Equipo> equiposBomb = DBMS.getInstance().obtenerEquiposSolicitudBombero(u);

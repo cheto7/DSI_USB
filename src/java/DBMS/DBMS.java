@@ -1504,7 +1504,7 @@ public class DBMS {
             Solicitud s = new Solicitud();
             String sqlquery;
             //Busca la ultima solicitud del usuario
-            sqlquery = "SELECT S.id,S.usuario,S.fecha_solicitud,S.id_periodo "
+            sqlquery = "SELECT S.id,S.usuario,S.fecha_solicitud,S.id_periodo, S.modificada "
                     + "FROM \"PREPAS\".solicitud S, \"PREPAS\".periodo P "
                     + "WHERE P.habilitado='true' AND P.id=S.id_periodo "
                     + "AND S.usuario = '" + u.getUsuario() + "' "
@@ -1521,6 +1521,7 @@ public class DBMS {
                 s.setFecha_solicitud(rs.getString("fecha_solicitud"));
                 s.setId(rs.getInt("id"));
                 s.setPeriodo(rs.getInt("id_periodo"));
+                s.setModificada(rs.getString("modificada"));
                 return s;
             } else {
                 //Obtenemos id del periodo abierto
