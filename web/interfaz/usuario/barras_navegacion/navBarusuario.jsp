@@ -42,7 +42,7 @@
             <html:hidden name="autenticado" property="usuario"/>
             <html:submit style="padding:10px 20px 40px 20px"> Datos Personales </html:submit>
         </html:form>
-    </li>    
+    </li>
 
     <li>
         <html:form action="/Ir_pag_pedido" onsubmit="return (this)">

@@ -102,12 +102,12 @@
                 </logic:iterate>
                 </tbody>
             </table>
-        </logic:notEmpty>
         <center>
             <html:form action="/DownloadInventario" onsubmit="return (this)">
                 <input type="image" src="assets/botonXlsInventario.png" 
                        alt="Descargar reporte de solicitudes" />
             </html:form>            
-        </center>
+        </center>            
+        </logic:notEmpty>
     </logic:present>
 </fieldset>

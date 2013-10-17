@@ -77,7 +77,7 @@
         <bean:write name="equipo" property="vida_util"/>
     </html:text>
     <html:select name="Equipo" property="talla" styleClass="span2">
-        <option></option>
+        <option><bean:write name="equipo" property="talla"/></option>
         <option>Días</option>
         <option>Semanas</option>
         <option>Meses</option>

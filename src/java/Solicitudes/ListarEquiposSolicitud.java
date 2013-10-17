@@ -63,7 +63,7 @@ public class ListarEquiposSolicitud extends org.apache.struts.action.Action {
             request.setAttribute("periodoCerrado", "error");
             return mapping.findForward(FAILURE);
         }
-        if (solicitud.getModificada().equals("true")){
+        if (solicitud!=null && solicitud.getModificada()!=null && solicitud.getModificada().equals("true")){
             request.setAttribute("solicitudAprobada", "error");
             return mapping.findForward(FAILURE);
         }

@@ -126,13 +126,6 @@
     </td>
     <td></td>
 </tr>
-<%--<tr>
-    <td>
-        <label>Cantidad en existencia:</label>
-        <html:text name="Equipo" property="cantidad" styleClass="span4" ></html:text>
-    </td>
-    <td></td>
-</tr>--%>
 <tr>
     <td style="display: inline"><label>Vida útil:</label>
         <html:text name="Equipo" property="vida_util" styleClass="span2" value="0"></html:text>

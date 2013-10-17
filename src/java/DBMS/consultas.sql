@@ -1,5 +1,5 @@
 --SELECT * FROM "PREPAS".solicitud;
---SELECT * FROM "PREPAS".equipo;
+SELECT * FROM "PREPAS".equipo;
 --SELECT * FROM "PREPAS".proveedor;
 --SELECT * FROM "PREPAS".contiene;
 --SELECT * FROM "PREPAS".periodo;
@@ -69,12 +69,12 @@ WHERE P.fecha_inicio='31-07-2013' AND P.fecha_fin = '31-11-2018' AND P.id = S.id
 GROUP BY E.nombre_vista, C.talla
 ORDER BY E.nombre_vista;*/
 
-SELECT U.area_laboral, E.nombre_vista, C.talla, SUM(C.cantidad) AS cantidad, E.funcionalidad, E.norma, Q.cantidad AS existencia
+/*SELECT U.area_laboral, E.nombre_vista, C.talla, SUM(C.cantidad) AS cantidad, E.funcionalidad, E.norma, Q.cantidad AS existencia
 FROM "PREPAS".periodo P, "PREPAS".solicitud S, "PREPAS".contiene C, "PREPAS".equipo E, "PREPAS".equipoTalla Q, "PREPAS".usuario U
 WHERE P.fecha_inicio='07-10-2013' AND P.fecha_fin = '31-10-2013' AND P.id = S.id_periodo AND S.modificada = 'true' AND C.id = S.id AND C.serial = E.serial AND
       U.usuario = S.usuario AND E.serial = Q.serial AND C.talla = Q.talla
 GROUP BY U.area_laboral, E.nombre_vista, C.talla,E.funcionalidad,E.norma, Q.cantidad
-ORDER BY U.area_laboral, E.nombre_vista
+ORDER BY U.area_laboral, E.nombre_vista*/
 
 
 /*SELECT U.area_laboral, E.nombre_vista, C.talla, SUM(C.cantidad) AS cantidad
