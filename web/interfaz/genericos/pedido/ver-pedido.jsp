@@ -45,7 +45,7 @@
         <td><center> <bean:write name="solicitud" property="fecha_solicitud"/> </center></td>
 <td>
     <logic:equal name="solicitud" property="modificada" value="true">
-    <center> Evaluada </center>
+    <center> Aprobada </center>
 </logic:equal>
 <logic:equal name="solicitud" property="modificada" value="false">
     <center> Pendiente </center>

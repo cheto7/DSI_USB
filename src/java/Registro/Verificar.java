@@ -198,11 +198,11 @@ public class Verificar extends DispatchAction {
         /*
          * Verificacion con respecto al nombre y el apellido y cedula
          */
-        if (!u.getNombre().matches("[a-zA-Z]+\\s?[a-zA-Z]*")) {
+        if (!u.getNombre().matches("[a-zA-ZáéíóúÁÉÍÓÚñ]+\\s?[a-zA-ZáéíóúÁÉÍÓÚñ]*")) {
             u.setMensaje("Nombre inválido. Debe usar solo letras");
             return mapping.findForward(FAILURE);
         }
-        if (!u.getApellido().matches("[a-zA-Z]+\\s?[a-zA-Z]*")) {
+        if (!u.getApellido().matches("[a-zA-ZáéíóúÁÉÍÓÚñ]+\\s?[a-zA-ZáéíóúÁÉÍÓÚñ]*")) {
             u.setMensaje("Apellido inválido. Debe usar solo letras");
             return mapping.findForward(FAILURE);
         }

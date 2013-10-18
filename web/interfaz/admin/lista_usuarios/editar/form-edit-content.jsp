@@ -88,10 +88,13 @@
         <option>
             <bean:write name="Usuario" property="talla_camisa"></bean:write>
             </option>
+            <option>SS</option>
             <option>S</option>
             <option>M</option>
             <option>L</option>
             <option>XL</option>
+            <option>XXL</option>
+            <option>XXXL</option>
     </html:select>
 </td>
 </tr>
@@ -102,6 +105,7 @@
     <option>
         <bean:write name="Usuario" property="talla_pantalon"></bean:write>
         </option>
+        <option>26</option>
         <option>28</option>
         <option>30</option>
         <option>32</option>
@@ -111,6 +115,7 @@
         <option>40</option>
         <option>42</option>
         <option>44</option>
+        <option>46</option>
         <option>48</option>
 </html:select>
 </td>
@@ -135,23 +140,31 @@
     <option>
         <bean:write name="Usuario" property="talla_zapato"></bean:write>
         </option>
-        <option>36</option>
-        <option>36.5</option>
-        <option>37</option>
-        <option>37.5</option>
-        <option>38</option>
-        <option>38.5</option>
-        <option>39</option>
-        <option>39.5</option>
-        <option>40</option>
-        <option>40.5</option>
-        <option>41</option>
-        <option>41.5</option>
-        <option>42</option>
-        <option>42.5</option>
-        <option>44</option>
-        <option>44.5</option>
-        <option>45</option>
+                <option>35</option>
+                <option>35.5</option>
+                <option>36</option>
+                <option>36.5</option>
+                <option>37</option>
+                <option>37.5</option>
+                <option>38</option>
+                <option>38.5</option>
+                <option>39</option>
+                <option>39.5</option>
+                <option>40</option>
+                <option>40.5</option>
+                <option>41</option>
+                <option>41.5</option>
+                <option>42</option>
+                <option>42.5</option>
+                <option>43</option>
+                <option>43.5</option>
+                <option>44</option>
+                <option>44.5</option>
+                <option>45</option>
+                <option>45.5</option>
+                <option>46</option>
+                <option>46.5</option>
+                <option>47</option>
 </html:select>
 </td>
 </tr>
@@ -200,10 +213,10 @@
         <option>
             <bean:write name="Usuario" property="area_laboral"></bean:write>
             </option>
-            <option value="Administrativa">Administrativa</option>
-            <option value="Academica">Académica</option>
-            <option value="Bombero">Bombero</option>
-            <option value="Obrero">Obrero</option> 
+            <option>Administrativa</option>
+            <option>Académica</option>
+            <option>Bombero</option>
+            <option>Obrero</option> 
     </html:select>
 </td>
 <td>

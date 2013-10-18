@@ -45,10 +45,13 @@ public class PonerTalla extends Action {
         }
         ArrayList<String_Cheto> select = new ArrayList<String_Cheto>();
         if(request.getParameter("tipo_talla").equalsIgnoreCase("camisa")){
+            select.add(new String_Cheto("SS"));
             select.add(new String_Cheto("S"));
             select.add(new String_Cheto("M"));
             select.add(new String_Cheto("L"));
             select.add(new String_Cheto("XL"));
+            select.add(new String_Cheto("XXL"));
+            select.add(new String_Cheto("XXL"));
         }else if(request.getParameter("tipo_talla").equalsIgnoreCase("mascara")){
             select.add(new String_Cheto("S"));
             select.add(new String_Cheto("M"));
@@ -56,6 +59,7 @@ public class PonerTalla extends Action {
             select.add(new String_Cheto("XL"));
             
         }else if(request.getParameter("tipo_talla").equalsIgnoreCase("pantalon")){
+            select.add(new String_Cheto("26"));
             select.add(new String_Cheto("28"));
             select.add(new String_Cheto("30"));
             select.add(new String_Cheto("32"));
@@ -65,6 +69,7 @@ public class PonerTalla extends Action {
             select.add(new String_Cheto("40"));
             select.add(new String_Cheto("42"));
             select.add(new String_Cheto("44"));
+            select.add(new String_Cheto("46"));
             select.add(new String_Cheto("48"));
         }else if(request.getParameter("tipo_talla").equalsIgnoreCase("guantes")){
             select.add(new String_Cheto("S"));
@@ -72,6 +77,8 @@ public class PonerTalla extends Action {
             select.add(new String_Cheto("L"));
             select.add(new String_Cheto("XL"));
         }else if(request.getParameter("tipo_talla").equalsIgnoreCase("zapato")){
+            select.add(new String_Cheto("35"));
+            select.add(new String_Cheto("35.5"));            
             select.add(new String_Cheto("36"));
             select.add(new String_Cheto("36.5"));
             select.add(new String_Cheto("37"));
@@ -86,9 +93,15 @@ public class PonerTalla extends Action {
             select.add(new String_Cheto("41.5"));
             select.add(new String_Cheto("42"));
             select.add(new String_Cheto("42.5"));
+            select.add(new String_Cheto("43"));
+            select.add(new String_Cheto("43.5"));
             select.add(new String_Cheto("44"));
             select.add(new String_Cheto("44.5"));
             select.add(new String_Cheto("45"));
+            select.add(new String_Cheto("45.5"));
+            select.add(new String_Cheto("46"));
+            select.add(new String_Cheto("46.5"));
+            select.add(new String_Cheto("47"));
         }else {
             select.add(new String_Cheto("No aplica"));
         }

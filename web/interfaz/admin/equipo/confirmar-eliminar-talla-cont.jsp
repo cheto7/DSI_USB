@@ -7,12 +7,12 @@
 <%@ taglib uri="http://struts.apache.org/tags-bean" prefix="bean" %>
 <%@ taglib uri="http://struts.apache.org/tags-html" prefix="html" %>
 
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page contentType="text/html" pageEncoding="ISO-8859-1"%>
 
 <fieldset>
     <center>
         <br><br><br>
-        <label>Â¿Desea eliminar la talla
+        <label>¿Desea eliminar la talla
             '<bean:write name="equipo" property="talla"/>'
             del equipo <bean:write name="equipo" property="nombre_vista"/>?
         </label>

@@ -56,7 +56,7 @@
                                 <html:hidden name="eq" property="tipo_talla"/>
                             <td><html:text name="facturado" property="cantidad" styleClass="span1" styleId="spinner" value="0"/></td>
 
-                            <td><html:submit style="btn btn-primary"> Agregar </html:submit></td>
+                            <td><html:submit styleClass="btn btn-primary"> Agregar </html:submit></td>
                         </html:form>
                     </tr>
                 </logic:iterate>
@@ -70,7 +70,7 @@
                                 <html:hidden name="eq" property="tipo_talla"/>
                             <td><html:text name="facturado" property="cantidad" styleClass="span1" styleId="spinner" value="0"/></td>
 
-                            <td><html:submit style="btn btn-primary"> Agregar </html:submit></td>
+                            <td><html:submit styleClass="btn btn-primary"> Agregar </html:submit></td>
                         </html:form>
                     </tr>
                 </logic:iterate>
@@ -254,7 +254,7 @@
     <center>
         <html:form action="/FormularioEditarFactura" onsubmit="return (this)">
             <html:hidden name="facturado" property="numero_factura"/>
-            <html:submit styleClass="btn btn-primary"> Siguiente </html:submit>
+            <html:submit styleClass="btn btn-success"> Siguiente </html:submit>
         </html:form>
     </center>
 </html>

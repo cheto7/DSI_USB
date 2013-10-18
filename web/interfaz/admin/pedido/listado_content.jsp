@@ -42,18 +42,13 @@
         <html:text name="ListadoGeneral" property="equipo" styleClass="span5" ></html:text><br>
         </td>
         <td>
-            <label>Tipo de usuario:</label>
+            <label>Área laboral:</label>
         <html:select name="ListadoGeneral" property="tipo">            
-    <option value="">No Aplica</option>            
-    <%--<option value="academico">Académico</option>
-    <option value="administrativo">Administrativo</option>
-    <option value="bombero">Bombero</option>
-    <option value="obrero">Obrero</option>
-    <option value="generico">Genérico</option>--%>
-    <option value="administrativo">Administrativo</option>
-    <option value="academico">Académico</option>
-    <option value="bombero">Bombero</option>
-    <option value="obrero">Obrero</option>            
+    <option value="">No Aplica</option>
+    <option>Administrativa</option>
+    <option>Académica</option>
+    <option>Bombero</option>
+    <option>Obrero</option>         
 </html:select>
 </td>
 

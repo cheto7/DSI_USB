@@ -30,7 +30,7 @@
 
 
 
-    <html:form action = "/GuardarTalla" onsubmit = "return (this)">
+    <html:form action = "/GuardarTalla" acceptCharset="ISO-8859-1" onsubmit = "return (this)">
         <table width="100%">
             <tbody>
                 <tr>
@@ -38,10 +38,13 @@
                         <h1 style="display: inline">Talla: </h1>
                         <logic:equal name="equipo" property="tipo_talla" value="camisa">
                             <html:select name="equipo" property="talla" styleClass="span3">
+                                <option>SS</option>
                                 <option>S</option>
                                 <option>M</option>
                                 <option>L</option>
                                 <option>XL</option>
+                                <option>XXL</option>
+                                <option>XXXL</option>
                             </html:select>                            
                         </logic:equal>
                         <logic:equal name="equipo" property="tipo_talla" value="guantes">
@@ -62,6 +65,7 @@
                         </logic:equal>
                         <logic:equal name="equipo" property="tipo_talla" value="pantalon">
                             <html:select name="equipo" property="talla" styleClass="span3">
+                                <option>26</option>
                                 <option>28</option>
                                 <option>30</option>
                                 <option>32</option>
@@ -71,11 +75,14 @@
                                 <option>40</option>
                                 <option>42</option>
                                 <option>44</option>
+                                <option>46</option>
                                 <option>48</option>
                             </html:select>                            
                         </logic:equal>
                         <logic:equal name="equipo" property="tipo_talla" value="zapato">
                            <html:select name="equipo" property="talla" styleClass="span3">
+                                <option>35</option>
+                                <option>35.5</option>
                                 <option>36</option>
                                 <option>36.5</option>
                                 <option>37</option>
@@ -90,9 +97,15 @@
                                 <option>41.5</option>
                                 <option>42</option>
                                 <option>42.5</option>
+                                <option>43</option>
+                                <option>43.5</option>
                                 <option>44</option>
                                 <option>44.5</option>
                                 <option>45</option>
+                                <option>45.5</option>
+                                <option>46</option>
+                                <option>46.5</option>
+                                <option>47</option>
                             </html:select>
                         </logic:equal>
                         <logic:equal name="equipo" property="tipo_talla" value="no aplica">

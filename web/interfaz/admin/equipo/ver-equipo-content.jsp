@@ -9,7 +9,7 @@
 <%@ taglib uri="http://struts.apache.org/tags-logic" prefix="logic" %>
 <%@ taglib uri="http://struts.apache.org/tags-tiles" prefix="tiles" %>
 
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page contentType="text/html" pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
@@ -49,10 +49,10 @@
 
     <body>
         <fieldset>
-            <legend>Datos del equipo de protecciÃ³n</legend>
+            <legend>Datos del equipo de protección</legend>
             <logic:present name="errorTallaNoAplica">
                 <center>
-                    <label style="color:red">Error: No aplican tallas al equipo de protecciÃ³n </label>
+                    <label style="color:red">Error: No aplican tallas al equipo de protección </label>
                 </center>
             </logic:present>
             <logic:present name="tallaAgregada">
@@ -85,13 +85,13 @@
                                 </tr>
                                 <tr>
                                     <td>
-                                        <h1 style="display: inline">Norma tÃ©cnica asociada:</h1>
+                                        <h1 style="display: inline">Norma técnica asociada:</h1>
                                     <bean:write name="equipo" property="norma"></bean:write>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
-                                        <h1 style="display: inline">Vida Ãºtil: </h1>
+                                        <h1 style="display: inline">Vida útil: </h1>
                                     <bean:write name="equipo" property="vida_util"></bean:write>
                                     </td>
                                 </tr>
@@ -124,7 +124,7 @@
                                     <td colspan="3">
                                         <center>
                                             <img width="100" src="assets/materiales/<bean:write name="equipo" property="nombre_vista"/>.png" />
-                                        </center>
+                                        </center>UTF-8
                                     </td>
                                 </tr>-->                            
                                 <tr>
@@ -145,7 +145,7 @@
                                             </center>
                                         </td>
                                         <td>
-                                            <html:form action = "/CambiarTalla" onsubmit = "return (this)">
+                                            <html:form action = "/CambiarTalla" acceptCharset="ISO-8859-1" onsubmit = "return (this)">
                                                 <html:hidden name="equipo" property="serial"/>
                                                 <html:hidden name="equipo" property="imagen"/>
                                                 <html:hidden name="equipo" property="tipo"/>
@@ -162,7 +162,7 @@
                                             </html:form>
                                         </td>
                                         <td>
-                                            <html:form action = "/EliminarTalla" onsubmit = "return (this)">
+                                            <html:form action = "/EliminarTalla" acceptCharset="ISO-8859-1" onsubmit = "return (this)">
                                                 <html:hidden name="equipo" property="serial"/>
                                                 <html:hidden name="equipo" property="imagen"/>
                                                 <html:hidden name="equipo" property="tipo"/>

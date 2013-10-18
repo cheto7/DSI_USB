@@ -7,8 +7,8 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <%
-    if (session.getAttribute("usuarioAdministrador") != null)  {
-        if (session.getAttribute("usuarioAdministrador").equals("administrador")){
+    if (session!=null && session.getAttribute("usuarioAdministrador") != null)  {
+        if (!session.getAttribute("usuarioAdministrador").equals("usuario")){
 %>
 <tiles:insert definition="agregarCargo"/>
 <%

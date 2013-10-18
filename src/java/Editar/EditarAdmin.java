@@ -69,11 +69,11 @@ public class EditarAdmin extends org.apache.struts.action.Action {
         /*
          * Verificacion de campos obligatorios vacios
          */
-        if (!u.getNombre().matches("[a-zA-Z]+\\s?[a-zA-Z]*")) {
+        if (!u.getNombre().matches("[a-zA-ZáéíóúÁÉÍÓÚñ]+\\s?[a-zA-ZáéíóúÁÉÍÓÚñ]*")) {
             u.setMensaje("Debe introducir sus nombres correctamente.");
             return mapping.findForward(FAILURE);
         }
-        if (!u.getApellido().matches("[a-zA-Z]+\\s?[a-zA-Z]*")) {
+        if (!u.getApellido().matches("[a-zA-ZáéíóúÁÉÍÓÚñ]+\\s?[a-zA-ZáéíóúÁÉÍÓÚñ]*")) {
             u.setMensaje("Debe introducir sus apellidos correctamente.");
             return mapping.findForward(FAILURE);
         }    

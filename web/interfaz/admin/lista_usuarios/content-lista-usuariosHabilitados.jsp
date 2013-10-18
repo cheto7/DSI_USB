@@ -123,7 +123,7 @@
                                     <html:form action = "/realizar_solicitudOtros" onsubmit = "return (this)">
                                         <html:hidden name="usuario" property="usuario"/>
 
-                                        <html:submit styleClass="btn btn-success"> Realizar Solicitud </html:submit>
+                                        <html:submit styleClass="btn btn-success"> Solicitar </html:submit>
                                     </html:form> 
                                 </td>
 

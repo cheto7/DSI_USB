@@ -91,7 +91,7 @@
            <html:form action = "/CancelarPedido" onsubmit="return (this)">
             <html:hidden name="autenticado" property="usuario"/>
             <html:hidden name="solicitud" property="id"/>
-            <html:submit styleClass="btn btn-danger"> Cancelar </html:submit>
+            <html:submit styleClass="btn btn-danger"> Borrar todo </html:submit>
             </html:form>
         </td>
         <td>

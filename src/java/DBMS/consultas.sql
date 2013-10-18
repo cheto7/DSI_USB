@@ -1,10 +1,10 @@
 --SELECT * FROM "PREPAS".solicitud;
-SELECT * FROM "PREPAS".equipo;
+--SELECT * FROM "PREPAS".equipo;
 --SELECT * FROM "PREPAS".proveedor;
 --SELECT * FROM "PREPAS".contiene;
 --SELECT * FROM "PREPAS".periodo;
 --SELECT * FROM "PREPAS".noticia;
---SELECT * FROM "PREPAS".usuario;
+SELECT * FROM "PREPAS".usuario;
 --SELECT * FROM "PREPAS".unidadAdscripcion;
 
 --SELECT E.serial as serial,E.imagen as imagen,E.nombre_vista as nombre_vista,P.puntuacion as puntuacion,E.tipo_talla as tipo_talla 

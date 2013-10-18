@@ -4,24 +4,12 @@
     Author     : ivan
 --%>
 
-<%-- 
-    Document   : navBarDatosEquipo
-    Created on : 14/07/2013, 11:37:17 PM
-    Author     : ivan
---%>
-
-<%-- 
-    Document   : navBarListaEquipos
-    Created on : 13/02/2013, 02:20:07 PM
-    Author     : ivan
---%>
-
 <%@ taglib uri="http://struts.apache.org/tags-bean" prefix="bean" %>
 <%@ taglib uri="http://struts.apache.org/tags-html" prefix="html" %>
 <%@ taglib uri="http://struts.apache.org/tags-logic" prefix="logic" %>
 <%@ taglib uri="http://struts.apache.org/tags-tiles" prefix="tiles" %>
 
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page contentType="text/html" pageEncoding="ISO-8859-1"%>
 
 <div id="datos_persona" style="margin-bottom:20px; display:none">
     <a href="#" style="margin-left:10px; color:#F30; text-decoration:none; display:block"> Salir </a>
@@ -51,7 +39,7 @@
     </li>
     <li>
         <html:form action="/CerrarSesion" onsubmit="return (this)"> 
-            <html:submit style="padding:10px 20px 40px 20px">Cerrar SesiÃ³n</html:submit>
+            <html:submit style="padding:10px 20px 40px 20px">Cerrar Sesión</html:submit>
         </html:form> 
     </li>
 </ul>

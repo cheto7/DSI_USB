@@ -4,14 +4,14 @@
     Author     : ivan
 --%>
 
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page contentType="text/html" pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://struts.apache.org/tags-bean" prefix="bean" %>
 <%@ taglib uri="http://struts.apache.org/tags-html" prefix="html" %>
 <%@ taglib uri="http://struts.apache.org/tags-logic" prefix="logic" %>
 <!DOCTYPE html>
 <html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
     <legend>Cambiar talla/cantidad a equipo</legend>
 </head>
 <body>
@@ -30,7 +30,7 @@
 
 
     
-    <html:form action = "/CambiarTallaEquipo" onsubmit = "return (this)">
+<html:form action = "/CambiarTallaEquipo" acceptCharset="ISO-8859-1" onsubmit = "return (this)">
         <table width="100%">
             <tbody>
                 <tr>

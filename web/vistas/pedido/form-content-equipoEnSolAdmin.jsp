@@ -24,7 +24,7 @@
     <tr>
         <th>Equipo</th>
         <th><center>Imagen</center></th>
-        <th>Frecuencia de uso (días)</th>
+        <th>Frecuencia de uso</th>
         <th>Cantidad</th>
         <th>Talla</th>
     </tr>

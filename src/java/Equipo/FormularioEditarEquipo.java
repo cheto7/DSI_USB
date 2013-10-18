@@ -28,7 +28,9 @@ public class FormularioEditarEquipo extends Action {
         Equipo e = (Equipo) form;
         String[] separar = e.getVida_util().split("\\s");
         e.setVida_util(separar[0]);
-        e.setTalla(separar[1]);
+        if (separar[1]!=null){
+            e.setTalla(separar[1]);
+        }
         request.setAttribute("equipo",e);
         return mapping.findForward(SUCCESS);
     }

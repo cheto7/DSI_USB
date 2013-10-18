@@ -18,7 +18,7 @@
             ?
         </label>
         <br>
-        <html:form action="/EliminarNoticia" onsubmit="return (this)">
+        <html:form action="/EliminarNoticia" acceptCharset="ISO-8859-1" onsubmit="return (this)">
             <html:hidden name="noticia" property="titulo"/>
             <html:hidden name="noticia" property="usuario"/>
             <html:hidden name="noticia" property="contenido"/>
